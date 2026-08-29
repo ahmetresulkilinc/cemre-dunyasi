@@ -1,0 +1,477 @@
+/* css/barbie.css — Barbie Köşesi. Sınıf öneki: barbie- (SVG iç parçaları: bb-)
+   Sahne: sıcak krem halı, ortada SVG Pomeranian; oyun modunda sahne oyun alanına döner.
+   Köpeğin boyaları --barbie-* (sanat rengi; gece değişmez). Arayüz renkleri yalnız tokens.css değişkenlerinden. */
+
+/* ---------------------------------------------------------------- Barbie'nin sanat renkleri (krem Pomeranian) */
+:root {
+  --barbie-tuy:        #F0DEC2;   /* krem tüy */
+  --barbie-tuy-acik:   #FCF3E4;   /* göğüs / burun çevresi ışığı */
+  --barbie-tuy-koyu:   #D6BE9B;   /* tüy oluğu, pati çizgisi */
+  --barbie-goz:        #1E1712;   /* kapkara parlak göz */
+  --barbie-burun:      #6B5145;   /* koyu kahve burun */
+  --barbie-burun-isik: #A98A78;
+  --barbie-kulak:      #F2AFB8;   /* pembe kulak içi ve yanak */
+  --barbie-agiz:       #8E4F5A;   /* ağız içi */
+  --barbie-dil:        #F49BA9;   /* dil */
+  --barbie-dil-koyu:   #D97C8C;
+}
+
+/* oda rengi: bal — üst şerit, birincil düğme, seçili çip */
+[data-bolum="barbie"] {
+  --oda:       var(--seker-bal);
+  --oda-zemin: color-mix(in srgb, var(--seker-bal) 24%, var(--kagit));
+  --oda-vurgu: var(--seker-bal);
+}
+
+/* ---------------------------------------------------------------- sahne (krem halı) */
+.barbie-sahne {
+  touch-action: manipulation;
+  -webkit-touch-callout: none;
+  isolation: isolate;
+  scroll-margin-top: calc(var(--ustbar-yuk) + var(--guvenli-ust) + 6px);
+  background-color: var(--kagit-2);
+  background-image:
+    radial-gradient(120% 80% at 50% 6%, color-mix(in srgb, var(--seker-limon) 30%, transparent) 0, transparent 64%),
+    repeating-linear-gradient(90deg, color-mix(in srgb, var(--seker-bal) 10%, transparent) 0 3px, transparent 3px 17px),
+    repeating-linear-gradient(0deg, color-mix(in srgb, var(--seker-bal) 6%, transparent) 0 3px, transparent 3px 17px),
+    linear-gradient(color-mix(in srgb, var(--seker-bal) 8%, var(--kagit-2)), var(--kagit-3));
+}
+.barbie-sahne.oyunda { touch-action: none; cursor: crosshair; }
+/* oyun tülü — köpeğin altında */
+.barbie-sahne::before {
+  content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: 0;
+  background:
+    radial-gradient(3px 3px at 14% 20%, var(--kagit) 60%, transparent 62%),
+    radial-gradient(2px 2px at 76% 14%, var(--kagit) 60%, transparent 62%),
+    radial-gradient(2.5px 2.5px at 88% 44%, var(--kagit) 60%, transparent 62%),
+    radial-gradient(2px 2px at 32% 36%, var(--kagit) 60%, transparent 62%),
+    radial-gradient(80% 70% at 50% 40%, color-mix(in srgb, var(--seker-limon) 40%, transparent), color-mix(in srgb, var(--seker-seftali) 26%, transparent));
+  transition: opacity var(--sure-4);
+}
+.barbie-sahne.oyunda::before { opacity: 1; }
+/* gece tülü (uyku) — dokunuşu engellemez */
+.barbie-sahne::after {
+  content: ""; position: absolute; inset: 0; z-index: 3; pointer-events: none; opacity: 0;
+  background: color-mix(in srgb, var(--seker-lavanta) 26%, transparent);
+  transition: opacity var(--sure-4);
+}
+.barbie-sahne.barbie-gece::after { opacity: 1; }
+
+.barbie-balon-yer { position: absolute; left: 50%; top: var(--b-3); width: 0; z-index: 5; }
+.barbie-balon { left: 0; width: max-content; max-width: min(280px, 84vw); text-align: center; transform: translate(-50%, 6px) scale(.9); }
+.barbie-balon.goster { transform: translate(-50%, 0); }
+.barbie-balon::after { left: 50%; }
+
+/* alt bilgi pili */
+.barbie-alt {
+  position: absolute; left: 50%; bottom: 8px; transform: translateX(-50%); z-index: 4; pointer-events: none;
+  display: flex; align-items: center; gap: 6px; max-width: 94%;
+  background: color-mix(in srgb, var(--kagit) 84%, transparent); padding: 4px 10px 4px 4px; border-radius: var(--r-tam); box-shadow: 0 2px 0 var(--golge-sert-ic);
+}
+.barbie-alt .rozet { flex: none; white-space: nowrap; }
+.barbie-ipucu { min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: var(--punto-xs); font-weight: var(--kalin-vurgu); color: var(--murekkep-2); }
+.barbie-sahne.oyunda .barbie-alt { display: none; }
+
+/* ---------------------------------------------------------------- köpek yerleşimi */
+.barbie-kopek-yer {
+  position: absolute; left: 50%; bottom: 16px; z-index: 2; height: 84%; aspect-ratio: 260 / 244;
+  transform: translateX(-50%); transform-origin: 50% 100%; will-change: transform;
+  cursor: pointer; border-radius: var(--r-lg);
+  transition: transform var(--sure-3) var(--egri-cikis);
+}
+.barbie-kopek-yer:focus-visible { box-shadow: var(--odak-halka); }
+.barbie-sahne.oyunda .barbie-kopek-yer { left: 0; top: 0; bottom: auto; transform: translate(50%, 100%) translate(-50%, -100%) scale(.5); transition: none; cursor: default; }
+.barbie-svg { width: 100%; height: 100%; overflow: visible; touch-action: none; }
+.barbie-svg * { transform-box: fill-box; }
+
+/* ---------------------------------------------------------------- köpek boyaları */
+.bb-golge { fill: var(--barbie-tuy-koyu); opacity: .45; }
+.bb-tuy { fill: var(--barbie-tuy); }
+.bb-tuy-acik { fill: var(--barbie-tuy-acik); }
+.bb-kulak-ic { fill: var(--barbie-kulak); }
+.bb-iris { fill: var(--barbie-goz); }
+.bb-parilti { fill: #FFFFFF; }
+.bb-parilti-kucuk { opacity: .8; }
+.bb-yanak { fill: var(--barbie-kulak); opacity: .4; transition: opacity var(--sure-2); }
+.bb-burun { fill: var(--barbie-burun); }
+.bb-burun-isik { fill: var(--barbie-burun-isik); opacity: .5; }
+.bb-agiz { fill: none; stroke: var(--pixel-cizgi); stroke-width: 1.8; stroke-linecap: round; transition: opacity var(--sure-1); }
+.bb-agiz-ic { fill: var(--barbie-agiz); }
+.bb-agiz-acik { opacity: 0; transform-origin: 50% 0; transition: opacity var(--sure-1), transform var(--sure-2) var(--egri-zip); }
+.bb-dil-yol { fill: var(--barbie-dil); }
+.bb-dil-cizgi { fill: none; stroke: var(--barbie-dil-koyu); stroke-width: 1.6; stroke-linecap: round; opacity: .7; }
+.bb-pati-cizgi { fill: none; stroke: var(--barbie-tuy-koyu); stroke-width: 1.6; stroke-linecap: round; opacity: .75; }
+.bb-goz-kapali, .bb-goz-mutlu { fill: none; stroke: var(--barbie-goz); stroke-width: 3; stroke-linecap: round; opacity: 0; transition: opacity var(--sure-1); }
+.bb-goz-acik { transition: opacity var(--sure-1); }
+.bb-kucak { opacity: 0; transition: opacity var(--sure-3); }
+.bb-kucak path { fill: var(--battaniye-acik); stroke: var(--battaniye-koyu); stroke-width: 2; stroke-linejoin: round; }
+.bb-kucak .bb-kucak-ilmek { fill: none; stroke: var(--battaniye-koyu); stroke-width: 1.6; stroke-dasharray: 4 5; opacity: .8; }
+.bb-kucak-arka path { fill: var(--battaniye); }
+.bb-mama { opacity: 0; transition: opacity var(--sure-2); }
+.bb-mama-golge { fill: var(--barbie-tuy-koyu); opacity: .35; }
+.bb-mama-kase { fill: var(--seker-gok); stroke: var(--goz-metin); stroke-width: 1.6; stroke-linejoin: round; }
+.bb-mama-ic { fill: var(--goz-zemin); }
+.bb-mama-tane { fill: var(--seker-seftali); }
+.bb-vur { fill: transparent; stroke: none; pointer-events: all; cursor: pointer; }
+
+/* ---------------------------------------------------------------- köpek hareketleri */
+.bb-govde-g { transform-origin: 50% 100%; animation: barbie-nefes var(--sure-nefes) var(--egri-ikili) infinite alternate; }
+.bb-kafa-g { transform-origin: 50% 92%; transition: transform var(--sure-3) var(--egri-zip); }
+.bb-kuyruk { transform-origin: 10% 74%; animation: barbie-kuyruk 1.4s var(--egri-ikili) infinite alternate; }
+.bb-kuyruk.hizli { animation-duration: .4s; }
+.bb-kuyruk.cilgin { animation: barbie-kuyruk-cilgin .19s var(--egri-ikili) infinite alternate; }
+.bb-kulak { transition: transform var(--sure-2) var(--egri-zip); }
+.bb-kulak-sol { transform-origin: 100% 100%; }
+.bb-kulak-sag { transform-origin: 0% 100%; }
+.bb-kulak-sol.oynat { animation: barbie-kulak-sol .7s var(--egri-zip); }
+.bb-kulak-sag.oynat { animation: barbie-kulak-sag .7s var(--egri-zip); }
+.bb-pati { transform-origin: 50% 100%; transition: transform var(--sure-2) var(--egri-zip); }
+.bb-pati.kaldir { animation: barbie-pati-kaldir .7s var(--egri-zip); }
+.bb-pati.seyiriyor { animation: barbie-seyir .16s var(--egri-ikili) 7; }
+.bb-burun-g { transform-origin: 50% 50%; }
+.bb-burun-g.boop { animation: barbie-boop .5s var(--egri-zip); }
+.bb-dil { transform-origin: 50% 4%; transition: transform var(--sure-2) var(--egri-zip), opacity var(--sure-1); }
+
+@keyframes barbie-nefes { from { transform: scale(1, 1); } to { transform: scale(1.022, 1.032); } }
+@keyframes barbie-kuyruk { from { transform: rotate(-13deg); } to { transform: rotate(15deg); } }
+@keyframes barbie-kuyruk-cilgin { from { transform: rotate(-24deg) scale(1.03); } to { transform: rotate(26deg) scale(1.03); } }
+@keyframes barbie-kulak-sol { 0%, 100% { transform: rotate(0); } 30% { transform: rotate(-18deg); } 60% { transform: rotate(7deg); } }
+@keyframes barbie-kulak-sag { 0%, 100% { transform: rotate(0); } 30% { transform: rotate(18deg); } 60% { transform: rotate(-7deg); } }
+@keyframes barbie-pati-kaldir { 0%, 100% { transform: translateY(0) rotate(0); } 40% { transform: translateY(-15px) rotate(-14deg); } }
+@keyframes barbie-seyir { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-4px, -3px); } }
+@keyframes barbie-boop { 0%, 100% { transform: scale(1); } 40% { transform: scale(.82, .72); } 70% { transform: scale(1.1); } }
+
+/* göz durumları */
+.barbie-svg.kirp .bb-goz-acik,
+.barbie-svg.uyuyor .bb-goz-acik,
+.barbie-svg.esniyor .bb-goz-acik,
+.barbie-svg.yiyor .bb-goz-acik,
+.barbie-svg.mutlu .bb-goz-acik { opacity: 0; }
+.barbie-svg.kirp .bb-goz-kapali,
+.barbie-svg.uyuyor .bb-goz-kapali,
+.barbie-svg.esniyor .bb-goz-kapali,
+.barbie-svg.yiyor .bb-goz-kapali { opacity: 1; }
+.barbie-svg.mutlu:not(.uyuyor):not(.esniyor):not(.yiyor) .bb-goz-mutlu { opacity: 1; }
+.barbie-svg.mutlu:not(.uyuyor):not(.esniyor):not(.yiyor) .bb-goz-kapali { opacity: 0; }
+.barbie-svg.mutlu .bb-yanak { opacity: .75; }
+
+/* dil: kapalı ağızda dışarıda; yerken, uyurken, esnerken içeride */
+.barbie-svg.uyuyor .bb-dil,
+.barbie-svg.yiyor .bb-dil,
+.barbie-svg.esniyor .bb-dil { opacity: 0; }
+.barbie-svg.mutlu .bb-dil,
+.barbie-svg.kosuyor .bb-dil { transform: translateY(4px) scale(1.08); }
+.barbie-svg.yalaniyor .bb-dil { animation: barbie-yala .9s var(--egri-ikili); }
+@keyframes barbie-yala { 0%, 100% { transform: translateY(0) scale(1); } 30% { transform: translateY(-9px) scale(1.2, 1.35); } 60% { transform: translateY(2px) scale(.95, 1.1); } }
+
+/* uyku */
+.barbie-svg.uyuyor .bb-kafa-g { transform: rotate(6deg) translateY(6px); }
+.barbie-svg.uyuyor .bb-govde-g { animation-duration: calc(var(--sure-nefes) * 1.5); }
+.barbie-svg.uyuyor .bb-kuyruk { animation-duration: 6s; }
+.barbie-svg.uyuyor .bb-agiz { opacity: .7; }
+
+/* esneme */
+.barbie-svg.esniyor .bb-agiz { opacity: 0; }
+.barbie-svg.esniyor .bb-agiz-acik { opacity: 1; transform: scale(1.2); }
+.barbie-svg.esniyor .bb-kafa-g { animation: barbie-esne 1.5s var(--egri-ikili); }
+@keyframes barbie-esne { 0%, 100% { transform: rotate(0) translateY(0); } 35%, 70% { transform: rotate(-5deg) translateY(-7px); } }
+
+/* kafa eğme (meraklı) */
+.barbie-svg.kafa-egik .bb-kafa-g { transform: rotate(-11deg) translateY(-2px); }
+.barbie-svg.kafa-egik .bb-kulak-sol { transform: rotate(-9deg); }
+
+/* gıdıklama */
+.barbie-svg.gidik .bb-agiz { opacity: 0; }
+.barbie-svg.gidik .bb-agiz-acik { opacity: 1; transform: scale(.65); }
+.barbie-svg.gidik .bb-pati-sol { animation: barbie-pati-oyna .3s var(--egri-ikili) 4; }
+.barbie-svg.gidik .bb-pati-sag { animation: barbie-pati-oyna-sag .3s var(--egri-ikili) 4; }
+.barbie-svg.gidik .bb-kafa-g { transform: rotate(4deg); }
+.barbie-svg.gidik .bb-dil { transform: translateY(6px) rotate(-8deg) scale(1.1); }
+@keyframes barbie-pati-oyna { 0%, 100% { transform: translate(0, 0) rotate(0); } 50% { transform: translate(-10px, -9px) rotate(-20deg); } }
+@keyframes barbie-pati-oyna-sag { 0%, 100% { transform: translate(0, 0) rotate(0); } 50% { transform: translate(10px, -9px) rotate(20deg); } }
+
+/* mama (kâse) */
+.barbie-svg.yiyor .bb-mama { opacity: 1; }
+.barbie-svg.yiyor .bb-agiz { opacity: 0; }
+.barbie-svg.yiyor .bb-agiz-acik { opacity: 1; transform: scale(.6); }
+.barbie-svg.yiyor .bb-kafa-g { animation: barbie-cigne .5s var(--egri-ikili) infinite alternate; }
+@keyframes barbie-cigne { from { transform: translateY(30px) rotate(0) scale(.96); } to { transform: translateY(36px) rotate(-2deg) scale(.96); } }
+
+/* kucak */
+.barbie-svg.kucakta .bb-kucak { opacity: 1; }
+.barbie-svg.kucakta { animation: barbie-salla 2.8s var(--egri-ikili) infinite alternate; transform-origin: 50% 100%; }
+.barbie-svg.kucakta .bb-kafa-g { transform: rotate(-4deg) translateY(3px); }
+.barbie-svg.kucakta .bb-pati, .barbie-svg.kucakta .bb-golge { opacity: 0; }
+@keyframes barbie-salla { from { transform: rotate(-3deg); } to { transform: rotate(3deg); } }
+
+/* konuşma ve havlama */
+.barbie-svg.konusuyor .bb-agiz { opacity: 0; }
+.barbie-svg.konusuyor .bb-agiz-acik { opacity: 1; transform: scale(.5); }
+.barbie-svg.havliyor .bb-agiz { opacity: 0; }
+.barbie-svg.havliyor .bb-agiz-acik { opacity: 1; transform: scale(1.45); }
+.barbie-svg.havliyor .bb-kulak-sol { transform: rotate(-30deg); }
+.barbie-svg.havliyor .bb-kulak-sag { transform: rotate(30deg); }
+.barbie-svg.havliyor .bb-kafa-g { animation: barbie-havla .2s var(--egri-ikili) 7; }
+.barbie-svg.havliyor .bb-yanak { opacity: .9; }
+.barbie-svg.havliyor .bb-dil { transform: translateY(10px) scale(1.1); }
+@keyframes barbie-havla { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-7px) scale(1.05); } }
+.barbie-svg.agiz-acik .bb-agiz { opacity: 0; }
+.barbie-svg.agiz-acik .bb-agiz-acik { opacity: 1; transform: scale(1.1); }
+
+/* oyun: koşma, atlama, taşıma, ip çekme */
+.barbie-svg.kosuyor .bb-govde-g { animation: barbie-kos .32s var(--egri-ikili) infinite; }
+.barbie-svg.kosuyor .bb-kafa-g { animation: barbie-kos-kafa .32s var(--egri-ikili) infinite; }
+.barbie-svg.kosuyor .bb-pati-sol { animation: barbie-adim .32s var(--egri-ikili) infinite; }
+.barbie-svg.kosuyor .bb-pati-sag { animation: barbie-adim .32s var(--egri-ikili) infinite .16s; }
+.barbie-svg.kosuyor .bb-kuyruk { animation-duration: .28s; }
+.barbie-svg.atla .bb-govde-g, .barbie-svg.atla .bb-kafa-g { animation: barbie-atla .32s var(--egri-zip); }
+.barbie-svg.atla .bb-pati { transform: translateY(-13px) rotate(-20deg); }
+.barbie-svg.tasiyor .bb-kafa-g { transform: translateY(-5px) rotate(2deg); }
+.barbie-svg.ceker .bb-kafa-g { transform: rotate(9deg) translateY(4px) scale(1.03); }
+.barbie-svg.ceker .bb-kulak-sol { transform: rotate(-16deg); }
+.barbie-svg.ceker .bb-kulak-sag { transform: rotate(16deg); }
+.barbie-svg.ceker .bb-pati { transform: translateY(-5px) rotate(-9deg); }
+.barbie-svg.ceker .bb-dil { opacity: 0; }
+@keyframes barbie-kos { 0%, 100% { transform: translateY(0) scale(1, 1); } 50% { transform: translateY(-5px) scale(1.02, .98); } }
+@keyframes barbie-kos-kafa { 0%, 100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-6px) rotate(-2deg); } }
+@keyframes barbie-adim { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-9px, -10px) rotate(-14deg); } }
+@keyframes barbie-atla { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-17px) scale(1.04); } }
+
+/* ---------------------------------------------------------------- zzz ve havlama yazısı */
+.barbie-zzz { position: absolute; left: 62%; top: 16%; z-index: 3; pointer-events: none; opacity: 0; transition: opacity var(--sure-3); }
+.barbie-zzz.goster { opacity: 1; }
+.barbie-zzz span {
+  position: absolute; left: 0; top: 0; font-family: var(--yazi-baslik); font-weight: var(--kalin-dev); color: var(--murekkep-2); line-height: 1;
+  animation: barbie-zzz 2.4s var(--egri-ikili) infinite;
+}
+.barbie-zzz span:nth-child(1) { font-size: 22px; }
+.barbie-zzz span:nth-child(2) { font-size: 17px; animation-delay: .8s; }
+.barbie-zzz span:nth-child(3) { font-size: 13px; animation-delay: 1.6s; }
+@keyframes barbie-zzz { 0% { opacity: 0; transform: translate(0, 0) rotate(-8deg); } 25% { opacity: 1; } 100% { opacity: 0; transform: translate(22px, -46px) rotate(10deg); } }
+
+.barbie-hav-yazi {
+  position: absolute; left: 50%; top: 22%; z-index: 6; transform: translate(-50%, -50%) scale(.3); opacity: 0; pointer-events: none;
+  font-family: var(--yazi-baslik); font-weight: var(--kalin-dev); font-size: var(--punto-2xl); letter-spacing: .03em; color: var(--murekkep);
+  -webkit-text-stroke: 2px var(--kagit); paint-order: stroke fill; text-shadow: 0 4px 0 var(--kagit), 0 8px 18px var(--golge-renk); white-space: nowrap;
+}
+.barbie-hav-yazi.goster { animation: barbie-hav 1.5s var(--egri-zip) forwards; }
+@keyframes barbie-hav {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(.3) rotate(-6deg); }
+  12% { opacity: 1; transform: translate(-50%, -50%) scale(1.2) rotate(3deg); }
+  22% { transform: translate(-53%, -50%) scale(1.06) rotate(-3deg); }
+  32% { transform: translate(-47%, -50%) scale(1.12) rotate(2deg); }
+  42%, 80% { opacity: 1; transform: translate(-50%, -50%) scale(1.08) rotate(0); }
+  100% { opacity: 0; transform: translate(-50%, -68%) scale(1.18); }
+}
+
+/* ---------------------------------------------------------------- oyun katmanı: top, ip, ödüller, HUD */
+.barbie-oyun-kat { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
+.barbie-top {
+  position: absolute; left: 0; top: 0; width: 30px; height: 30px; border-radius: 50%; will-change: transform;
+  background:
+    radial-gradient(circle at 34% 28%, color-mix(in srgb, var(--seker-limon) 55%, #FFFFFF) 0 22%, var(--seker-limon) 58%, color-mix(in srgb, var(--seker-limon) 68%, var(--murekkep)) 100%);
+  box-shadow: 0 2px 0 var(--golge-sert-ic), 0 6px 12px -6px var(--golge-renk);
+}
+.barbie-top::before, .barbie-top::after {
+  content: ""; position: absolute; inset: 3px; border-radius: 50%; border: 2px solid var(--kagit);
+  clip-path: inset(0 0 0 64%);
+}
+.barbie-top::after { clip-path: inset(0 64% 0 0); }
+.barbie-top.elde { box-shadow: 0 2px 0 var(--golge-sert-ic); }
+
+.barbie-ip { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; display: none; }
+.barbie-ip.goster { display: block; }
+.barbie-ip path { fill: none; stroke: var(--seker-kiraz); stroke-width: 6; stroke-linecap: round; opacity: .9; }
+.barbie-ip-uc {
+  position: absolute; left: 0; top: 0; width: 62px; height: 22px; border-radius: var(--r-tam); will-change: transform;
+  background: repeating-linear-gradient(58deg, var(--seker-kiraz) 0 8px, color-mix(in srgb, var(--seker-kiraz) 55%, var(--kagit)) 8px 16px);
+  box-shadow: 0 2px 0 var(--golge-sert-ic), inset 0 0 0 2px color-mix(in srgb, var(--seker-kiraz) 70%, var(--murekkep));
+}
+
+.barbie-odul {
+  position: absolute; left: 0; top: 0; font-size: 30px; line-height: 1; will-change: transform;
+  filter: drop-shadow(0 3px 0 var(--golge-renk));
+}
+.barbie-odul.yakalandi { animation: barbie-odul-git .32s var(--egri-cikis) forwards; }
+.barbie-odul.dustu { animation: barbie-odul-dus .32s var(--egri-cikis) forwards; }
+@keyframes barbie-odul-git { from { opacity: 1; scale: 1; } to { opacity: 0; scale: 1.6; } }
+@keyframes barbie-odul-dus { from { opacity: 1; scale: 1; } to { opacity: 0; scale: .5; } }
+
+.barbie-hud {
+  position: absolute; left: 50%; bottom: 8px; transform: translateX(-50%); z-index: 5;
+  display: flex; align-items: center; gap: var(--b-2); max-width: 96%; white-space: nowrap;
+  background: var(--kagit); padding: 4px 4px 4px var(--b-3); border-radius: var(--r-tam); box-shadow: var(--golge-yastik-ic);
+  font-size: var(--punto-sm); font-weight: var(--kalin-vurgu); color: var(--murekkep-2);
+}
+.barbie-hud-ad { overflow: hidden; text-overflow: ellipsis; }
+.barbie-hud-skor { font-family: var(--yazi-baslik); font-size: var(--punto-xl); font-weight: var(--kalin-dev); color: var(--murekkep); min-width: 1.4em; text-align: center; }
+.barbie-hud-ek { font-size: var(--punto-xs); color: var(--murekkep-2); }
+.barbie-hud-yardim, .barbie-hud-bitir { min-height: var(--dokunma-min); }
+
+/* ---------------------------------------------------------------- sekmeler ve panel */
+.barbie-sekmeler { padding-top: var(--b-3); scroll-margin-top: calc(var(--ustbar-yuk) + var(--guvenli-ust) + 6px); }
+.barbie-sekmeler .cip { min-height: var(--dokunma-min); }
+.barbie-panel { padding-top: var(--b-2); }
+.barbie-panel .yama > .baslik + p { margin-top: 2px; }
+.barbie-panel .yama { display: flex; flex-direction: column; gap: var(--b-3); }
+.barbie-panel .yama > .satir.arasi > .baslik { margin: 0; }
+.barbie-panel details > summary { cursor: pointer; font-weight: var(--kalin-vurgu); color: var(--burun-metin); min-height: var(--dokunma-min); display: flex; align-items: center; list-style: none; }
+.barbie-panel details > summary::-webkit-details-marker { display: none; }
+.barbie-panel details > summary::before { content: "›"; display: inline-block; margin-right: 6px; transition: transform var(--sure-2); }
+.barbie-panel details[open] > summary::before { transform: rotate(90deg); }
+.barbie-panel details > *:not(summary) { margin-top: var(--b-2); }
+.barbie-sil {
+  position: relative; display: inline-grid; place-items: center; min-width: 36px; min-height: 36px; margin: -6px -8px -6px 0; border-radius: var(--r-tam);
+  font-size: 18px; line-height: 1; color: var(--sessiz); font-weight: var(--kalin-baslik);
+}
+/* görünen daire küçük kalsın, dokunma alanı 44 px'e tamamlansın */
+.barbie-sil::after { content: ""; position: absolute; inset: -6px; border-radius: inherit; }
+.barbie-sil:active { background: var(--kagit-3); }
+
+/* ---------------------------------------------------------------- oyna */
+.barbie-oyunlar { gap: var(--b-3); }
+.barbie-oyun-kart { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; padding: var(--b-4); min-height: 158px; }
+.barbie-oyun-kart::after { inset: 5px; border-radius: calc(var(--r-lg) - 5px); }
+.barbie-oyun-emoji { font-size: 34px; line-height: 1; margin-bottom: 4px; }
+.barbie-oyun-ad { font-family: var(--yazi-baslik); font-size: var(--punto-lg); font-weight: var(--kalin-baslik); letter-spacing: var(--aralik-baslik); }
+.barbie-oyun-kart .sessiz { flex: 1; }
+.barbie-oyun-kart .rozet { margin-top: var(--b-2); }
+.barbie-kalpler { display: flex; gap: 6px; font-size: 28px; line-height: 1; }
+.barbie-kalp { color: var(--kagit-3); transition: color var(--sure-3), transform var(--sure-3) var(--egri-zip); }
+.barbie-kalp.dolu { color: var(--seker-kiraz); transform: scale(1.1); }
+
+/* ---------------------------------------------------------------- albüm */
+/* .barbie-panel .yama sütun yapıyor; albüm başlığı satır kalsın (başlık solda, düğme sağda) */
+.barbie-album-ust { flex-direction: row; align-items: center; justify-content: space-between; gap: var(--b-3); text-align: left; }
+.barbie-album-ust > div { min-width: 0; }
+.barbie-album-ust .dugme { flex: none; }
+.barbie-polaroidler { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--b-4) var(--b-3); padding: var(--b-2) var(--b-1); }
+.barbie-polaroid {
+  display: flex; flex-direction: column; gap: 6px; padding: 8px 8px 10px; background: var(--kagit); color: var(--murekkep);
+  border-radius: var(--r-xs); box-shadow: var(--golge-yastik-ic); text-align: left; transform: rotate(var(--don, 0deg));
+  transition: transform var(--sure-2) var(--egri-zip), box-shadow var(--sure-2);
+}
+.barbie-polaroid:active { transform: rotate(var(--don, 0deg)) scale(.97); }
+.barbie-polaroid:focus-visible { box-shadow: var(--odak-halka), var(--golge-yastik-ic) !important; }
+.barbie-polaroid-cerceve { display: block; aspect-ratio: 4 / 5; overflow: hidden; border-radius: 4px; background: var(--kagit-3); }
+.barbie-polaroid-cerceve img { width: 100%; height: 100%; object-fit: cover; }
+.barbie-polaroid-not { font-size: var(--punto-sm); font-weight: 600; color: var(--murekkep-2); line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.barbie-polaroid-tarih { font-size: var(--punto-xs); color: var(--sessiz); }
+.barbie-buyuk-foto { max-height: 56dvh; width: auto; max-width: 100%; margin: 0 auto; border-radius: var(--r-md); object-fit: contain; background: var(--kagit-2); }
+.barbie-foto-sheet textarea.girdi { min-height: 64px; }
+
+/* ---------------------------------------------------------------- günlük */
+.barbie-yas-buyuk { display: flex; align-items: baseline; gap: 6px; }
+.barbie-yas-sayi { font-family: var(--yazi-baslik); font-size: var(--punto-2xl); font-weight: var(--kalin-dev); line-height: 1.1; color: var(--burun-metin); letter-spacing: var(--aralik-baslik); }
+.barbie-dogum .satir { gap: var(--b-2); }
+.barbie-dogum .girdi { flex: 1; min-width: 0; }
+.barbie-uyari { background: var(--burun-zemin); flex-direction: column; gap: var(--b-2); }
+.barbie-uyari::after { display: none; }
+.barbie-uyari p { line-height: var(--satir-genis); }
+.barbie-cip-liste { gap: 6px; }
+.barbie-kayit-cip { padding-right: 4px; gap: 2px; min-height: 36px; }
+.barbie-kayit-cip .barbie-sil { margin: 0; min-width: 32px; min-height: 32px; color: inherit; opacity: .7; }
+.barbie-mama .cip[aria-pressed="true"], .barbie-hatirlaticilar .cip[aria-pressed="true"] { background: var(--oda-vurgu); color: var(--murekkep); }
+
+.barbie-hizli-dugmeler { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--b-2); }
+.barbie-hizli-dugmeler .dugme-ikincil { padding: 0 var(--b-2); min-height: var(--dokunma-min); }
+.barbie-satir-form { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--b-2); }
+.barbie-satir-form .dugme { min-height: 48px; padding: 0 var(--b-4); }
+.barbie-hafta { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; }
+.barbie-hafta-sutun { display: grid; grid-template-rows: 64px auto; gap: 4px; align-items: end; text-align: center; }
+.barbie-hafta-cubuk { align-self: end; height: max(4px, var(--y, 0%)); border-radius: 6px 6px 2px 2px; background: var(--kagit-3); transition: height var(--sure-3) var(--egri-cikis); }
+.barbie-hafta-sutun.dolu .barbie-hafta-cubuk { background: var(--oda-vurgu); }
+.barbie-hafta-gun { font-size: var(--punto-xs); font-weight: var(--kalin-vurgu); color: var(--sessiz); }
+.barbie-noktalar { display: flex; flex-wrap: wrap; gap: 5px; }
+.barbie-nokta { width: 15px; height: 15px; border-radius: 50%; background: var(--kagit-3); }
+.barbie-nokta.dolu { background: var(--oda-vurgu); box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--oda-vurgu) 55%, var(--murekkep)); }
+
+.barbie-kilo-ozet { display: flex; align-items: center; gap: var(--b-2); flex-wrap: wrap; }
+.barbie-kilo-son { font-family: var(--yazi-baslik); font-size: var(--punto-2xl); font-weight: var(--kalin-dev); line-height: 1; color: var(--burun-metin); }
+.barbie-grafik { background: var(--kagit-2); border-radius: var(--r-md); padding: var(--b-2); }
+.barbie-grafik-svg { width: 100%; height: auto; overflow: visible; }
+.barbie-grafik-bant { fill: var(--goz-zemin); opacity: .8; }
+.barbie-grafik-cizgi { stroke: var(--cizgi); stroke-width: 1; stroke-dasharray: 3 4; }
+.barbie-grafik-alan { fill: color-mix(in srgb, var(--oda-vurgu) 20%, transparent); }
+.barbie-grafik-yol { fill: none; stroke: var(--oda-vurgu); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.barbie-grafik-nokta { fill: var(--kagit); stroke: var(--oda-vurgu); stroke-width: 2.5; }
+.barbie-grafik-yazi { fill: var(--sessiz); font-family: var(--yazi-govde); font-size: 11px; font-weight: var(--kalin-vurgu); font-variant-numeric: tabular-nums; }
+.barbie-kilo-form { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr) auto; gap: var(--b-2); align-items: stretch; }
+.barbie-kilo-form .dugme { min-height: 48px; padding: 0 var(--b-4); }
+
+.barbie-hatirlatici-liste { gap: var(--b-2); }
+.barbie-hatirlatici { display: flex; align-items: center; gap: var(--b-2); padding: var(--b-2) var(--b-2) var(--b-2) var(--b-3); background: var(--kagit-2); border-radius: var(--r-md); }
+.barbie-hatirlatici.gecti { opacity: .6; }
+.barbie-hatirlatici-ikon { font-size: 22px; line-height: 1; }
+.barbie-hatirlatici-metin { flex: 1; min-width: 0; }
+.barbie-hatirlatici-metin .kalin { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.barbie-hatirlatici-sil { box-shadow: none; background: transparent; color: var(--sessiz); font-size: 22px; }
+
+.barbie-olay-dugmeler { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--b-2); }
+.barbie-olay-dugmeler .dugme-ikincil { padding: 0 var(--b-2); flex-direction: column; gap: 2px; min-height: 60px; font-size: var(--punto-xs); white-space: normal; text-align: center; line-height: 1.15; }
+.barbie-olay-dugmeler .dugme-ikincil span:first-child { font-size: 22px; line-height: 1; }
+.barbie-olay-liste { display: flex; flex-direction: column; gap: 4px; }
+.barbie-olay { display: flex; align-items: center; gap: var(--b-2); min-height: 40px; padding: 2px 0 2px var(--b-2); border-bottom: 1px solid var(--cizgi-2); font-size: var(--punto-sm); }
+.barbie-olay:last-child { border-bottom: 0; }
+
+.barbie-ruh { gap: 6px; }
+.barbie-ruh-dugme { width: var(--dokunma-min); height: var(--dokunma-min); border-radius: 50%; font-size: 24px; line-height: 1; background: var(--kagit-2); box-shadow: 0 2px 0 var(--golge-sert-ic); transition: transform var(--sure-1), background var(--sure-2); }
+.barbie-ruh-dugme[aria-pressed="true"] { background: var(--oda-zemin); box-shadow: 0 0 0 3px var(--oda-vurgu); }
+.barbie-ruh-dugme:active { transform: scale(.92); }
+.barbie-not-liste { gap: var(--b-3); }
+.barbie-not-tarih { font-size: var(--punto-xs); font-weight: var(--kalin-baslik); color: var(--burun-metin); text-transform: uppercase; letter-spacing: .04em; margin-bottom: 4px; }
+.barbie-not { display: flex; align-items: flex-start; gap: var(--b-2); padding: var(--b-2) var(--b-2) var(--b-2) var(--b-3); background: var(--kagit-2); border-radius: var(--r-md); }
+.barbie-not-ruh { font-size: 22px; line-height: 1.2; }
+.barbie-not-metin { flex: 1; min-width: 0; font-size: var(--punto-sm); line-height: var(--satir-genis); white-space: pre-wrap; overflow-wrap: anywhere; }
+.barbie-not .barbie-sil { margin: -4px -4px 0 0; }
+
+/* ---------------------------------------------------------------- bakım */
+.barbie-ipucu-emoji { font-size: 26px; line-height: 1; }
+.barbie-ipucu-kart p { line-height: var(--satir-genis); }
+.barbie-ara-baslik { padding: var(--b-2) var(--b-2) 0; color: var(--murekkep-2); }
+
+/* ---------------------------------------------------------------- sözler */
+.barbie-soz-liste { display: flex; flex-wrap: wrap; gap: var(--b-2); }
+.barbie-soz {
+  display: inline-flex; align-items: center; min-height: var(--dokunma-min); padding: var(--b-2) var(--b-3); border-radius: var(--r-md);
+  font-size: var(--punto-sm); font-weight: 600; line-height: 1.3; text-align: left; color: var(--murekkep);
+}
+.barbie-soz.duyuldu { background: var(--kagit); box-shadow: var(--golge-yastik-ic); border-left: 4px solid var(--oda-vurgu); }
+.barbie-soz.duyuldu:active { transform: translateY(2px); box-shadow: none; }
+.barbie-soz.kilitli { background: color-mix(in srgb, var(--kagit) 55%, transparent); color: var(--sessiz); letter-spacing: .2em; min-width: 64px; justify-content: center; }
+.barbie-soz.havla { font-family: var(--yazi-baslik); font-size: var(--punto-lg); font-weight: var(--kalin-dev); border-left-color: var(--burun); letter-spacing: .03em; }
+
+/* ---------------------------------------------------------------- geniş ekran */
+@media (min-width: 768px) {
+  .barbie-oyunlar { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .barbie-polaroidler { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .barbie-olay-dugmeler { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .barbie-kopek-yer { bottom: 20px; }
+}
+@media (max-width: 430px) {
+  .barbie-kilo-form { grid-template-columns: 1fr 1fr; }
+  .barbie-kilo-form .dugme { grid-column: 1 / -1; }
+}
+@media (max-width: 340px) {
+  .barbie-olay-dugmeler { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .barbie-hizli-dugmeler { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .barbie-album-ust { flex-direction: column; align-items: stretch; }
+  .barbie-hud-ad { display: none; }
+}
+
+/* ---------------------------------------------------------------- hareketi azalt */
+@media (prefers-reduced-motion: reduce) {
+  .bb-govde-g, .bb-kuyruk, .bb-kuyruk.hizli, .bb-kuyruk.cilgin, .bb-pati.seyiriyor,
+  .barbie-svg.kucakta, .barbie-svg.yiyor .bb-kafa-g, .barbie-svg.esniyor .bb-kafa-g,
+  .barbie-svg.havliyor .bb-kafa-g, .barbie-svg.yalaniyor .bb-dil,
+  .barbie-svg.gidik .bb-pati-sol, .barbie-svg.gidik .bb-pati-sag,
+  .barbie-svg.kosuyor .bb-govde-g, .barbie-svg.kosuyor .bb-kafa-g,
+  .barbie-svg.kosuyor .bb-pati-sol, .barbie-svg.kosuyor .bb-pati-sag,
+  .barbie-zzz span { animation: none; }
+  .barbie-svg.yiyor .bb-kafa-g { transform: translateY(32px) scale(.96); }
+  .barbie-zzz span { opacity: .8; }
+  .barbie-zzz span:nth-child(2) { transform: translate(10px, -16px); }
+  .barbie-zzz span:nth-child(3) { transform: translate(20px, -32px); }
+  .barbie-hav-yazi.goster { animation: none; opacity: 1; transform: translate(-50%, -50%) scale(1.06); }
+  .barbie-kopek-yer, .barbie-hafta-cubuk { transition: none; }
+}
