@@ -1,0 +1,171 @@
+/* css/tirnak.css — Tırnak Salonu. Sınıf öneki: tirnak-
+   Salon masası: petal pembe, soğuk ve açık panel (kâğıttan biraz daha serin), üstte inci şerit.
+   El canvas'ı ortada büyük; altında 5 adımlı sekme (Şekil → Baz → Renk → Nail art → Top coat) ve seçenek yaması.
+   Renkler tokens.css değişkenlerinden; canvas içindeki oje/ten renkleri JS'de (sanat). */
+
+.tirnak-salon { display: flex; flex-direction: column; }
+
+/* ---------------------------------------------------------------- salon masası (sahne) */
+.tirnak-masa {
+  background-color: var(--oda);
+  background-image:
+    radial-gradient(70% 60% at 50% 30%, color-mix(in srgb, var(--kagit) 55%, transparent) 0%, transparent 100%),
+    radial-gradient(circle at 20% 80%, color-mix(in srgb, var(--seker-lavanta) 22%, transparent) 0, transparent 40%),
+    radial-gradient(circle at 85% 70%, color-mix(in srgb, var(--seker-kiraz) 18%, transparent) 0, transparent 38%);
+  touch-action: manipulation;
+  -webkit-touch-callout: none;
+}
+.tirnak-masa::before {
+  content: ""; position: absolute; left: 0; right: 0; top: 0; height: 5px; z-index: 4; pointer-events: none;
+  background-image: var(--inci); background-size: var(--inci-boyut); background-position: 0% 50%;
+  animation: inci-kay 6s var(--egri-ikili) infinite alternate;
+}
+.tirnak-tuvalKap { position: absolute; left: 0; right: 0; top: 8px; bottom: 46px; display: flex; align-items: flex-end; justify-content: center; }
+.tirnak-tuval {
+  display: block; touch-action: none; -webkit-user-select: none; user-select: none; will-change: transform;
+  filter: drop-shadow(0 10px 14px color-mix(in srgb, var(--murekkep) 14%, transparent));
+  cursor: pointer;
+}
+.tirnak-tuval.cevir { animation: tirnak-cevir var(--sure-3) var(--egri-cikis); }
+@keyframes tirnak-cevir { 0% { transform: scaleX(1); } 50% { transform: scaleX(.08); } 100% { transform: scaleX(1); } }
+
+.tirnak-masaUst { position: absolute; left: var(--b-3); right: var(--b-3); top: var(--b-3); z-index: 3; display: flex; justify-content: space-between; align-items: center; gap: var(--b-2); pointer-events: none; }
+.tirnak-masaUst > * { pointer-events: auto; }
+.tirnak-elDugme { min-height: var(--dokunma-min); }
+
+.tirnak-balon {
+  left: 50%; top: calc(var(--b-3) + var(--dokunma-min) + var(--b-2)); transform: translate(-50%, 6px) scale(.9); max-width: min(280px, 84%); text-align: center; z-index: 3;
+}
+.tirnak-balon.goster { transform: translate(-50%, 0) scale(1); }
+.tirnak-balon::after { display: none; }
+
+.tirnak-secim {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 3; min-height: 46px;
+  display: flex; align-items: center; justify-content: space-between; gap: var(--b-2); padding: var(--b-1) var(--b-3);
+  background: color-mix(in srgb, var(--kagit) 82%, transparent); border-top: 1px solid var(--cizgi-2);
+}
+.tirnak-secimYazi { font-size: var(--punto-sm); font-weight: var(--kalin-baslik); color: var(--murekkep-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+.tirnak-secim .cip { min-height: 36px; padding: 0 var(--b-3); }
+@media (min-width: 768px) { .tirnak-masa::before { border-radius: var(--r-lg) var(--r-lg) 0 0; } .tirnak-secim { border-radius: 0 0 var(--r-lg) var(--r-lg); } }
+
+/* ---------------------------------------------------------------- adım sekmeleri (1–5, salon sırası gerçek bir sıra) */
+.tirnak-adimlar {
+  display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 4px;
+  max-width: var(--icerik-genislik); margin: var(--b-3) auto 0; padding: 0 var(--kenar); width: 100%;
+}
+.tirnak-adim {
+  display: flex; flex-direction: column; align-items: center; gap: 3px; min-height: var(--dokunma-min); padding: 6px 2px;
+  border-radius: var(--r-md); background: var(--kagit-2); color: var(--murekkep-2);
+  font-size: var(--punto-xs); font-weight: var(--kalin-baslik); line-height: 1.1; box-shadow: 0 2px 0 var(--golge-sert-ic);
+  transition: background var(--sure-2), color var(--sure-2), transform var(--sure-1);
+}
+.tirnak-adim:active { transform: translateY(2px); box-shadow: none; }
+.tirnak-adimNo {
+  display: inline-grid; place-items: center; width: 22px; height: 22px; border-radius: 50%;
+  background: var(--kagit); color: var(--murekkep-2); font-size: var(--punto-xs); box-shadow: 0 1px 0 var(--golge-sert-ic);
+}
+.tirnak-adimAd { white-space: nowrap; }
+.tirnak-adim[aria-selected="true"] { background: var(--oda-vurgu); color: var(--murekkep); }
+.tirnak-adim[aria-selected="true"] .tirnak-adimNo { background: var(--murekkep); color: var(--kagit); }
+
+/* ---------------------------------------------------------------- seçenek yaması */
+.tirnak-icerik { padding-top: var(--b-3); }
+.tirnak-panel { display: flex; flex-direction: column; gap: var(--b-3); }
+.tirnak-panelBaslik { display: flex; align-items: baseline; justify-content: space-between; gap: var(--b-2); }
+.tirnak-altBaslik { font-size: var(--punto-sm); font-weight: var(--kalin-baslik); color: var(--murekkep-2); margin-top: var(--b-1); }
+.tirnak-cipler { padding-left: 0; padding-right: 0; margin: 0 calc(-1 * var(--b-2)); padding-left: var(--b-2); padding-right: var(--b-2); }
+.tirnak-altSekmeler { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 4px; overflow: visible; margin: 0; padding: 2px 0; }
+.tirnak-altSekmeler .cip { min-width: 0; padding: 0 2px; font-size: var(--punto-xs); justify-content: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+.tirnak-secenekler { display: grid; grid-template-columns: repeat(auto-fill, minmax(76px, 1fr)); gap: var(--b-2); }
+.tirnak-secenek {
+  display: flex; flex-direction: column; align-items: center; gap: 4px; min-height: 84px; padding: 6px 4px 8px;
+  border-radius: var(--r-md); background: var(--kagit-2); color: var(--murekkep-2);
+  font-size: var(--punto-xs); font-weight: var(--kalin-vurgu); line-height: 1.15; text-align: center;
+  box-shadow: 0 2px 0 var(--golge-sert-ic); transition: transform var(--sure-1), background var(--sure-2), box-shadow var(--sure-2);
+}
+.tirnak-secenek:active { transform: translateY(2px); box-shadow: none; }
+.tirnak-secenek[aria-selected="true"] { background: var(--oda-zemin); color: var(--murekkep); box-shadow: 0 0 0 2.5px var(--oda-vurgu), 0 2px 0 var(--golge-sert-ic); }
+.tirnak-secenek-inci[aria-selected="true"] { box-shadow: 0 0 0 2.5px var(--seker-lavanta), 0 2px 0 var(--golge-sert-ic); }
+.tirnak-secenekAd { overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
+.tirnak-mini { width: 44px; height: 58px; display: block; border-radius: var(--r-xs); background: color-mix(in srgb, var(--kagit) 70%, transparent); }
+.tirnak-mini-parca { width: 40px; height: 40px; background: var(--kagit-3); border-radius: 50%; }
+.tirnak-parcalar .tirnak-secenek { min-height: 72px; }
+
+.tirnak-ornekler { padding: 2px; }
+.tirnak-ornekler .ornek { width: 40px; height: 40px; }
+.tirnak-ornekler .ornek:focus-visible { box-shadow: var(--odak-halka) !important; }
+.tirnak-tenler .ornek { width: 40px; height: 40px; }
+
+/* kaydırıcılar */
+.tirnak-kaydirici { display: block; }
+.tirnak-kaydiriciEtiket { display: flex; justify-content: space-between; font-size: var(--punto-sm); font-weight: var(--kalin-vurgu); color: var(--murekkep-2); margin-bottom: 2px; }
+.tirnak-kaydiriciDeger { color: var(--sessiz); }
+input.kaydirici.tirnak-ton::-webkit-slider-runnable-track { background: var(--tirnak-tonYol); }
+input.kaydirici.tirnak-ton::-moz-range-track { background: var(--tirnak-tonYol); }
+input.kaydirici.tirnak-ton::-moz-range-progress { background: transparent; }
+
+/* özel renk */
+.tirnak-ozel { border: 2px solid var(--cizgi); border-radius: var(--r-md); padding: var(--b-2) var(--b-3); }
+.tirnak-ozel > summary { cursor: pointer; font-weight: var(--kalin-vurgu); color: var(--burun-metin); min-height: var(--dokunma-min); display: flex; align-items: center; list-style: none; }
+.tirnak-ozel > summary::-webkit-details-marker { display: none; }
+.tirnak-ozel > summary::before { content: "▸"; margin-right: 6px; transition: transform var(--sure-2); }
+.tirnak-ozel[open] > summary::before { transform: rotate(90deg); }
+.tirnak-ozel > .dikey { padding-top: var(--b-2); }
+.tirnak-ozelOnizle { display: inline-block; width: 44px; height: 44px; border-radius: 50%; border: 2px solid var(--kagit); box-shadow: 0 2px 0 var(--golge-sert-ic); flex: none; }
+.tirnak-renkSecici { position: relative; overflow: hidden; }
+.tirnak-renkSecici input { position: absolute; inset: 0; opacity: 0; width: 100%; height: 100%; cursor: pointer; }
+
+.tirnak-parcaAyar { display: flex; flex-direction: column; gap: var(--b-2); background: var(--kagit-2); }
+.tirnak-parcaAyar::after { display: none; }
+
+/* ---------------------------------------------------------------- ilk kurulum (ten & el) */
+.tirnak-kurulum { display: flex; flex-direction: column; gap: var(--b-3); align-items: stretch; }
+.tirnak-onizleme { width: 160px; height: 200px; margin: 0 auto; border-radius: var(--r-md); background: var(--oda); filter: drop-shadow(0 6px 10px color-mix(in srgb, var(--murekkep) 12%, transparent)); }
+.tirnak-elSec .dugme-ikincil[aria-pressed="true"] { border-color: var(--oda-vurgu); background: var(--oda-zemin); }
+.tirnak-secili { border-color: var(--oda-vurgu) !important; background: var(--oda-zemin) !important; }
+
+/* ---------------------------------------------------------------- sheet içerikleri: setler, galeri */
+.tirnak-set { display: flex; align-items: center; gap: var(--b-3); }
+.tirnak-set .tirnak-mini { flex: none; }
+.tirnak-setBilgi { min-width: 0; }
+.tirnak-set-inci { box-shadow: 0 0 0 3px var(--seker-lavanta), var(--golge-yastik), var(--isik-ustten); }
+.tirnak-set-inci::before {
+  content: "senin setin"; position: absolute; right: var(--b-3); top: -8px; z-index: 1;
+  font-size: var(--punto-xs); font-weight: var(--kalin-baslik); padding: 2px 8px; border-radius: var(--r-tam);
+  background-image: var(--inci); background-size: var(--inci-boyut); color: var(--murekkep);
+}
+.tirnak-galeri { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: var(--b-3); }
+.tirnak-galeriKart { display: flex; flex-direction: column; gap: var(--b-2); }
+.tirnak-galeriResim { width: 100%; height: auto; aspect-ratio: 200 / 118; border-radius: var(--r-sm); background: var(--oda); }
+.tirnak-galeriBilgi { min-width: 0; }
+.tirnak-galeriBilgi .kalin { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* alt çubuk: .bolum giriş animasyonu (fill-mode both) bitince kimlik transform bırakıyor; transform'lu ata
+   position:fixed alt çubuğu kendine göre konumlandırıp sayfa altına (ekran dışına) itiyor. Bu bölümde animasyon
+   bitince transform'u bırakıyoruz (giriş kayması yine oynar). */
+body[data-bolum="tirnak"] .bolum { animation-fill-mode: none; }
+/* alt çubukta geri al / yinele pasif hali */
+body[data-bolum="tirnak"] .altbar .eylem[aria-disabled="true"] { opacity: .45; }
+
+/* ---------------------------------------------------------------- masaüstü: el solda (yapışkan), adımlar ve seçenekler sağda */
+@media (min-width: 900px) {
+  .tirnak-salon {
+    display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); grid-template-rows: auto 1fr;
+    gap: var(--b-3) var(--b-5); align-items: start; max-width: var(--icerik-genislik); margin: 0 auto; padding: 0 var(--kenar);
+  }
+  .tirnak-masa { grid-column: 1; grid-row: 1 / span 2; position: sticky; top: calc(var(--ustbar-yuk) + var(--b-3)); height: min(72vh, 620px); margin: var(--b-3) 0 0; max-width: none; width: 100%; }
+  .tirnak-adimlar { grid-column: 2; grid-row: 1; margin: var(--b-3) 0 0; padding: 0; }
+  .tirnak-icerik { grid-column: 2; grid-row: 2; padding-left: 0; padding-right: 0; }
+}
+
+/* ---------------------------------------------------------------- küçük ekran ve hareket azaltma */
+@media (max-width: 340px) {
+  .tirnak-adim { font-size: 11px; }
+  .tirnak-secenekler { grid-template-columns: repeat(auto-fill, minmax(68px, 1fr)); }
+  .tirnak-secim .cip { padding: 0 var(--b-2); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tirnak-masa::before { animation: none; }
+  .tirnak-tuval.cevir { animation: none; }
+}

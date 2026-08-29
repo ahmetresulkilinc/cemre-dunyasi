@@ -1,0 +1,15 @@
+node_modules/
+.hallmark/
+qa-shots/
+*.log
+Thumbs.db
+.DS_Store
+# iç çalışma dokümanları (herkese açık depoya girmesin)
+ARASTIRMA.md
+STIL.md
+QA-RAPORU.md
+RAPOR.md
+site/MODUL-SOZLESMESI.md
+/assets/
+# şifresiz kişisel dosyalar (fotoğraflar + mektup) — ASLA depoya girmez
+gizli-kaynak/

@@ -1,0 +1,93 @@
+/* hub.css — giriş ekranı: selam, battaniyede Pıttıksu, 8 yama kart (kendi logosu + adı), bağlar, ana ekrana ekle. Önek: hub- */
+.hub { min-height: 100dvh; padding: calc(var(--b-4) + var(--guvenli-ust)) var(--kenar) calc(var(--b-16) + var(--guvenli-alt) + var(--b-8)); max-width: var(--icerik-genislik); margin: 0 auto; position: relative; }
+.hub[hidden] { display: none !important; }
+
+/* üst: selam + düğmeler */
+.hub-ust { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--b-3); }
+.hub-selam { background: var(--kagit); border-radius: var(--r-lg); padding: var(--b-3) var(--b-5); box-shadow: var(--golge-yastik), var(--isik-ustten); display: inline-block; max-width: 100%; min-width: 0; }
+.hub-selam h1 { font-family: var(--yazi-baslik); font-weight: var(--kalin-dev); font-size: var(--punto-3xl); letter-spacing: var(--aralik-baslik); line-height: var(--satir-siki); text-wrap: balance; }
+.hub-selam p { color: var(--sessiz); font-size: var(--punto-sm); margin-top: 2px; }
+.hub-dugmeler { display: flex; gap: var(--b-2); flex: none; }
+.hub-dugmeler .dugme-ikon[aria-pressed="true"] { background: var(--burun-zemin); }
+
+/* gece yıldızları (sadece gece) */
+.hub-yildizlar { position: absolute; left: 0; right: 0; top: -4px; height: 70px; pointer-events: none; display: none; }
+:root[data-hava="gece"] .hub-yildizlar { display: block; }
+.hub-yildizlar i { position: absolute; width: 3px; height: 3px; border-radius: 50%; background: var(--kagit); }
+
+/* Pıttıksu battaniyede (hub tezi) */
+.hub-kedi { position: relative; height: 150px; margin: var(--b-3) 0 var(--b-2); display: flex; align-items: flex-end; justify-content: center; }
+.hub-kedi-svg { width: 250px; height: auto; cursor: pointer; transform-origin: 50% 90%; overflow: visible; }
+.hub-kedi-svg .hub-kedi-govde { transform-origin: 50% 85%; animation: hub-nefes var(--sure-nefes) var(--egri-ikili) infinite; }
+@keyframes hub-nefes { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.018, 1.03); } }
+.hub-kedi-svg .hub-kedi-goz-acik, .hub-kedi-svg .hub-kedi-goz-kapali, .hub-kedi-svg .hub-kedi-zzz { transition: opacity var(--sure-2); }
+.hub-kedi-svg.uyanik .hub-kedi-goz-acik { opacity: 1; }
+.hub-kedi-svg.uyanik .hub-kedi-goz-kapali, .hub-kedi-svg.uyanik .hub-kedi-zzz { opacity: 0; }
+.hub-kedi-svg.uyanik .hub-kedi-kafa { animation: hub-kafa .5s var(--egri-zip); transform-origin: 95px 80px; }
+@keyframes hub-kafa { 0% { transform: rotate(0); } 40% { transform: rotate(-6deg) translateY(-3px); } 100% { transform: rotate(0); } }
+.hub-kedi-zzz text { animation: hub-zzz 2.2s ease-in-out infinite; }
+.hub-kedi-zzz text:last-child { animation-delay: .6s; }
+@keyframes hub-zzz { 0% { opacity: 0; transform: translate(0, 0); } 30% { opacity: 1; } 100% { opacity: 0; transform: translate(6px, -12px); } }
+.hub-kedi .balon { left: 50%; top: -4px; transform: translate(-50%, 6px) scale(.9); max-width: 260px; text-align: center; }
+.hub-kedi .balon.goster { transform: translate(-50%, 0); }
+.hub-kedi .balon::after { left: 50%; }
+.hub-kedi-svg:focus-visible { box-shadow: none !important; outline: 3px solid var(--odak); outline-offset: 4px; border-radius: 24px; }
+
+/* kartlar: 2 sütun, Pıttıksu ve Bizim Köşemiz geniş */
+.hub-kartlar { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--b-3); }
+/* .hub-kartlar öneki: base.css'teki .yama.dokun { display:block } kuralını geçmek için (aynı özgüllük, sonra yüklenir) */
+.hub-kartlar .hub-kart { position: relative; grid-column: span 1; padding: var(--b-4); min-height: 164px; display: flex; flex-direction: column; align-items: flex-start; gap: var(--b-3); color: inherit; text-decoration: none; }
+.hub-kartlar .hub-kart.genis { grid-column: span 2; min-height: 150px; flex-direction: row; align-items: center; gap: var(--b-4); }
+.hub.canlandi .hub-kart { opacity: 0; animation: hub-kart-gel var(--sure-3) var(--egri-cikis) forwards; animation-delay: calc(var(--i, 0) * 55ms); }
+@keyframes hub-kart-gel { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+.hub-kart-ikon { width: 60px; height: 60px; flex: none; display: grid; place-items: center; border-radius: 50%;
+  background: color-mix(in srgb, var(--kart-renk, var(--burun)) 28%, var(--kagit)); box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--kart-renk, var(--burun)) 45%, transparent); }
+.hub-kart-ikon svg { width: 44px; height: 44px; overflow: visible; }
+.hub-kart.genis .hub-kart-ikon { width: 84px; height: 84px; }
+.hub-kart.genis .hub-kart-ikon svg { width: 64px; height: 64px; }
+.hub-kart-metin { display: flex; flex-direction: column; gap: 4px; min-width: 0; flex: 1; }
+.hub-kart-ad { font-family: var(--yazi-baslik); font-weight: var(--kalin-baslik); font-size: var(--punto-lg); letter-spacing: var(--aralik-baslik); line-height: var(--satir-siki); }
+.hub-kart-aciklama { color: var(--sessiz); font-size: var(--punto-sm); line-height: 1.35; }
+.hub-kart-ipucu { margin-top: auto; font-size: var(--punto-xs); font-weight: var(--kalin-baslik); color: var(--burun-metin); }
+.hub-kart-ipucu[hidden], .hub-kart-ipucu:empty { display: none; }
+.hub-kart-rozet { margin-top: auto; align-self: flex-start; }
+.hub-kart::before { content: ""; position: absolute; left: var(--b-5); right: var(--b-5); top: 0; height: 5px; border-radius: 0 0 5px 5px; background: var(--kart-renk, var(--burun)); opacity: .8; }
+.hub-kart[data-bolum="tirnak"]::before { background-image: var(--inci); background-size: var(--inci-boyut); opacity: 1; }
+.hub-kart.yakinda { opacity: .68; cursor: default; }
+.hub-kart.yakinda .hub-kart-ikon { filter: grayscale(.6); }
+.hub-kart.yakinda::after { border-style: dotted; }
+@media (hover: hover) { .hub-kart.dokun:hover .hub-kart-ikon { transform: rotate(-4deg) scale(1.05); } .hub-kart-ikon { transition: transform var(--sure-2) var(--egri-yumus); } }
+
+/* Bizim Köşemiz kartı: sağ köşede küçük, hafif eğik polaroid (assets/bizim/ikimiz-thumb.jpg) */
+.hub-kart-polaroid { position: relative; flex: none; align-self: center; width: 74px; padding: 4px 4px 11px; margin-left: var(--b-2); background: var(--kagit); border-radius: var(--r-xs);
+  box-shadow: var(--golge-yastik), var(--isik-ustten); transform: rotate(6deg); transition: transform var(--sure-2) var(--egri-cikis); }
+.hub-kart-foto { display: block; aspect-ratio: 4 / 3; overflow: hidden; border-radius: 3px; background: var(--kagit-3); }
+.hub-kart-foto img { width: 100%; height: 100%; object-fit: cover; display: block; -webkit-user-drag: none; }
+.hub-kart-bant { position: absolute; left: 50%; top: -7px; width: 34px; height: 12px; transform: translateX(-50%) rotate(-4deg); border-radius: 2px; z-index: 1;
+  background: color-mix(in srgb, var(--seker-kiraz) 55%, transparent); box-shadow: 0 1px 0 color-mix(in srgb, var(--murekkep) 12%, transparent); }
+.hub-kart-polaroid::after { content: "♥"; position: absolute; right: 6px; bottom: 0; font-size: 9px; line-height: 11px; color: var(--burun-metin); }
+@media (hover: hover) { .hub-kart.dokun:hover .hub-kart-polaroid { transform: rotate(2deg) translateY(-2px); } }
+.hub-kart.genis .hub-kart-metin { padding-right: var(--b-1); }
+@media (min-width: 768px) { .hub-kart-polaroid { width: 92px; } }
+
+/* bağlar: buket / not */
+.hub-baglar { display: flex; justify-content: center; flex-wrap: wrap; gap: var(--b-2); margin-top: var(--b-5); }
+.hub-baglar .dugme-hayalet { background: color-mix(in srgb, var(--kagit) 70%, transparent); border-radius: var(--r-tam); text-decoration: none; box-shadow: 0 2px 0 var(--golge-sert); }
+.hub-baglar .dugme-hayalet:active { transform: translateY(2px); box-shadow: none; }
+
+/* alt: kurulum + gizlilik notu */
+.hub-alt { margin-top: var(--b-5); display: flex; flex-direction: column; align-items: center; gap: var(--b-3); }
+.hub-alt .sessiz { text-align: center; }
+.kurulum { display: flex; align-items: center; gap: var(--b-3); width: 100%; }
+.kurulum .ikon { font-size: 28px; }
+
+@media (min-width: 768px) {
+  .hub-kartlar { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .hub-kartlar .hub-kart.genis { grid-column: span 3; }
+  .hub-kedi { height: 190px; }
+  .hub-kedi-svg { width: 300px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hub.canlandi .hub-kart { animation: none; opacity: 1; }
+  .hub-kedi-svg .hub-kedi-govde, .hub-kedi-zzz text, .hub-kedi-svg.uyanik .hub-kedi-kafa { animation: none; }
+}
