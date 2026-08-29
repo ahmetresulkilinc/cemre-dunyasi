@@ -8,7 +8,7 @@ window.CD = window.CD || {};
   const CD = window.CD;
   const $ = (s, k) => (k || document).querySelector(s);
   CD.config = window.CD_CONFIG || {};
-  CD.surum = '1.0.0';
+  CD.surum = '1.1.0';
 
   /* ============================================================== olay (mini emitter) */
   const dinleyiciler = {};
@@ -80,6 +80,94 @@ window.CD = window.CD || {};
     try { sessionStorage.clear(); } catch (e) {}
     for (const m of MAGAZALAR) { try { await islem(m, 'readwrite', s => s.clear()); } catch (e) {} }
     return true;
+  };
+
+  /* ---- kalıcı depolama isteği (Android/Chrome'da veriyi silinmeye karşı korur) ---- */
+  CD.depo.kalici = async function () {
+    try {
+      if (!navigator.storage || !navigator.storage.persist) return null;
+      if (navigator.storage.persisted && await navigator.storage.persisted()) return true;
+      return await navigator.storage.persist();
+    } catch (e) { return null; }
+  };
+
+  /* ---- tam yedek: localStorage (cd.*) + IndexedDB kayıtları (fotoğraflar dahil) ---- */
+  const blobDataUrl = (b) => new Promise((c, r) => { const f = new FileReader(); f.onload = () => c(f.result); f.onerror = () => r(f.error); f.readAsDataURL(b); });
+  async function disaCevir(v, derinlik) {
+    if (v == null || derinlik > 4) return v;
+    if (v instanceof Blob) return { __blob: await blobDataUrl(v), __tur: v.type || '' };
+    if (Array.isArray(v)) { const a = []; for (const x of v) a.push(await disaCevir(x, derinlik + 1)); return a; }
+    if (typeof v === 'object' && Object.getPrototypeOf(v) === Object.prototype) { const o = {}; for (const k of Object.keys(v)) o[k] = await disaCevir(v[k], derinlik + 1); return o; }
+    return v;
+  }
+  function iceCevir(v, derinlik) {
+    if (v == null || derinlik > 4) return v;
+    if (typeof v === 'object' && typeof v.__blob === 'string') {
+      const [bas, b64] = v.__blob.split(','); const tur = v.__tur || (bas.match(/:(.*?);/) || [])[1] || 'application/octet-stream';
+      const ham = atob(b64); const u = new Uint8Array(ham.length); for (let i = 0; i < ham.length; i++) u[i] = ham.charCodeAt(i);
+      return new Blob([u], { type: tur });
+    }
+    if (Array.isArray(v)) return v.map(x => iceCevir(x, derinlik + 1));
+    if (typeof v === 'object' && Object.getPrototypeOf(v) === Object.prototype) { const o = {}; Object.keys(v).forEach(k => { o[k] = iceCevir(v[k], derinlik + 1); }); return o; }
+    return v;
+  }
+  CD.depo.yedekAl = async function () {
+    const ayar = {}; CD.depo.anahtarlar().forEach(k => { if (k !== 'kilit.anahtar') ayar[k] = CD.depo.al(k); });
+    const magaza = {};
+    for (const m of MAGAZALAR) {
+      try { const kayitlar = await islem(m, 'readonly', s => s.getAll()); magaza[m] = await disaCevir(kayitlar || [], 0); }
+      catch (e) { magaza[m] = []; }
+    }
+    return JSON.stringify({ site: 'cemre-dunyasi', surum: CD.surum || 1, tarih: new Date().toISOString(), ayar, magaza });
+  };
+  CD.depo.yedekYukle = async function (json) {
+    const o = typeof json === 'string' ? JSON.parse(json) : json;
+    if (!o || (o.site && o.site !== 'cemre-dunyasi')) throw new Error('Bu dosya bu siteye ait değil');
+    const ayar = o.ayar || o.veri || {};
+    Object.keys(ayar).forEach(k => { if (k !== 'kilit.anahtar') CD.depo.yaz(k, ayar[k]); });
+    let kayit = 0;
+    for (const m of Object.keys(o.magaza || {})) {
+      if (MAGAZALAR.indexOf(m) < 0) continue;
+      for (const r of o.magaza[m] || []) { try { await islem(m, 'readwrite', s => s.put(iceCevir(r, 0))); kayit++; } catch (e) {} }
+    }
+    return { anahtar: Object.keys(ayar).length, kayit };
+  };
+
+  /* ---- yedek arayüzü: dosya olarak paylaş/indir, dosyadan geri yükle ---- */
+  CD.yedekIndir = async function () {
+    CD.toast('Yedeğin hazırlanıyor… 💾');
+    let json; try { json = await CD.depo.yedekAl(); } catch (e) { CD.toast('Yedek alınamadı 🙈'); return; }
+    const ad = 'cemre-dunyasi-yedek-' + new Date().toISOString().slice(0, 10) + '.json';
+    const blob = new Blob([json], { type: 'application/json' });
+    try {
+      const dosya = new File([blob], ad, { type: 'application/json' });
+      if (navigator.canShare && navigator.canShare({ files: [dosya] })) { await navigator.share({ files: [dosya], title: 'Cemre\'nin Dünyası yedeği' }); CD.toast('Yedeğin kaydedildi 💗'); return; }
+    } catch (e) { if (e && e.name === 'AbortError') return; }
+    try {
+      const u = URL.createObjectURL(blob); const a = document.createElement('a');
+      a.href = u; a.download = ad; document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(u), 8000); CD.toast('Yedeğin indirildi 💾');
+    } catch (e) { CD.toast('Yedek alınamadı 🙈'); }
+  };
+  CD.yedekYukleAc = function () {
+    const inp = document.createElement('input');
+    inp.type = 'file'; inp.accept = 'application/json,.json'; inp.style.display = 'none';
+    document.body.appendChild(inp);
+    inp.addEventListener('change', async () => {
+      const f = inp.files && inp.files[0]; inp.remove(); if (!f) return;
+      CD.toast('Yükleniyor… 📂');
+      try { await CD.depo.yedekYukle(await f.text()); CD.toast('Geri geldi 💗'); setTimeout(() => { location.hash = ''; location.reload(); }, 900); }
+      catch (e) { CD.toast('Bu dosya olmadı 🙈'); }
+    });
+    inp.click();
+  };
+  CD.yedekYardim = function () {
+    CD.sheet(CD.el('div.dikey', [
+      CD.el('p', 'Telefonun, Safari ile ana ekrandaki uygulamanın hafızasını ayrı tutuyor. Yani Safari\'de ektiğin çiçekler uygulamada görünmez.'),
+      CD.el('p', 'Taşımak için: Safari\'de aç → ⋯ → "Yedeğini al" (dosyayı kaydet) → uygulamayı aç → ⋯ → "Yedeği yükle".'),
+      CD.el('p', 'Bundan sonra hep ana ekrandaki simgeden gir; her şey orada birikir. 🐾'),
+      CD.el('button.dugme.tam', { type: 'button', onclick: () => CD.sheetKapat() }, 'Anladım')
+    ]), { baslik: 'Kayıtlar nerede duruyor?' });
   };
 
   /* ============================================================== yardımcılar */
@@ -480,14 +568,31 @@ window.CD = window.CD || {};
   /* ============================================================== başlat */
   const hazirKuyruk = []; let basladi = false;
   CD.hazir = (fn) => { if (basladi) fn(); else hazirKuyruk.push(fn); };
+  // ana ekrandan ilk açılışta boş hafıza → Safari'deki kayıtları taşıma ipucu (bir kere)
+  function ilkKurulumIpucu() {
+    try {
+      const uygulama = (window.matchMedia && matchMedia('(display-mode: standalone)').matches) || navigator.standalone === true;
+      if (!uygulama || CD.depo.al('ipucu.yedek', false)) return;
+      const veriVar = CD.depo.anahtarlar().some(k => !/^(kilit\.|ipucu\.|giris\.|ses$|hava$)/.test(k));
+      if (veriVar) return;
+      CD.depo.yaz('ipucu.yedek', true);
+      setTimeout(() => CD.yedekYardim(), 1800);
+    } catch (e) {}
+  }
+
   function baslat() {
     havaUygula();
+    CD.depo.kalici();
+    ilkKurulumIpucu();
     const geri = $('#geriDugme'); if (geri) geri.addEventListener('click', () => { CD.ses.tik(); CD.ac(''); });
     const menu = $('#bolumMenu'); if (menu) menu.addEventListener('click', () => {
       const k = CD.el('div.dikey', [
         CD.el('button.dugme-ikincil.tam', { type: 'button', onclick: () => { CD.ses.ac(!CD.ses.acik); CD.sheetKapat(); CD.toast(CD.ses.acik ? 'Ses açık 🔈' : 'Ses kapalı 🔇'); } }, CD.ses.acik ? '🔇 Sesi kapat' : '🔈 Sesi aç'),
         CD.el('button.dugme-ikincil.tam', { type: 'button', onclick: () => { CD.havaDegistir(); CD.sheetKapat(); } }, CD.hava === 'gece' ? '☀️ Gündüze geç' : '🌙 Geceye geç'),
         CD.el('a.dugme.tam', { href: '#/', onclick: () => CD.sheetKapat() }, '🏠 Eve dön'),
+        CD.el('button.dugme-ikincil.tam', { type: 'button', onclick: () => { CD.sheetKapat(); CD.yedekIndir(); } }, '💾 Yedeğini al'),
+        CD.el('button.dugme-ikincil.tam', { type: 'button', onclick: () => { CD.sheetKapat(); CD.yedekYukleAc(); } }, '📂 Yedeği yükle'),
+        CD.el('button.dugme-hayalet.tam', { type: 'button', onclick: () => CD.yedekYardim() }, 'Kayıtlarım nerede duruyor?'),
         CD.el('button.dugme-ikincil.tam', { type: 'button', onclick: () => {
           // aynı sheet'in içeriği onay ekranıyla değişir (kapatıp açmak 320ms'lik temizleme zamanlayıcısıyla yarışır)
           const onay = CD.el('div.dikey', [
