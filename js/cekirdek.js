@@ -486,7 +486,7 @@ window.CD = window.CD || {};
 
   /* ============================================================== bölüm kaydı & yönlendirme */
   CD.bolumler = CD.bolumler || {};
-  CD.BOLUM_SIRASI = ['pittiksu', 'tirnak', 'petevi', 'angela', 'bahce', 'panda', 'ofke', 'bizim'];
+  CD.BOLUM_SIRASI = ['pittiksu', 'barbie', 'tirnak', 'petevi', 'angela', 'bahce', 'panda', 'ofke', 'bizim'];
   CD.kaydet = function (tanim) {
     if (!tanim || !tanim.id) { console.warn('[CD.kaydet] id eksik', tanim); return; }
     if (typeof tanim.mount !== 'function') { console.warn('[CD.kaydet] mount eksik:', tanim.id); return; }

@@ -39,6 +39,16 @@ window.CD_CONFIG = {
   },
 
   /* ---------------------------------------------------------------
+     BARBIE — Cemre'nin köpeği (krem Pomeranian)
+     --------------------------------------------------------------- */
+  BARBIE: {
+    AD: "Barbie",
+    /* Doğum tarihi / eve geliş: yıl-ay-gün. Örnek: "2023-05-10". Boş bırakabilirsin. */
+    DOGUM_TARIHI: "",
+    TANIM: "krem tüylü, kara gözlü, dili hep dışarıda minik Pomeranian"
+  },
+
+  /* ---------------------------------------------------------------
      ANGELA — beyaz kız kedi bölümü. Cemre içeriden yeniden adlandırabilir.
      --------------------------------------------------------------- */
   ANGELA_ADI: "Angela",
@@ -55,7 +65,8 @@ window.CD_CONFIG = {
     kedi:     { AD: "Sırıtan Kedi",     ROL: "tembel" },
     tavsan:   { AD: "Tavşan",           ROL: "bahçıvan" },
     bibble:   { AD: "Bibble",           ROL: "somurtkan" },
-    pittiksu: { AD: "Pıttıksu",         ROL: "misafir bebek" }
+    pittiksu: { AD: "Pıttıksu",         ROL: "misafir bebek" },
+    barbie:   { AD: "Barbie",           ROL: "evin neşesi" }
   },
 
   /* ---------------------------------------------------------------
@@ -98,6 +109,9 @@ window.CD_CONFIG = {
     { dosya: "buket.jpg",   altyazi: "Lilyumlu buket 💐" },
     { dosya: "patrick.jpg", altyazi: "Patrick 🍬" },
     { dosya: "melody.jpg",  altyazi: "My Melody 🎀" },
-    { dosya: "kopek.jpg",   altyazi: "🐶" }   /* Ahmet: köpeğin adını / bir altyazı yaz */
+    { dosya: "kopek.jpg",   altyazi: "Barbie 🐶" },
+    { dosya: "barbie-1.jpg", altyazi: "Barbie ✨" },
+    { dosya: "barbie-2.jpg", altyazi: "Dili hep dışarıda 🐾" },
+    { dosya: "cemre-barbie.jpg", altyazi: "Cemre ve Barbie 💗" }
   ]
 };

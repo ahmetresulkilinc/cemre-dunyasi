@@ -5,7 +5,7 @@
    Şifreli dosyalar site/tools/gizle.js ile üretilir. Anahtar (kelime değil) bu cihazda hatırlanır. */
 (() => {
   'use strict';
-  const SCRIPTLER = ['js/cekirdek.js', 'js/petler-miras.js', 'js/giris.js', 'js/bolum/pittiksu.js', 'js/bolum/tirnak.js', 'js/bolum/petevi.js', 'js/bolum/angela.js', 'js/bolum/panda.js', 'js/bolum/bahce.js', 'js/bolum/ofke.js', 'js/bolum/bizim.js', 'js/hub.js'];
+  const SCRIPTLER = ['js/cekirdek.js', 'js/petler-miras.js', 'js/giris.js', 'js/bolum/pittiksu.js', 'js/bolum/barbie.js', 'js/bolum/tirnak.js', 'js/bolum/petevi.js', 'js/bolum/angela.js', 'js/bolum/panda.js', 'js/bolum/bahce.js', 'js/bolum/ofke.js', 'js/bolum/bizim.js', 'js/hub.js'];
   const SAKLA = 'cd.kilit.anahtar';
   const G = window.GIZLI = { hazir: false, _url: {}, url(p) { return this._url[p] || p; } };
   const subtle = (window.crypto && window.crypto.subtle) || null;
