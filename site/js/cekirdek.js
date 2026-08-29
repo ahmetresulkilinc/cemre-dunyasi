@@ -70,6 +70,18 @@ window.CD = window.CD || {};
   CD.depo.disaAktar = () => { const o = {}; CD.depo.anahtarlar().forEach(k => { o[k] = CD.depo.al(k); }); return JSON.stringify({ surum: CD.surum, tarih: new Date().toISOString(), veri: o }); };
   CD.depo.iceAktar = (json) => { try { const o = typeof json === 'string' ? JSON.parse(json) : json; const v = o && o.veri ? o.veri : o; Object.keys(v).forEach(k => CD.depo.yaz(k, v[k])); return true; } catch (e) { return false; } };
 
+  // sıfırla: oyun ilerlemesi, başarımlar, kayıtlar, eklenen fotoğraflar silinir; KORU listesi (tam anahtar) kalır
+  const SIFIRLA_KORU = ['cd.pittiksu.dogumTarihi', 'cd.pittiksu.dogumVarsayilan', 'cd.kilit.anahtar', 'cd.ses', 'cd.hava'];
+  CD.depo.sifirla = async function (koru) {
+    const kal = new Set([].concat(SIFIRLA_KORU, koru || []));
+    const sakla = {}; kal.forEach(k => { try { const v = localStorage.getItem(k); if (v != null) sakla[k] = v; } catch (e) {} });
+    try { localStorage.clear(); } catch (e) {}
+    Object.keys(sakla).forEach(k => { try { localStorage.setItem(k, sakla[k]); } catch (e) {} });
+    try { sessionStorage.clear(); } catch (e) {}
+    for (const m of MAGAZALAR) { try { await islem(m, 'readwrite', s => s.clear()); } catch (e) {} }
+    return true;
+  };
+
   /* ============================================================== yardımcılar */
   CD.kimlik = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
   CD.rastgele = (a) => a[Math.floor(Math.random() * a.length)];
@@ -475,7 +487,17 @@ window.CD = window.CD || {};
       const k = CD.el('div.dikey', [
         CD.el('button.dugme-ikincil.tam', { type: 'button', onclick: () => { CD.ses.ac(!CD.ses.acik); CD.sheetKapat(); CD.toast(CD.ses.acik ? 'Ses açık 🔈' : 'Ses kapalı 🔇'); } }, CD.ses.acik ? '🔇 Sesi kapat' : '🔈 Sesi aç'),
         CD.el('button.dugme-ikincil.tam', { type: 'button', onclick: () => { CD.havaDegistir(); CD.sheetKapat(); } }, CD.hava === 'gece' ? '☀️ Gündüze geç' : '🌙 Geceye geç'),
-        CD.el('a.dugme.tam', { href: '#/', onclick: () => CD.sheetKapat() }, '🏠 Eve dön')
+        CD.el('a.dugme.tam', { href: '#/', onclick: () => CD.sheetKapat() }, '🏠 Eve dön'),
+        CD.el('button.dugme-ikincil.tam', { type: 'button', onclick: () => {
+          // aynı sheet'in içeriği onay ekranıyla değişir (kapatıp açmak 320ms'lik temizleme zamanlayıcısıyla yarışır)
+          const onay = CD.el('div.dikey', [
+            CD.el('p', 'Oyun ilerlemesi, başarımlar, bahçe, pet evi, tırnak tasarımları ve eklenen fotoğraflar silinir.'),
+            CD.el('p', 'Pıttıksu\'nun doğum tarihi, sihirli kelime ve ses/gece tercihin kalır. 🐾'),
+            CD.el('button.dugme.tam', { type: 'button', onclick: async () => { CD.ses.tik(); CD.toast('Sıfırlanıyor… 🧹'); try { await CD.depo.sifirla(); } catch (e) {} location.hash = ''; location.reload(); } }, 'Evet, hepsini sıfırla'),
+            CD.el('button.dugme-ikincil.tam', { type: 'button', onclick: () => CD.sheetKapat() }, 'Vazgeç')
+          ]);
+          CD.sheet(onay, { baslik: 'Her şeyi sıfırla?', sessiz: true });
+        } }, '🧹 Verileri sıfırla')
       ]);
       CD.sheet(k, { baslik: 'Ayarlar' });
     });
