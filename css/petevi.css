@@ -1,0 +1,269 @@
+/* css/petevi.css — Pixel Pet Evi
+   Kesit ev: yatay kaydırılan 5 oda (salon · mutfak · banyo · yatak odası · balkon).
+   Duvar kâğıtları CSS deseni, mobilyalar inline SVG (çizgi --pixel-cizgi, dolgular token → gece kendiliğinden uyar).
+   Pixel petler odaların içinde (.pet-katmani.yerel); arayüz yumuşak ve pürüzsüz. Tüm sınıflar "petevi-" önekli. */
+
+/* ---------------------------------------------------------------- sahne / şerit */
+.petevi-sahne { --petevi-zemin-yuk: 44px; background: var(--kagit-3); }
+.petevi-serit {
+  display: flex; height: 100%; overflow-x: auto; overflow-y: hidden;
+  scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain;
+}
+.petevi-serit::-webkit-scrollbar { display: none; }
+.petevi-oda {
+  position: relative; flex: 0 0 100%; height: 100%; scroll-snap-align: start; overflow: hidden; isolation: isolate;
+  -webkit-tap-highlight-color: transparent; -webkit-user-select: none; user-select: none;
+}
+@media (min-width: 768px) { .petevi-oda { flex-basis: 50%; } }
+
+/* katmanlar: duvar 0 · mobilya 1 · zemin 2 · petler 5 · karartma 6 · efekt 8 · etiket 9 */
+.petevi-duvar { position: absolute; inset: 0 0 var(--petevi-zemin-yuk); z-index: 0; }
+.petevi-duvar::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 6px; background: var(--kagit); box-shadow: 0 2px 0 var(--cizgi); }
+.petevi-mobilya-kat { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+.petevi-zemin {
+  position: absolute; left: 0; right: 0; bottom: 0; height: var(--petevi-zemin-yuk); z-index: 2;
+  background-image: repeating-linear-gradient(90deg, transparent 0 46px, var(--battaniye-koyu) 46px 48px), linear-gradient(var(--battaniye-acik), transparent 4px);
+  background-color: var(--seker-seftali);
+  box-shadow: inset 0 3px 0 var(--battaniye-koyu);
+}
+.petevi-oda .pet-katmani { z-index: 5; }
+.petevi-karartma { position: absolute; inset: 0; z-index: 6; pointer-events: none; background: var(--kaplama); opacity: 0; transition: opacity var(--sure-4) var(--egri-cikis); }
+.petevi-oda.petevi-los .petevi-karartma { opacity: .85; }
+.petevi-oda.petevi-uyku .petevi-karartma { opacity: 1; }
+.petevi-efekt { position: absolute; inset: 0; z-index: 8; pointer-events: none; }
+.petevi-oda-etiket {
+  position: absolute; left: var(--b-3); top: var(--b-3); z-index: 9; pointer-events: none;
+  font-size: var(--punto-xs); font-weight: var(--kalin-baslik); color: var(--murekkep-2); background: var(--kagit);
+  padding: 4px 10px; border-radius: var(--r-tam); box-shadow: 0 2px 0 var(--golge-sert-ic);
+}
+
+/* ---------------------------------------------------------------- duvar kâğıtları */
+.petevi-oda-salon .petevi-duvar { background-color: var(--kagit-2); background-image: repeating-linear-gradient(90deg, transparent 0 22px, color-mix(in srgb, var(--burun-zemin) 70%, transparent) 22px 30px); }
+.petevi-oda-mutfak .petevi-duvar {
+  background-color: var(--kagit);
+  background-image: linear-gradient(45deg, color-mix(in srgb, var(--seker-limon) 40%, var(--kagit)) 25%, transparent 25% 75%, color-mix(in srgb, var(--seker-limon) 40%, var(--kagit)) 75%), linear-gradient(45deg, color-mix(in srgb, var(--seker-limon) 40%, var(--kagit)) 25%, transparent 25% 75%, color-mix(in srgb, var(--seker-limon) 40%, var(--kagit)) 75%);
+  background-size: 26px 26px; background-position: 0 0, 13px 13px;
+}
+.petevi-oda-banyo .petevi-duvar { background-color: var(--burun-zemin); background-image: linear-gradient(var(--kagit) 2px, transparent 2px), linear-gradient(90deg, var(--kagit) 2px, transparent 2px); background-size: 28px 28px; }
+.petevi-oda-yatak .petevi-duvar { background-color: var(--kagit-2); background-image: radial-gradient(var(--seker-lavanta) 2.5px, transparent 3px); background-size: 22px 22px; }
+.petevi-oda-balkon .petevi-duvar { background-image: linear-gradient(var(--goz-zemin), var(--kagit) 92%); }
+.petevi-oda-balkon .petevi-duvar::after { display: none; }
+:root[data-hava="gece"] .petevi-oda-balkon .petevi-duvar {
+  background-image:
+    radial-gradient(1.5px 1.5px at 12% 22%, var(--kagit) 60%, transparent 62%), radial-gradient(1.5px 1.5px at 34% 12%, var(--kagit) 60%, transparent 62%),
+    radial-gradient(2px 2px at 58% 30%, var(--kagit) 60%, transparent 62%), radial-gradient(1.5px 1.5px at 80% 16%, var(--kagit) 60%, transparent 62%),
+    radial-gradient(1.5px 1.5px at 22% 48%, var(--kagit) 60%, transparent 62%), radial-gradient(1.5px 1.5px at 90% 44%, var(--kagit) 60%, transparent 62%),
+    linear-gradient(var(--goz-zemin), var(--kagit-2));
+}
+
+/* ---------------------------------------------------------------- mobilyalar */
+.petevi-mobilya { position: absolute; bottom: var(--petevi-zemin-yuk); pointer-events: none; }
+.petevi-mobilya svg { display: block; width: 100%; height: auto; overflow: visible; }
+.petevi-mobilya svg * { stroke: var(--pixel-cizgi); stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+.petevi-mobilya .petevi-ns { stroke: none; }
+.petevi-mobilya .petevi-ince { stroke-width: 1.5; fill: none; }
+.petevi-r-kagit { fill: var(--kagit); }
+.petevi-r-kagit2 { fill: var(--kagit-2); }
+.petevi-r-burun { fill: var(--burun); }
+.petevi-r-pembe { fill: var(--burun-zemin); }
+.petevi-r-seftali { fill: var(--seker-seftali); }
+.petevi-r-limon { fill: var(--seker-limon); }
+.petevi-r-nane { fill: var(--seker-nane); }
+.petevi-r-gok { fill: var(--seker-gok); }
+.petevi-r-lavanta { fill: var(--seker-lavanta); }
+.petevi-r-kiraz { fill: var(--seker-kiraz); }
+.petevi-r-yaprak { fill: var(--seker-yaprak); }
+.petevi-r-bal { fill: var(--seker-bal); }
+.petevi-r-gri { fill: var(--gri); }
+.petevi-r-ink { fill: var(--pixel-cizgi); }
+.petevi-r-battaniye { fill: var(--battaniye); }
+.petevi-r-battaniye-koyu { stroke: var(--battaniye-koyu) !important; }
+.petevi-mobilya svg .petevi-kalin { stroke-width: 3; fill: none; }
+.petevi-mobilya svg .petevi-s-kiraz { stroke: var(--seker-kiraz); }
+.petevi-mobilya svg .petevi-s-bal { stroke: var(--seker-bal); }
+.petevi-mobilya svg .petevi-s-yaprak { stroke: var(--seker-yaprak); }
+.petevi-mobilya svg .petevi-s-tebesir { stroke: var(--battaniye-acik); }
+.petevi-mobilya svg .petevi-tebesir { stroke: none; fill: var(--battaniye-acik); font-family: var(--yazi-baslik); font-size: 20px; font-weight: var(--kalin-baslik); }
+.petevi-mobilya svg .petevi-tebesir-kucuk { font-family: var(--yazi-govde); font-size: 12px; font-weight: var(--kalin-vurgu); }
+.petevi-ay { display: none; }
+:root[data-hava="gece"] .petevi-gunes { display: none; }
+:root[data-hava="gece"] .petevi-ay { display: block; }
+:root[data-hava="gece"] .petevi-gok-cam { fill: var(--goz-zemin); }
+
+/* tünekler: petlerin zıplayıp oturabildiği raflar (görünmez çizgi + altında tahta) */
+.petevi-tunek { position: absolute; height: 4px; pointer-events: none; }
+.petevi-tunek::before { content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 8px; border-radius: 3px; background: var(--seker-seftali); box-shadow: 0 2px 0 var(--pixel-cizgi); }
+
+/* salon */
+.petevi-m-tablo { left: 8%; top: 60px; bottom: auto; width: 56px; }
+.petevi-m-sus { left: 23%; top: 4px; bottom: auto; width: 60%; }
+.petevi-m-saat { left: 50%; top: 62px; bottom: auto; width: 44px; transform: translateX(-50%); }
+.petevi-oda-salon .petevi-m-pencere { right: 6%; top: 38px; bottom: auto; width: 118px; }
+@media (max-width: 359px) { .petevi-m-saat { display: none; } }
+.petevi-m-lamba { left: 5%; width: 40px; }
+.petevi-isik { position: absolute; left: 50%; top: -20px; width: 130px; height: 130px; transform: translateX(-50%); border-radius: 50%; background: radial-gradient(circle, color-mix(in srgb, var(--seker-limon) 45%, transparent), transparent 68%); opacity: 0; transition: opacity var(--sure-4); }
+:root[data-hava="gece"] .petevi-isik { opacity: 1; }
+.petevi-m-koltuk { left: 50%; width: 150px; transform: translateX(-46%); }
+.petevi-m-hali { left: 50%; width: 190px; bottom: calc(var(--petevi-zemin-yuk) - 12px); transform: translateX(-50%); }
+.petevi-m-raf { right: 7%; width: 110px; bottom: calc(var(--petevi-zemin-yuk) + 112px); }
+.petevi-t-raf { right: 7%; width: 110px; bottom: calc(var(--petevi-zemin-yuk) + 121px); }
+.petevi-t-raf::before { display: none; }
+
+/* mutfak */
+.petevi-m-aski { left: 6%; top: 50px; bottom: auto; width: 96px; }
+.petevi-m-tahta { right: 6%; top: 24px; bottom: auto; width: 124px; }
+.petevi-m-dolap { left: 5%; width: 62px; }
+.petevi-m-tezgah { right: 4%; width: 176px; }
+.petevi-buhar { position: absolute; left: 30%; top: -8px; width: 8px; height: 20px; border-radius: var(--r-tam); background: var(--kagit); opacity: .75; animation: petevi-buhar 2.6s ease-in-out infinite; }
+.petevi-buhar::after { content: ""; position: absolute; left: 14px; top: 4px; width: 6px; height: 16px; border-radius: var(--r-tam); background: var(--kagit); animation: petevi-buhar 2.6s ease-in-out .8s infinite; }
+@keyframes petevi-buhar { 0% { transform: translateY(0) scaleX(1); opacity: .75; } 100% { transform: translateY(-26px) scaleX(1.6); opacity: 0; } }
+.petevi-m-kavanoz { left: 30%; width: 110px; bottom: calc(var(--petevi-zemin-yuk) + 118px); }
+.petevi-t-tezgah { left: 30%; width: 110px; bottom: calc(var(--petevi-zemin-yuk) + 126px); }
+.petevi-t-tezgah::before { display: none; }
+
+/* banyo */
+.petevi-m-lombar { right: 8%; top: 30px; bottom: auto; width: 72px; }
+.petevi-m-havlu-raf { left: 6%; top: 54px; bottom: auto; width: 84px; }
+.petevi-m-ayna { left: 6%; width: 64px; }
+.petevi-m-kuvet { right: 5%; width: 178px; }
+.petevi-m-havlu { left: calc(6% + 76px); width: 26px; bottom: calc(var(--petevi-zemin-yuk) + 84px); }
+.petevi-t-kuvet { left: 8%; width: 100px; bottom: calc(var(--petevi-zemin-yuk) + 132px); }
+.petevi-t-kuvet::after { content: "🧴"; position: absolute; right: 10px; bottom: 4px; font-size: 18px; line-height: 1; }
+.petevi-kopukcuk { animation: petevi-kopukcuk 3.2s ease-in-out infinite alternate; }
+@keyframes petevi-kopukcuk { from { transform: translateY(0); } to { transform: translateY(-3px); } }
+
+/* yatak odası */
+.petevi-m-isiklar { left: 0; top: 6px; bottom: auto; width: 100%; }
+.petevi-m-cerceve { left: 6%; top: 96px; bottom: auto; width: 104px; }
+:root[data-hava="gece"] .petevi-m-isiklar svg { filter: drop-shadow(0 0 6px color-mix(in srgb, var(--seker-limon) 70%, transparent)); }
+:root[data-hava="gece"] .petevi-ampul:nth-of-type(odd) { animation: petevi-ampul 2.4s var(--egri-ikili) infinite alternate; }
+:root[data-hava="gece"] .petevi-ampul:nth-of-type(even) { animation: petevi-ampul 2.4s var(--egri-ikili) -1.2s infinite alternate; }
+@keyframes petevi-ampul { from { opacity: .55; } to { opacity: 1; } }
+.petevi-m-yatak { left: 4%; width: 190px; }
+.petevi-m-komodin { left: calc(4% + 196px); width: 50px; }
+.petevi-m-pencere { right: 8%; width: 96px; bottom: calc(var(--petevi-zemin-yuk) + 118px); }
+.petevi-t-basucu { right: 8%; width: 96px; bottom: calc(var(--petevi-zemin-yuk) + 118px); }
+.petevi-t-basucu::before { height: 6px; }
+
+/* balkon */
+.petevi-m-gunes { right: 10%; top: 10px; bottom: auto; width: 64px; }
+.petevi-m-gunes .petevi-gunes { filter: drop-shadow(0 0 10px color-mix(in srgb, var(--seker-limon) 60%, transparent)); }
+.petevi-bulut { position: absolute; background: var(--kagit); border-radius: var(--r-tam); opacity: .92; box-shadow: 0 2px 0 var(--golge-sert-ic); animation: petevi-bulut 18s ease-in-out infinite alternate; }
+.petevi-bulut::before { content: ""; position: absolute; left: 22%; top: -55%; width: 45%; height: 130%; background: inherit; border-radius: 50%; }
+.petevi-bulut-1 { left: 12%; top: 54px; width: 74px; height: 22px; }
+.petevi-bulut-2 { left: 36%; top: 98px; width: 52px; height: 16px; animation-duration: 24s; animation-delay: -6s; }
+.petevi-m-asili { right: 30%; top: 0; bottom: auto; width: 54px; }
+@keyframes petevi-bulut { from { transform: translateX(0); } to { transform: translateX(28px); } }
+:root[data-hava="gece"] .petevi-bulut { opacity: .35; }
+.petevi-korkuluk {
+  position: absolute; left: 0; right: 0; bottom: var(--petevi-zemin-yuk); height: 56px;
+  background-image: repeating-linear-gradient(90deg, transparent 0 26px, var(--gri) 26px 30px);
+  border-top: 6px solid var(--gri); border-bottom: 4px solid var(--gri); box-sizing: border-box;
+}
+.petevi-m-saksi1 { left: 7%; width: 52px; }
+.petevi-m-saksi2 { left: calc(7% + 58px); width: 52px; }
+.petevi-m-saksi3 { right: 7%; width: 52px; }
+.petevi-t-korkuluk { left: 32%; width: 108px; bottom: calc(var(--petevi-zemin-yuk) + 124px); }
+.petevi-t-korkuluk::after { content: "🐦"; position: absolute; right: 8px; bottom: 6px; font-size: 20px; line-height: 1; }
+:root[data-hava="gece"] .petevi-t-korkuluk::after { content: "🦉"; }
+
+/* ---------------------------------------------------------------- petler: seçim halkası, ad etiketi, balon yönü */
+.petevi-oda .pet .pet-balon { left: calc(50% + var(--petevi-balon-kay, 0px) * var(--petevi-yon, 1)); transform: translate(-50%, 6px) scale(.8) scaleX(var(--petevi-yon, 1)); }
+.petevi-oda .pet .pet-balon.goster { transform: translate(-50%, 0) scale(1) scaleX(var(--petevi-yon, 1)); }
+.petevi-oda .pet .pet-balon { transition: opacity var(--sure-2); } /* yön değişince balon anında döner, ara karede aynalanmaz */
+.petevi-oda .pet .pet-balon::after { left: calc(50% - var(--petevi-balon-kay, 0px) * var(--petevi-yon, 1)); }
+.petevi-oda .pet::before {
+  content: attr(data-ad); position: absolute; top: calc(100% + 6px); left: 50%; transform: translateX(-50%) scaleX(var(--petevi-yon, 1));
+  font-family: var(--yazi-govde); font-size: 11px; font-weight: var(--kalin-baslik); line-height: 1.2; white-space: nowrap;
+  background: var(--kagit); color: var(--murekkep); padding: 2px 7px; border-radius: var(--r-tam); box-shadow: 0 2px 0 var(--golge-sert-ic);
+  opacity: 0; pointer-events: none; transition: opacity var(--sure-2);
+}
+.petevi-oda .pet.petevi-secili::before { opacity: 1; }
+.petevi-oda .pet.petevi-secili canvas { filter: drop-shadow(0 3px 0 color-mix(in srgb, var(--pixel-cizgi) 18%, transparent)) drop-shadow(0 0 4px var(--burun)); }
+.petevi-halka { position: absolute; left: 50%; bottom: -5px; width: 78%; height: 9px; transform: translateX(-50%); border-radius: 50%; background: var(--burun); opacity: 0; pointer-events: none; z-index: -1; transition: opacity var(--sure-2); }
+.pet.petevi-secili .petevi-halka { opacity: .5; animation: petevi-halka var(--sure-nefes) var(--egri-ikili) infinite alternate; }
+@keyframes petevi-halka { from { transform: translateX(-50%) scale(.9); } to { transform: translateX(-50%) scale(1.08); } }
+
+/* ---------------------------------------------------------------- oda içi efektler (emoji) */
+.petevi-emoji { position: absolute; font-size: 26px; line-height: 1; transform: translate(-50%, -50%); will-change: transform, left, top; }
+.petevi-yemek-ucan { transition: left .5s var(--egri-cikis), top .5s var(--egri-cikis), transform .22s var(--egri-cikis); filter: drop-shadow(0 3px 0 color-mix(in srgb, var(--pixel-cizgi) 18%, transparent)); }
+.petevi-yuksel { animation: petevi-yuksel 1.2s var(--egri-cikis) forwards; }
+@keyframes petevi-yuksel { from { opacity: 1; transform: translate(-50%, -50%) scale(.6); } 30% { opacity: 1; } to { opacity: 0; transform: translate(-50%, -170%) scale(1.1); } }
+.petevi-sunger { font-size: 30px; animation: petevi-sunger .45s var(--egri-ikili) 3; }
+@keyframes petevi-sunger { 0%, 100% { transform: translate(-95%, -50%) rotate(-14deg); } 50% { transform: translate(-5%, -50%) rotate(14deg); } }
+.petevi-mum { font-size: 28px; animation: petevi-mum 1.4s ease-in-out infinite alternate; }
+.petevi-mum::before { content: ""; position: absolute; left: 50%; top: 40%; width: 120px; height: 120px; transform: translate(-50%, -50%); border-radius: 50%; background: radial-gradient(circle, color-mix(in srgb, var(--seker-limon) 55%, transparent), transparent 68%); z-index: -1; }
+@keyframes petevi-mum { from { transform: translate(-50%, -50%) scale(1); } to { transform: translate(-50%, -50%) scale(1.07); } }
+.petevi-sargi { font-size: 42px; animation: petevi-sargi 1.5s var(--egri-yumus) forwards; }
+@keyframes petevi-sargi { from { opacity: 0; transform: translate(-50%, -50%) scale(.3) rotate(-25deg); } 40% { opacity: 1; transform: translate(-50%, -50%) scale(1.15) rotate(6deg); } to { opacity: 0; transform: translate(-50%, -50%) scale(1); } }
+.petevi-oyuncak { font-size: 28px; animation: petevi-oyuncak .5s var(--egri-ikili) infinite alternate; }
+@keyframes petevi-oyuncak { from { transform: translate(-50%, -50%) rotate(-15deg); } to { transform: translate(-50%, -150%) rotate(15deg); } }
+
+/* ---------------------------------------------------------------- içerik: çipler, ev halkı, kart, özet */
+.petevi-icerik { gap: var(--b-3); }
+.petevi-cipler { margin: 0 calc(-1 * var(--kenar)); padding: var(--b-1) var(--kenar); }
+.petevi-oda-tanim { margin-top: calc(-1 * var(--b-2)); padding: 0 var(--b-1); }
+.petevi-roster {
+  display: flex; gap: var(--b-2); overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch;
+  margin: 0 calc(-1 * var(--kenar)); padding: var(--b-1) var(--kenar) var(--b-2); scroll-snap-type: x proximity;
+}
+.petevi-roster::-webkit-scrollbar { display: none; }
+.petevi-roster-pet {
+  position: relative; flex: none; display: flex; flex-direction: column; align-items: center; gap: 2px; scroll-snap-align: start;
+  min-width: 76px; min-height: var(--dokunma-min); padding: var(--b-2) var(--b-2) var(--b-1);
+  background: var(--kagit); border: 2px solid transparent; border-radius: var(--r-md); box-shadow: 0 3px 0 var(--golge-sert-ic);
+  color: var(--murekkep-2); font-size: var(--punto-xs); font-weight: var(--kalin-baslik); touch-action: manipulation;
+  transition: transform var(--sure-1), box-shadow var(--sure-2), background var(--sure-2);
+}
+.petevi-roster-pet[aria-pressed="true"] { border-color: var(--burun); background: var(--burun-zemin); color: var(--murekkep); }
+.petevi-roster-pet:active { transform: translateY(2px); box-shadow: none; }
+.petevi-roster-ikon { height: 54px; display: flex; align-items: flex-end; }
+.petevi-roster-ad { max-width: 88px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.petevi-ruh-nokta { position: absolute; top: 6px; right: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--seker-nane); box-shadow: 0 0 0 2px var(--kagit); }
+.petevi-ruh-nokta.petevi-ruh-mutlu { background: var(--basari); }
+.petevi-ruh-nokta.petevi-ruh-keyifli { background: var(--seker-nane); }
+.petevi-ruh-nokta.petevi-ruh-durgun { background: var(--seker-limon); }
+.petevi-ruh-nokta.petevi-ruh-ozledi { background: var(--seker-kiraz); }
+
+.petevi-kart-ust { display: flex; gap: var(--b-3); align-items: flex-start; margin-bottom: var(--b-4); }
+.petevi-kart-ikon { flex: none; width: 84px; height: 84px; display: grid; place-items: center; background: var(--oda-zemin); border-radius: var(--r-md); box-shadow: inset 0 0 0 2px var(--cizgi-2); }
+.petevi-kart-baslik { min-width: 0; display: flex; flex-direction: column; gap: var(--b-1); }
+.petevi-etiketler { gap: var(--b-1); }
+.petevi-kisilik { margin-top: var(--b-1); line-height: var(--satir-normal); }
+.petevi-ruh.petevi-ruh-mutlu { background: var(--basari-zemin); color: var(--basari); }
+.petevi-ruh.petevi-ruh-keyifli { background: var(--goz-zemin); color: var(--goz-metin); }
+.petevi-ruh.petevi-ruh-durgun { background: var(--gri-zemin); color: var(--gri-metin); }
+.petevi-ruh.petevi-ruh-ozledi { background: var(--uyari-zemin); color: var(--uyari); }
+.petevi-barlar { gap: var(--b-2); }
+.petevi-seviye { margin-top: var(--b-4); padding-top: var(--b-3); border-top: 2px dashed var(--cizgi); display: flex; flex-direction: column; gap: var(--b-2); }
+.petevi-kalpler { color: var(--burun-metin); letter-spacing: 1px; font-size: var(--punto-md); }
+.petevi-seviye-bar .bar-yuzde { min-width: 0; }
+.petevi-kart-dugmeler { margin-top: var(--b-3); gap: var(--b-2); }
+.petevi-cagir[hidden] { display: none; }
+.petevi-istek { margin: var(--b-1) 0 0; font-size: var(--punto-sm); line-height: var(--satir-normal); }
+.petevi-ozet .baslik { margin-bottom: 0; }
+.petevi-ozet p { margin: var(--b-2) 0; line-height: var(--satir-normal); }
+.petevi-ipucu { display: flex; flex-direction: column; gap: var(--b-2); align-items: flex-start; }
+
+/* ---------------------------------------------------------------- alt sayfalar */
+.petevi-sheet { gap: var(--b-3); }
+.petevi-yemekler { gap: var(--b-2); }
+.petevi-yemek { flex-direction: column; min-height: 76px; gap: 2px; padding: var(--b-2); }
+.petevi-yemek-emoji { font-size: 30px; line-height: 1; }
+.petevi-liste { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: var(--b-1); }
+.petevi-liste li { display: flex; align-items: center; gap: var(--b-2); padding: var(--b-2) var(--b-3); background: var(--kagit-2); border-radius: var(--r-sm); }
+.petevi-liste-emoji { width: 26px; text-align: center; font-size: 18px; line-height: 1; }
+.petevi-liste-sevmez .petevi-liste-emoji { color: var(--uyari); font-weight: var(--kalin-dev); }
+.petevi-rozetler { display: flex; flex-direction: column; gap: var(--b-2); }
+.petevi-rozet { display: grid; grid-template-columns: 40px 1fr auto; gap: var(--b-2); align-items: center; padding: var(--b-2) var(--b-3); background: var(--kagit-2); border-radius: var(--r-sm); opacity: .72; }
+.petevi-rozet.acik { opacity: 1; background: var(--burun-zemin); }
+.petevi-rozet-emoji { font-size: 26px; text-align: center; line-height: 1; }
+
+/* ---------------------------------------------------------------- hareketi azalt */
+@media (prefers-reduced-motion: reduce) {
+  .petevi-buhar, .petevi-buhar::after, .petevi-kopukcuk, .petevi-bulut, .petevi-mum, .petevi-oyuncak, .pet.petevi-secili .petevi-halka, :root[data-hava="gece"] .petevi-ampul { animation: none; }
+  .petevi-sunger { animation: none; transform: translate(-50%, -50%); }
+  .petevi-yuksel { animation: petevi-yuksel 150ms var(--egri-cikis) forwards; }
+  .petevi-sargi { animation: none; opacity: 1; transform: translate(-50%, -50%); }
+  .petevi-yemek-ucan { transition: none; }
+}

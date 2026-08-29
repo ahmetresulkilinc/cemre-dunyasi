@@ -1,0 +1,406 @@
+/* Hallmark · route: custom (bespoke) · structure: örgü battaniye üstünde yama-kartlardan oluşan hub, bölümler = odalar
+ * idea: "Pıttıksu'nun battaniyesi" — fotoğraftaki gerçek pembe örgü battaniye sitenin zemini
+ * paper: #FFF9F3 (~oklch 98% 0.01 60) · accent: #EE8AAA (~oklch 72% 0.14 355)
+ * display: Sour Gummy (gömülü, wght 100–900) · body: Nunito (gömülü, wght 200–1000)
+ * axes: light / rounded-display / chromatic-dusty-pink ~355° · genre: playful (kawaii) · studied: no
+ * pre-emit critique: P5 H4 E4 S5 R4 V5
+ */
+
+/* ============================================================
+   Cemre'nin Dünyası — tokens.css
+   Tüm tasarım kararları burada: renk, yazı, boşluk, köşe, gölge, hareket, katman.
+   Rehber: ../STIL.md · Build yok; her sayfada İLK CSS olarak yüklenir.
+   Kural: bileşen CSS'lerinde ham hex YAZILMAZ, sadece var(--...) kullanılır.
+   Gündüz/gece: <html data-hava="gunduz|gece">  ·  Bölüm rengi: <body data-bolum="pittiksu|tirnak|...">
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   1) GÖMÜLÜ FONTLAR (CDN yok — dosyalar site/fonts/ içinde)
+   İkisi de değişken (variable) font; ağırlık eksenleri dosyadan doğrulandı.
+   latin-ext alt kümesi Türkçe ş ğ İ için ŞART (ı latin içinde).
+   ------------------------------------------------------------ */
+@font-face {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 200 1000;
+  font-display: swap;
+  src: url("fonts/Nunito-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 200 1000;
+  font-display: swap;
+  src: url("fonts/Nunito-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Sour Gummy";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("fonts/SourGummy-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Sour Gummy";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("fonts/SourGummy-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: "Caveat";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("fonts/Caveat-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Caveat";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("fonts/Caveat-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* ------------------------------------------------------------
+   2) GÜNDÜZ PALETİ (varsayılan)
+   Kaynak: assets/pittiksu fotoğrafları — pembe örgü battaniye, gri tüy,
+   mavi-gri göz, pembe burun, Cemre'nin inci-aurora krom tırnakları.
+   ------------------------------------------------------------ */
+:root {
+  color-scheme: light;
+
+  /* --- Battaniye: sitenin zemini (imza) --- */
+  --battaniye:       #F5C2BD;   /* örgünün ana pembesi */
+  --battaniye-koyu:  #E6A6A2;   /* ilmek oluğu / gölge */
+  --battaniye-acik:  #FCE1DD;   /* ilmek tepesi / ışık */
+
+  /* --- Kâğıt: kartların ve panellerin yüzeyi --- */
+  --kagit:    #FFF9F3;
+  --kagit-2:  #FBF0E7;
+  --kagit-3:  #F5E4D9;
+
+  /* --- Mürekkep: metin --- */
+  --murekkep:    #3B3444;   /* ana metin (erik-gri, saf siyah değil) */
+  --murekkep-2:  #5D5566;   /* ikincil metin */
+  --sessiz:      #736C7E;   /* yardımcı metin — kâğıt üstünde 4.8:1 */
+  --cizgi:       #EBDAD5;   /* ayraç */
+  --cizgi-2:     #F4E8E3;   /* zayıf ayraç */
+
+  /* --- Pıttıksu grisi: ikon, pasif durum, "kedi" rengi --- */
+  --gri:        #7A8090;   /* dolgu */
+  --gri-metin:  #515766;   /* metin olarak güvenli */
+  --gri-zemin:  #E9EBEF;   /* tint */
+
+  /* --- Burun pembesi: ANA VURGU (buton dolgusu, aktif durum) --- */
+  --burun:        #EE8AAA;   /* dolgu — üstüne her zaman --murekkep yazılır (5.0:1) */
+  --burun-metin:  #B8456C;   /* link / vurgu metni — kâğıt üstünde 4.9:1 */
+  --burun-zemin:  #FCDDE7;   /* seçili çip, tint */
+
+  /* --- Göz mavisi: ikincil vurgu (bilgi, su, banyo, gece göğü) --- */
+  --goz:        #6F97AC;
+  --goz-metin:  #3F6B82;   /* 5.5:1 */
+  --goz-zemin:  #DCEBF2;
+
+  /* --- İnci / aurora krom: Cemre'nin tırnak finish'i. SADECE ödül, yıldız, rozet, Tırnak bölümü kimliği --- */
+  --inci: linear-gradient(115deg, #FFD6E4 0%, #FFE9F0 18%, #E2F1FF 38%, #FFF7D9 56%, #EADFFF 74%, #FFD9E6 100%);
+  --inci-konik: conic-gradient(from 200deg, #FFD6E4, #E2F1FF, #FFF7D9, #EADFFF, #FFD6E4);
+  --inci-boyut: 300% 300%;
+
+  /* --- Şekerler: işlevsel renkler (ihtiyaç barları, bahçe, yiyecek). Sadece DOLGU; üstüne --murekkep --- */
+  --seker-seftali:  #FFC3A3;   /* açlık / mama */
+  --seker-limon:    #FFE28A;   /* enerji / güneş */
+  --seker-nane:     #9FE3C4;   /* temizlik */
+  --seker-gok:      #A9D6F2;   /* su / sulama */
+  --seker-lavanta:  #CDBDF6;   /* uyku */
+  --seker-kiraz:    #FF9DB4;   /* sevgi / kalp */
+  --seker-yaprak:   #7CCB9A;   /* büyüme / bahçe */
+  --seker-bal:      #F5B54A;   /* yıldız (Angela) */
+
+  /* --- Öfke odası: tek "sıcak" renk --- */
+  --ofke:        #FF7A7A;
+  --ofke-zemin:  #FFE3E3;
+
+  /* --- Durum --- */
+  --basari:        #3E9C6C;
+  --basari-zemin:  #DDF5E8;
+  --uyari:         #C94A5E;
+  --uyari-zemin:   #FFE1E6;
+  --odak:          #B8456C;   /* :focus-visible halkası — battaniye üstünde 3.3:1 */
+  --odak-halka:    0 0 0 3px var(--kagit), 0 0 0 6px var(--odak);
+  --secim:         var(--burun-zemin);
+  --kaplama:       rgba(59, 52, 68, .45);   /* sheet/modal arkası */
+
+  /* --- Gölge (yastık): sert ofset + yumuşak bulanıklık --- */
+  --golge-sert:     #E3A7A3;                 /* battaniye üstündeki kartın altı */
+  --golge-sert-ic:  #E8D6D0;                 /* kâğıt üstündeki parçaların altı */
+  --golge-renk:     rgba(59, 52, 68, .25);
+  --golge-yastik:   0 4px 0 var(--golge-sert), 0 12px 24px -12px var(--golge-renk);
+  --golge-yastik-ic:0 3px 0 var(--golge-sert-ic), 0 8px 16px -10px var(--golge-renk);
+  --golge-kalkik:   0 8px 0 var(--golge-sert), 0 24px 40px -18px var(--golge-renk);
+  --golge-basili:   0 0 0 var(--golge-sert), inset 0 2px 0 rgba(59, 52, 68, .08);
+  --golge-yumusak:  0 14px 30px -16px var(--golge-renk);
+  --isik-ustten:    inset 0 2px 0 rgba(255, 255, 255, .75);
+
+  /* --- Dikiş: yama kartların iç kesikli çizgisi (imza) --- */
+  --dikis-renk:   rgba(59, 52, 68, .20);
+  --dikis:        2px dashed var(--dikis-renk);
+  --dikis-ofset:  7px;
+
+  /* --- Battaniye dokusu: örgü ilmek (CSS ile, görsel dosyası yok) --- */
+  --doku-battaniye:
+    radial-gradient(circle at 45% 40%, var(--battaniye-acik) 0, transparent 58%),
+    linear-gradient(var(--battaniye-koyu) 1px, transparent 1px),
+    linear-gradient(90deg, var(--battaniye-koyu) 1px, transparent 1px),
+    linear-gradient(var(--battaniye), var(--battaniye));
+  --doku-battaniye-boyut: 14px 14px, 14px 14px, 14px 14px, auto;
+  --lamba: none;   /* gece modunda sıcak lamba ışığı; gündüz yok */
+
+  /* --- Pıttıksu (SVG/pixel için sabit kedi renkleri — gece değişmez; ARASTIRMA.md §4 ile uzlaştırıldı) --- */
+  --pittiksu-tuy:        #848D9A;
+  --pittiksu-tuy-koyu:   #5E6674;
+  --pittiksu-tuy-acik:   #A9B3BF;
+  --pittiksu-goz:        #5C7D99;   /* mavi-gri iris */
+  --pittiksu-goz-koyu:   #1F2A36;   /* göz bebeği */
+  --pittiksu-burun:      #E6A3B0;
+  --pittiksu-kulak:      #E9B4BC;
+  --pittiksu-agiz:       #F2B8C6;   /* ağız içi */
+  --pixel-cizgi:         #3B2A3A;   /* TÜM pixel sprite'ların ortak çizgi rengi (miras 7 pet ile aynı) */
+
+  /* --- MARKA (araştırma tamamlandı: resmi marka görseli yok; favori renk sorulmadı → burun pembesi varsayılan; Ahmet isterse burayı değiştirir) --- */
+  --marka-1:       var(--burun);        /* Cemre'nin favori rengi (Ahmet değiştirebilir) */
+  --marka-2:       var(--goz);          /* ikincil marka rengi */
+  --marka-fiyonk:  #FFB3C7;             /* Ponçik Ayı sprite'ının pembesi (buddies/ayi.json) */
+  --marka-logo:    none;                /* logo yok; hub başlığı yazıyla */
+  --tema-rengi:    var(--battaniye);    /* PWA meta theme-color; JS okur ve <meta>'ya yazar */
+
+  /* ------------------------------------------------------------
+     3) YAZI
+     ------------------------------------------------------------ */
+  --yazi-baslik: "Sour Gummy", ui-rounded, "Arial Rounded MT Bold", "Segoe UI", sans-serif;   /* SADECE ≥20px başlıklar */
+  --yazi-govde:  "Nunito", ui-rounded, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --yazi-sayi:   var(--yazi-govde);   /* + font-variant-numeric: tabular-nums */
+  --yazi-elyazisi: "Caveat", "Segoe Script", "Bradley Hand", "Snell Roundhand", cursive;   /* SADECE giriş mektubu kartı (Ahmet'ın notu) */
+  --tabular:     "tnum" 1;
+
+  --punto-xs:   0.75rem;    /* 12 — rozet, tarih */
+  --punto-sm:   0.875rem;   /* 14 — yardımcı */
+  --punto-md:   1.0625rem;  /* 17 — gövde (mobil) */
+  --punto-lg:   1.25rem;    /* 20 — kart başlığı */
+  --punto-xl:   1.5rem;     /* 24 — bölüm alt başlığı */
+  --punto-2xl:  1.875rem;   /* 30 — bölüm başlığı */
+  --punto-3xl:  clamp(2.125rem, 6vw + 1rem, 2.75rem);   /* 34–44 — hub selamı */
+  --punto-dev:  clamp(2.5rem, 8vw + 1rem, 4rem);        /* 40–64 — tek büyük an (kutlama) */
+
+  --satir-siki:   1.1;
+  --satir-normal: 1.5;
+  --satir-genis:  1.65;
+
+  --kalin-govde:  500;
+  --kalin-vurgu:  700;
+  --kalin-baslik: 800;
+  --kalin-dev:    900;
+  --aralik-baslik: 0.01em;   /* Sour Gummy'ye hafif hava; eksi tracking YOK */
+
+  /* ------------------------------------------------------------
+     4) BOŞLUK, KÖŞE, ÖLÇÜ
+     ------------------------------------------------------------ */
+  --b-1: 4px;  --b-2: 8px;  --b-3: 12px; --b-4: 16px; --b-5: 20px;
+  --b-6: 24px; --b-8: 32px; --b-10: 40px; --b-12: 48px; --b-16: 64px;
+
+  --r-xs: 8px; --r-sm: 12px; --r-md: 18px; --r-lg: 24px; --r-xl: 32px; --r-tam: 999px;
+
+  --dokunma-min:      44px;   /* her dokunulabilir şey */
+  --dokunma-birincil: 52px;   /* ana eylem düğmeleri */
+  --altbar-yuk:       64px;
+  --ustbar-yuk:       56px;
+  --guvenli-alt:      env(safe-area-inset-bottom, 0px);
+  --guvenli-ust:      env(safe-area-inset-top, 0px);
+  --icerik-genislik:  860px;  /* masaüstünde ortalanan sütun; battaniye tüm ekranı kaplar */
+  --kenar:            var(--b-4);   /* sayfa kenar boşluğu (mobil) */
+  --sprite-olcek:     3;      /* pixel petler: 1 piksel = 3 css px */
+
+  /* ------------------------------------------------------------
+     5) HAREKET
+     ------------------------------------------------------------ */
+  --sure-1: 120ms;    /* basma, renk */
+  --sure-2: 200ms;    /* kart, sekme, çip */
+  --sure-3: 320ms;    /* sayfa geçişi, sheet */
+  --sure-4: 600ms;    /* ödül, kutlama */
+  --sure-nefes: 3200ms;   /* ambient nefes döngüsü */
+
+  --egri-cikis:  cubic-bezier(.2, .8, .2, 1);      /* varsayılan: arayüz */
+  --egri-giris:  cubic-bezier(.4, 0, 1, 1);        /* çıkış/kapanış */
+  --egri-ikili:  cubic-bezier(.45, 0, .55, 1);     /* döngüler */
+  --egri-zip:    cubic-bezier(.34, 1.56, .64, 1);  /* SADECE karakterler + ödüller (overshoot) */
+  --egri-yumus:  cubic-bezier(.22, 1.2, .36, 1);   /* hafif taşma: sheet açılışı, konuşma balonu */
+
+  --kayma-sayfa: 24px;   /* sayfa geçişinde ilk konum */
+  --parcacik-maks: 18;   /* aynı anda en fazla kalp/toz/yıldız (JS okur) */
+
+  /* ------------------------------------------------------------
+     6) KATMANLAR (z-index)
+     ------------------------------------------------------------ */
+  --kat-zemin: 0;
+  --kat-icerik: 1;
+  --kat-ustbar: 10;
+  --kat-altbar: 20;
+  --kat-petler: 25;      /* dolaşan petler içeriğin üstünde, sheet'in altında */
+  --kat-sheet: 30;
+  --kat-toast: 40;
+  --kat-parcacik: 50;
+  --kat-giris: 60;       /* giriş sahnesi (karanlık → buket → not) her şeyin üstünde */
+
+  /* --- Giriş sahnesi (karanlık oda) — sadece giris.css kullanır --- */
+  --giris-karanlik:  #14101A;   /* saf siyah değil: erik-siyah */
+  --giris-karanlik-2:#241A2C;
+  --giris-isik:      #FFE9D6;   /* ışık sızması */
+  --giris-kart:      #FFFDF9;   /* beyaz not kartı (gece de beyaz kalır) */
+  --giris-kart-cizgi:#E8D9D0;
+  --giris-murekkep:  #3B2E3A;   /* kart üstündeki el yazısı */
+}
+
+/* ------------------------------------------------------------
+   7) GECE (oda karardı, battaniye aynı ama loş; lamba yanıyor)
+   JS: saat 20:00–07:00 arası otomatik "gece" (ARASTIRMA.md §7 ile aynı), kullanıcı düğmesi kazanır (localStorage cd.hava)
+   ------------------------------------------------------------ */
+:root[data-hava="gece"] {
+  color-scheme: dark;
+
+  --battaniye:       #6B4E5E;
+  --battaniye-koyu:  #533A49;
+  --battaniye-acik:  #85677A;
+
+  --kagit:    #3A3346;
+  --kagit-2:  #443C51;
+  --kagit-3:  #4E465C;
+
+  --murekkep:    #F7EEF2;
+  --murekkep-2:  #D8CCD6;
+  --sessiz:      #B3A6B8;   /* 5.2:1 */
+  --cizgi:       #55495F;
+  --cizgi-2:     #4A3F55;
+
+  --gri:        #8F95A4;
+  --gri-metin:  #C6CBD4;
+  --gri-zemin:  #444A58;
+
+  --burun:        #F19CB8;
+  --burun-metin:  #FFB9CD;
+  --burun-zemin:  #57384A;
+
+  --goz:        #86AFC4;
+  --goz-metin:  #A9D0E2;
+  --goz-zemin:  #2F4552;
+
+  --seker-seftali:  #D9A084;
+  --seker-limon:    #D9BE6E;
+  --seker-nane:     #7FBFA3;
+  --seker-gok:      #86B3D0;
+  --seker-lavanta:  #A995D6;
+  --seker-kiraz:    #DA8298;
+  --seker-yaprak:   #66AB82;
+  --seker-bal:      #D09A3E;
+
+  --ofke:        #E86A6A;
+  --ofke-zemin:  #4F2E36;
+
+  --basari:        #6FCB99;
+  --basari-zemin:  #2E4A3C;
+  --uyari:         #F08AA0;
+  --uyari-zemin:   #4F2E38;
+  --odak:          #FFB9CD;
+  --kaplama:       rgba(20, 14, 26, .6);
+
+  --golge-sert:     #2B2434;
+  --golge-sert-ic:  #2E2738;
+  --golge-renk:     rgba(0, 0, 0, .45);
+  --golge-basili:   0 0 0 var(--golge-sert), inset 0 2px 0 rgba(0, 0, 0, .18);
+  --isik-ustten:    inset 0 1px 0 rgba(255, 255, 255, .08);
+
+  --dikis-renk:  rgba(247, 238, 242, .22);
+
+  --lamba: radial-gradient(70% 45% at 78% -5%, rgba(255, 214, 150, .20), transparent 70%);
+  --tema-rengi: var(--battaniye);
+}
+
+/* ------------------------------------------------------------
+   8) ODA RENKLERİ — her bölüm kendi tonunu alır, sistem aynı kalır
+   <body data-bolum="..."> · --oda: bölümün duvarı (başlık şeridi, ikon)
+   --oda-zemin: panel tint · --oda-vurgu: bölümün birincil düğme dolgusu (üstüne --murekkep)
+   ------------------------------------------------------------ */
+:root, [data-bolum="hub"] {
+  --oda:       var(--battaniye);
+  --oda-zemin: var(--burun-zemin);
+  --oda-vurgu: var(--burun);
+}
+[data-bolum="pittiksu"] { --oda: var(--battaniye);     --oda-zemin: var(--goz-zemin);   --oda-vurgu: var(--goz); }
+[data-bolum="tirnak"]   { --oda: var(--burun-zemin);   --oda-zemin: var(--kagit);       --oda-vurgu: var(--burun); }
+[data-bolum="petevi"]   { --oda: var(--seker-seftali); --oda-zemin: var(--kagit-2);     --oda-vurgu: var(--burun); }
+[data-bolum="angela"]   { --oda: var(--seker-lavanta); --oda-zemin: var(--kagit);       --oda-vurgu: var(--seker-kiraz); }
+[data-bolum="bahce"]    { --oda: var(--seker-yaprak);  --oda-zemin: var(--kagit-2);     --oda-vurgu: var(--seker-yaprak); }
+[data-bolum="panda"]    { --oda: var(--seker-yaprak);  --oda-zemin: var(--kagit);       --oda-vurgu: var(--seker-bal); }
+[data-bolum="ofke"]     { --oda: var(--gri);           --oda-zemin: var(--gri-zemin);   --oda-vurgu: var(--ofke); }
+
+/* ------------------------------------------------------------
+   9) HAREKETİ AZALT — süreler kısalır, taşma (spring) düz eğriye döner.
+   JS ayrıca matchMedia ile parçacık/ambient döngülerini kapatır.
+   ------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --sure-1: 0ms;
+    --sure-2: 120ms;
+    --sure-3: 150ms;
+    --sure-4: 150ms;
+    --sure-nefes: 0ms;
+    --egri-zip:   var(--egri-cikis);
+    --egri-yumus: var(--egri-cikis);
+    --kayma-sayfa: 0px;
+    --parcacik-maks: 0;
+  }
+}
+
+/* Masaüstü: kenar boşluğu büyür, sütun ortalanır (battaniye yine tam ekran) */
+@media (min-width: 768px) {
+  :root { --kenar: var(--b-8); --sprite-olcek: 4; }
+}
+
+/* ------------------------------------------------------------
+   10) İMZA SINIFLARI (isteğe bağlı ama önerilir — imzanın birebir uygulanması için)
+   ------------------------------------------------------------ */
+.battaniye-zemin {
+  background-color: var(--battaniye);
+  background-image: var(--lamba), var(--doku-battaniye);
+  background-size: auto, var(--doku-battaniye-boyut);
+}
+.yama {                                  /* battaniyeye dikilmiş kâğıt yama = kart */
+  position: relative;
+  background: var(--kagit);
+  color: var(--murekkep);
+  border-radius: var(--r-lg);
+  box-shadow: var(--golge-yastik), var(--isik-ustten);
+  padding: var(--b-5);
+}
+.yama::after {                           /* dikiş */
+  content: "";
+  position: absolute;
+  inset: var(--dikis-ofset);
+  border: var(--dikis);
+  border-radius: calc(var(--r-lg) - var(--dikis-ofset));
+  pointer-events: none;
+}
+.inci-yuzey {                            /* aurora krom parıltısı — küçük yüzeyler için */
+  background-image: var(--inci);
+  background-size: var(--inci-boyut);
+  background-position: 0% 50%;
+  animation: inci-kay 6s var(--egri-ikili) infinite alternate;
+}
+@keyframes inci-kay { from { background-position: 0% 50%; } to { background-position: 100% 50%; } }
+@media (prefers-reduced-motion: reduce) { .inci-yuzey { animation: none; } }

@@ -1,0 +1,145 @@
+/* giris.css — karanlık oda → buket → beyaz not kartı → "Hadi biraz eğlenelim". Sınıf öneki: giris- / cb- (çiçek buketi).
+   Renkler: --giris-* sabitleri (gündüz/gece fark etmez, giriş her zaman karanlık odadır). */
+body.giris-acik { overflow: hidden; }
+body.giris-acik .pet-katmani { display: none; }
+
+.giris {
+  position: fixed; inset: 0; z-index: var(--kat-giris);
+  background: radial-gradient(120% 90% at 50% 110%, var(--giris-karanlik-2), var(--giris-karanlik) 60%);
+  color: var(--giris-kart); overflow: hidden; -webkit-user-select: none; user-select: none;
+  display: grid; place-items: center;
+  transition: opacity 800ms var(--egri-giris);
+}
+.giris.kapan { opacity: 0; pointer-events: none; }
+
+/* ışık sızması: yukarıdan sıcak, ortadan pembe hale */
+.giris-isik { position: absolute; inset: -20%; pointer-events: none; opacity: 0; transform: scale(.6);
+  background:
+    radial-gradient(45% 38% at 50% 12%, color-mix(in srgb, var(--giris-isik) 26%, transparent), transparent 70%),
+    radial-gradient(38% 34% at 50% 48%, color-mix(in srgb, var(--burun) 22%, transparent), transparent 72%);
+  transition: opacity 1800ms var(--egri-cikis), transform 2400ms var(--egri-cikis); }
+.giris.isik .giris-isik { opacity: 1; transform: scale(1.15); }
+.giris.hizli .giris-isik { transition-duration: 500ms, 700ms; }
+
+/* sahne: buket + "Çiçeği al" */
+.giris-sahne { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--b-4); width: 100%; height: 100dvh; padding: calc(var(--guvenli-ust) + var(--b-4)) var(--b-4) calc(var(--guvenli-alt) + var(--b-6)); transition: opacity 600ms var(--egri-giris), transform 900ms var(--egri-cikis); }
+.giris.kart-acik .giris-sahne { opacity: .28; transform: scale(.86) translateY(-4%); }
+.giris.kart-gitti .giris-sahne { opacity: 0; transform: scale(.8) translateY(8%); }
+.giris-buket-kap { position: relative; width: min(94vw, 62dvh, 620px); aspect-ratio: 700 / 830; flex: none; opacity: 0; transform: translateY(24px) scale(.96);
+  transition: opacity 1600ms var(--egri-cikis), transform 1800ms var(--egri-cikis); }
+.giris.goster .giris-buket-kap { opacity: 1; transform: none; }
+.giris.hizli .giris-buket-kap { transition-duration: 500ms, 600ms; }
+.giris-buket { width: 100%; height: 100%; display: block; overflow: visible; transform-origin: 50% 88%; }
+.giris.canli .giris-buket { animation: cb-salla 7s var(--egri-ikili) infinite alternate; }
+@keyframes cb-salla { from { transform: rotate(-.9deg); } to { transform: rotate(.9deg); } }
+.cb-hale { opacity: 0; transition: opacity 2000ms ease; }
+.giris.goster .cb-hale { opacity: 1; }
+.giris.canli .cb-hale { animation: cb-hale 5s var(--egri-ikili) infinite alternate; }
+@keyframes cb-hale { from { opacity: .6; } to { opacity: 1; } }
+
+/* çiçekler: kademeli belirme (merkezden dışa), sonra nefes */
+.cb-gel { transform-box: fill-box; transform-origin: center; opacity: 0; transform: scale(.15);
+  animation: cb-gel 950ms var(--egri-yumus) both; animation-delay: var(--gecik, 0ms); animation-play-state: paused; }
+.giris.goster .cb-gel { animation-play-state: running; }
+.giris.hizli .cb-gel { animation-duration: 520ms; }
+@keyframes cb-gel { 0% { opacity: 0; transform: scale(.15) rotate(-14deg); } 55% { opacity: 1; } 78% { transform: scale(1.07) rotate(2deg); } 100% { opacity: 1; transform: scale(1) rotate(0); } }
+.cb-nefes { transform-box: fill-box; transform-origin: center; }
+.giris.canli .cb-nefes.aktif { animation: cb-nefes var(--nsure, 3200ms) var(--egri-ikili) infinite alternate; animation-delay: var(--ngecik, 0ms); }
+@keyframes cb-nefes { from { transform: scale(1); } to { transform: scale(1.035); } }
+.cb-sarim-arka, .cb-sarim-on { opacity: 0; transition: opacity 1400ms ease 300ms; }
+.giris.goster .cb-sarim-arka, .giris.goster .cb-sarim-on { opacity: 1; }
+.giris.hizli .cb-sarim-arka, .giris.hizli .cb-sarim-on { transition-duration: 400ms; transition-delay: 0ms; }
+
+/* ışıltı parçacıkları */
+.giris-parcaciklar { position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity 1200ms ease 600ms; }
+.giris.goster .giris-parcaciklar { opacity: 1; }
+.giris-parcaciklar i { position: absolute; width: var(--boy, 4px); height: var(--boy, 4px); margin: calc(var(--boy, 4px) / -2); border-radius: 50%; background: var(--giris-isik);
+  box-shadow: 0 0 6px 1px color-mix(in srgb, var(--giris-isik) 70%, transparent); opacity: 0;
+  animation: giris-isilti var(--sure, 3000ms) ease-in-out infinite; animation-delay: var(--gecik, 0ms); }
+.giris-parcaciklar i.yildiz { border-radius: 0; background: var(--burun-zemin); clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%); width: calc(var(--boy, 4px) * 2.2); height: calc(var(--boy, 4px) * 2.2); margin: calc(var(--boy, 4px) * -1.1); box-shadow: none; }
+@keyframes giris-isilti { 0%, 100% { opacity: 0; transform: scale(.4) translateY(0); } 40% { opacity: 1; transform: scale(1) translateY(-6px); } 70% { opacity: .5; } }
+.giris.patlama .giris-parcaciklar i { animation-duration: 900ms; animation-iteration-count: 1; }
+
+/* "Çiçeği al" */
+.giris-al { min-height: var(--dokunma-birincil); padding: 0 var(--b-8); border-radius: var(--r-tam); background: var(--giris-kart); color: var(--giris-murekkep);
+  font-family: var(--yazi-baslik); font-weight: var(--kalin-baslik); font-size: var(--punto-lg); letter-spacing: var(--aralik-baslik);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--burun) 40%, transparent), 0 10px 30px -10px rgba(0,0,0,.6), 0 0 40px -6px color-mix(in srgb, var(--burun) 55%, transparent);
+  opacity: 0; transform: translateY(10px); transition: opacity 700ms var(--egri-cikis), transform 700ms var(--egri-cikis), box-shadow var(--sure-2); flex: none; }
+.giris-al.goster { opacity: 1; transform: none; animation: giris-al-nabiz 2.6s var(--egri-ikili) 1.2s infinite; }
+.giris-al:active { transform: translateY(2px); }
+.giris-al:focus-visible { box-shadow: 0 0 0 3px var(--giris-karanlik), 0 0 0 6px var(--burun); }
+@keyframes giris-al-nabiz { 0%, 100% { box-shadow: 0 0 0 1px color-mix(in srgb, var(--burun) 40%, transparent), 0 10px 30px -10px rgba(0,0,0,.6), 0 0 34px -6px color-mix(in srgb, var(--burun) 45%, transparent); } 50% { box-shadow: 0 0 0 1px color-mix(in srgb, var(--burun) 60%, transparent), 0 10px 30px -10px rgba(0,0,0,.6), 0 0 56px -4px color-mix(in srgb, var(--burun) 75%, transparent); } }
+
+/* atla (tekrar açılışlar) */
+.giris-atla { position: absolute; top: calc(var(--guvenli-ust) + var(--b-3)); right: var(--b-3); min-height: var(--dokunma-min); padding: 0 var(--b-4); border-radius: var(--r-tam);
+  color: color-mix(in srgb, var(--giris-kart) 70%, transparent); font-weight: var(--kalin-vurgu); font-size: var(--punto-sm); background: rgba(255,255,255,.06); z-index: 3; }
+.giris-atla:focus-visible { box-shadow: 0 0 0 3px var(--giris-karanlik), 0 0 0 6px var(--burun); }
+
+/* ---- beyaz not kartı (3D ile öne gelir) */
+.giris-kart-kap { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--b-3);
+  padding: calc(var(--guvenli-ust) + var(--b-4)) var(--b-4) calc(var(--guvenli-alt) + var(--b-4)); perspective: 1200px; z-index: 2; }
+.giris-kart-kap[hidden] { display: none !important; }
+.giris-kart { position: relative; width: min(92vw, 560px); max-height: min(76dvh, 760px); display: flex; flex-direction: column;
+  background: var(--giris-kart); color: var(--giris-murekkep); border-radius: var(--r-sm);
+  box-shadow: 0 30px 60px -20px rgba(0,0,0,.75), 0 0 0 1px var(--giris-kart-cizgi), 0 0 90px -20px color-mix(in srgb, var(--burun) 45%, transparent);
+  opacity: 0; transform: translateY(-38vh) translateZ(-900px) rotateX(-28deg) scale(.5); transform-origin: 50% 50%;
+  transition: opacity 500ms var(--egri-cikis), transform 1000ms var(--egri-yumus); }
+.giris-kart::before { content: ""; position: absolute; inset: 9px; border: 1px solid var(--giris-kart-cizgi); border-radius: calc(var(--r-sm) - 4px); pointer-events: none; }
+.giris-kart::after { content: ""; position: absolute; left: 50%; top: -1px; width: 56px; height: 3px; margin-left: -28px; border-radius: 0 0 3px 3px; background: var(--burun); opacity: .85; }
+.giris-kart-kap.goster .giris-kart { opacity: 1; transform: none; }
+.giris-kart-kap.cekil .giris-kart { opacity: 0; transform: translateY(-14vh) translateZ(-300px) rotateX(14deg) scale(.88); transition: opacity 420ms var(--egri-giris), transform 520ms var(--egri-giris); }
+.giris-kart-bas { padding: var(--b-5) var(--b-6) 0; font-family: var(--yazi-govde); font-weight: var(--kalin-baslik); font-size: var(--punto-xs); letter-spacing: .14em; text-transform: uppercase; color: var(--burun-metin); text-align: center; }
+.giris-kart-govde { flex: 1 1 auto; min-height: 0; overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; padding: var(--b-4) var(--b-6) var(--b-8);
+  font-family: var(--yazi-elyazisi); font-size: clamp(1.35rem, 1.05rem + 1.2vw, 1.7rem); line-height: 1.42; font-weight: 500; -webkit-font-smoothing: antialiased; }
+.giris-kart-govde p { margin: 0 0 .9em; text-wrap: pretty; overflow-wrap: anywhere; }
+.giris-kart-govde p:last-child { margin-bottom: 0; }
+.giris-kart-govde .giris-hitap { font-weight: 700; color: var(--burun-metin); font-size: 1.06em; }
+.giris-kart-govde .giris-imza { text-align: right; font-weight: 700; margin-top: 1.1em; }
+.giris-kart-govde:focus-visible { outline: none; box-shadow: none !important; }
+.giris-kart-golge { position: absolute; left: 10px; right: 10px; bottom: 10px; height: 44px; border-radius: 0 0 var(--r-sm) var(--r-sm); pointer-events: none; opacity: 0; transition: opacity var(--sure-2);
+  background: linear-gradient(to top, var(--giris-kart), transparent); }
+.giris-kart.kaydirilir:not(.dipte) .giris-kart-golge { opacity: 1; }
+.giris-devam { min-height: var(--dokunma-min); padding: 0 var(--b-5); border-radius: var(--r-tam); display: inline-flex; align-items: center; gap: 6px;
+  color: color-mix(in srgb, var(--giris-kart) 80%, transparent); font-weight: var(--kalin-vurgu); font-size: var(--punto-sm); opacity: 0; transform: translateY(8px); transition: opacity 500ms ease 900ms, transform 500ms var(--egri-cikis) 900ms; }
+.giris-kart-kap.goster .giris-devam { opacity: 1; transform: none; }
+.giris-kart-kap.cekil .giris-devam { opacity: 0; transition-delay: 0ms; }
+.giris-devam-ok { font-size: 22px; line-height: 1; }
+.giris-devam:focus-visible { box-shadow: 0 0 0 3px var(--giris-karanlik), 0 0 0 6px var(--burun); }
+
+/* ---- "Hadi biraz eğlenelim" */
+.giris-eglence { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--b-4); color: var(--giris-kart); cursor: pointer; z-index: 2; padding: var(--b-6); }
+.giris-eglence[hidden] { display: none !important; }
+.giris-hadi { font-family: var(--yazi-baslik); font-weight: var(--kalin-dev); font-size: var(--punto-3xl); letter-spacing: var(--aralik-baslik); line-height: var(--satir-siki); text-align: center;
+  opacity: 0; transform: translateY(60dvh); transition: transform 1500ms var(--egri-cikis), opacity 900ms ease 200ms; text-wrap: balance;
+  text-shadow: 0 0 30px color-mix(in srgb, var(--burun) 55%, transparent); }
+.giris-eglence.goster .giris-hadi { opacity: 1; transform: none; }
+.giris-tikla { font-family: var(--yazi-govde); font-weight: var(--kalin-vurgu); font-size: var(--punto-lg); color: var(--burun); opacity: 0; letter-spacing: .08em; }
+.giris-eglence.goster .giris-tikla { animation: giris-tikla 1.7s var(--egri-ikili) 1300ms infinite; }
+@keyframes giris-tikla { 0%, 100% { opacity: .35; transform: translateY(0); } 50% { opacity: 1; transform: translateY(-3px); } }
+.giris-eglence:focus-visible { outline: none; box-shadow: none !important; }
+.giris-eglence:focus-visible .giris-tikla { text-decoration: underline; text-underline-offset: 6px; }
+
+/* ---- masaüstü */
+@media (min-width: 768px) {
+  .giris-buket-kap { width: min(60vw, 66dvh, 640px); }
+  .giris-kart { max-height: min(78dvh, 800px); }
+}
+@media (orientation: landscape) and (max-height: 520px) {
+  .giris-sahne { flex-direction: row; gap: var(--b-6); }
+  .giris-buket-kap { width: min(44vw, 86dvh); }
+}
+
+/* ---- hareketi azalt: sade solmalar, döngü yok */
+.giris.az .giris-buket-kap, .giris.az .giris-isik, .giris.az .giris-kart, .giris.az .giris-hadi, .giris.az .giris-al, .giris.az .giris-sahne, .giris.az .giris-devam { transition-duration: 200ms; transition-delay: 0ms; }
+.giris.az .cb-gel { animation: none; opacity: 1; transform: none; }
+.giris.az .cb-nefes.aktif, .giris.az .giris-buket, .giris.az .cb-hale, .giris.az .giris-al.goster, .giris.az .giris-tikla, .giris.az .giris-parcaciklar i { animation: none; }
+.giris.az .giris-parcaciklar i { opacity: .7; }
+.giris.az .giris-tikla { opacity: 1; }
+.giris.az .giris-hadi { transform: none; }
+.giris.az .giris-kart { transform: none; }
+.giris.az .giris-kart-kap.cekil .giris-kart { transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .giris .cb-gel { animation: none; opacity: 1; transform: none; }
+  .giris .cb-nefes.aktif, .giris .giris-buket, .giris .cb-hale, .giris .giris-al.goster, .giris .giris-tikla, .giris .giris-parcaciklar i { animation: none; }
+  .giris .giris-parcaciklar i, .giris .giris-tikla { opacity: .8; }
+}

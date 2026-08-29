@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="tr" data-hava="gunduz">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Cemre'nin Dünyası</title>
+  <meta name="description" content="Cemre için küçük, tatlı bir dünya: Pıttıksu, tırnak salonu, pet evi, bahçe ve daha fazlası.">
+  <meta name="theme-color" content="#F5C2BD">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Cemre">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="base.css">
+  <link rel="stylesheet" href="css/giris.css">
+  <link rel="stylesheet" href="css/hub.css">
+  <link rel="stylesheet" href="css/pittiksu.css">
+  <link rel="stylesheet" href="css/tirnak.css">
+  <link rel="stylesheet" href="css/petevi.css">
+  <link rel="stylesheet" href="css/angela.css">
+  <link rel="stylesheet" href="css/panda.css">
+  <link rel="stylesheet" href="css/bahce.css">
+  <link rel="stylesheet" href="css/ofke.css">
+  <link rel="stylesheet" href="css/bizim.css">
+</head>
+<body class="battaniye-zemin" data-bolum="hub">
+  <a class="atla" href="#hubKartlar">Bölümlere atla</a>
+
+  <!-- ================= HUB (giriş ekranı) ================= -->
+  <main id="hub" class="hub" aria-label="Giriş">
+    <div class="hub-yildizlar" aria-hidden="true"></div>
+    <header class="hub-ust">
+      <div class="hub-selam">
+        <h1 id="hubSelam">Hoş geldin Cemre</h1>
+        <p id="hubAltSelam">Pıttıksu battaniyede seni bekliyor.</p>
+      </div>
+      <div class="hub-dugmeler">
+        <button class="dugme-ikon" id="sesDugme" type="button" aria-label="Sesi kapat" aria-pressed="true">🔈</button>
+        <button class="dugme-ikon" id="havaDugme" type="button" aria-label="Geceye geç" aria-pressed="false">🌙</button>
+      </div>
+    </header>
+
+    <div class="hub-kedi" id="hubKedi" data-pati>
+      <div class="balon" id="hubBalon" role="status" aria-live="polite"></div>
+    </div>
+
+    <nav class="hub-kartlar" id="hubKartlar" aria-label="Bölümler"></nav>
+
+    <div class="hub-baglar">
+      <button class="dugme-hayalet" id="buketDugme" type="button">🌹 Buketi tekrar gör</button>
+      <button class="dugme-hayalet" id="notDugme" type="button">💌 Notu oku</button>
+    </div>
+
+    <div class="hub-alt">
+      <div class="yama siki kurulum" id="kurulumKarti" hidden>
+        <span class="ikon" aria-hidden="true">📱</span>
+        <div>
+          <div class="kalin">Ana ekrana ekle</div>
+          <div class="sessiz" id="kurulumMetin">Paylaş düğmesi → "Ana Ekrana Ekle" dersen, Pıttıksu her zaman bir dokunuş uzakta olur.</div>
+        </div>
+        <button class="dugme-ikon" id="kurulumKapat" type="button" aria-label="Kapat">✕</button>
+      </div>
+      <p class="sessiz">Her şey bu telefonda kalır; hiçbir yere gönderilmez.</p>
+    </div>
+  </main>
+
+  <!-- ================= BÖLÜM KABUĞU (tek konteyner; modüller buraya mount olur) ================= -->
+  <section id="bolum" class="bolum" hidden>
+    <header class="ustbar">
+      <button class="dugme-ikon" id="geriDugme" type="button" aria-label="Eve dön">‹</button>
+      <h1><span id="bolumIkon" class="ustbar-ikon" aria-hidden="true" hidden></span><span id="bolumBaslik">Bölüm</span></h1>
+      <button class="dugme-ikon" id="bolumMenu" type="button" aria-label="Ses ve gece ayarları">⋯</button>
+    </header>
+    <div id="bolumIcerik" class="bolum-icerik"></div>
+  </section>
+
+  <div id="toast" role="status" aria-live="polite"></div>
+  <div id="sheetKaplama" hidden>
+    <div id="sheet" role="dialog" aria-modal="true" aria-label="Alt sayfa">
+      <div class="tutamac" aria-hidden="true"></div>
+      <div id="sheetIcerik"></div>
+    </div>
+  </div>
+  <noscript><p class="yama" style="margin:16px">Bu dünya açılmak için JavaScript istiyor; tarayıcı ayarlarından açıp tekrar dener misin?</p></noscript>
+
+  <!-- sıra: ayarlar → kilit (sihirli kelime + şifre çözme) → kilit.js sırayla yükler: çekirdek → petler → giriş → bölümler → hub -->
+  <script src="config.js"></script>
+  <script src="js/kilit.js"></script>
+</body>
+</html>
