@@ -249,6 +249,27 @@
         ozledim: ['miu… neredeydin?', 'Battaniye soğudu…'],
         bos: ['miu?', 'Gözlerim mavi-gri, gördün mü?', 'BITCH!', 'Patim minik', 'Esnedim, rekor', 'mırr…', 'Misafirim ama ev benim']
       }
+    },
+    {
+      id: 'barbie', ev: 'salon', rolIkon: '🐶',
+      kisilik: 'Evin neşesi. Kapı açılınca ilk o koşar, dili hep dışarıda; en sevdiği yer Cemre’nin kucağı.',
+      sever: [['🎾', 'Top getirmek'], ['🤲', 'Kucak'], ['🚶', 'Yürüyüş'], ['🍗', 'Ödül maması']],
+      sevmez: ['Yalnız kalmak', 'Süpürge sesi'],
+      yemek: [['🍗', 'Ödül maması'], ['🥩', 'Küçük et parçası'], ['🥕', 'Havuç çubuğu'], ['🧀', 'Minik peynir']],
+      oyun: { emoji: '🎾', ad: 'Top at, getirsin' },
+      azalma: { aclik: 5, uyku: 3, temizlik: 5, eglence: 6, sevgi: 6 },
+      soz: {
+        selam: ['Hav! Geldin mi?', 'Kuyruğum durmuyor!', 'Seni bekliyordum Cemre'],
+        besle: ['Bu benim için mi?', 'Hav hav, teşekkürler!', 'Bir tane daha olur mu'],
+        yika: ['Tüylerim köpük köpük', 'Silkeleneceğim, kaç!', 'Kokum mis oldu'],
+        uyut: ['Kucakta uyurum ben', 'zzz… top… zzz', 'Rüyamda koştum'],
+        uyan: ['Günaydın! Yürüyüşe?', 'Uyandım, hemen kalk'],
+        oyna: ['At, at, at!', 'Topu getirdim!', 'Bir daha bir daha'],
+        sev: ['Kuyruğum pervane oldu', 'Elini çekme, daha!', 'Cemre ♥'],
+        doydu: ['Karnım güzelce doldu', 'Şimdi kestirme vakti'],
+        ozledim: ['Kapıda bekledim…', 'Neredeydin, seni özledim', 'Top hep burada duruyor'],
+        bos: ['Top atsana', 'Kucak boş mu?', 'Kapıyı dinliyorum', 'Bir yürüyüş iyi giderdi']
+      }
     }
   ];
   const petTanim = (id) => PETLER.find(t => t.id === id) || null;

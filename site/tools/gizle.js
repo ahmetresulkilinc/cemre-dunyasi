@@ -34,7 +34,7 @@ const manifest = { surum: 1, salt: salt.toString('base64'), iter: ITER, kontrol:
 fs.writeFileSync(path.join(HEDEF, 'kontrol.enc'), sifrele(Buffer.from('cemre-dunyasi-ok', 'utf8')));
 
 let toplam = 0;
-for (const klasor of ['bizim', 'pittiksu']) {
+for (const klasor of ['bizim', 'pittiksu', 'barbie']) {
   const d = path.join(KAYNAK, klasor);
   if (!fs.existsSync(d)) continue;
   for (const f of fs.readdirSync(d).sort()) {

@@ -1,10 +1,26 @@
 {
  "surum": 1,
- "salt": "f5C6EnaBb417Xc2OsXWrBg==",
+ "salt": "t8llupUbfIgYF3CGxr2rWQ==",
  "iter": 120000,
  "kontrol": "kontrol.enc",
  "not": "254bb97b57f12e16.enc",
  "dosyalar": {
+  "assets/bizim/barbie-1-thumb.jpg": {
+   "enc": "59ca7c8d2bc6d005.enc",
+   "tur": "image/jpeg"
+  },
+  "assets/bizim/barbie-1.jpg": {
+   "enc": "e568f45b122a059d.enc",
+   "tur": "image/jpeg"
+  },
+  "assets/bizim/barbie-2-thumb.jpg": {
+   "enc": "bb2d5e3943387ab2.enc",
+   "tur": "image/jpeg"
+  },
+  "assets/bizim/barbie-2.jpg": {
+   "enc": "35518499480aaa9a.enc",
+   "tur": "image/jpeg"
+  },
   "assets/bizim/buket-thumb.jpg": {
    "enc": "39521d17f4d6348a.enc",
    "tur": "image/jpeg"
@@ -27,6 +43,14 @@
   },
   "assets/bizim/cemre-2.jpg": {
    "enc": "f622f024f97adb7a.enc",
+   "tur": "image/jpeg"
+  },
+  "assets/bizim/cemre-barbie-thumb.jpg": {
+   "enc": "b80a80ddc983a972.enc",
+   "tur": "image/jpeg"
+  },
+  "assets/bizim/cemre-barbie.jpg": {
+   "enc": "e4d2374ab05077fc.enc",
    "tur": "image/jpeg"
   },
   "assets/bizim/ikimiz-thumb.jpg": {
@@ -75,6 +99,30 @@
   },
   "assets/pittiksu/pittiksu-2.jpg": {
    "enc": "2f021fff79283ee9.enc",
+   "tur": "image/jpeg"
+  },
+  "assets/barbie/barbie-1-thumb.jpg": {
+   "enc": "e6dfb31ed631bba5.enc",
+   "tur": "image/jpeg"
+  },
+  "assets/barbie/barbie-1.jpg": {
+   "enc": "f0fedae7f2fd8b49.enc",
+   "tur": "image/jpeg"
+  },
+  "assets/barbie/barbie-2-thumb.jpg": {
+   "enc": "7b89b75faf9a4dd7.enc",
+   "tur": "image/jpeg"
+  },
+  "assets/barbie/barbie-2.jpg": {
+   "enc": "1dece88a515a1638.enc",
+   "tur": "image/jpeg"
+  },
+  "assets/barbie/cemre-barbie-thumb.jpg": {
+   "enc": "9a02b15903b2698b.enc",
+   "tur": "image/jpeg"
+  },
+  "assets/barbie/cemre-barbie.jpg": {
+   "enc": "1bd829e2b6f11a9e.enc",
    "tur": "image/jpeg"
   }
  }
