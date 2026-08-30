@@ -8,7 +8,7 @@ window.CD = window.CD || {};
   const CD = window.CD;
   const $ = (s, k) => (k || document).querySelector(s);
   CD.config = window.CD_CONFIG || {};
-  CD.surum = '1.4.0';
+  CD.surum = '1.4.1';
 
   /* ============================================================== olay (mini emitter) */
   const dinleyiciler = {};
