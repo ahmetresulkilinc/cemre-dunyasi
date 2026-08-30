@@ -8,7 +8,7 @@ window.CD = window.CD || {};
   const CD = window.CD;
   const $ = (s, k) => (k || document).querySelector(s);
   CD.config = window.CD_CONFIG || {};
-  CD.surum = '1.6.0';
+  CD.surum = '1.7.0';
 
   /* ============================================================== olay (mini emitter) */
   const dinleyiciler = {};
@@ -73,7 +73,7 @@ window.CD = window.CD || {};
   CD.depo.iceAktar = (json) => { try { const o = typeof json === 'string' ? JSON.parse(json) : json; const v = o && o.veri ? o.veri : o; Object.keys(v).forEach(k => CD.depo.yaz(k, v[k])); return true; } catch (e) { return false; } };
 
   // sıfırla: oyun ilerlemesi, başarımlar, kayıtlar, eklenen fotoğraflar silinir; KORU listesi (tam anahtar) kalır
-  const SIFIRLA_KORU = ['cd.pittiksu.dogumTarihi', 'cd.pittiksu.dogumVarsayilan', 'cd.kilit.anahtar', 'cd.senk.oda', 'cd.ses', 'cd.hava'];
+  const SIFIRLA_KORU = ['cd.pittiksu.dogumTarihi', 'cd.pittiksu.dogumVarsayilan', 'cd.kilit.anahtar', 'cd.senk.oda', 'cd.senk.sifirlaGoruldu', 'cd.cihaz.kim', 'cd.ses', 'cd.hava'];
   CD.depo.sifirla = async function (koru) {
     const kal = new Set([].concat(SIFIRLA_KORU, koru || []));
     const sakla = {}; kal.forEach(k => { try { const v = localStorage.getItem(k); if (v != null) sakla[k] = v; } catch (e) {} });
@@ -622,12 +622,26 @@ window.CD = window.CD || {};
           (CD.senk && CD.senk.acik) ? ('☁️ Bulut açık' + (CD.senk.sonSenk ? ' · ' + new Date(CD.senk.sonSenk).toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' }) : '') + ' · şimdi eşitle') : '☁️ Bulut kapalı'),
         CD.el('button.dugme-ikincil.tam', { type: 'button', onclick: () => {
           // aynı sheet'in içeriği onay ekranıyla değişir (kapatıp açmak 320ms'lik temizleme zamanlayıcısıyla yarışır)
+          const bulutVar = !!(CD.senk && CD.senk.acik);
+          const sifirlaSimdi = async (bulutDahil) => {
+            CD.ses.tik(); CD.toast('Sıfırlanıyor… 🧹');
+            try {
+              if (bulutDahil && CD.senk && CD.senk.bulutuSifirla) await CD.senk.bulutuSifirla();
+              await CD.depo.sifirla();
+              CD.depo.yaz('senk.ilkYapildi', true);
+            } catch (e) {}
+            location.hash = ''; location.reload();
+          };
           const onay = CD.el('div.dikey', [
             CD.el('p', 'Oyun ilerlemesi, başarımlar, bahçe, pet evi, tırnak tasarımları ve eklenen fotoğraflar silinir.'),
-            CD.el('p', 'Pıttıksu\'nun doğum tarihi, sihirli kelime ve ses/gece tercihin kalır. 🐾'),
-            CD.el('button.dugme.tam', { type: 'button', onclick: async () => { CD.ses.tik(); CD.toast('Sıfırlanıyor… 🧹'); try { await CD.depo.sifirla(); } catch (e) {} location.hash = ''; location.reload(); } }, 'Evet, hepsini sıfırla'),
-            CD.el('button.dugme-ikincil.tam', { type: 'button', onclick: () => CD.sheetKapat() }, 'Vazgeç')
-          ]);
+            CD.el('p', 'Pıttıksu’nun doğum tarihi, sihirli kelime ve ses/gece tercihin kalır. 🐾'),
+            bulutVar
+              ? CD.el('button.dugme.tam', { type: 'button', onclick: () => sifirlaSimdi(true) }, '☁️ Her şeyi sıfırla (ikimizde de)')
+              : CD.el('button.dugme.tam', { type: 'button', onclick: () => sifirlaSimdi(false) }, 'Evet, hepsini sıfırla'),
+            bulutVar ? CD.el('button.dugme-ikincil.tam', { type: 'button', onclick: () => sifirlaSimdi(false) }, '📱 Sadece bu telefonu sıfırla') : null,
+            bulutVar ? CD.el('p.sessiz', 'Buluttaki ortak dünya da silinir; karşı telefon açılınca boş başlar.') : null,
+            CD.el('button.dugme-hayalet.tam', { type: 'button', onclick: () => CD.sheetKapat() }, 'Vazgeç')
+          ].filter(Boolean));
           CD.sheet(onay, { baslik: 'Her şeyi sıfırla?', sessiz: true });
         } }, '🧹 Verileri sıfırla')
       ]);
