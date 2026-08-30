@@ -279,46 +279,68 @@
 
   function kopekSvg() {
     return '<svg class="barbie-svg" viewBox="0 0 260 244" aria-hidden="true" focusable="false">' +
-      '<ellipse class="bb-golge" cx="130" cy="231" rx="80" ry="9"/>' +
+      '<ellipse class="bb-golge" cx="130" cy="232" rx="76" ry="9"/>' +
       '<g class="bb-kucak bb-kucak-arka"><path d="M18 154c-12 40-4 82 46 86h132c50-4 58-46 46-86-30-26-70-34-112-34S48 128 18 154z"/></g>' +
       '<g class="bb-govde-g">' +
-        '<g class="bb-kuyruk"><path class="bb-tuy" d="' + tuylu(198, 166, 31, 22, 13, 0.14) + '"/><path class="bb-tuy-acik" d="' + tuylu(201, 166, 18, 12, 10, 0.12) + '" opacity=".7"/></g>' +
-        '<path class="bb-tuy" d="' + tuylu(130, 182, 62, 43, 20, 0.07) + '"/>' +
-        '<path class="bb-tuy-acik" d="' + tuylu(130, 194, 41, 27, 15, 0.08) + '" opacity=".75"/>' +
-        '<g class="bb-pati bb-pati-sol"><ellipse class="bb-tuy" cx="103" cy="216" rx="20" ry="12"/><path class="bb-pati-cizgi" d="M92 220v-6M99 222v-7M107 222v-7M114 220v-6"/></g>' +
-        '<g class="bb-pati bb-pati-sag"><ellipse class="bb-tuy" cx="157" cy="216" rx="20" ry="12"/><path class="bb-pati-cizgi" d="M146 220v-6M153 222v-7M161 222v-7M168 220v-6"/></g>' +
+        // kuyruk: sırtın üstüne kıvrılan tüy demeti
+        '<g class="bb-kuyruk">' +
+          '<path class="bb-tuy" d="' + tuylu(199, 128, 27, 33, 20, 0.055) + '"/>' +
+          '<path class="bb-tuy-acik" d="' + tuylu(201, 131, 14, 20, 14, 0.05) + '" opacity=".65"/>' +
+        '</g>' +
+        // oturan gövde
+        '<path class="bb-tuy" d="' + tuylu(130, 188, 54, 44, 28, 0.03) + '"/>' +
+        // ön bacaklar + patiler
+        '<g class="bb-pati bb-pati-sol">' +
+          '<path class="bb-tuy" d="M104 186h16v28h-16z"/>' +
+          '<ellipse class="bb-tuy-acik" cx="112" cy="215" rx="16" ry="10"/>' +
+          '<path class="bb-pati-cizgi" d="M104 218v-5M110 220v-6M117 219v-5"/>' +
+        '</g>' +
+        '<g class="bb-pati bb-pati-sag">' +
+          '<path class="bb-tuy" d="M140 186h16v28h-16z"/>' +
+          '<ellipse class="bb-tuy-acik" cx="148" cy="215" rx="16" ry="10"/>' +
+          '<path class="bb-pati-cizgi" d="M140 218v-5M146 220v-6M153 219v-5"/>' +
+        '</g>' +
+        // göğüs manşonu (Pomeranian yakası)
+        '<path class="bb-tuy-acik" d="' + tuylu(130, 180, 38, 36, 24, 0.05) + '" opacity=".9"/>' +
       '</g>' +
       '<g class="bb-kafa-g">' +
-        '<g class="bb-kulak bb-kulak-sol"><path class="bb-tuy" d="M90 78 82 22l44 30z"/><path class="bb-kulak-ic" d="M95 70 89 37l28 17z"/></g>' +
-        '<g class="bb-kulak bb-kulak-sag"><path class="bb-tuy" d="M170 78 178 22l-44 30z"/><path class="bb-kulak-ic" d="M165 70 171 37l-28 17z"/></g>' +
-        '<path class="bb-tuy" d="' + tuylu(130, 106, 71, 61, 22, 0.055) + '"/>' +
-        '<path class="bb-tuy-acik" d="' + tuylu(130, 126, 42, 32, 16, 0.05) + '" opacity=".8"/>' +
+        // boyun yakası — kafanın hemen altında kabaran tüy
+        '<path class="bb-tuy" d="' + tuylu(130, 146, 70, 26, 26, 0.06) + '"/>' +
+        // kulaklar: küçük, dik, yuvarlak uçlu
+        '<g class="bb-kulak bb-kulak-sol"><path class="bb-tuy" d="M96 80 88 42q7-8 15 0l28 22z"/><path class="bb-kulak-ic" d="M101 74 95 50q4-5 8 0l16 16z"/></g>' +
+        '<g class="bb-kulak bb-kulak-sag"><path class="bb-tuy" d="M164 80 172 42q-7-8-15 0l-28 22z"/><path class="bb-kulak-ic" d="M159 74 165 50q-4-5-8 0l-16 16z"/></g>' +
+        // kafa + yanak tüyleri
+        '<path class="bb-tuy" d="' + tuylu(130, 104, 60, 52, 30, 0.028) + '"/>' +
+        '<path class="bb-tuy" d="' + tuylu(84, 118, 20, 24, 16, 0.055) + '"/>' +
+        '<path class="bb-tuy" d="' + tuylu(176, 118, 20, 24, 16, 0.055) + '"/>' +
+        // burun çevresi (açık ton)
+        '<ellipse class="bb-tuy-acik" cx="130" cy="132" rx="29" ry="21" opacity=".95"/>' +
         '<g class="bb-goz bb-goz-sol">' +
-          '<g class="bb-goz-acik"><ellipse class="bb-iris" cx="103" cy="107" rx="13" ry="14"/><circle class="bb-parilti" cx="98.5" cy="101" r="4.4"/><circle class="bb-parilti bb-parilti-kucuk" cx="107" cy="113" r="2"/></g>' +
-          '<path class="bb-goz-kapali" d="M90 107q13-9 26 0"/><path class="bb-goz-mutlu" d="M90 111q13-15 26 0"/></g>' +
+          '<g class="bb-goz-acik"><ellipse class="bb-iris" cx="106" cy="102" rx="12" ry="13"/><circle class="bb-parilti" cx="101.8" cy="96.5" r="4.2"/><circle class="bb-parilti bb-parilti-kucuk" cx="110" cy="108" r="1.9"/></g>' +
+          '<path class="bb-goz-kapali" d="M94 102q12-8 24 0"/><path class="bb-goz-mutlu" d="M94 106q12-14 24 0"/></g>' +
         '<g class="bb-goz bb-goz-sag">' +
-          '<g class="bb-goz-acik"><ellipse class="bb-iris" cx="157" cy="107" rx="13" ry="14"/><circle class="bb-parilti" cx="152.5" cy="101" r="4.4"/><circle class="bb-parilti bb-parilti-kucuk" cx="161" cy="113" r="2"/></g>' +
-          '<path class="bb-goz-kapali" d="M144 107q13-9 26 0"/><path class="bb-goz-mutlu" d="M144 111q13-15 26 0"/></g>' +
-        '<ellipse class="bb-yanak" cx="80" cy="132" rx="10" ry="7"/><ellipse class="bb-yanak" cx="180" cy="132" rx="10" ry="7"/>' +
+          '<g class="bb-goz-acik"><ellipse class="bb-iris" cx="154" cy="102" rx="12" ry="13"/><circle class="bb-parilti" cx="149.8" cy="96.5" r="4.2"/><circle class="bb-parilti bb-parilti-kucuk" cx="158" cy="108" r="1.9"/></g>' +
+          '<path class="bb-goz-kapali" d="M142 102q12-8 24 0"/><path class="bb-goz-mutlu" d="M142 106q12-14 24 0"/></g>' +
+        '<ellipse class="bb-yanak" cx="88" cy="126" rx="10" ry="6.5"/><ellipse class="bb-yanak" cx="172" cy="126" rx="10" ry="6.5"/>' +
         '<g class="bb-burun-g">' +
-          '<path class="bb-burun" d="M130 127c8.5 0 14.5 3.6 14.5 8.4 0 5.2-6.4 9.6-14.5 9.6s-14.5-4.4-14.5-9.6c0-4.8 6-8.4 14.5-8.4z"/>' +
-          '<ellipse class="bb-burun-isik" cx="124.5" cy="132.5" rx="4" ry="2.4"/>' +
+          '<path class="bb-burun" d="M130 118c7.8 0 13.4 3.4 13.4 7.8 0 4.8-6 8.8-13.4 8.8s-13.4-4-13.4-8.8c0-4.4 5.6-7.8 13.4-7.8z"/>' +
+          '<ellipse class="bb-burun-isik" cx="125" cy="123" rx="3.6" ry="2.2"/>' +
         '</g>' +
-        '<path class="bb-agiz" d="M130 145v3.5m0 0c-4.4 6.4-12 6.4-16 1.6m16-1.6c4.4 6.4 12 6.4 16 1.6"/>' +
-        '<g class="bb-agiz-acik"><ellipse class="bb-agiz-ic" cx="130" cy="153" rx="11" ry="11.5"/></g>' +
-        '<g class="bb-dil"><path class="bb-dil-yol" d="M122 150q8-4 16 0 2.4 13-8 16.5-10.4-3.5-8-16.5z"/><path class="bb-dil-cizgi" d="M130 153v10"/></g>' +
+        '<path class="bb-agiz" d="M130 134.5v3.5m0 0c-4.2 6-11.4 6-15.2 1.4m15.2-1.4c4.2 6 11.4 6 15.2 1.4"/>' +
+        '<g class="bb-agiz-acik"><ellipse class="bb-agiz-ic" cx="130" cy="143" rx="10.5" ry="11"/></g>' +
+        '<g class="bb-dil"><path class="bb-dil-yol" d="M122.5 140q7.5-3.6 15 0 2.2 12.4-7.5 15.6-9.7-3.2-7.5-15.6z"/><path class="bb-dil-cizgi" d="M130 143v9.5"/></g>' +
       '</g>' +
       '<g class="bb-kucak bb-kucak-on"><path d="M28 178c-10 34 4 62 48 64h108c44-2 58-30 48-64-30 22-66 30-102 30s-72-8-102-30z"/><path class="bb-kucak-ilmek" d="M52 216c14 6 30 8 50 8M72 228c16 4 36 6 60 4M148 222c16 0 30-2 44-8"/></g>' +
       '<g class="bb-mama"><ellipse class="bb-mama-golge" cx="130" cy="228" rx="34" ry="6"/><path class="bb-mama-kase" d="M100 206h60l-7 20a6 6 0 0 1-6 4h-34a6 6 0 0 1-6-4z"/><ellipse class="bb-mama-ic" cx="130" cy="207" rx="30" ry="7"/><circle class="bb-mama-tane" cx="121" cy="206" r="4"/><circle class="bb-mama-tane" cx="132" cy="209" r="4.5"/><circle class="bb-mama-tane" cx="142" cy="205" r="4"/></g>' +
       '<g class="bb-vurlar">' +
-        '<ellipse class="bb-vur" data-bolge="kafa" cx="130" cy="100" rx="71" ry="58"/>' +
-        '<ellipse class="bb-vur" data-bolge="karin" cx="130" cy="188" rx="58" ry="34"/>' +
-        '<ellipse class="bb-vur bb-vur-kuyruk" data-bolge="kuyruk" cx="203" cy="166" rx="30" ry="22"/>' +
-        '<ellipse class="bb-vur" data-bolge="pati-sol" cx="103" cy="216" rx="22" ry="14"/>' +
-        '<ellipse class="bb-vur" data-bolge="pati-sag" cx="157" cy="216" rx="22" ry="14"/>' +
-        '<path class="bb-vur" data-bolge="kulak-sol" d="M76 16 134 50 88 88z"/>' +
-        '<path class="bb-vur" data-bolge="kulak-sag" d="M184 16 126 50l46 38z"/>' +
-        '<ellipse class="bb-vur" data-bolge="burun" cx="130" cy="140" rx="20" ry="18"/>' +
+        '<ellipse class="bb-vur" data-bolge="kafa" cx="130" cy="102" rx="62" ry="52"/>' +
+        '<ellipse class="bb-vur" data-bolge="karin" cx="130" cy="190" rx="50" ry="36"/>' +
+        '<ellipse class="bb-vur bb-vur-kuyruk" data-bolge="kuyruk" cx="200" cy="128" rx="28" ry="34"/>' +
+        '<ellipse class="bb-vur" data-bolge="pati-sol" cx="112" cy="210" rx="20" ry="18"/>' +
+        '<ellipse class="bb-vur" data-bolge="pati-sag" cx="148" cy="210" rx="20" ry="18"/>' +
+        '<path class="bb-vur" data-bolge="kulak-sol" d="M90 86 80 34l54 32z"/>' +
+        '<path class="bb-vur" data-bolge="kulak-sag" d="M170 86 180 34l-54 32z"/>' +
+        '<ellipse class="bb-vur" data-bolge="burun" cx="130" cy="130" rx="19" ry="17"/>' +
       '</g>' +
     '</svg>';
   }
