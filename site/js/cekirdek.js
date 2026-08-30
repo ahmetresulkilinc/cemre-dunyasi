@@ -8,7 +8,7 @@ window.CD = window.CD || {};
   const CD = window.CD;
   const $ = (s, k) => (k || document).querySelector(s);
   CD.config = window.CD_CONFIG || {};
-  CD.surum = '1.3.1';
+  CD.surum = '1.4.0';
 
   /* ============================================================== olay (mini emitter) */
   const dinleyiciler = {};
@@ -168,6 +168,25 @@ window.CD = window.CD || {};
       CD.el('p', 'Bundan sonra hep ana ekrandaki simgeden gir; her şey orada birikir. 🐾'),
       CD.el('button.dugme.tam', { type: 'button', onclick: () => CD.sheetKapat() }, 'Anladım')
     ]), { baslik: 'Kayıtlar nerede duruyor?' });
+  };
+
+  /* ---- bu cihazda kim var? (ortak oyunlar için; buluta gitmez) ---- */
+  CD.isimler = () => { const i = (CD.config.ISIMLER || {}); return { ben: i.BEN || 'Ahmet', o: i.O || 'Cemre' }; };
+  CD.kim = () => CD.depo.al('cihaz.kim', null);                       // 'cemre' | 'ahmet' | null
+  CD.kimAdi = (k) => { const i = CD.isimler(); return (k || CD.kim()) === 'ahmet' ? i.ben : i.o; };
+  CD.kimYaz = (k) => { CD.depo.yaz('cihaz.kim', k); CD.olay.yay('kim', k); return k; };
+  CD.kimSec = function (zorunlu) {
+    return new Promise(coz => {
+      const i = CD.isimler();
+      const sec = (k) => { CD.kimYaz(k); CD.sheetKapat(); CD.ses.pop(); coz(k); };
+      const ic = [
+        CD.el('p', 'Bu telefonu kim kullanıyor? Sırayla oynanan oyunlarda hamleler buna göre ayrılır.'),
+        CD.el('button.dugme.tam', { type: 'button', onclick: () => sec('cemre') }, '🎀 ' + i.o),
+        CD.el('button.dugme-ikincil.tam', { type: 'button', onclick: () => sec('ahmet') }, '💙 ' + i.ben)
+      ];
+      if (!zorunlu) ic.push(CD.el('button.dugme-hayalet.tam', { type: 'button', onclick: () => { CD.sheetKapat(); coz(null); } }, 'Sonra'));
+      CD.sheet(CD.el('div.dikey', ic), { baslik: 'Sen kimsin?' });
+    });
   };
 
   /* ============================================================== yardımcılar */
