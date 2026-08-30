@@ -1,6 +1,6 @@
 /* sw.js — sadece kabuk önbelleği. Site çevrimdışı da açılır; hatalar sessizce yutulur.
    Sürümü değiştirince (SURUM) eski önbellek silinir. Veri hep cihazda (localStorage/IndexedDB), ağ yok. */
-const SURUM = 'cd-v3';
+const SURUM = 'cd-v4';
 const KABUK = [
   './', './index.html', './config.js', './tokens.css', './base.css', './manifest.webmanifest',
   './css/giris.css', './css/hub.css', './css/pittiksu.css', './css/tirnak.css', './css/petevi.css', './css/angela.css', './css/panda.css', './css/bahce.css', './css/ofke.css', './css/bizim.css',
