@@ -32,8 +32,8 @@
 
   const FIYONK = [
     '<svg class="xox-isaret xox-fiyonk" viewBox="0 0 64 64" aria-hidden="true" focusable="false">',
-    '<path class="xox-kuyruk" d="M28 35.5C25 44 23.4 50 22.3 56"/>',
-    '<path class="xox-kuyruk" d="M36 35.5C39 44 40.6 50 41.7 56"/>',
+    '<path class="xox-kuyruk" d="M28.5 36C26.2 43 23.4 48.4 19.8 53.2"/>',
+    '<path class="xox-kuyruk" d="M35.5 36C37.8 43 40.6 48.4 44.2 53.2"/>',
     '<path class="xox-dolgu" d="M32 32C24.4 19.8 11 16.8 7.2 25.2 3.5 33.5 12.2 42.6 32 32Z"/>',
     '<path class="xox-dolgu" d="M32 32C39.6 19.8 53 16.8 56.8 25.2 60.5 33.5 51.8 42.6 32 32Z"/>',
     '<ellipse class="xox-dolgu" cx="32" cy="32.4" rx="6.4" ry="6"/>',
@@ -58,7 +58,7 @@
   /* ------------------------------------------------------------ durum */
   let ctx = null, kok = null, d = null;
   const ui = {};
-  let senkT = 0, notT = 0, yeniT = 0, sayacT = 0;
+  let senkT = 0, notT = 0, sayacT = 0;
   const cozler = [];                       // CD.olay.dinle geri alma fonksiyonları
 
   /* ÖNEMLİ: senk.js yalnızca kök CD.depo.yaz'ı sarmalayıp zaman damgası basıyor.
@@ -267,6 +267,9 @@
       h.setAttribute('aria-disabled', kilit ? 'true' : 'false');
       h.classList.toggle('xox-kilit', kilit);
       h.classList.toggle('xox-vurgu', !!(d.cizgi && d.cizgi.indexOf(i) >= 0));
+      // karşı tarafın cevap bekleyen son hamlesi: sen oynayana kadar işaretli kalır
+      const bekleyen = !!(d.sonHamle && d.sonHamle.indeks === i && b && !tek && d.sonHamle.kim !== b && !d.kazanan);
+      h.classList.toggle('xox-geldi', bekleyen);
       const yer = (Math.floor(i / 3) + 1) + '. satır ' + ((i % 3) + 1) + '. sütun';
       h.setAttribute('aria-label', yer + ', ' + (sahip ? adi(sahip) : 'boş'));
     }
@@ -281,11 +284,11 @@
     }
     ui.tahta.classList.toggle('xox-tahta-bitti', !!d.kazanan);
 
-    /* sıra göstergesi */
-    const siradaki = d.kazanan ? null : d.sira;
-    ui.siraCemre.classList.toggle('xox-sira-aktif', siradaki === 'cemre');
-    ui.siraAhmet.classList.toggle('xox-sira-aktif', siradaki === 'ahmet');
-    ui.siraCizgi.dataset.yon = siradaki || 'yok';
+    /* sıra göstergesi — oyun bitince kazananın sembolü yanar */
+    const vurgulu = d.kazanan ? (d.kazanan === 'berabere' ? null : d.kazanan) : d.sira;
+    ui.siraCemre.classList.toggle('xox-sira-aktif', vurgulu === 'cemre');
+    ui.siraAhmet.classList.toggle('xox-sira-aktif', vurgulu === 'ahmet');
+    ui.siraCizgi.dataset.yon = d.kazanan ? 'yok' : d.sira;
 
     /* durum metni */
     let baslikMetin = '', altMetin = '';
@@ -519,13 +522,7 @@
     if (!s || !s.zaman) return;
     if (b && s.kim === b) { cihazYaz('gorulen', s.zaman); return; }
     if (s.zaman <= (cihazAl('gorulen', 0) || 0)) return;
-    cihazYaz('gorulen', s.zaman);
-    const h = ui.hucreler[s.indeks];
-    if (h) {
-      h.classList.add('xox-geldi');
-      clearTimeout(yeniT);
-      yeniT = setTimeout(() => { if (h) h.classList.remove('xox-geldi'); }, 5000);
-    }
+    cihazYaz('gorulen', s.zaman);      // aynı hamle için bir kez ses/toast
     if (!d.kazanan && oncekiOyunNo === d.oyunNo) {
       ctx.ses.pop();
       ctx.toast(adi(s.kim) + ' oynadı — sıra sende 💫');
@@ -594,7 +591,6 @@
       clearInterval(senkT); senkT = 0;
       clearInterval(sayacT); sayacT = 0;
       clearTimeout(notT); notT = 0;
-      clearTimeout(yeniT); yeniT = 0;
       document.removeEventListener('visibilitychange', gorunurluk);
       while (cozler.length) { const c = cozler.pop(); try { c(); } catch (e) {} }
       if (ctx && d) ipucuYaz(d);

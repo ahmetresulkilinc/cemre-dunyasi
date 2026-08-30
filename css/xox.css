@@ -16,7 +16,7 @@
   --xox-kareli:       color-mix(in srgb, var(--goz) 30%, transparent);
   --xox-cemre:        var(--seker-kiraz);
   --xox-ahmet:        var(--seker-gok);
-  padding-bottom: var(--b-8);
+  /* altbar boşluğu .bolum'da hazır (base.css) — burada ekleme yok */
 }
 
 /* ---------------------------------------------------------------- kimlik şeridi */
@@ -111,7 +111,7 @@
 }
 .xox-hucre.xox-vurgu { background: color-mix(in srgb, var(--seker-limon) 34%, transparent); }
 
-.xox-hucre-ic { width: 62%; height: 62%; display: block; }
+.xox-hucre-ic { width: 62%; height: 62%; display: block; position: relative; z-index: 3; }  /* kazanan çizgisi işaretlerin ALTINDAN geçsin */
 .xox-isaret { width: 100%; height: 100%; display: block; overflow: visible; }
 .xox-dolgu {
   fill: currentColor;
@@ -120,7 +120,7 @@
 }
 .xox-kuyruk {
   fill: none;
-  stroke: var(--xox-kalem); stroke-width: 3.6; stroke-linecap: round;
+  stroke: var(--xox-kalem); stroke-width: 4.2; stroke-linecap: round;
 }
 .xox-fiyonk { color: var(--xox-cemre); }
 .xox-kalp   { color: var(--xox-ahmet); }
@@ -145,10 +145,11 @@
   transition: opacity var(--sure-2);
 }
 .xox-kazanc line {
-  stroke: var(--xox-cemre); stroke-width: 9; stroke-linecap: round;
+  stroke: color-mix(in srgb, var(--xox-cemre) 88%, var(--murekkep));
+  stroke-width: 6; stroke-linecap: round;
   stroke-dasharray: 460; stroke-dashoffset: 460;
 }
-.xox-kazanc[data-kim="ahmet"] line { stroke: var(--xox-ahmet); }
+.xox-kazanc[data-kim="ahmet"] line { stroke: color-mix(in srgb, var(--xox-ahmet) 88%, var(--murekkep)); }
 .xox-kazanc.xox-kazanc-acik { opacity: 1; }
 .xox-kazanc.xox-kazanc-acik line { animation: xox-cizgi-ciz .45s var(--egri-cikis) 120ms forwards; }
 @keyframes xox-cizgi-ciz { to { stroke-dashoffset: 0; } }
@@ -161,11 +162,12 @@
   100% { transform: none; opacity: 1; }
 }
 
-/* karşı taraftan gelen taze hamle */
+/* karşı taraftan gelen, cevap bekleyen hamle — sen oynayana kadar işaretli kalır.
+   Nabız birkaç vuruşta durur; etiket kalır (sonsuz döngü yorucu olurdu). */
 .xox-hucre.xox-geldi::before {
   content: ""; position: absolute; inset: 8%; border-radius: var(--r-md);
   border: 2.5px solid var(--oda-vurgu); pointer-events: none;
-  animation: xox-nabiz 1.8s var(--egri-ikili) infinite;
+  animation: xox-nabiz 1.8s var(--egri-ikili) 3;
 }
 .xox-hucre.xox-geldi::after {
   content: "yeni"; position: absolute; top: 4px; right: 4px; z-index: 3;
@@ -215,7 +217,8 @@
 .xox-skor-yuz { width: 28px; height: 28px; display: block; }
 .xox-skor-emoji { font-size: 22px; line-height: 28px; text-align: center; }
 .xox-skor-sayi {
-  font-family: var(--yazi-baslik); font-weight: var(--kalin-dev);
+  /* Sour Gummy'nin sıfırı "ə" gibi okunuyor → sayılar için gövde yazısı (tokens: --yazi-sayi) */
+  font-family: var(--yazi-sayi); font-weight: var(--kalin-baslik);
   font-size: var(--punto-2xl); line-height: 1.05;
   font-variant-numeric: tabular-nums; font-feature-settings: var(--tabular);
 }
