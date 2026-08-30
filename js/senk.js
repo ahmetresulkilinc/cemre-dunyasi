@@ -12,7 +12,7 @@ window.CD = window.CD || {};
   const TABLO = 'cemre_durum';
   const ZAMAN = 'senk.zaman';        // { "bahce.durum": 1788… }
   const ILK = 'senk.ilkYapildi';
-  const ATLA = /^(kilit\.|senk\.|ipucu\.)/;   // buluta gitmeyecek anahtarlar
+  const ATLA = /^(kilit\.|senk\.|ipucu\.|cihaz\.)/;   // buluta gitmeyecek anahtarlar
   const ARA = 4 * 60 * 1000;
 
   let oda = null, acik = false, bekleyen = 0, sonSenk = 0, calisiyor = false, durum = 'kapalı';

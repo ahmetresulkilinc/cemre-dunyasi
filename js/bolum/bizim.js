@@ -565,8 +565,8 @@
     const kap = ctx.el('div.dikey');
     const son = ctx.depo.al('olcerSon', null);
     const ISIM = (ctx.config.ISIMLER || {});
-    const ad1 = ctx.el('input.girdi', { type: 'text', value: (son && son.a) || ISIM.O || 'Cemre', placeholder: 'Bir isim', maxlength: '30', autocomplete: 'off', 'aria-label': 'Birinci isim' });
-    const ad2 = ctx.el('input.girdi', { type: 'text', value: (son && son.b) || ISIM.BEN || 'Ahmet', placeholder: 'Bir isim daha', maxlength: '30', autocomplete: 'off', 'aria-label': 'İkinci isim' });
+    const AD_A = temiz(ISIM.O || 'Cemre'), AD_B = temiz(ISIM.BEN || 'Ahmet');
+    // isim yazılmaz; iki isim sabit, tek dokunuşla ölçülür
     const olcD = ctx.el('button.dugme.tam', { type: 'button' }, 'Ölç');
     const yuzdeYazi = ctx.el('span.bizim-olcer-yuzde.sayi', '%?');
     const kalp = ctx.el('div.bizim-olcer-kalp', [ctx.el('span.bizim-olcer-kalp-svg', { html: KALP_SVG, 'aria-hidden': 'true' }), yuzdeYazi]);
@@ -582,8 +582,7 @@
     let calisiyor = false;
     function calistir() {
       if (calisiyor) return;
-      const a = temiz(ad1.value), b = temiz(ad2.value);
-      if (!a || !b) { salla(olcD); ctx.ses.hmpf(); ctx.toast('İki isim yaz, ölçer öyle çalışıyor.'); (a ? ad2 : ad1).focus(); return; }
+      const a = AD_A, b = AD_B;
       calisiyor = true; olcD.disabled = true;
       const s = olc(a, b);
       kalp.classList.remove('sonuc', 'ozel'); kalp.classList.add('olcuyor');
@@ -616,13 +615,14 @@
       rafId = requestAnimationFrame(adim);
     }
     olcD.addEventListener('click', calistir);
-    [ad1, ad2].forEach(i => i.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); calistir(); } }));
-    const takas = ctx.el('button.dugme-ikon.bizim-takas', { type: 'button', 'aria-label': 'İsimleri değiştir', onclick: () => { const t = ad1.value; ad1.value = ad2.value; ad2.value = t; ctx.ses.tik(); } }, '⇅');
+    const isimSatiri = ctx.el('div.bizim-olcer-isimler', [
+      ctx.el('span.bizim-olcer-isim', AD_A),
+      ctx.el('span.bizim-olcer-arti', { 'aria-hidden': 'true' }, '💗'),
+      ctx.el('span.bizim-olcer-isim', AD_B)
+    ]);
     gecmisCiz();
     kap.append(ctx.el('div.yama.dikey.bizim-olcer', [
-      kalp,
-      ctx.el('div.bizim-olcer-form', [ad1, takas, ad2]),
-      olcD, bar, yorum, gecmisKap
+      kalp, isimSatiri, olcD, bar, yorum, gecmisKap
     ]));
     return kap;
   }

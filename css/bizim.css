@@ -209,3 +209,13 @@
   .bizim-deste.kay-sol, .bizim-deste.kay-sag, .bizim-sayac-sayi.zip, .bizim-evet.sevindi, .bizim-olcer-kalp.sonuc .bizim-olcer-kalp-svg { animation: none; }
   .bizim-hayir { transition: none; }
 }
+
+/* aşk ölçer: isimler sabit, yazı alanı yok */
+.bizim-olcer-isimler { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; }
+.bizim-olcer-isim {
+  font-family: var(--yazi-baslik); font-size: 1.25rem; line-height: 1.2;
+  padding: 8px 16px; border-radius: var(--r-hap);
+  background: var(--kagit); color: var(--murekkep);
+  border: 2px dashed var(--oda-vurgu, var(--seker-kiraz));
+}
+.bizim-olcer-arti { font-size: 1.35rem; }
