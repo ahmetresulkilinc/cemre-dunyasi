@@ -8,7 +8,7 @@ window.CD = window.CD || {};
   const CD = window.CD;
   const $ = (s, k) => (k || document).querySelector(s);
   CD.config = window.CD_CONFIG || {};
-  CD.surum = '1.4.1';
+  CD.surum = '1.5.0';
 
   /* ============================================================== olay (mini emitter) */
   const dinleyiciler = {};
@@ -111,6 +111,10 @@ window.CD = window.CD || {};
     if (typeof v === 'object' && Object.getPrototypeOf(v) === Object.prototype) { const o = {}; Object.keys(v).forEach(k => { o[k] = iceCevir(v[k], derinlik + 1); }); return o; }
     return v;
   }
+  CD.depo.kayitDisa = (kayit) => disaCevir(kayit, 0);   // Blob → { __blob: dataURL }
+  CD.depo.kayitIce = (kayit) => iceCevir(kayit, 0);     // { __blob } → Blob
+  CD.depo.magazalar = () => MAGAZALAR.slice();
+
   CD.depo.yedekAl = async function () {
     const ayar = {}; CD.depo.anahtarlar().forEach(k => { if (k !== 'kilit.anahtar') ayar[k] = CD.depo.al(k); });
     const magaza = {};
@@ -165,7 +169,7 @@ window.CD = window.CD || {};
     CD.sheet(CD.el('div.dikey', [
       CD.el('p', 'Telefonun, Safari ile ana ekrandaki uygulamanın hafızasını ayrı tutuyor. Yani Safari\'de ektiğin çiçekler uygulamada görünmez.'),
       CD.el('p', 'Taşımak için: Safari\'de aç → ⋯ → "Yedeğini al" (dosyayı kaydet) → uygulamayı aç → ⋯ → "Yedeği yükle".'),
-      CD.el('p', 'Bundan sonra hep ana ekrandaki simgeden gir; her şey orada birikir. 🐾'),
+      CD.el('p', (CD.senk && CD.senk.acik) ? 'Bulut açık: kayıtların ve fotoğrafların iki telefonda da aynı görünür. 🐾' : 'Bundan sonra hep ana ekrandaki simgeden gir; her şey orada birikir. 🐾'),
       CD.el('button.dugme.tam', { type: 'button', onclick: () => CD.sheetKapat() }, 'Anladım')
     ]), { baslik: 'Kayıtlar nerede duruyor?' });
   };
