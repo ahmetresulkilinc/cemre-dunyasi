@@ -8,7 +8,7 @@ window.CD = window.CD || {};
   const CD = window.CD;
   const $ = (s, k) => (k || document).querySelector(s);
   CD.config = window.CD_CONFIG || {};
-  CD.surum = '1.5.0';
+  CD.surum = '1.6.0';
 
   /* ============================================================== olay (mini emitter) */
   const dinleyiciler = {};
@@ -23,7 +23,9 @@ window.CD = window.CD || {};
     const p = ON_EK + (onek ? onek + '.' : '');
     return {
       al(k, d) { try { const v = localStorage.getItem(p + k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
-      yaz(k, v) { try { localStorage.setItem(p + k, JSON.stringify(v)); return true; } catch (e) { return false; } },
+      yaz(k, v) { try { localStorage.setItem(p + k, JSON.stringify(v));
+        if (CD.depo && CD.depo.yazildi) { try { CD.depo.yazildi(p.slice(ON_EK.length) + k); } catch (e) {} }
+        return true; } catch (e) { return false; } },
       sil(k) { try { localStorage.removeItem(p + k); } catch (e) {} },
       anahtarlar() { const a = []; try { for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (k && k.startsWith(p)) a.push(k.slice(p.length)); } } catch (e) {} return a; },
       temizle() { this.anahtarlar().forEach(k => this.sil(k)); }
@@ -509,7 +511,7 @@ window.CD = window.CD || {};
 
   /* ============================================================== bölüm kaydı & yönlendirme */
   CD.bolumler = CD.bolumler || {};
-  CD.BOLUM_SIRASI = ['pittiksu', 'barbie', 'tirnak', 'petevi', 'angela', 'bahce', 'panda', 'ofke', 'bizim'];
+  CD.BOLUM_SIRASI = ['pittiksu', 'barbie', 'tirnak', 'petevi', 'angela', 'bahce', 'panda', 'ofke', 'xox', 'bizim'];
   CD.kaydet = function (tanim) {
     if (!tanim || !tanim.id) { console.warn('[CD.kaydet] id eksik', tanim); return; }
     if (typeof tanim.mount !== 'function') { console.warn('[CD.kaydet] mount eksik:', tanim.id); return; }
