@@ -5,8 +5,9 @@
    Şifreli dosyalar site/tools/gizle.js ile üretilir. Anahtar (kelime değil) bu cihazda hatırlanır. */
 (() => {
   'use strict';
-  const SCRIPTLER = ['js/cekirdek.js', 'js/petler-miras.js', 'js/giris.js', 'js/bolum/pittiksu.js', 'js/bolum/barbie.js', 'js/bolum/tirnak.js', 'js/bolum/petevi.js', 'js/bolum/angela.js', 'js/bolum/panda.js', 'js/bolum/bahce.js', 'js/bolum/ofke.js', 'js/bolum/bizim.js', 'js/hub.js'];
+  const SCRIPTLER = ['js/cekirdek.js', 'js/senk.js', 'js/petler-miras.js', 'js/giris.js', 'js/bolum/pittiksu.js', 'js/bolum/barbie.js', 'js/bolum/tirnak.js', 'js/bolum/petevi.js', 'js/bolum/angela.js', 'js/bolum/panda.js', 'js/bolum/bahce.js', 'js/bolum/ofke.js', 'js/bolum/bizim.js', 'js/hub.js'];
   const SAKLA = 'cd.kilit.anahtar';
+  const ODA_SAKLA = 'cd.senk.oda';   // sihirli kelimeden türetilen bulut odası (kelime saklanmaz)
   const G = window.GIZLI = { hazir: false, _url: {}, url(p) { return this._url[p] || p; } };
   const subtle = (window.crypto && window.crypto.subtle) || null;
   const b64 = { e: (buf) => btoa(String.fromCharCode(...new Uint8Array(buf))), d: (s) => Uint8Array.from(atob(s), c => c.charCodeAt(0)) };
@@ -31,6 +32,17 @@
     const ham = await subtle.importKey('raw', new TextEncoder().encode(kelime), 'PBKDF2', false, ['deriveKey']);
     return subtle.deriveKey({ name: 'PBKDF2', salt: b64.d(m.salt), iterations: m.iter, hash: 'SHA-256' }, ham, { name: 'AES-GCM', length: 256 }, true, ['decrypt']);
   }
+  async function odaTuret(kelime, m) {
+    try {
+      const ham = await subtle.importKey('raw', new TextEncoder().encode(kelime + '|oda'), 'PBKDF2', false, ['deriveBits']);
+      const bit = await subtle.deriveBits({ name: 'PBKDF2', salt: b64.d(m.salt), iterations: m.iter, hash: 'SHA-256' }, ham, 256);
+      const hex = [...new Uint8Array(bit)].map(x => x.toString(16).padStart(2, '0')).join('');
+      try { localStorage.setItem(ODA_SAKLA, hex); } catch (e) {}
+      return hex;
+    } catch (e) { return null; }
+  }
+  function odaOku() { try { return localStorage.getItem(ODA_SAKLA) || null; } catch (e) { return null; } }
+
   async function dogrula(key, m) {
     try { const d = await coz(key, await encAl(m.kontrol)); return new TextDecoder().decode(d) === 'cemre-dunyasi-ok'; } catch (e) { return false; }
   }
@@ -103,7 +115,7 @@
         dugme.disabled = true; hata.textContent = 'Bakıyorum… ✨';
         try {
           const key = await kelimedenAnahtar(kelime, m);
-          if (await dogrula(key, m)) { hata.textContent = 'Açıldı 💗'; await anahtariSakla(key); resolve(key); return; }
+          if (await dogrula(key, m)) { hata.textContent = 'Açıldı 💗'; await anahtariSakla(key); await odaTuret(kelime, m); resolve(key); return; }
         } catch (err) { console.error('[kilit]', err); }
         dugme.disabled = false; hata.textContent = 'Hmm, o değil 🙈 Ahmet’e sor.';
         form.classList.remove('sallan'); void form.offsetWidth; form.classList.add('sallan');
@@ -125,6 +137,8 @@
     await hepsiniCoz(key, m);
     k.remove();
     await yukle();
+    const odaA = odaOku();
+    if (odaA && window.CD && CD.senk) { CD.hazir(() => CD.senk.baslat(odaA)); }
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', basla); else basla();
 })();

@@ -8,7 +8,7 @@ window.CD = window.CD || {};
   const CD = window.CD;
   const $ = (s, k) => (k || document).querySelector(s);
   CD.config = window.CD_CONFIG || {};
-  CD.surum = '1.2.1';
+  CD.surum = '1.3.0';
 
   /* ============================================================== olay (mini emitter) */
   const dinleyiciler = {};
@@ -71,7 +71,7 @@ window.CD = window.CD || {};
   CD.depo.iceAktar = (json) => { try { const o = typeof json === 'string' ? JSON.parse(json) : json; const v = o && o.veri ? o.veri : o; Object.keys(v).forEach(k => CD.depo.yaz(k, v[k])); return true; } catch (e) { return false; } };
 
   // sıfırla: oyun ilerlemesi, başarımlar, kayıtlar, eklenen fotoğraflar silinir; KORU listesi (tam anahtar) kalır
-  const SIFIRLA_KORU = ['cd.pittiksu.dogumTarihi', 'cd.pittiksu.dogumVarsayilan', 'cd.kilit.anahtar', 'cd.ses', 'cd.hava'];
+  const SIFIRLA_KORU = ['cd.pittiksu.dogumTarihi', 'cd.pittiksu.dogumVarsayilan', 'cd.kilit.anahtar', 'cd.senk.oda', 'cd.ses', 'cd.hava'];
   CD.depo.sifirla = async function (koru) {
     const kal = new Set([].concat(SIFIRLA_KORU, koru || []));
     const sakla = {}; kal.forEach(k => { try { const v = localStorage.getItem(k); if (v != null) sakla[k] = v; } catch (e) {} });
@@ -593,6 +593,8 @@ window.CD = window.CD || {};
         CD.el('button.dugme-ikincil.tam', { type: 'button', onclick: () => { CD.sheetKapat(); CD.yedekIndir(); } }, '💾 Yedeğini al'),
         CD.el('button.dugme-ikincil.tam', { type: 'button', onclick: () => { CD.sheetKapat(); CD.yedekYukleAc(); } }, '📂 Yedeği yükle'),
         CD.el('button.dugme-hayalet.tam', { type: 'button', onclick: () => CD.yedekYardim() }, 'Kayıtlarım nerede duruyor?'),
+        CD.el('button.dugme-hayalet.tam', { type: 'button', onclick: () => { if (CD.senk && CD.senk.acik) { CD.senk.simdi(); CD.toast('Eşitleniyor… ☁️'); } else CD.toast('Bulut kapalı — her şey bu telefonda 📱'); } },
+          (CD.senk && CD.senk.acik) ? ('☁️ Bulut açık' + (CD.senk.sonSenk ? ' · ' + new Date(CD.senk.sonSenk).toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' }) : '') + ' · şimdi eşitle') : '☁️ Bulut kapalı'),
         CD.el('button.dugme-ikincil.tam', { type: 'button', onclick: () => {
           // aynı sheet'in içeriği onay ekranıyla değişir (kapatıp açmak 320ms'lik temizleme zamanlayıcısıyla yarışır)
           const onay = CD.el('div.dikey', [
