@@ -567,7 +567,7 @@
     const ISIM = (ctx.config.ISIMLER || {});
     const AD_A = temiz(ISIM.O || 'Cemre'), AD_B = temiz(ISIM.BEN || 'Ahmet');
     // isim yazılmaz; iki isim sabit, tek dokunuşla ölçülür
-    const olcD = ctx.el('button.dugme.tam', { type: 'button' }, 'Ölç');
+    const olcD = ctx.el('button.dugme.bizim-olc-dugme', { type: 'button' }, '💘 Ölç');
     const yuzdeYazi = ctx.el('span.bizim-olcer-yuzde.sayi', '%?');
     const kalp = ctx.el('div.bizim-olcer-kalp', [ctx.el('span.bizim-olcer-kalp-svg', { html: KALP_SVG, 'aria-hidden': 'true' }), yuzdeYazi]);
     const bar = ctx.el('div.bar.bizim-olcer-bar', [ctx.el('span.bar-ikon', '💘'), ctx.el('span.bar-yol', [ctx.el('span.bar-dolu', { stil: { width: '0%' } })]), ctx.el('span.bar-yuzde', '0%')]);
@@ -589,7 +589,7 @@
       yorum.textContent = 'Kalp atışı sayılıyor…';
       const bitir = () => {
         if (!ctx) return;
-        calisiyor = false; olcD.disabled = false;
+        calisiyor = false; olcD.disabled = false; olcD.textContent = '💘 Tekrar ölç';
         kalp.classList.remove('olcuyor'); kalp.classList.add('sonuc'); if (s.ozel) kalp.classList.add('ozel');
         yuzdeYazi.textContent = '%' + s.yuzde; bar.querySelector('.bar-dolu').style.width = s.yuzde + '%'; bar.querySelector('.bar-yuzde').textContent = s.yuzde + '%';
         yorum.textContent = s.yorum;
@@ -622,7 +622,7 @@
     ]);
     gecmisCiz();
     kap.append(ctx.el('div.yama.dikey.bizim-olcer', [
-      kalp, isimSatiri, olcD, bar, yorum, gecmisKap
+      kalp, isimSatiri, olcD, yorum, gecmisKap
     ]));
     return kap;
   }

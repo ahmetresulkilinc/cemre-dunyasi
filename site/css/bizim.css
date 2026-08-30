@@ -210,12 +210,14 @@
   .bizim-hayir { transition: none; }
 }
 
-/* aşk ölçer: isimler sabit, yazı alanı yok */
-.bizim-olcer-isimler { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; }
+/* aşk ölçer: isimler sabit yazı (kutu yok), tek dokunuşluk düğme */
+.bizim-olcer-isimler { display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; margin: -2px 0 2px; }
 .bizim-olcer-isim {
-  font-family: var(--yazi-baslik); font-size: 1.25rem; line-height: 1.2;
-  padding: 8px 16px; border-radius: var(--r-hap);
-  background: var(--kagit); color: var(--murekkep);
-  border: 2px dashed var(--oda-vurgu, var(--seker-kiraz));
+  font-family: var(--yazi-baslik); font-size: 1.45rem; line-height: 1.15;
+  color: var(--murekkep); letter-spacing: .01em;
 }
-.bizim-olcer-arti { font-size: 1.35rem; }
+.bizim-olcer-arti { font-size: 1.5rem; animation: bizim-olcer-atis 1.5s var(--egri-ikili, ease-in-out) infinite; }
+@keyframes bizim-olcer-atis { 0%, 100% { transform: scale(1); } 45% { transform: scale(1.18); } }
+@media (prefers-reduced-motion: reduce) { .bizim-olcer-arti { animation: none; } }
+.bizim-olc-dugme { align-self: center; min-width: 200px; font-size: var(--punto-lg, 1.1rem); border-radius: var(--r-tam); padding: 0 var(--b-6, 24px); }
+.bizim-olcer-yorum { text-align: center; }
