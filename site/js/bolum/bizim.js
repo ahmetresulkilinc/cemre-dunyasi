@@ -564,13 +564,14 @@
   function olcerKur() {
     const kap = ctx.el('div.dikey');
     const son = ctx.depo.al('olcerSon', null);
-    const ad1 = ctx.el('input.girdi', { type: 'text', value: (son && son.a) || 'Cemre', placeholder: 'Bir isim', maxlength: '30', autocomplete: 'off', 'aria-label': 'Birinci isim' });
-    const ad2 = ctx.el('input.girdi', { type: 'text', value: (son && son.b) || '', placeholder: 'Bir isim daha', maxlength: '30', autocomplete: 'off', 'aria-label': 'İkinci isim' });
+    const ISIM = (ctx.config.ISIMLER || {});
+    const ad1 = ctx.el('input.girdi', { type: 'text', value: (son && son.a) || ISIM.O || 'Cemre', placeholder: 'Bir isim', maxlength: '30', autocomplete: 'off', 'aria-label': 'Birinci isim' });
+    const ad2 = ctx.el('input.girdi', { type: 'text', value: (son && son.b) || ISIM.BEN || 'Ahmet', placeholder: 'Bir isim daha', maxlength: '30', autocomplete: 'off', 'aria-label': 'İkinci isim' });
     const olcD = ctx.el('button.dugme.tam', { type: 'button' }, 'Ölç');
     const yuzdeYazi = ctx.el('span.bizim-olcer-yuzde.sayi', '%?');
     const kalp = ctx.el('div.bizim-olcer-kalp', [ctx.el('span.bizim-olcer-kalp-svg', { html: KALP_SVG, 'aria-hidden': 'true' }), yuzdeYazi]);
     const bar = ctx.el('div.bar.bizim-olcer-bar', [ctx.el('span.bar-ikon', '💘'), ctx.el('span.bar-yol', [ctx.el('span.bar-dolu', { stil: { width: '0%' } })]), ctx.el('span.bar-yuzde', '0%')]);
-    const yorum = ctx.el('p.bizim-olcer-yorum', { 'aria-live': 'polite' }, 'İki isim yaz, kalbi dinleyelim.');
+    const yorum = ctx.el('p.bizim-olcer-yorum', { 'aria-live': 'polite' }, 'Kalbi dinleyelim mi?');
     const gecmisKap = ctx.el('div.bizim-olcer-gecmis');
     function gecmisCiz() {
       const g = ctx.depo.al('olcumler', []);
