@@ -13,6 +13,11 @@ window.CD_CONFIG = {
      --------------------------------------------------------------- */
   NOT: "",  /* Mektup şifreli: metni gizli-kaynak/not.txt dosyasında düzenle, sonra "node site/tools/gizle.js <kelime>" çalıştır */
 
+  /* ---------------------------------------------------------------
+     İSİMLER — sitede geçen iki isim (aşk ölçer, mesajlar…).
+     --------------------------------------------------------------- */
+  ISIMLER: { BEN: "Ahmet", O: "Cemre" },
+
   /* Kartın en üstündeki küçük başlık (boş bırakırsan görünmez) */
   NOT_BASLIK: "Ahmet'ten küçük bir not",
 
