@@ -20,6 +20,17 @@ window.CD_CONFIG = {
   NOT_IMZA: "— Ahmet",
 
   /* ---------------------------------------------------------------
+     BULUT SENKRONU — açıksa kayıtlar buluta da yazılır; aynı sihirli kelimeyi
+     kullanan her cihaz (senin telefonun dahil) aynı dünyayı görür.
+     Kurulum: Supabase panelinde site/tools/supabase-kurulum.sql dosyasını çalıştır.
+     Kapatmak için URL'yi boş bırak.
+     --------------------------------------------------------------- */
+  SENK: {
+    URL: "https://tfsjzvltwmbmvjfoxmkn.supabase.co",
+    ANON: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRmc2p6dmx0d21ibXZqZm94bWtuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc0Njc5NzYsImV4cCI6MjEwMzA0Mzk3Nn0.GYmK82MH6PO-S-OHg0R3qDZ2a5l7MsGWKtlw2n4BGSw"
+  },
+
+  /* ---------------------------------------------------------------
      YAPIM AŞAMASINDA — Buraya yazılan bölümler hub'da "yapım aşamasında"
      rozetiyle kapalı görünür. Bölüm bitince adını listeden sil.
      Bölüm adları: pittiksu, tirnak, petevi, angela, bahce, panda, ofke, bizim
