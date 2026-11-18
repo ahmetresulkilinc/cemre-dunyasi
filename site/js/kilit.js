@@ -59,6 +59,13 @@
     if (m.not) {
       try { const d = await coz(key, await encAl(m.not)); window.CD_CONFIG = window.CD_CONFIG || {}; window.CD_CONFIG.NOT = new TextDecoder().decode(d); } catch (e) { console.error('[kilit] mektup çözülemedi', e); }
     }
+    if (m.kisisel) {
+      try {
+        const d = JSON.parse(new TextDecoder().decode(await coz(key, await encAl(m.kisisel))));
+        window.CD_CONFIG = window.CD_CONFIG || {};
+        for (const [a, v] of Object.entries(d)) window.CD_CONFIG[a] = v;
+      } catch (e) { console.error('[kilit] kişisel ayarlar çözülemedi', e); }
+    }
     const isler = Object.entries(m.dosyalar || {}).map(async ([yol, bilgi]) => {
       try { const d = await coz(key, await encAl(bilgi.enc)); G._url[yol] = URL.createObjectURL(new Blob([d], { type: bilgi.tur || 'image/jpeg' })); }
       catch (e) { console.error('[kilit] çözülemedi:', yol, e); }

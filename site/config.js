@@ -16,13 +16,13 @@ window.CD_CONFIG = {
   /* ---------------------------------------------------------------
      İSİMLER — sitede geçen iki isim (aşk ölçer, mesajlar…).
      --------------------------------------------------------------- */
-  ISIMLER: { BEN: "Ahmet", O: "Cemre" },
+  ISIMLER: { BEN: "", O: "" },   /* gerçek değerler: gizli-kaynak/kisisel.json (şifreli) */
 
   /* Kartın en üstündeki küçük başlık (boş bırakırsan görünmez) */
-  NOT_BASLIK: "Ahmet'ten küçük bir not",
+  NOT_BASLIK: "",
 
   /* Mektubun altındaki imza (boş bırakırsan görünmez) */
-  NOT_IMZA: "— Ahmet",
+  NOT_IMZA: "",
 
   /* ---------------------------------------------------------------
      BULUT SENKRONU — açıksa kayıtlar buluta da yazılır; aynı sihirli kelimeyi
@@ -51,7 +51,7 @@ window.CD_CONFIG = {
        Boş bırakırsan site "yaklaşık 10 gün önce" sayar; Cemre içeriden değiştirebilir. */
     DOGUM_TARIHI: "",
     /* Kısa tanım — bakım kartlarında ve sözlerde geçer */
-    TANIM: "gri tüylü, mavi-gri gözlü, pembe burunlu minicik yavru kedi"
+    TANIM: ""
   },
 
   /* ---------------------------------------------------------------
@@ -61,7 +61,7 @@ window.CD_CONFIG = {
     AD: "Barbie",
     /* Doğum tarihi / eve geliş: yıl-ay-gün. Örnek: "2023-05-10". Boş bırakabilirsin. */
     DOGUM_TARIHI: "",
-    TANIM: "krem tüylü, kara gözlü, dili hep dışarıda minik Pomeranian"
+    TANIM: ""
   },
 
   /* ---------------------------------------------------------------
@@ -86,7 +86,8 @@ window.CD_CONFIG = {
   },
 
   /* ---------------------------------------------------------------
-     BİZİM KÖŞEMİZ — kişisel alanlar. Hepsini sen dolduracaksın;
+     BİZİM KÖŞEMİZ — kişisel alanlar. ŞİFRELİ: gizli-kaynak/kisisel.json içinde düzenle,
+     sonra node site/tools/gizle.js ile yeniden şifrele. Buradakiler sadece boş kalıp. Hepsini sen dolduracaksın;
      doldurmadığın alan sitede "yakında" olarak görünür, uydurma bir şey yazılmaz.
      --------------------------------------------------------------- */
   BIZIM: {
@@ -118,16 +119,6 @@ window.CD_CONFIG = {
      (ve varsa "ad-thumb.jpg" küçüğünü) at, buraya bir satır daha ekle.
      "ikimiz.jpg" duvarın tepesinde büyük görünür (oneCikan: true).
      --------------------------------------------------------------- */
-  BIZIM_FOTOLAR: [
-    { dosya: "ikimiz.jpg",  altyazi: "İkimiz 🤍", oneCikan: true },
-    { dosya: "cemre-1.jpg", altyazi: "Dünyanın en güzel insanı 💋" },
-    { dosya: "cemre-2.jpg", altyazi: "Işık sana yakışıyor ☀️" },
-    { dosya: "buket.jpg",   altyazi: "Lilyumlu buket 💐" },
-    { dosya: "patrick.jpg", altyazi: "Patrick 🍬" },
-    { dosya: "melody.jpg",  altyazi: "My Melody 🎀" },
-    { dosya: "kopek.jpg",   altyazi: "Barbie 🐶" },
-    { dosya: "barbie-1.jpg", altyazi: "Barbie ✨" },
-    { dosya: "barbie-2.jpg", altyazi: "Dili hep dışarıda 🐾" },
-    { dosya: "cemre-barbie.jpg", altyazi: "Cemre ve Barbie 💗" }
+  BIZIM_FOTOLAR: [   /* gerçek liste: gizli-kaynak/kisisel.json (şifreli) */
   ]
 };

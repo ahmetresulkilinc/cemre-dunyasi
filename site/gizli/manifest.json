@@ -1,6 +1,6 @@
 {
  "surum": 1,
- "salt": "k1wiT3SINIGeerU/FBspMg==",
+ "salt": "Hwi/d9zMtLJGeI/MUNqJ5g==",
  "iter": 120000,
  "kontrol": "kontrol.enc",
  "not": "254bb97b57f12e16.enc",
@@ -125,5 +125,6 @@
    "enc": "1bd829e2b6f11a9e.enc",
    "tur": "image/jpeg"
   }
- }
+ },
+ "kisisel": "4d7cf61ec3808e60.enc"
 }
