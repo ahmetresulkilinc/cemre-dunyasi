@@ -156,9 +156,9 @@ window.CD = window.CD || {};
   let motor = null;
   function petler() {
     if (!CD.PetMotor || !window.CD_PETLER_MIRAS) return;
-    motor = CD.PetMotor({ sabit: true, tunekSecici: '#hubKartlar .hub-kart', sozler: ['♥', 'ponçik!', 'hehe', 'Cemre ♥', 'zıp!', 'beni fırlat!', 'yumuşacık', 'gezmece!', 'burası güzelmiş', 'mırr', 'battaniye!', 'hangi odaya gidiyoruz?'] });
+    motor = CD.PetMotor({ sabit: true, tunekSecici: '#hubKartlar .hub-kart', tunekOncelik: innerWidth < 600 ? 0.7 : 0, sozler: ['♥', 'ponçik!', 'hehe', 'Cemre ♥', 'zıp!', 'beni fırlat!', 'yumuşacık', 'gezmece!', 'burası güzelmiş', 'mırr', 'battaniye!', 'hangi odaya gidiyoruz?'] });
     motor.katman.id = 'hubPetKatmani';
-    const w = innerWidth; const say = w < 600 ? 4 : (w < 900 ? 5 : 7);
+    const w = innerWidth; const say = w < 600 ? 3 : (w < 900 ? 5 : 7);   // dar ekranda az pet: kart yazıları kapanmasın
     const cfg = (CD.config && CD.config.PETLER) || {};
     const gun = Math.floor(Date.now() / 86400000);
     const hepsi = CD.petListesi().filter(p => p.id !== 'pittiksu');
@@ -172,9 +172,20 @@ window.CD = window.CD || {};
     guncelle();
   }
 
+  /* ---------------------------------------------------------------- gizlilik satırı: bulut açıksa doğruyu söyle */
+  function gizlilikYaz() {
+    const p = $('#hubGizlilik'); if (!p) return;
+    let odaVar = false; try { odaVar = !!localStorage.getItem('cd.senk.oda'); } catch (e) {}
+    const bulut = !!(CD.senk && ((CD.senk.acik) || (CD.senk.kurulu && CD.senk.kurulu() && odaVar && !CD.senk.durdu)));
+    p.textContent = bulut
+      ? 'Kayıtların bu telefonda ve ikimizin gizli bulut odasında saklanır; başka hiçbir yere gönderilmez.'
+      : 'Her şey bu telefonda kalır; hiçbir yere gönderilmez.';
+  }
+
   /* ---------------------------------------------------------------- kur */
   CD.hazir(() => {
-    selam(); kartlariKur(); yildizlar(); kediKur(); dugmeler(); kurulum(); petler();
+    selam(); kartlariKur(); yildizlar(); kediKur(); dugmeler(); kurulum(); petler(); gizlilikYaz();
+    CD.olay.dinle('senk:acildi', gizlilikYaz);
     const buket = $('#buketDugme'), not = $('#notDugme');
     if (buket) buket.addEventListener('click', () => { CD.ses.pop(); if (CD.giris) CD.giris.buketGoster(); });
     if (not) not.addEventListener('click', () => { CD.ses.pop(); if (CD.giris) CD.giris.notGoster(); });
