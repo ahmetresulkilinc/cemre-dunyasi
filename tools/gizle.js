@@ -12,7 +12,7 @@ const KAYNAK = path.join(KOK, 'gizli-kaynak');
 const HEDEF = path.join(KOK, 'site', 'gizli');
 const ITER = 120000;
 
-const sifre = (process.argv[2] || process.env.SIFRE || '').trim().toLowerCase();
+const sifre = (process.argv.slice(2).find(a => !a.startsWith('--')) || process.env.SIFRE || '').trim().toLowerCase();
 if (!sifre) { console.error('Kullanım: node site/tools/gizle.js <sihirli-kelime>'); process.exit(1); }
 if (!fs.existsSync(KAYNAK)) { console.error('gizli-kaynak/ klasörü yok: ' + KAYNAK); process.exit(1); }
 
@@ -52,5 +52,19 @@ if (fs.existsSync(notYolu)) {
   fs.writeFileSync(path.join(HEDEF, out), sifrele(fs.readFileSync(notYolu)));
   manifest.not = out;
 }
+// Kişisel ayarlar (isimler, albüm altyazıları, Bizim Köşemiz…) — config.js'in üstüne yazılır
+const kisiselYolu = path.join(KAYNAK, 'kisisel.json');
+if (fs.existsSync(kisiselYolu)) {
+  JSON.parse(fs.readFileSync(kisiselYolu, 'utf8')); // bozuk JSON'u şimdi yakala
+  const out = ad('kisisel');
+  fs.writeFileSync(path.join(HEDEF, out), sifrele(fs.readFileSync(kisiselYolu)));
+  manifest.kisisel = out;
+}
 fs.writeFileSync(path.join(HEDEF, 'manifest.json'), JSON.stringify(manifest, null, 1));
-console.log(`Şifrelendi: ${toplam} görsel${manifest.not ? ' + mektup' : ''} → ${HEDEF}`);
+console.log(`Şifrelendi: ${toplam} görsel${manifest.not ? ' + mektup' : ''}${manifest.kisisel ? ' + kişisel ayarlar' : ''} → ${HEDEF}`);
+
+// Bulut odası (yalnızca taşıma için yazdırılır; kilit.js aynısını tarayıcıda türetir)
+if (process.argv.includes('--oda')) {
+  const oda = crypto.pbkdf2Sync(Buffer.from(sifre + '|oda', 'utf8'), salt, ITER, 32, 'sha256').toString('hex');
+  console.log('ODA=' + oda);
+}
