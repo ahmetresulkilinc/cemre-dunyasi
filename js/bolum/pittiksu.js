@@ -824,7 +824,7 @@
   /* ============================================================ GÜNLÜK */
   function gunlukKur() {
     const kap = ctx.el('div.dikey.pittiksu-gunluk');
-    kap.append(yasKarti(), hatirlatmaUyarisi(), mamaKarti(), kiloKarti(), hatirlaticiKarti(), olayKarti(), notKarti());
+    kap.append(...[yasKarti(), hatirlatmaUyarisi(), mamaKarti(), kiloKarti(), hatirlaticiKarti(), olayKarti(), notKarti()].filter(Boolean));   // null → "null" yazısı olmasın
     ui.gunlukKap = kap;
     return kap;
   }

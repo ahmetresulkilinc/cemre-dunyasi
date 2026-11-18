@@ -218,7 +218,7 @@
 .petevi-roster-pet[aria-pressed="true"] { border-color: var(--burun); background: var(--burun-zemin); color: var(--murekkep); }
 .petevi-roster-pet:active { transform: translateY(2px); box-shadow: none; }
 .petevi-roster-ikon { height: 54px; display: flex; align-items: flex-end; }
-.petevi-roster-ad { max-width: 88px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.petevi-roster-ad { max-width: 88px; overflow: hidden; text-align: center; line-height: 1.15; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow-wrap: break-word; }   /* uzun ad (Fiyonklu Hayalet) iki satıra iner, kesilmez */
 .petevi-ruh-nokta { position: absolute; top: 6px; right: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--seker-nane); box-shadow: 0 0 0 2px var(--kagit); }
 .petevi-ruh-nokta.petevi-ruh-mutlu { background: var(--basari); }
 .petevi-ruh-nokta.petevi-ruh-keyifli { background: var(--seker-nane); }

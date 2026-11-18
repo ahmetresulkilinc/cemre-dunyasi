@@ -13,11 +13,15 @@
   const b64 = { e: (buf) => btoa(String.fromCharCode(...new Uint8Array(buf))), d: (s) => Uint8Array.from(atob(s), c => c.charCodeAt(0)) };
 
   function yukle() {
+    window.CD_YUKLENIYOR = true;   // çekirdek ilk yönlendirmeyi bekletir; bölümler kaydolunca CD.basla()
     return SCRIPTLER.reduce((p, src) => p.then(() => new Promise((res, rej) => {
       const s = document.createElement('script'); s.src = src; s.async = false;
       s.onload = res; s.onerror = () => { console.error('[kilit] yüklenemedi:', src); res(); };
       document.body.appendChild(s);
-    })), Promise.resolve());
+    })), Promise.resolve()).then(() => {
+      window.CD_YUKLENIYOR = false;
+      try { if (window.CD && CD.basla) CD.basla(); } catch (e) { console.error('[kilit] başlatılamadı', e); }
+    });
   }
 
   async function manifestAl() {
@@ -117,13 +121,19 @@
       setTimeout(() => giris.focus(), 300);
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
-        const kelime = (giris.value || '').trim().toLowerCase();
-        if (!kelime) return;
+        const ham = (giris.value || '').trim();
+        if (!ham) return;
         dugme.disabled = true; hata.textContent = 'Bakıyorum… ✨';
-        try {
-          const key = await kelimedenAnahtar(kelime, m);
-          if (await dogrula(key, m)) { hata.textContent = 'Açıldı 💗'; await anahtariSakla(key); await odaTuret(kelime, m); resolve(key); return; }
-        } catch (err) { console.error('[kilit]', err); }
+        // 1) her zamanki küçültme (anahtar hiç değişmez); 2) olmazsa Türkçe küçültme (büyük I → ı, İ → i) yedeği.
+        //    Oda da hangi varyant tuttuysa ondan türetilir.
+        const varyantlar = [ham.toLowerCase()];
+        try { const tr = ham.toLocaleLowerCase('tr'); if (varyantlar.indexOf(tr) < 0) varyantlar.push(tr); } catch (e) {}
+        for (const kelime of varyantlar) {
+          try {
+            const key = await kelimedenAnahtar(kelime, m);
+            if (await dogrula(key, m)) { hata.textContent = 'Açıldı 💗'; await anahtariSakla(key); await odaTuret(kelime, m); resolve(key); return; }
+          } catch (err) { console.error('[kilit]', err); }
+        }
         dugme.disabled = false; hata.textContent = 'Hmm, o değil 🙈 Ahmet’e sor.';
         form.classList.remove('sallan'); void form.offsetWidth; form.classList.add('sallan');
         giris.select();

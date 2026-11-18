@@ -15,9 +15,9 @@ Bu klasör (`site/`) sitenin tamamıdır. Kurulum, program, internet bağlantıs
 | Bahçe | Saksıya tohum ek (lilyum, gül, lale, …), sula, açmasını izle, buket yap. |
 | Obur Panda | Yemek sürükle, karnı şişsin, sonra sarılıp uyusun. |
 | Öfke Odası | Terlik/çekiç/sopa ile eşya kır, combo, sonunda nefes egzersizi. |
-| Bizim Köşemiz | İkimizin albümü, birlikte sayacı, sebepler, şarkımız, anılar — hepsi `config.js`'ten. |
+| Bizim Köşemiz | İkimizin albümü, birlikte sayacı, sebepler, şarkımız, anılar — hepsi şifreli `gizli-kaynak/kisisel.json`'dan (düzenleyip `tools/gizle.js` ile yeniden şifrele). Boş alan Cemre'ye sadece "yakında" olarak görünür. |
 
-Her şey telefonda kalır (localStorage / IndexedDB). Hiçbir yere veri gönderilmez.
+Her şey telefonda kalır (localStorage / IndexedDB). `config.js` → `SENK` doluysa kayıtlar ve fotoğraflar ayrıca ikinizin bulut odasında (Supabase) eşitlenir; başka hiçbir yere gönderilmez.
 
 ## 2. `config.js` — senin düzenleyeceğin tek dosya
 

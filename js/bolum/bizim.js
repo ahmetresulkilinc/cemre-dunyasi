@@ -1,7 +1,9 @@
 /* js/bolum/bizim.js — Bizim Köşemiz
    İkimizin albümü (başlangıçta dolu) · Birlikte sayacı · Seni sevmemin sebepleri · Şarkımız · Evet/Hayır · Aşk ölçer · Anı zaman çizelgesi
-   Kişisel içerik config.js → CD_CONFIG.BIZIM'den gelir; boş alan "yakında" görünür, uydurulmaz.
-   Albüm: config.js → BIZIM_FOTOLAR (assets/bizim/*.jpg) + Cemre'nin telefondan eklediği kareler (IndexedDB).
+   Kişisel içerik CD_CONFIG.BIZIM'den gelir — gerçek değerler ŞİFRELİ: gizli-kaynak/kisisel.json dosyasında düzenlenir,
+   sonra tools/gizle.js ile yeniden şifrelenir (config.js'teki BIZIM sadece boş kalıp). Boş alan "yakında" görünür, uydurulmaz.
+   Cemre'nin ekranında Ahmet'e yönelik talimat/dosya adı ASLA gösterilmez; talimatlar sadece bu yorumlarda.
+   Albüm: gizli-kaynak/kisisel.json → BIZIM_FOTOLAR (şifreli kareler, kilit.js çözer) + Cemre'nin telefondan eklediği kareler (IndexedDB).
    Sözleşme: site/MODUL-SOZLESMESI.md · klasik <script>, modül yok, fetch yok. */
 (() => {
   'use strict';
@@ -17,7 +19,7 @@
   ];
   const FOTO_YOL = 'assets/bizim/';
   const G = p => (window.GIZLI ? window.GIZLI.url(p) : p); // şifreli fotoğraf → blob adresi (kilit.js)
-  // Ahmet'in eklediği başlangıç kareleri (site/assets/bizim/). config.js → BIZIM_FOTOLAR varsa o kazanır; bu liste sadece yedek.
+  // Ahmet'in eklediği başlangıç kareleri (şifreli). gizli-kaynak/kisisel.json → BIZIM_FOTOLAR varsa o kazanır; bu liste sadece yedek.
   const VARSAYILAN_FOTOLAR = [
     { dosya: 'ikimiz.jpg', altyazi: 'İkimiz 🤍' },
     { dosya: 'cemre-1.jpg', altyazi: 'Dünyanın en güzel insanı 💋' },
@@ -72,11 +74,12 @@
   function kalpAt(el, n) { const m = merkez(el); ctx.efekt.kalp(m.x, m.y, n || 4); }
   function salla(dugme) { dugme.classList.remove('salla'); void dugme.offsetWidth; dugme.classList.add('salla'); }
 
-  function yakindaKarti(baslik, aciklama, ahmetIpucu) {
+  /* Boş alan kartı: sadece sevimli "yakında" hâli. alanAdi = gizli-kaynak/kisisel.json → BIZIM içindeki alan
+     (Ahmet için not: o alanı doldurup tools/gizle.js ile yeniden şifrele). Ekranda gösterilmez. */
+  function yakindaKarti(baslik, aciklama, alanAdi) { // eslint-disable-line no-unused-vars
     return ctx.el('div.yama.bizim-yakinda', [
       ctx.el('div.satir', [ctx.el('span.rozet.gri', 'yakında'), ctx.el('strong.bizim-yakinda-baslik', baslik)]),
-      ctx.el('p.ikincil', aciklama),
-      ahmetIpucu ? ctx.el('p.sessiz.bizim-ahmet-notu', 'Ahmet için: site/config.js içinde ' + ahmetIpucu + ' satırını doldurman yeter.') : null
+      ctx.el('p.ikincil', aciklama)
     ]);
   }
 
@@ -121,14 +124,14 @@
       kart.append(
         ctx.el('div.bizim-sayac-ust', 'Birlikte'),
         ctx.el('div.bizim-sayac-bekle', [ctx.el('span.bizim-sayac-kalp', { 'aria-hidden': 'true', html: KALP_SVG }), ctx.el('span', 'Sayaç yakında başlıyor')]),
-        ctx.el('p.ikincil.bizim-sayac-aciklama', 'Ahmet ilk günümüzü yazınca burada gün gün, saat saat sayacağız.'),
-        ctx.el('p.sessiz.bizim-ahmet-notu', a.tarih && !bas ? 'Ahmet için: BIRLIKTE_TARIH "yıl-ay-gün" biçiminde olmalı, örnek "2025-02-14".' : 'Ahmet için: site/config.js içinde BIRLIKTE_TARIH satırına ilk gününüzü yaz (örnek "2025-02-14").')
+        ctx.el('p.ikincil.bizim-sayac-aciklama', 'Ahmet ilk günümüzü yazınca burada gün gün, saat saat sayacağız.')
+        // Ahmet için: gizli-kaynak/kisisel.json → BIZIM.BIRLIKTE_TARIH = "yıl-ay-gün" (örnek "2025-02-14"), sonra tools/gizle.js
       );
       return kart;
     }
     const gun = CD.gunFarki(a.tarih);
     if (gun < 0) {
-      kart.append(ctx.el('div.bizim-sayac-ust', 'Birlikte'), ctx.el('p.ikincil.bizim-sayac-aciklama', 'Bu tarih ileride görünüyor; sayaç o gün gelince başlayacak.'), ctx.el('p.sessiz.bizim-ahmet-notu', 'Ahmet için: BIRLIKTE_TARIH bugünden önce bir gün olmalı.'));
+      kart.append(ctx.el('div.bizim-sayac-ust', 'Birlikte'), ctx.el('p.ikincil.bizim-sayac-aciklama', 'Sayaç o gün gelince başlayacak.'));   // Ahmet için: BIRLIKTE_TARIH bugünden önce bir gün olmalı
       return kart;
     }
     const sayi = ctx.el('button.bizim-sayac-sayi.sayi', { type: 'button', 'aria-label': gun + ' gündür birlikteyiz; dokununca kalp çıkar' }, sayiYaz(gun));
@@ -164,7 +167,7 @@
   }
 
   /* ------------------------------------------------------------ 2) İKİMİZİN ALBÜMÜ */
-  // Yerleşik kareler: config.js BIZIM_FOTOLAR (yoksa CEMRE_CONFIG.BIZIM_FOTOLAR, o da yoksa VARSAYILAN_FOTOLAR).
+  // Yerleşik kareler: CD_CONFIG.BIZIM_FOTOLAR (gizli-kaynak/kisisel.json'dan çözülür; yoksa CEMRE_CONFIG.BIZIM_FOTOLAR, o da yoksa VARSAYILAN_FOTOLAR).
   // Cemre altyazı/tarih değiştirirse depo'ya (yerlesik), gizlerse depo'ya (gizliFotolar) yazılır; dosyalar hiç silinmez.
   function yerlesikHam() {
     const c = ctx.config || {};

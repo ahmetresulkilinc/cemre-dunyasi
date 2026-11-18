@@ -942,7 +942,7 @@
     const rozetler = ctx.el('div.angela-rozetler');
     ROZETLER.forEach(r => { const var2 = d.rozetler.includes(r.id); rozetler.appendChild(ctx.el('div.angela-rozet' + (var2 ? '.acik' : ''), { title: r.sart }, [ctx.el('span.angela-rozet-emoji', { 'aria-hidden': 'true' }, var2 ? r.emoji : '🔒'), ctx.el('span.angela-rozet-ad', r.ad), ctx.el('span.angela-rozet-sart', r.sart)])); });
     const s = d.sayac;
-    ui.panel.append(
+    ui.panel.append(...[   // null öğeler süzülür (yoksa ekranda "null" yazısı çıkar)
       ctx.el('div.yama.angela-kart', [
         ctx.el('div.baslik.baslik-lg', 'Adı ne olsun?'),
         ctx.el('div.satir', [girdi, ctx.el('button.dugme.kucuk', { type: 'button', onclick: kaydetAd }, 'Kaydet')]),
@@ -954,7 +954,7 @@
         ['🍓', s.besle, 'kez besledin'], ['🧋', s.icir, 'içecek verdin'], ['🫧', s.banyo, 'banyo'], ['💤', s.uyku, 'kez uyuttun'], ['💗', s.oksama, 'kez okşadın'], ['🎤', s.konus, 'kez konuştunuz'], ['🎮', s.oyun, 'oyun'], ['👗', s.giyim, 'kombin'], ['💃', s.dans, 'dans'], ['🥠', s.fal, 'kurabiye']
       ].map(x => ctx.el('div.angela-sayac', [ctx.el('span.angela-sayac-sayi.sayi', String(x[1])), ctx.el('span.sessiz', x[0] + ' ' + x[2])])))]),
       sonKayit ? ctx.el('button.dugme-ikincil.tam', { type: 'button', onclick: () => { ctx.ses.tik(); tekrarCal(); } }, '🔁 Son kaydı tekrar çal') : null
-    );
+    ].filter(Boolean));
   }
 
   /* ------------------------------------------------------------ oyun 1: kelebek yakala (sahnede) */

@@ -270,7 +270,9 @@ window.CD_PETLER_MIRAS = [{"id":"ayi","name":"Ponçik Ayı","palette":{"k":"#3b2
         }
         if (!this.onFloor || this.mode !== 'idle') return;
         if (this.uyuyor) { if (Math.random() < 0.3) this.uyan(); return; }
-        const r = Math.random();
+        // tunekOncelik (0..1): dar ekranda petler zeminde kart yazılarının üstünde durmasın diye kart kenarına tüneme ağırlığı
+        const tunekBos = secenek.tunekOncelik && this.sprite.frames.length > 2 && Math.random() < secenek.tunekOncelik && tunekler().some(s => !tunekKullanilan.has(s));
+        const r = tunekBos ? 0.45 : Math.random();
         if (r < 0.26) { this.targetX = 8 + Math.random() * Math.max(20, W() - 16 - this.w); this.mode = 'walk'; this.dir = this.targetX > this.x ? 1 : -1; uyan(); }
         else if (r < 0.40) {
           const others = petler.filter(b => b !== this && !b.held && b.onFloor && b.mode !== 'perch' && !b.kilitli);

@@ -26,7 +26,8 @@ window.CD = window.CD || {};
       yaz(k, v) { try { localStorage.setItem(p + k, JSON.stringify(v));
         if (CD.depo && CD.depo.yazildi) { try { CD.depo.yazildi(p.slice(ON_EK.length) + k); } catch (e) {} }
         return true; } catch (e) { return false; } },
-      sil(k) { try { localStorage.removeItem(p + k); } catch (e) {} },
+      sil(k) { try { const vardi = localStorage.getItem(p + k) != null; localStorage.removeItem(p + k);
+        if (vardi && CD.depo && CD.depo.silindi) { try { CD.depo.silindi(p.slice(ON_EK.length) + k); } catch (e) {} } } catch (e) {} },
       anahtarlar() { const a = []; try { for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (k && k.startsWith(p)) a.push(k.slice(p.length)); } } catch (e) {} return a; },
       temizle() { this.anahtarlar().forEach(k => this.sil(k)); }
     };
@@ -117,8 +118,10 @@ window.CD = window.CD || {};
   CD.depo.kayitIce = (kayit) => iceCevir(kayit, 0);     // { __blob } → Blob
   CD.depo.magazalar = () => MAGAZALAR.slice();
 
+  // yedeğe girmeyen cihaza özel anahtarlar (kim, bulut odası/damgaları, ipuçları, kapı anahtarı)
+  const YEDEK_DISI = /^(kilit\.|senk\.|cihaz\.|ipucu\.)/;
   CD.depo.yedekAl = async function () {
-    const ayar = {}; CD.depo.anahtarlar().forEach(k => { if (k !== 'kilit.anahtar') ayar[k] = CD.depo.al(k); });
+    const ayar = {}; CD.depo.anahtarlar().forEach(k => { if (!YEDEK_DISI.test(k)) ayar[k] = CD.depo.al(k); });
     const magaza = {};
     for (const m of MAGAZALAR) {
       try { const kayitlar = await islem(m, 'readonly', s => s.getAll()); magaza[m] = await disaCevir(kayitlar || [], 0); }
@@ -130,7 +133,7 @@ window.CD = window.CD || {};
     const o = typeof json === 'string' ? JSON.parse(json) : json;
     if (!o || (o.site && o.site !== 'cemre-dunyasi')) throw new Error('Bu dosya bu siteye ait değil');
     const ayar = o.ayar || o.veri || {};
-    Object.keys(ayar).forEach(k => { if (k !== 'kilit.anahtar') CD.depo.yaz(k, ayar[k]); });
+    Object.keys(ayar).forEach(k => { if (!YEDEK_DISI.test(k)) CD.depo.yaz(k, ayar[k]); });
     let kayit = 0;
     for (const m of Object.keys(o.magaza || {})) {
       if (MAGAZALAR.indexOf(m) < 0) continue;
@@ -458,12 +461,17 @@ window.CD = window.CD || {};
     t.textContent = msg; t.classList.add('goster');
     clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('goster'), ms || 2400);
   };
-  let sheetKapatCb = null;
+  let sheetKapatCb = null, sheetKapatT = 0, sheetAcan = null;
   CD.sheet = function (icerik, secenek) {
     secenek = secenek || {};
     const kap = $('#sheetKaplama'), ic = $('#sheetIcerik'), sh = $('#sheet'); if (!kap) return;
+    // kapanış zamanlayıcısı hâlâ bekliyorsa iptal: yeni sayfa kendiliğinden kapanmasın / boşalmasın
+    clearTimeout(sheetKapatT); sheetKapatT = 0;
+    // odağı geri vereceğimiz eleman (sheet zaten açıkken içerik değişiyorsa ilk açan kalır)
+    if (kap.hidden || !kap.classList.contains('acik')) { const a = document.activeElement; if (a && a !== document.body && !kap.contains(a)) sheetAcan = a; }
     ic.innerHTML = '';
-    if (secenek.baslik) ic.appendChild(CD.el('div.sheet-baslik', secenek.baslik));
+    if (secenek.baslik) { ic.appendChild(CD.el('div.sheet-baslik#sheetBaslik', secenek.baslik)); sh.setAttribute('aria-labelledby', 'sheetBaslik'); sh.removeAttribute('aria-label'); }
+    else { sh.removeAttribute('aria-labelledby'); sh.setAttribute('aria-label', 'Alt sayfa'); }
     if (typeof icerik === 'string') ic.insertAdjacentHTML('beforeend', icerik); else if (icerik) ic.appendChild(icerik);
     kap.hidden = false; document.body.classList.add('sheet-acik');
     requestAnimationFrame(() => kap.classList.add('acik'));
@@ -476,7 +484,13 @@ window.CD = window.CD || {};
   CD.sheetKapat = function () {
     const kap = $('#sheetKaplama'); if (!kap || kap.hidden) return;
     kap.classList.remove('acik'); document.body.classList.remove('sheet-acik');
-    setTimeout(() => { kap.hidden = true; $('#sheetIcerik').innerHTML = ''; }, 320);
+    const acan = sheetAcan;
+    clearTimeout(sheetKapatT);
+    sheetKapatT = setTimeout(() => {
+      sheetKapatT = 0; kap.hidden = true; $('#sheetIcerik').innerHTML = ''; sheetAcan = null;
+      // odak, sayfayı açan düğmeye döner (hâlâ ekrandaysa)
+      if (acan && acan.isConnected && typeof acan.focus === 'function') { try { acan.focus({ preventScroll: true }); } catch (e) {} }
+    }, 320);
     if (sheetKapatCb) { const cb = sheetKapatCb; sheetKapatCb = null; cb(); }
   };
   CD.onayla = function (metin, evetMetin, hayirMetin) {
@@ -588,6 +602,7 @@ window.CD = window.CD || {};
     CD.olay.yay('bolum:acildi', id);
   }
   CD.git = git;
+  CD.basla = () => { window.CD_YUKLENIYOR = false; git(); };   // kilit.js: tüm betikler yüklenince çağırır
   window.addEventListener('hashchange', git);
 
   /* ============================================================== başlat */
@@ -618,17 +633,40 @@ window.CD = window.CD || {};
         CD.el('button.dugme-ikincil.tam', { type: 'button', onclick: () => { CD.sheetKapat(); CD.yedekIndir(); } }, '💾 Yedeğini al'),
         CD.el('button.dugme-ikincil.tam', { type: 'button', onclick: () => { CD.sheetKapat(); CD.yedekYukleAc(); } }, '📂 Yedeği yükle'),
         CD.el('button.dugme-hayalet.tam', { type: 'button', onclick: () => CD.yedekYardim() }, 'Kayıtlarım nerede duruyor?'),
-        CD.el('button.dugme-hayalet.tam', { type: 'button', onclick: () => { if (CD.senk && CD.senk.acik) { CD.senk.simdi(); CD.toast('Eşitleniyor… ☁️'); } else CD.toast('Bulut kapalı — her şey bu telefonda 📱'); } },
-          (CD.senk && CD.senk.acik) ? ('☁️ Bulut açık' + (CD.senk.sonSenk ? ' · ' + new Date(CD.senk.sonSenk).toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' }) : '') + ' · şimdi eşitle') : '☁️ Bulut kapalı'),
+        CD.el('button.dugme-hayalet.tam', { type: 'button', onclick: () => {
+          if (CD.senk && CD.senk.acik) { CD.senk.simdi(); CD.toast('Eşitleniyor… ☁️'); return; }
+          if (CD.senk && CD.senk.durdu && CD.senk.kurulu()) {
+            // "sadece bu telefonu sıfırla" sonrası: istenirse ortak dünyaya yeniden bağlan
+            CD.sheet(CD.el('div.dikey', [
+              CD.el('p', 'Bu telefon şu an buluttan ayrı. Yeniden bağlanırsan ortak dünyadaki kayıtlar bu telefona gelir.'),
+              CD.el('button.dugme.tam', { type: 'button', onclick: () => { CD.senk.yenidenBagla(); CD.sheetKapat(); CD.toast('Bağlanıyor… ☁️'); setTimeout(() => location.reload(), 600); } }, '☁️ Buluta yeniden bağlan'),
+              CD.el('button.dugme-hayalet.tam', { type: 'button', onclick: () => CD.sheetKapat() }, 'Şimdilik kalsın')
+            ]), { baslik: 'Bulut', sessiz: true });
+            return;
+          }
+          CD.toast('Bulut kapalı — her şey bu telefonda 📱');
+        } },
+          (CD.senk && CD.senk.acik) ? ('☁️ Bulut açık' + (CD.senk.sonSenk ? ' · ' + new Date(CD.senk.sonSenk).toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' }) : '') + ' · şimdi eşitle')
+            : (CD.senk && CD.senk.durdu && CD.senk.kurulu()) ? '☁️ Bulut bu telefonda kapalı · yeniden bağlan' : '☁️ Bulut kapalı'),
         CD.el('button.dugme-ikincil.tam', { type: 'button', onclick: () => {
           // aynı sheet'in içeriği onay ekranıyla değişir (kapatıp açmak 320ms'lik temizleme zamanlayıcısıyla yarışır)
           const bulutVar = !!(CD.senk && CD.senk.acik);
           const sifirlaSimdi = async (bulutDahil) => {
             CD.ses.tik(); CD.toast('Sıfırlanıyor… 🧹');
+            if (bulutDahil && CD.senk && CD.senk.bulutuSifirla) {
+              let tamam = false;
+              try { tamam = await CD.senk.bulutuSifirla(); } catch (e) { tamam = false; }
+              if (!tamam) {          // bulut sıfırlanamadıysa HİÇBİR şey silinmez; kullanıcıya söylenir
+                CD.toast('Buluta ulaşılamadı; hiçbir şey silinmedi. İnternet gelince tekrar dener misin? 🙈', 4200);
+                return;
+              }
+            }
+            const sadeceBuTelefon = !bulutDahil && !!(CD.senk && CD.senk.acik);
             try {
-              if (bulutDahil && CD.senk && CD.senk.bulutuSifirla) await CD.senk.bulutuSifirla();
               await CD.depo.sifirla();
               CD.depo.yaz('senk.ilkYapildi', true);
+              // bulut açıkken "sadece bu telefon": bu telefonda senkron durur, yoksa buluttan geri dolardı
+              if (sadeceBuTelefon && CD.senk.durdur) CD.senk.durdur();
             } catch (e) {}
             location.hash = ''; location.reload();
           };
@@ -639,7 +677,7 @@ window.CD = window.CD || {};
               ? CD.el('button.dugme.tam', { type: 'button', onclick: () => sifirlaSimdi(true) }, '☁️ Her şeyi sıfırla (ikimizde de)')
               : CD.el('button.dugme.tam', { type: 'button', onclick: () => sifirlaSimdi(false) }, 'Evet, hepsini sıfırla'),
             bulutVar ? CD.el('button.dugme-ikincil.tam', { type: 'button', onclick: () => sifirlaSimdi(false) }, '📱 Sadece bu telefonu sıfırla') : null,
-            bulutVar ? CD.el('p.sessiz', 'Buluttaki ortak dünya da silinir; karşı telefon açılınca boş başlar.') : null,
+            bulutVar ? CD.el('p.sessiz', 'İkimizde de: buluttaki ortak dünya da silinir; karşı telefon açılınca boş başlar. Sadece bu telefon: bu telefon boşalır ve buluttan ayrılır (ortak dünya yerinde kalır; Ayarlar → Bulut ile yeniden bağlanırsın).') : null,
             CD.el('button.dugme-hayalet.tam', { type: 'button', onclick: () => CD.sheetKapat() }, 'Vazgeç')
           ].filter(Boolean));
           CD.sheet(onay, { baslik: 'Her şeyi sıfırla?', sessiz: true });
@@ -655,9 +693,22 @@ window.CD = window.CD || {};
       sh.addEventListener('touchmove', e => { if (y0 == null) return; dy = e.touches[0].clientY - y0; if (dy > 0) sh.style.transform = 'translateY(' + dy + 'px)'; }, { passive: true });
       sh.addEventListener('touchend', () => { if (y0 == null) return; sh.style.transform = ''; if (dy > 90) CD.sheetKapat(); y0 = null; }, { passive: true });
     }
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') CD.sheetKapat(); });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') { CD.sheetKapat(); return; }
+      // sheet açıkken Tab odağı sheet içinde dolaşır
+      if (e.key !== 'Tab') return;
+      const kp = $('#sheetKaplama'); if (!kp || kp.hidden || !kp.classList.contains('acik')) return;
+      const odaklar = Array.from(kp.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])')).filter(x => !x.disabled && x.offsetParent !== null);
+      if (!odaklar.length) return;
+      const ilk = odaklar[0], son = odaklar[odaklar.length - 1];
+      if (!kp.contains(document.activeElement)) { e.preventDefault(); ilk.focus(); }
+      else if (e.shiftKey && document.activeElement === ilk) { e.preventDefault(); son.focus(); }
+      else if (!e.shiftKey && document.activeElement === son) { e.preventDefault(); ilk.focus(); }
+    });
     basladi = true; hazirKuyruk.splice(0).forEach(fn => { try { fn(); } catch (e) { console.warn('[CD.hazir]', e); } });
-    git();
+    // kilit.js betikleri sırayla yüklüyorsa ilk yönlendirmeyi o yapar (bölümler kaydolduktan sonra; CD.basla).
+    // Aksi hâlde #/bahce gibi bir adres, bölüm henüz kaydolmadığı için hub'a düşerdi.
+    if (!window.CD_YUKLENIYOR) git();
     // service worker (sadece http/https; hatada sessiz)
     if ('serviceWorker' in navigator && /^https?:/.test(location.protocol)) { try { navigator.serviceWorker.register('sw.js').catch(() => {}); } catch (e) {} }
     CD.olay.yay('basladi');
