@@ -5,7 +5,7 @@ window.CD_PETLER_MIRAS = [{"id":"ayi","name":"Ponçik Ayı","palette":{"k":"#3b2
 /* ------------------------------------------------------------------------------------------
    PET MOTORU — Cemre'nin Evi'ndeki buddies.js'ten devralındı, Cemre'nin Dünyası'na uyarlandı.
    Kullanım:
-     const motor = CD.PetMotor({ katman?, sabit: true|false, tunekSecici?, sozler?, zeminPay? });
+     const motor = CD.PetMotor({ katman?, sabit: true|false, tunekSecici?, sozler?, zeminPay?, olcek? });
      const pet = motor.ekle(CD.petVeri('ayi'), { x: 40, ad: 'Ponçik Ayı' });
      pet.soyle('♥'); pet.zipla(); pet.uyu(); pet.uyan(); pet.git(x); pet.kare('eat'); pet.kilit(true);
      motor.goster(false); motor.sevin(); motor.yokEt();
@@ -61,7 +61,8 @@ window.CD_PETLER_MIRAS = [{"id":"ayi","name":"Ponçik Ayı","palette":{"k":"#3b2
     const sozler = secenek.sozler || SOZLER;
     const petler = [];
     const tunekKullanilan = new Set();
-    let SCALE = olcek();
+    const olcekAl = () => { const o = secenek.olcek; const v = typeof o === 'function' ? o() : o; return v > 0 ? v : olcek(); };   // mahalle: ölçek 2
+    let SCALE = olcekAl();
 
     const kutu = () => katman.getBoundingClientRect();
     const W = () => sabit ? innerWidth : katman.clientWidth;
@@ -435,7 +436,7 @@ window.CD_PETLER_MIRAS = [{"id":"ayi","name":"Ponçik Ayı","palette":{"k":"#3b2
         if (force || t !== this._t) { this.el.style.transform = t; this._t = t; }
       }
       olcekle() {
-        SCALE = olcek(); this.w = this.cw * SCALE; this.h = this.ch * SCALE;
+        SCALE = olcekAl(); this.w = this.cw * SCALE; this.h = this.ch * SCALE;
         this.el.style.width = this.w + 'px'; this.el.style.height = this.h + 'px';
       }
     }

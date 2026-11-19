@@ -43,6 +43,33 @@ window.CD_CONFIG = {
   YAPIM_ASAMASINDA: [],
 
   /* ---------------------------------------------------------------
+     MAHALLE (ana ekran) — AHMET ONAYLAYACAK: aşağıdakiler tasarımcının önerdiği
+     yer tutuculardır; doğru değilse değiştir.
+     EV: kimin evi hangi bina? Uyku hilali o evin çatısında çıkar, elçi o kapıda bekler.
+         Bina adları: pittiksu, barbie, tirnak, petevi, angela, panda, bahce, ofke, xox, bizim
+     KISILER: mahalledeki pixel karakterlerin saç (SAC), ten (TEN), üst giysi (UST) ve kot (ALT) rengi.
+         Boş bırakırsan tokens.css'teki varsayılan renkler kullanılır.
+     MEKTUP_YAZARI: giriş mektubunu kim yazdı? Öbürü okuyunca "mühür kırıldı" postası gider.
+     --------------------------------------------------------------- */
+  MAHALLE: {
+    EV: { cemre: "pittiksu", ahmet: "barbie" },          /* Ahmet onaylayacak */
+    KISILER: {   /* fotoğraflardan alındı */
+      cemre: { SAC: "#3E2A22", TEN: "#F3D2BC", UST: "#2E2A30", ALT: "#4A6C93" },
+      ahmet: { SAC: "#1E1A1A", TEN: "#C99A74", UST: "#2A2A2E", ALT: "#4A6C93" }
+    },
+    MEKTUP_YAZARI: "ahmet"
+  },
+
+  /* ---------------------------------------------------------------
+     GÜNÜN SORUSU — Mahalle Panosu'nda her gün bir soru çıkar (iki telefonda aynı).
+     Boş bırakırsan sitedeki 160'tan fazla hazır soru sırayla kullanılır (js/sorular.js).
+     Kendi sorularını yazmak istersen her satıra bir soru: "Soru?",
+     --------------------------------------------------------------- */
+  GUNUN_SORULARI: [
+    /* "Bugün seni en çok ne güldürdü?", */
+  ],
+
+  /* ---------------------------------------------------------------
      PITTIKSU — Cemre'nin gerçek kedisi
      --------------------------------------------------------------- */
   PITTIKSU: {

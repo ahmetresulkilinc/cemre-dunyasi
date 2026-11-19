@@ -8,7 +8,7 @@ window.CD = window.CD || {};
   const CD = window.CD;
   const $ = (s, k) => (k || document).querySelector(s);
   CD.config = window.CD_CONFIG || {};
-  CD.surum = '1.7.0';
+  CD.surum = '2.0.0';
 
   /* ============================================================== olay (mini emitter) */
   const dinleyiciler = {};
@@ -74,7 +74,7 @@ window.CD = window.CD || {};
   CD.depo.iceAktar = (json) => { try { const o = typeof json === 'string' ? JSON.parse(json) : json; const v = o && o.veri ? o.veri : o; Object.keys(v).forEach(k => CD.depo.yaz(k, v[k])); return true; } catch (e) { return false; } };
 
   // sıfırla: oyun ilerlemesi, başarımlar, kayıtlar, eklenen fotoğraflar silinir; KORU listesi (tam anahtar) kalır
-  const SIFIRLA_KORU = ['cd.pittiksu.dogumTarihi', 'cd.pittiksu.dogumVarsayilan', 'cd.kilit.anahtar', 'cd.senk.oda', 'cd.senk.sifirlaGoruldu', 'cd.cihaz.kim', 'cd.ses', 'cd.hava'];
+  const SIFIRLA_KORU = ['cd.pittiksu.dogumTarihi', 'cd.pittiksu.dogumVarsayilan', 'cd.kilit.anahtar', 'cd.senk.oda', 'cd.senk.sifirlaGoruldu', 'cd.cihaz.kim', 'cd.ses', 'cd.cihaz.hava'];
   CD.depo.sifirla = async function (koru) {
     const kal = new Set([].concat(SIFIRLA_KORU, koru || []));
     const sakla = {}; kal.forEach(k => { try { const v = localStorage.getItem(k); if (v != null) sakla[k] = v; } catch (e) {} });
@@ -401,6 +401,23 @@ window.CD = window.CD || {};
         const g = c.createGain(); g.gain.value = 0.9; s.connect(g); g.connect(master); s.start();
         return new Promise(cozul => { s.onended = () => cozul(true); });
       },
+      // --- mahalle (V2 Faz 1 · FAZ1-TASARIM.md §13)
+      kalpGonder() { osc('sine', 660, 880, 0.08, 0.08); setTimeout(() => this.tink(), 60); },
+      kalpGeldi() {
+        const atis = (g) => { osc('sine', 95, 70, 0.12, 0.16, { tip: 'lowpass', f: 400 }, g); osc('sine', 80, 60, 0.14, 0.12, { tip: 'lowpass', f: 400 }, g + 0.14); };
+        atis(0); atis(0.7);
+        setTimeout(() => { const c = hazir(); if (!c) return; [1046.5, 1568, 2637].forEach((f, i) => osc('sine', f, f * 0.995, 1.2 - i * 0.3, (0.05 - i * 0.012) / 2, null, i * 0.02)); }, 1350);
+      },
+      yagmurSerp() { const n = [1046, 1175, 1319, 1568, 1760]; for (let i = 0; i < 8; i++) osc('sine', n[Math.floor(Math.random() * n.length)], null, 0.09, 0.03, null, i * 0.3 + Math.random() * 0.1); },
+      muhurKirildi() { gurultuCal(0.05, 0.08, { tip: 'highpass', f: 2500 }); setTimeout(() => this.pop(), 30); setTimeout(() => this.parilti(), 120); },
+      pat() { osc('triangle', 170, 70, 0.11, 0.12); gurultuCal(0.06, 0.06, { tip: 'lowpass', f: 900 }); },
+      hav() { osc('square', 460, 300, 0.08, 0.05, { tip: 'lowpass', f: 1400 }); osc('square', 460, 300, 0.08, 0.05, { tip: 'lowpass', f: 1400 }, 0.11); },
+      elciAdim(i) { osc('sine', (i || 0) % 2 ? 440 : 520, null, 0.03, 0.03); },
+      ninni() { [659, 523, 440].forEach((f, i) => osc('sine', f, f, 0.4, 0.04, null, i * 0.35)); },
+      uyandim() { [523, 659, 784, 1046].forEach((f, i) => osc('sine', f, f, 0.12, 0.06, null, i * 0.09)); },
+      gokGurultu() { gurultuCal(1.2, 0.07, { tip: 'lowpass', f: 260, renk: 'kahve' }, { giris: 0.08 }); },
+      ruhSec() { this.tik(); },
+      soruKaydet() { gurultuCal(0.15, 0.05, { tip: 'bandpass', f: 3200, q: 1 }); setTimeout(() => this.parilti(), 80); },
       // ham erişim (ileri kullanım: bölüm kendi sentezini yapmak isterse)
       baglam() { return hazir(); },
       get master() { return master; }
@@ -444,6 +461,13 @@ window.CD = window.CD || {};
         el.classList.remove('sarsil', 'sarsil-guclu'); void el.offsetWidth; el.classList.add(guc > 1 ? 'sarsil-guclu' : 'sarsil');
         setTimeout(() => el.classList.remove('sarsil', 'sarsil-guclu'), 260);
         try { if (navigator.vibrate) navigator.vibrate(guc > 1 ? 18 : 8); } catch (e) {}
+      },
+      // emoji yağmuru (V2): üstten rastgele x'lerden düşen en çok --parcacik-maks emoji, ±12px salınım
+      yagmur(e, sure, adet) {
+        if (CD.azHareket) return;
+        sure = sure || 3000; const n = Math.min(adet || 18, maks());
+        for (let i = 0; i < n; i++) setTimeout(() => parcacik('yagmur', Math.random() * (innerWidth - 32) + 4, -32,
+          { '--dy': (innerHeight * (0.72 + Math.random() * 0.18)) + 'px', '--sal': (Math.random() < 0.5 ? -12 : 12) + 'px', '--sure': (1600 + Math.random() * 800) + 'ms' }, 2450, e), (i / n) * Math.max(200, sure - 2400) + Math.random() * 120);
       },
       // element merkezinden parçacık (kısayol)
       merkez(el) { const r = el.getBoundingClientRect(); return { x: r.left + r.width / 2, y: r.top + r.height / 2 }; }
@@ -508,20 +532,43 @@ window.CD = window.CD || {};
   };
 
   /* ============================================================== gündüz / gece */
-  function otomatikHava() { const s = new Date().getHours(); return (s >= 20 || s < 7) ? 'gece' : 'gunduz'; }
+  /* Günün vakti — selam ve gökyüzü AYNI sınırları kullanır (tek kaynak):
+     sabah 06–12 · gündüz 12–18 · akşam (gün batımı) 18–20 · gece 20–06 */
+  CD.gunVakti = function (d) {
+    const s = (d || new Date()).getHours();
+    if (s >= 6 && s < 12) return { vakit: 'sabah', hava: 'gunduz', selam: 'Günaydın' };
+    if (s >= 12 && s < 18) return { vakit: 'gunduz', hava: 'gunduz', selam: 'İyi günler' };
+    if (s >= 18 && s < 20) return { vakit: 'aksam', hava: 'gunduz', selam: 'İyi akşamlar' };
+    if (s >= 20 && s < 23) return { vakit: 'gece', hava: 'gece', selam: 'İyi akşamlar' };
+    return { vakit: 'gece', hava: 'gece', selam: 'Hâlâ uyumadın mı', soru: true };
+  };
+  /* Elle seçilen gündüz/gece yalnız BU cihazda geçerli (cihaz. öneki → senklenmez) ve 4 saat sonra otomatiğe döner. */
+  const HAVA_ELLE = 'cihaz.hava', ELLE_SURE = 4 * 3600000;
+  try { localStorage.removeItem('cd.hava'); } catch (e) {}          // eski sürümün ortak (senkli) seçimi
+  function elleSecim() { const v = CD.depo.al(HAVA_ELLE, null); return (v && (v.h === 'gece' || v.h === 'gunduz') && Date.now() < (v.bitis || 0)) ? v : null; }
+  let sonHava = '';
   function havaUygula() {
-    const secim = CD.depo.al('hava', null);
-    const h = secim || otomatikHava();
+    const gv = CD.gunVakti(); const elle = elleSecim();
+    const h = elle ? elle.h : gv.hava;
+    const vakit = elle ? (elle.h === 'gece' ? 'gece' : (gv.vakit === 'gece' ? 'gunduz' : gv.vakit)) : gv.vakit;
     document.documentElement.setAttribute('data-hava', h);
-    CD.hava = h;
+    document.documentElement.setAttribute('data-vakit', vakit);
+    CD.hava = h; CD.vakit = vakit;
+    if (h + vakit === sonHava) return;
+    sonHava = h + vakit;
     const tema = getComputedStyle(document.documentElement).getPropertyValue('--tema-rengi').trim();
     const m = $('meta[name="theme-color"]'); if (m && tema) m.setAttribute('content', tema);
     CD.olay.yay('hava', h);
   }
-  CD.havaAyarla = function (h) { if (h) CD.depo.yaz('hava', h); else CD.depo.sil('hava'); havaUygula(); };
-  CD.havaDegistir = function () { const h = (document.documentElement.getAttribute('data-hava') === 'gece') ? 'gunduz' : 'gece'; CD.depo.yaz('hava', h); havaUygula(); CD.ses.pop(); };
+  CD.havaAyarla = function (h) { if (h) CD.depo.yaz(HAVA_ELLE, { h, bitis: Date.now() + ELLE_SURE }); else CD.depo.sil(HAVA_ELLE); havaUygula(); };
+  CD.havaDegistir = function () {
+    const h = (document.documentElement.getAttribute('data-hava') === 'gece') ? 'gunduz' : 'gece';
+    if (h === CD.gunVakti().hava) CD.depo.sil(HAVA_ELLE); else CD.depo.yaz(HAVA_ELLE, { h, bitis: Date.now() + ELLE_SURE });   // otomatikle aynıysa seçim silinir
+    havaUygula(); CD.ses.pop();
+  };
   CD.gece = () => CD.hava === 'gece';
-  setInterval(() => { if (!CD.depo.al('hava', null)) havaUygula(); }, 60000);
+  setInterval(havaUygula, 60000);                 // vakit geçişleri + elle seçimin süresi dolunca otomatiğe dönüş
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) havaUygula(); });
 
   /* ============================================================== bölüm kaydı & yönlendirme */
   CD.bolumler = CD.bolumler || {};
@@ -625,11 +672,14 @@ window.CD = window.CD || {};
     CD.depo.kalici();
     ilkKurulumIpucu();
     const geri = $('#geriDugme'); if (geri) geri.addEventListener('click', () => { CD.ses.tik(); CD.ac(''); });
-    const menu = $('#bolumMenu'); if (menu) menu.addEventListener('click', () => {
+    const menu = $('#bolumMenu'); if (menu) menu.addEventListener('click', () => CD.ayarlarAc());
+    CD.ayarlarAc = () => {
+      const evde = !aktif;
       const k = CD.el('div.dikey', [
         CD.el('button.dugme-ikincil.tam', { type: 'button', onclick: () => { CD.ses.ac(!CD.ses.acik); CD.sheetKapat(); CD.toast(CD.ses.acik ? 'Ses açık 🔈' : 'Ses kapalı 🔇'); } }, CD.ses.acik ? '🔇 Sesi kapat' : '🔈 Sesi aç'),
         CD.el('button.dugme-ikincil.tam', { type: 'button', onclick: () => { CD.havaDegistir(); CD.sheetKapat(); } }, CD.hava === 'gece' ? '☀️ Gündüze geç' : '🌙 Geceye geç'),
-        CD.el('a.dugme.tam', { href: '#/', onclick: () => CD.sheetKapat() }, '🏠 Eve dön'),
+        evde ? null : CD.el('a.dugme.tam', { href: '#/', onclick: () => CD.sheetKapat() }, '🏠 Mahalleye dön'),
+        CD.el('button.dugme-ikincil.tam', { type: 'button', onclick: () => { CD.sheetKapat(); setTimeout(() => CD.kimSec(false), 340); } }, CD.kim() ? '👤 Bu telefon: ' + CD.kimAdi() + ' · değiştir' : '👤 Bu telefon kimin? Seç'),
         CD.el('button.dugme-ikincil.tam', { type: 'button', onclick: () => { CD.sheetKapat(); CD.yedekIndir(); } }, '💾 Yedeğini al'),
         CD.el('button.dugme-ikincil.tam', { type: 'button', onclick: () => { CD.sheetKapat(); CD.yedekYukleAc(); } }, '📂 Yedeği yükle'),
         CD.el('button.dugme-hayalet.tam', { type: 'button', onclick: () => CD.yedekYardim() }, 'Kayıtlarım nerede duruyor?'),
@@ -682,9 +732,9 @@ window.CD = window.CD || {};
           ].filter(Boolean));
           CD.sheet(onay, { baslik: 'Her şeyi sıfırla?', sessiz: true });
         } }, '🧹 Verileri sıfırla')
-      ]);
+      ].filter(Boolean));
       CD.sheet(k, { baslik: 'Ayarlar' });
-    });
+    };
     const kap = $('#sheetKaplama');
     if (kap) {
       kap.addEventListener('click', e => { if (e.target.id === 'sheetKaplama') CD.sheetKapat(); });

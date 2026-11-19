@@ -5,12 +5,12 @@
    - Aynı kaynak istekleri: önce ağ (güncellemeler hemen gelsin) ama en fazla AG_SURE ms beklenir; ağ yavaşsa önbellekten açılır
      (ağ cevabı yine de arkadan gelip önbelleği tazeler). Önbellekte yoksa ağ beklenir.
    - Bulut (Supabase) istekleri farklı kaynak olduğu için hiç dokunulmaz. */
-const SURUM = 'cd-v13';
+const SURUM = 'cd-v14';
 const AG_SURE = 3500;
 const KABUK = [
   './', './index.html', './config.js', './tokens.css', './base.css', './manifest.webmanifest',
-  './css/giris.css', './css/hub.css', './css/pittiksu.css', './css/barbie.css', './css/tirnak.css', './css/petevi.css', './css/angela.css', './css/panda.css', './css/bahce.css', './css/ofke.css', './css/xox.css', './css/bizim.css',
-  './js/kilit.js', './js/cekirdek.js', './js/senk.js', './js/petler-miras.js', './js/giris.js', './js/hub.js',
+  './css/giris.css', './css/mahalle.css', './css/posta.css', './css/pittiksu.css', './css/barbie.css', './css/tirnak.css', './css/petevi.css', './css/angela.css', './css/panda.css', './css/bahce.css', './css/ofke.css', './css/xox.css', './css/bizim.css',
+  './js/kilit.js', './js/cekirdek.js', './js/senk.js', './js/canli.js', './js/varlik.js', './js/petler-miras.js', './js/giris.js', './js/sorular.js', './js/posta.js', './js/mahalle.js',
   './js/bolum/pittiksu.js', './js/bolum/barbie.js', './js/bolum/tirnak.js', './js/bolum/petevi.js', './js/bolum/angela.js', './js/bolum/panda.js', './js/bolum/bahce.js', './js/bolum/ofke.js', './js/bolum/xox.js', './js/bolum/bizim.js',
   './fonts/Nunito-latin.woff2', './fonts/Nunito-latin-ext.woff2', './fonts/SourGummy-latin.woff2', './fonts/SourGummy-latin-ext.woff2', './fonts/Caveat-latin.woff2', './fonts/Caveat-latin-ext.woff2',
   './icons/icon-192.png', './icons/icon-512.png', './icons/icon-maskable-512.png', './icons/apple-touch-icon.png', './icons/favicon.svg',
