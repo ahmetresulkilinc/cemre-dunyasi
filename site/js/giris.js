@@ -285,6 +285,7 @@ window.CD = window.CD || {};
     const kap = kok.querySelector('.giris-kart-kap'); const govde = kok.querySelector('.giris-kart-govde');
     const kart = kok.querySelector('.giris-kart'); const devam = kok.querySelector('.giris-devam');
     kap.hidden = false; kok.classList.add('kart-acik');
+    CD.olay.yay('mektup:acildi');            // okundu mührü (posta.js; aynı mektup için bir kez)
     requestAnimationFrame(() => requestAnimationFrame(() => kap.classList.add('goster')));
     durum = 'kart';
     zaman(() => { try { govde.focus({ preventScroll: true }); } catch (e) {} }, 700);

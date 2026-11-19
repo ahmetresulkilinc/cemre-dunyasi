@@ -404,3 +404,55 @@
 }
 @keyframes inci-kay { from { background-position: 0% 50%; } to { background-position: 100% 50%; } }
 @media (prefers-reduced-motion: reduce) { .inci-yuzey { animation: none; } }
+
+/* ------------------------------------------------------------
+   11) MAHALLE (V2 Faz 1 · "Yokuş Mahalle" ana ekranı, kalp, posta kartı, saklı not)
+   Kaynak: V2/FAZ1-TASARIM.md §16. Bina sanatındaki ham renkler css/mahalle.css içinde --bd-* olarak durur.
+   ------------------------------------------------------------ */
+:root {
+  /* ölçü */
+  --m-px: 4px;                      /* mahalle pikseli · ≥400px: 5px */
+  --mahalle-genislik: 520px;
+  --gok-yuk: 152px;                 /* ≥768px: 184px */
+  --kaldirim-yuk: calc(var(--m-px) * 14);
+  --tabela-yuk: 28px;
+  --sprite-olcek-mahalle: 2;
+  --sprite-olcek-kisi: 3;
+  /* zemin */
+  --cimen: #A8DDA0;   --cimen-koyu: #7CCB9A;
+  --kaldirim: #E9D9CC; --kaldirim-cizgi: #D9C3B4;
+  --gece-golge: #2A2440; --gece-karart: 0%;
+  /* pencere */
+  --pencere-gunduz: #CFE8F5; --pencere-isik: #FFD98A; --pencere-hale: rgba(255, 217, 138, .35);
+  /* gökyüzü (ruh hali) */
+  --gok-gunes-ust: #9FD4F5;     --gok-gunes-alt: #DDF1FB;
+  --gok-parcali-ust: #AFCFE6;   --gok-parcali-alt: #E4EEF4;
+  --gok-bulutlu-ust: #B9C2CF;   --gok-bulutlu-alt: #E2E5EA;
+  --gok-yagmur-ust: #8E9CB0;    --gok-yagmur-alt: #C9D1DC;
+  --gok-firtina-ust: #5E5A78;   --gok-firtina-alt: #8F87A6;
+  --gok-gokkusagi-ust: #B7DDF7; --gok-gokkusagi-alt: #FBE3EE;
+  --gok-gece: #2A2440;
+  --gok-aksam-ust: #8C7BB5;     --gok-aksam-alt: #F6B79B;    /* gün batımı (18–20), selamla aynı saat sınırı */
+  --bulut: #FFFFFF; --bulut-golge: #D7E3EC; --simsek: #FFF3B0;
+  --gok-yazi: var(--murekkep);
+  /* kişiler (fotoğraflardan alınan tariflerle; config.js → MAHALLE.KISILER doluysa o kazanır)
+     --kisi-cemre / --kisi-ahmet = üst giysi rengi, --kisi-alt = kot */
+  --kisi-cemre: #2E2A30;       --kisi-ahmet: #2A2A2E;       --kisi-alt: #4A6C93;
+  --kisi-cemre-sac: #3E2A22;   --kisi-ahmet-sac: #1E1A1A;
+  --kisi-cemre-ten: #F3D2BC;   --kisi-ahmet-ten: #C99A74;
+  /* posta, not, mühür */
+  --not-sari: #FFF1A8; --not-sari-golge: #E8D27A;
+  --muhur: #D2556F; --muhur-koyu: #9E3550;
+  /* hareket */
+  --sure-uzun-bas: 450ms; --sure-yagmur: 3000ms; --sure-posta: 5000ms;
+  /* katman */
+  --kat-kalp: 15; --kat-secici: 35; --kat-posta: 45;
+}
+:root[data-hava="gece"] {
+  --cimen: #4E6E5A; --cimen-koyu: #3E5A4A;
+  --kaldirim: #5A4E5E; --kaldirim-cizgi: #4A3F55;
+  --gece-karart: 38%; --pencere-gunduz: var(--pencere-isik);
+  --not-sari: #E8D98A;
+}
+@media (min-width: 400px) { :root { --m-px: 5px; } }
+@media (min-width: 768px) { :root { --gok-yuk: 184px; } }

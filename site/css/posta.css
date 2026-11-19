@@ -1,0 +1,116 @@
+/* posta.css — çekirdek katmanı: kalp düğmesi, emoji seçicisi, posta kartı, "sen yokken", sahne anları, saklı not düşüşü.
+   Hepsi body'nin doğrudan çocukları; bölüm modüllerine dokunmaz. Renk/ölçü yalnız token. */
+
+/* ---------------------------------------------------------------- kalp düğmesi (tek eleman, sabit, üst çubuğun 3. sütununda) */
+#kalpDugme {
+  position: fixed; z-index: var(--kat-kalp);
+  top: calc(var(--guvenli-ust) + (var(--ustbar-yuk) - var(--dokunma-min)) / 2);
+  right: calc(var(--ustbar-kenar) + var(--dokunma-min) + var(--b-2));
+  width: var(--dokunma-min); height: var(--dokunma-min); border-radius: var(--r-tam); background: var(--kagit-2);
+  display: grid; place-items: center; touch-action: manipulation;
+  -webkit-touch-callout: none; -webkit-user-select: none; user-select: none;
+  transition: background var(--sure-2);
+}
+#kalpDugme[hidden] { display: none; }
+body.giris-acik #kalpDugme { display: none; }
+#kalpDugme .kalp-svg { width: calc(12 * 2px); height: auto; pointer-events: none; transition: transform var(--sure-1) var(--egri-cikis); }
+#kalpDugme.basildi .kalp-svg { animation: kalp-bas 260ms var(--egri-zip); }
+@keyframes kalp-bas { 0% { transform: scale(1); } 40% { transform: scale(.86); } 100% { transform: scale(1); } }
+#kalpDugme.atiyor .kalp-svg { animation: kalp-at 1s var(--egri-ikili) 2; }
+@keyframes kalp-at { 0%, 100% { transform: scale(1); } 25% { transform: scale(1.12); } 50% { transform: scale(1); } 75% { transform: scale(1.12); } }
+#kalpDugme.parla { background: var(--burun-zemin); }
+.kalp-nokta { position: absolute; left: 3px; top: 3px; width: 8px; height: 8px; border-radius: 50%; background: var(--basari); box-shadow: 0 0 0 2px var(--kagit); display: none; pointer-events: none; }
+#kalpDugme.cevrimici .kalp-nokta { display: block; }
+#kalpDugme:active { transform: translateY(1px); }
+
+/* ---------------------------------------------------------------- emoji yağmuru seçicisi */
+.secici {
+  position: fixed; z-index: var(--kat-secici);
+  top: calc(var(--guvenli-ust) + var(--ustbar-yuk) + var(--b-1));
+  right: calc(var(--ustbar-kenar) + var(--b-2));
+  display: flex; gap: var(--b-1); padding: var(--b-1); border-radius: var(--r-tam);
+  background: var(--kagit); box-shadow: var(--golge-kalkik);
+  opacity: 0; transform: scale(.9); transform-origin: 100% 0;
+  transition: opacity var(--sure-2) var(--egri-yumus), transform var(--sure-2) var(--egri-yumus);
+}
+.secici.acik { opacity: 1; transform: none; }
+.secici-emoji { width: var(--dokunma-min); height: var(--dokunma-min); border-radius: var(--r-tam); font-size: 24px; line-height: 1; display: grid; place-items: center; }
+.secici-emoji:active { transform: scale(.9); }
+@media (hover: hover) { .secici-emoji:hover { background: var(--burun-zemin); } }
+
+/* ---------------------------------------------------------------- posta kartı (üstten iner) */
+#posta {
+  position: fixed; z-index: var(--kat-posta); left: 0; right: 0;
+  top: calc(var(--guvenli-ust) + var(--ustbar-yuk) + var(--b-2));
+  display: flex; justify-content: center; pointer-events: none; padding: 0 var(--kenar);
+}
+.posta-kart {
+  pointer-events: auto; width: min(100%, 420px); display: grid; grid-template-columns: auto 1fr; align-items: center; gap: var(--b-3);
+  padding: var(--b-3) var(--b-4) var(--b-3) var(--b-5);
+  opacity: 0; transform: translateY(-16px);
+  transition: opacity var(--sure-3) var(--egri-yumus), transform var(--sure-3) var(--egri-yumus);
+}
+.posta-kart.goster { opacity: 1; transform: none; }
+.posta-kart.cik { opacity: 0; transform: translateY(-10px); transition: opacity var(--sure-2) var(--egri-giris), transform var(--sure-2) var(--egri-giris); }
+.posta-kafa { width: 40px; height: 40px; border-radius: var(--r-tam); background: var(--kagit-2); display: grid; place-items: center; }
+.posta-kafa canvas { image-rendering: pixelated; image-rendering: crisp-edges; display: block; }
+.posta-metin { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.posta-baslik { font-size: var(--punto-md); font-weight: var(--kalin-baslik); line-height: 1.3; overflow-wrap: anywhere; }
+.posta-alt { font-size: var(--punto-sm); color: var(--sessiz); }
+.posta-satirlar { display: flex; flex-direction: column; gap: 4px; margin-top: var(--b-1); font-size: var(--punto-sm); font-weight: var(--kalin-vurgu); }
+.posta-eylemler { grid-column: 1 / -1; display: flex; justify-content: flex-end; gap: var(--b-2); }
+.posta-eylem { min-height: var(--dokunma-min); }
+.posta-kart.kalici .posta-kafa { align-self: start; }
+/* balmumu mühür (sol üst köşe, 10×10 m-px) */
+.posta-muhur { position: absolute; left: -10px; top: -12px; width: calc(var(--m-px) * 10); height: calc(var(--m-px) * 10); pointer-events: none; z-index: 2; }
+.muhur-yari { position: absolute; inset: 0; transition: transform 400ms var(--egri-giris), opacity 400ms var(--egri-giris); }
+.muhur-yari svg { width: 100%; height: 100%; display: block; }
+.muhur-yari.sol { clip-path: inset(0 50% 0 0); }
+.muhur-yari.sag { clip-path: inset(0 0 0 50%); }
+.posta-muhur.kirik .muhur-yari.sol { transform: translate(-6px, 14px) rotate(-8deg); opacity: 0; }
+.posta-muhur.kirik .muhur-yari.sag { transform: translate(6px, 14px) rotate(8deg); opacity: 0; }
+
+/* ---------------------------------------------------------------- sahne anları */
+.sahne-kalp { position: fixed; left: 50%; top: 42%; z-index: var(--kat-parcacik); pointer-events: none; transform: translate(-50%, -50%) scale(0); animation: sahne-kalp 600ms var(--egri-zip) forwards; }
+.sahne-kalp svg { width: calc(var(--m-px) * 24); height: auto; display: block; }
+@keyframes sahne-kalp { 0% { transform: translate(-50%, -50%) scale(0); } 70% { transform: translate(-50%, -50%) scale(1.15); } 100% { transform: translate(-50%, -50%) scale(1); } }
+/* emoji yağmuru parçacığı (CD.efekt.yagmur) */
+.parcacik.yagmur { font-size: 26px; line-height: 1; animation: p-yagmur var(--sure, 2000ms) linear forwards; }
+@keyframes p-yagmur {
+  0% { transform: translate(var(--x), var(--y)); opacity: 1; }
+  25% { transform: translate(calc(var(--x) + var(--sal)), calc(var(--y) + var(--dy) * .25)); }
+  50% { transform: translate(var(--x), calc(var(--y) + var(--dy) * .5)); }
+  75% { transform: translate(calc(var(--x) + var(--sal)), calc(var(--y) + var(--dy) * .75)); opacity: 1; }
+  100% { transform: translate(var(--x), calc(var(--y) + var(--dy))); opacity: 0; }
+}
+
+/* ---------------------------------------------------------------- saklı yapışkan not ("pat") */
+.not-katman { position: fixed; inset: 0; z-index: var(--kat-posta); background: var(--kaplama); display: grid; place-items: center; padding: var(--kenar); opacity: 0; transition: opacity var(--sure-2); }
+.not-katman.dus { opacity: 1; }
+.not-katman.kapan { opacity: 0; transition-delay: 200ms; }
+.not-kagit {
+  position: relative; width: 240px; min-height: 200px; margin-bottom: 8vh; padding: var(--b-6) var(--b-4) var(--b-4);
+  display: flex; flex-direction: column; gap: var(--b-2); align-items: stretch;
+  background: var(--not-sari); color: var(--giris-murekkep); border-radius: 4px; box-shadow: 0 4px 0 var(--not-sari-golge), var(--golge-yumusak);
+  transform: translateY(-120vh) rotate(-3deg);
+}
+.not-katman.dus .not-kagit { transform: rotate(-3deg); transition: transform 500ms var(--egri-giris); }
+.not-kagit.ez { transform: rotate(-3deg) scale(1.04, .94) !important; transition: transform 120ms var(--egri-cikis) !important; }
+.not-kagit.burus { transform: translate(var(--ucus-x, 0), var(--ucus-y, -40vh)) rotate(20deg) scale(.08) !important; opacity: .4; transition: transform 400ms var(--egri-giris), opacity 400ms !important; }
+.not-bant { position: absolute; left: 50%; top: -10px; width: 84px; height: 22px; transform: translateX(-50%) rotate(-2deg); background: color-mix(in srgb, var(--kagit) 60%, transparent); box-shadow: 0 1px 0 color-mix(in srgb, var(--murekkep) 12%, transparent); }
+.not-metin { font-family: var(--yazi-elyazisi); font-size: var(--punto-xl); line-height: 1.25; overflow-wrap: anywhere; flex: 1; }
+.not-imza { font-family: var(--yazi-elyazisi); font-size: var(--punto-lg); text-align: right; }
+.not-okudum { min-height: var(--dokunma-min); }
+
+@media (prefers-reduced-motion: reduce) {
+  #kalpDugme.basildi .kalp-svg, #kalpDugme.atiyor .kalp-svg { animation: none; }
+  .sahne-kalp { display: none; }
+  .parcacik.yagmur { display: none; }
+  .not-kagit, .not-katman.dus .not-kagit { transform: rotate(-3deg); transition: opacity 150ms; }
+  .not-kagit.ez { transform: rotate(-3deg) !important; }
+  .not-kagit.burus { transform: rotate(-3deg) !important; opacity: 0; transition: opacity 150ms !important; }
+  .muhur-yari { transition: opacity 150ms; }
+  .posta-muhur.kirik .muhur-yari.sol, .posta-muhur.kirik .muhur-yari.sag { transform: none; }
+  .posta-kart, .posta-kart.cik { transform: none; transition: opacity 150ms; }
+  .secici { transform: none; transition: opacity 150ms; }
+}

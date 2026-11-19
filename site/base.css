@@ -128,11 +128,14 @@ input[type="range"].kaydirici:focus-visible::-webkit-slider-thumb { box-shadow: 
 
 /* ---- üst çubuk (bölüm kabuğu) */
 .ustbar {
-  position: sticky; top: 0; z-index: var(--kat-ustbar); display: grid; grid-template-columns: 44px 1fr 44px; align-items: center; gap: var(--b-2);
-  min-height: var(--ustbar-yuk); padding: var(--guvenli-ust) var(--b-3) 0; background: var(--kagit); box-shadow: 0 4px 0 var(--oda), 0 10px 20px -14px var(--golge-renk);
+  position: sticky; top: 0; z-index: var(--kat-ustbar); display: grid; grid-template-columns: 44px 1fr 44px 44px; align-items: center; gap: var(--b-2);
+  min-height: calc(var(--ustbar-yuk) + var(--guvenli-ust)); padding: var(--guvenli-ust) var(--ustbar-kenar) 0; background: var(--kagit); box-shadow: 0 4px 0 var(--oda), 0 10px 20px -14px var(--golge-renk);
 }
 .ustbar h1 { text-align: center; font-family: var(--yazi-baslik); font-weight: var(--kalin-baslik); font-size: var(--punto-lg); letter-spacing: var(--aralik-baslik); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .ustbar .dugme-ikon { box-shadow: none; background: var(--kagit-2); }
+/* 3. sütun: sabit kalp düğmesinin (#kalpDugme, posta.css) yeri — başlık kalbin altına girmez */
+.ustbar-kalp-yeri { width: var(--dokunma-min); height: var(--dokunma-min); }
+:root { --ustbar-kenar: var(--b-3); }
 
 /* ---- alt çubuk */
 .altbar {
@@ -236,7 +239,7 @@ body.sheet-acik .pet-katmani .pet { pointer-events: none; }
 .kurulum .ikon { font-size: 28px; }
 
 @media (min-width: 768px) {
-  .ustbar { padding-left: var(--kenar); padding-right: var(--kenar); }
+  :root { --ustbar-kenar: var(--kenar); }
   .altbar { left: 50%; right: auto; transform: translateX(-50%); width: min(100%, var(--icerik-genislik)); border-radius: var(--r-xl) var(--r-xl) 0 0; }
   .sahne { border-radius: var(--r-lg); margin: var(--b-3) auto 0; max-width: var(--icerik-genislik); }
 }

@@ -24,10 +24,12 @@ window.CD = window.CD || {};
   const SIFIRLA_ANAHTAR = '__sifirla';       // buluta düşen sıfırlama damgası (karşı telefona da geçer)
   const SIFIRLA_GORULDU = 'senk.sifirlaGoruldu';
   const FOTO_SILINEN = 'foto.silinen';       // { "fotolar bizim:abc": t } — ortak, senkronlu mezar taşı listesi
-  const ATLA = /^(kilit\.|senk\.|ipucu\.|cihaz\.)/;   // buluta gitmeyecek anahtarlar
+  const ATLA = /^(kilit\.|senk\.|ipucu\.|cihaz\.|hava$)/;   // hava: eski sürümün ortak gece/gündüz seçimi artık cihaza özel   // buluta gitmeyecek anahtarlar
   const ARA = 4 * 60 * 1000;
   const CANLI_ARA = 3000;      // ön planda canlı yoklama (sadece damga okunur, çok hafif)
   const DENEME = 4;            // iyimser kilit çakışmasında en fazla deneme
+  // mahalle varlığı/postası sık değişir; bunlar gelince "Yeni kayıtlar geldi" fısıltısı çıkmaz (posta kartı zaten söyler)
+  const SESSIZ_ANAHTAR = /^(varlik|posta|saklinot|okunan|soru|mektupMuhur)\./;
 
   let oda = null, acik = false, bekleyen = 0, sonSenk = 0, calisiyor = false, tekrar = false, durum = 'kapalı';
   let sessiz = false;          // true iken yerel yazmalar damgalanmaz (buluttan gelen değer yazılırken)
@@ -103,7 +105,7 @@ window.CD = window.CD || {};
     });
     return o;
   }
-  const doluMu = (paket) => Object.keys(paket || {}).some(k => k !== SIFIRLA_ANAHTAR && !mezarMi(paket[k]) && !/^(ses|hava|giris\.)/.test(k));
+  const doluMu = (paket) => Object.keys(paket || {}).some(k => k !== SIFIRLA_ANAHTAR && !mezarMi(paket[k]) && !/^(ses|hava|giris\.)/.test(k) && !SESSIZ_ANAHTAR.test(k));   // mahalle nabzı "dolu" sayılmaz (ilk eşitlemede gereksiz soru çıkmasın)
   function sirali(v) {
     if (Array.isArray(v)) return v.map(sirali);
     if (v && typeof v === 'object') { const o = {}; Object.keys(v).sort().forEach(k => { o[k] = sirali(v[k]); }); return o; }
@@ -165,7 +167,7 @@ window.CD = window.CD || {};
   }
   function birlestir(yerel, bulut) {
     const sonuc = {}, hepsi = new Set([].concat(Object.keys(yerel), Object.keys(bulut)));
-    let degisti = false, fotoDegisti = false;
+    let degisti = false, fotoDegisti = false, gorunur = false;   // gorunur: mahalle/posta dışı bir kayıt değişti (fısıltı gösterilir)
     hepsi.forEach(k => {
       if (k === SIFIRLA_ANAHTAR || ATLA.test(k)) { if (bulut[k]) sonuc[k] = bulut[k]; return; }
       const y = yerel[k], b = bulut[k];
@@ -180,11 +182,11 @@ window.CD = window.CD || {};
         sonuc[k] = b;
         const farkli = !ayni({ v: y.v, sil: !!y.sil }, { v: b.v, sil: !!b.sil });
         if (farkli || (y.t || 0) !== (b.t || 0)) yereleUygula(k, b);
-        if (farkli) degisti = true;
+        if (farkli) { degisti = true; if (!SESSIZ_ANAHTAR.test(k)) gorunur = true; }
       } else if (y) sonuc[k] = y;
-      else if (b) { sonuc[k] = b; if (!mezarMi(b)) { yereleUygula(k, b); degisti = true; } else zamanYaz(k, b.t); }
+      else if (b) { sonuc[k] = b; if (!mezarMi(b)) { yereleUygula(k, b); degisti = true; if (!SESSIZ_ANAHTAR.test(k)) gorunur = true; } else zamanYaz(k, b.t); }
     });
-    return { sonuc, degisti, fotoDegisti };
+    return { sonuc, degisti, fotoDegisti, gorunur };
   }
 
   function ilkSecim() {
@@ -226,8 +228,16 @@ window.CD = window.CD || {};
         let paket, yeniGeldi = false;
         if (!CD.depo.al(ILK, false)) {                       // ilk eşitleme: körlemesine birleştirme yok
           const yerel = yerelPaket();
-          if (!doluMu(bulut)) paket = Object.assign({}, bulut, yerel);              // bulut boş → yükle (taşlar/sıfırlama kalsın)
-          else if (!doluMu(yerel)) { paket = bulut; buluttanAl(bulut); yeniGeldi = true; }
+          if (!doluMu(bulut)) {
+            // bulutta oyun kaydı yok (en çok mahalle anahtarları var) → anahtar bazında birleştir: bu telefonun kayıtları gider,
+            // karşının mahalle anahtarları (varlik/posta…) bu telefona gelir
+            const b = birlestir(yerel, bulut); paket = b.sonuc; if (b.degisti) yeniGeldi = true;
+          }
+          else if (!doluMu(yerel)) {
+            // bulut esas; bu telefonun yeni yazdığı kendi mahalle anahtarları (cd.varlik.<kim> …) da eklenir
+            const kendi = {}; Object.keys(yerel).forEach(k => { if (SESSIZ_ANAHTAR.test(k) && !mezarMi(yerel[k]) && (!bulut[k] || (yerel[k].t || 0) > (bulut[k].t || 0))) kendi[k] = yerel[k]; });
+            buluttanAl(bulut); paket = Object.assign({}, bulut, kendi); Object.keys(kendi).forEach(k => yereleUygula(k, kendi[k])); yeniGeldi = true;
+          }
           else {
             const secim = await ilkSecim();
             if (secim === 'sonra') return;
@@ -241,9 +251,9 @@ window.CD = window.CD || {};
           CD.depo.yaz(ILK, true);
           if (yeniGeldi) { CD.olay.yay('senk:yenilendi'); }
         } else {
-          const { sonuc, degisti, fotoDegisti } = birlestir(yerelPaket(), bulut);
+          const { sonuc, degisti, fotoDegisti, gorunur } = birlestir(yerelPaket(), bulut);
           if (fotoDegisti) fotoZorla = true;
-          if (degisti) { CD.toast('Yeni kayıtlar geldi 💫'); CD.olay.yay('senk:yenilendi'); }
+          if (degisti) { if (gorunur) CD.toast('Yeni kayıtlar geldi 💫'); CD.olay.yay('senk:yenilendi'); }
           // sonuç buluttakiyle aynıysa YAZMA (döngü ve gereksiz trafik yok)
           if (!okunan.var || !ayni(sonuc, okunan.ham)) {
             if (!(await bulutYaz(sonuc, okunan))) continue;   // iyimser kilit tutmadı → yeniden oku, yeniden birleştir
@@ -344,6 +354,7 @@ window.CD = window.CD || {};
   let dinleyicilerKuruldu = false;
   CD.senk = {
     get acik() { return acik; },
+    get oda() { return acik ? oda : null; },      // canli.js kanal adını bundan türetir (kanal adında oda görünmez)
     get durum() { return durum; },
     get durdu() { return durduMu(); },
     get sonSenk() { return sonSenk || CD.depo.al('senk.sonSenk', 0); },
