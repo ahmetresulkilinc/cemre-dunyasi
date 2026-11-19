@@ -5,6 +5,14 @@
  "kontrol": "kontrol.enc",
  "not": "254bb97b57f12e16.enc",
  "dosyalar": {
+  "assets/bizim/ahmet-1-thumb.jpg": {
+   "enc": "ef39817fbde376a4.enc",
+   "tur": "image/jpeg"
+  },
+  "assets/bizim/ahmet-1.jpg": {
+   "enc": "f80c112e2bf2dbd1.enc",
+   "tur": "image/jpeg"
+  },
   "assets/bizim/barbie-1-thumb.jpg": {
    "enc": "59ca7c8d2bc6d005.enc",
    "tur": "image/jpeg"
@@ -19,6 +27,46 @@
   },
   "assets/bizim/barbie-2.jpg": {
    "enc": "35518499480aaa9a.enc",
+   "tur": "image/jpeg"
+  },
+  "assets/bizim/biz-1-thumb.jpg": {
+   "enc": "92b1f96ed899134b.enc",
+   "tur": "image/jpeg"
+  },
+  "assets/bizim/biz-1.jpg": {
+   "enc": "d5a54078e76b077c.enc",
+   "tur": "image/jpeg"
+  },
+  "assets/bizim/biz-2-thumb.jpg": {
+   "enc": "c0e5868d659801a4.enc",
+   "tur": "image/jpeg"
+  },
+  "assets/bizim/biz-2.jpg": {
+   "enc": "81a8c9c16d714e1c.enc",
+   "tur": "image/jpeg"
+  },
+  "assets/bizim/biz-3-thumb.jpg": {
+   "enc": "c7c71757c683944e.enc",
+   "tur": "image/jpeg"
+  },
+  "assets/bizim/biz-3.jpg": {
+   "enc": "cdb63900dbc8e300.enc",
+   "tur": "image/jpeg"
+  },
+  "assets/bizim/biz-4-thumb.jpg": {
+   "enc": "d092a90f50e84027.enc",
+   "tur": "image/jpeg"
+  },
+  "assets/bizim/biz-4.jpg": {
+   "enc": "b5a0497989769bb1.enc",
+   "tur": "image/jpeg"
+  },
+  "assets/bizim/biz-5-thumb.jpg": {
+   "enc": "58d050215271abbb.enc",
+   "tur": "image/jpeg"
+  },
+  "assets/bizim/biz-5.jpg": {
+   "enc": "c697073f096902ab.enc",
    "tur": "image/jpeg"
   },
   "assets/bizim/buket-thumb.jpg": {
@@ -43,6 +91,30 @@
   },
   "assets/bizim/cemre-2.jpg": {
    "enc": "f622f024f97adb7a.enc",
+   "tur": "image/jpeg"
+  },
+  "assets/bizim/cemre-3-thumb.jpg": {
+   "enc": "42456975ca1f3582.enc",
+   "tur": "image/jpeg"
+  },
+  "assets/bizim/cemre-3.jpg": {
+   "enc": "1c4cf7d97622b838.enc",
+   "tur": "image/jpeg"
+  },
+  "assets/bizim/cemre-4-thumb.jpg": {
+   "enc": "dae0186931e27c8c.enc",
+   "tur": "image/jpeg"
+  },
+  "assets/bizim/cemre-4.jpg": {
+   "enc": "87b1d4292144cb9b.enc",
+   "tur": "image/jpeg"
+  },
+  "assets/bizim/cemre-5-thumb.jpg": {
+   "enc": "20843c76c9be702c.enc",
+   "tur": "image/jpeg"
+  },
+  "assets/bizim/cemre-5.jpg": {
+   "enc": "9a74eff5bcc8b6da.enc",
    "tur": "image/jpeg"
   },
   "assets/bizim/cemre-barbie-thumb.jpg": {

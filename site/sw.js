@@ -5,7 +5,7 @@
    - Aynı kaynak istekleri: önce ağ (güncellemeler hemen gelsin) ama en fazla AG_SURE ms beklenir; ağ yavaşsa önbellekten açılır
      (ağ cevabı yine de arkadan gelip önbelleği tazeler). Önbellekte yoksa ağ beklenir.
    - Bulut (Supabase) istekleri farklı kaynak olduğu için hiç dokunulmaz. */
-const SURUM = 'cd-v15';
+const SURUM = 'cd-v16';
 const AG_SURE = 3500;
 const KABUK = [
   './', './index.html', './config.js', './tokens.css', './base.css', './manifest.webmanifest',
