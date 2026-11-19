@@ -29,7 +29,8 @@ window.CD = window.CD || {};
   const CANLI_ARA = 3000;      // ön planda canlı yoklama (sadece damga okunur, çok hafif)
   const DENEME = 4;            // iyimser kilit çakışmasında en fazla deneme
   // mahalle varlığı/postası sık değişir; bunlar gelince "Yeni kayıtlar geldi" fısıltısı çıkmaz (posta kartı zaten söyler)
-  const SESSIZ_ANAHTAR = /^(varlik|posta|saklinot|okunan|soru|mektupMuhur)\./;
+  // safir.*: Safir'in Yeri'ndeki çiçek/anı da fısıltısız gelir (Cemre'yi hiçbir şey hazırlıksız yakalamasın)
+  const SESSIZ_ANAHTAR = /^(varlik|posta|saklinot|okunan|soru|mektupMuhur|safir)\./;
 
   let oda = null, acik = false, bekleyen = 0, sonSenk = 0, calisiyor = false, tekrar = false, durum = 'kapalı';
   let sessiz = false;          // true iken yerel yazmalar damgalanmaz (buluttan gelen değer yazılırken)

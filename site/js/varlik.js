@@ -47,7 +47,9 @@ window.CD = window.CD || {};
     if (CD.canli) CD.canli.durum({ kim: k, yer: v.yer, uyku: v.uyku, ruh: v.ruh, t: v.t });
     if (!nabizMi) yay('varlik:degisti', 'ben');
   }
-  const yerim = () => { const a = CD.aktifBolum ? CD.aktifBolum() : ''; return a || 'mahalle'; };
+  // sessiz yerler: karşı telefonda "… şu an X'te" diye görünmez (Safir'in Yeri yalnız içine girene görünür)
+  const SESSIZ_YER = { safir: true };
+  const yerim = () => { const a = CD.aktifBolum ? CD.aktifBolum() : ''; return (a && !SESSIZ_YER[a]) ? a : 'mahalle'; };
 
   /* ---------------------------------------------------------------- karşı kişinin görünümü (senk + canlı birleşimi) */
   let canliOnun = {};               // anlık gelen uyku/ruh (senk gelene kadar)
@@ -264,7 +266,7 @@ window.CD = window.CD || {};
   /* ---------------------------------------------------------------- bağlantılar */
   CD.hazir(() => {
     // yer değişince hemen nabız (bölüm adı için modüllere dokunmaya gerek yok)
-    CD.olay.dinle('bolum:acildi', (id) => { if (ben()) varlikYaz({ yer: id, sonBina: id }); });
+    CD.olay.dinle('bolum:acildi', (id) => { if (ben()) varlikYaz(SESSIZ_YER[id] ? { yer: 'mahalle' } : { yer: id, sonBina: id }); });
     CD.olay.dinle('hub:acildi', () => { if (ben()) varlikYaz({ yer: 'mahalle' }); });
     CD.olay.dinle('kim', () => { islenen = new Set(dizi(al(ISLENEN, []))); canliOnun = {}; canliGelen = []; if (ben()) varlikYaz({ yer: yerim() }); tara(); if (CD.senk && CD.senk.sonSenk) ilkGorusBitir(); yay('varlik:degisti', 'kim'); });
     // senk: karşının postası/varlığı değişmiş olabilir

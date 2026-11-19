@@ -1,6 +1,6 @@
 /* gizle.js — Kişisel dosyaları (fotoğraflar + mektup) sihirli kelimeyle şifreler.
    Kullanım (proje kökünde):  node site/tools/gizle.js <sihirli-kelime>
-   Kaynak:  gizli-kaynak/bizim/*.jpg, gizli-kaynak/pittiksu/*.jpg, gizli-kaynak/not.txt   (depoya GİRMEZ)
+   Kaynak:  gizli-kaynak/bizim/*.jpg, gizli-kaynak/pittiksu/*.jpg, gizli-kaynak/safir/*.jpg, gizli-kaynak/not.txt   (depoya GİRMEZ)
    Çıktı:   site/gizli/*.enc + site/gizli/manifest.json                                   (depoya girer, şifreli)
    Şifre: PBKDF2-SHA256 (120k tur) → AES-256-GCM. Tarayıcı tarafı: site/js/kilit.js */
 const fs = require('fs');
@@ -16,8 +16,19 @@ const sifre = (process.argv.slice(2).find(a => !a.startsWith('--')) || process.e
 if (!sifre) { console.error('Kullanım: node site/tools/gizle.js <sihirli-kelime>'); process.exit(1); }
 if (!fs.existsSync(KAYNAK)) { console.error('gizli-kaynak/ klasörü yok: ' + KAYNAK); process.exit(1); }
 
-const salt = crypto.randomBytes(16);
+// Tuz KORUNUR: aynı kelime + aynı tuz → aynı anahtar ve aynı bulut odası. Telefonlardaki kayıtlı anahtar
+// geçerli kalır, cemre_durum taşınmaz. Yeni tuz yalnız --yeni-tuz ile (kelime değişince) üretilir.
+const eskiManifest = (() => { try { return JSON.parse(fs.readFileSync(path.join(HEDEF, 'manifest.json'), 'utf8')); } catch (e) { return null; } })();
+const yeniTuz = process.argv.includes('--yeni-tuz') || !eskiManifest;
+const salt = yeniTuz ? crypto.randomBytes(16) : Buffer.from(eskiManifest.salt, 'base64');
 const key = crypto.pbkdf2Sync(Buffer.from(sifre, 'utf8'), salt, ITER, 32, 'sha256');
+if (!yeniTuz) {   // kelime doğru mu? Yanlışsa hiçbir şeye dokunmadan dur.
+  try {
+    const k = fs.readFileSync(path.join(HEDEF, eskiManifest.kontrol));
+    const d = crypto.createDecipheriv('aes-256-gcm', key, k.subarray(0, 12)); d.setAuthTag(k.subarray(k.length - 16));
+    if (Buffer.concat([d.update(k.subarray(12, k.length - 16)), d.final()]).toString() !== 'cemre-dunyasi-ok') throw 0;
+  } catch (e) { console.error('Kelime mevcut şifreyle uyuşmuyor; hiçbir şey değişmedi. (Kelimeyi değiştiriyorsan --yeni-tuz ekle; bulut odası da değişir!)'); process.exit(1); }
+}
 
 function sifrele(buf) {
   const iv = crypto.randomBytes(12);
@@ -34,7 +45,7 @@ const manifest = { surum: 1, salt: salt.toString('base64'), iter: ITER, kontrol:
 fs.writeFileSync(path.join(HEDEF, 'kontrol.enc'), sifrele(Buffer.from('cemre-dunyasi-ok', 'utf8')));
 
 let toplam = 0;
-for (const klasor of ['bizim', 'pittiksu', 'barbie']) {
+for (const klasor of ['bizim', 'pittiksu', 'barbie', 'safir']) {
   const d = path.join(KAYNAK, klasor);
   if (!fs.existsSync(d)) continue;
   for (const f of fs.readdirSync(d).sort()) {

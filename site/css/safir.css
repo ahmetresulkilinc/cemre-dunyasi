@@ -1,0 +1,218 @@
+/* css/safir.css — Safir'in Yeri: sakin, lavanta akşamüstü. Sınıflar "safir-" önekli. */
+[data-bolum="safir"] {
+  --oda: var(--seker-lavanta);
+  --oda-zemin: var(--kagit);
+  --oda-vurgu: var(--seker-lavanta);
+  /* sahne içi sanat renkleri (yerel) */
+  --safir-gok-ust: #B9A9E8;
+  --safir-gok-orta: #E3C5E6;
+  --safir-gok-alt: #FCDCCB;
+  --safir-cimen: #A8D9A4;
+  --safir-cimen-koyu: #8CC58C;
+  --safir-hap: var(--murekkep);
+}
+:root[data-hava="gece"] [data-bolum="safir"] {
+  --safir-gok-ust: #2E2A52;
+  --safir-gok-orta: #4F4377;
+  --safir-gok-alt: #82648E;
+  --safir-cimen: #4F7D5E;
+  --safir-cimen-koyu: #436C51;
+}
+
+.safir-icerik { display: flex; flex-direction: column; gap: var(--b-6); }
+
+/* ---------------- sahne */
+.safir-sahne {
+  position: relative;
+  height: min(58vh, 440px);
+  min-height: 300px;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  box-shadow: var(--golge-yumusak);
+  isolation: isolate;
+}
+.safir-gok {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, var(--safir-gok-ust) 0%, var(--safir-gok-orta) 52%, var(--safir-gok-alt) 100%);
+}
+.safir-cimen {
+  position: absolute; left: 0; right: 0; bottom: 0; height: 24%;
+  background:
+    linear-gradient(180deg, var(--safir-cimen-koyu) 0 6px, transparent 6px),
+    var(--safir-cimen);
+  z-index: 1;
+}
+.safir-sahne svg { display: block; width: 100%; height: auto; image-rendering: pixelated; }
+:root[data-hava="gece"] .safir-agac svg,
+:root[data-hava="gece"] .safir-kedi svg,
+:root[data-hava="gece"] .safir-cicek svg { filter: brightness(.82) saturate(.9); }
+
+.safir-agac {
+  position: absolute; left: 50%; bottom: 20%;
+  width: min(62%, 280px);
+  transform: translateX(-50%);
+  z-index: 2;
+}
+.safir-yildiz {
+  position: absolute; left: 50%; top: 7%;
+  width: 22px; margin-left: -11px;
+  z-index: 2;
+  animation: safir-parilti 4.5s ease-in-out infinite;
+}
+@keyframes safir-parilti {
+  0%, 100% { opacity: .65; transform: scale(.9); }
+  50% { opacity: 1; transform: scale(1.12); }
+}
+
+/* ---------------- çiçekler */
+.safir-cicekler { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
+.safir-cicek {
+  position: absolute;
+  width: clamp(18px, 4.6vw, 26px);
+  transform: translateX(-50%);
+  transform-origin: 50% 100%;
+}
+.safir-cicek.safir-yeni { animation: safir-pit .5s cubic-bezier(.3, 1.6, .5, 1) both; }
+@keyframes safir-pit {
+  from { transform: translateX(-50%) scale(0); }
+  to { transform: translateX(-50%) scale(1); }
+}
+.safir-nokta {
+  display: block;
+  width: 4px; height: 4px;
+  border-radius: var(--r-tam);
+  margin: 1px auto 0;
+  background: var(--murekkep-2);
+}
+.safir-nokta-cemre { background: var(--seker-kiraz); }
+.safir-nokta-ahmet { background: var(--seker-gok); }
+
+/* ---------------- kedi */
+.safir-kedi {
+  position: absolute; left: 50%; bottom: 13%;
+  width: min(30%, 132px);
+  margin-left: 4%;
+  padding: 0; border: 0; background: none;
+  cursor: pointer;
+  z-index: 4;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  border-radius: var(--r-sm);
+}
+.safir-kedi:focus-visible { outline: none; box-shadow: var(--odak-halka); }
+.safir-kedi-uyku { display: block; transform-origin: 50% 100%; animation: safir-nefes 4.2s ease-in-out infinite; }
+.safir-kedi-uyanik { display: none; position: absolute; left: 0; bottom: 0; width: 100%; }
+.safir-zzz {
+  position: absolute; left: 8%; top: -34%;
+  font-family: var(--yazi-baslik); font-size: var(--punto-sm);
+  color: var(--murekkep-2);
+  opacity: 0;
+  animation: safir-zzz 4.2s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes safir-nefes {
+  0%, 100% { transform: scale(1, 1); }
+  50% { transform: scale(1.015, 1.06); }
+}
+@keyframes safir-zzz {
+  0%, 30% { opacity: 0; transform: translate(0, 4px); }
+  55% { opacity: .7; }
+  90%, 100% { opacity: 0; transform: translate(6px, -10px); }
+}
+.safir-uyandi .safir-kedi-uyku, .safir-uyandi .safir-zzz { visibility: hidden; animation: none; }
+.safir-uyandi .safir-kedi-uyanik { display: block; animation: safir-sicra .62s cubic-bezier(.3, .7, .4, 1) both; }
+@keyframes safir-sicra {
+  0% { transform: translateY(0) scale(1, .92); }
+  40% { transform: translateY(-26%) rotate(-6deg); }
+  75% { transform: translateY(3%) scale(1.04, .94); }
+  100% { transform: translateY(0); }
+}
+.safir-hap {
+  position: absolute; left: 50%; bottom: 3%;
+  transform: translateX(-50%) scale(.6);
+  font-family: var(--yazi-baslik); font-size: var(--punto-lg);
+  color: var(--safir-hap);
+  background: var(--kagit);
+  padding: 2px var(--b-3);
+  border-radius: var(--r-tam);
+  opacity: 0;
+  z-index: 5;
+  pointer-events: none;
+  transition: opacity .25s ease, transform .3s cubic-bezier(.3, 1.6, .5, 1);
+  white-space: nowrap;
+}
+.safir-isir .safir-hap { opacity: 1; transform: translateX(-50%) scale(1); }
+
+/* ---------------- karşılama */
+.safir-karsilama {
+  position: absolute; left: 50%; bottom: var(--b-4);
+  transform: translateX(-50%);
+  width: max-content; max-width: calc(100% - 2 * var(--b-4));
+  min-height: var(--dokunma-min);
+  padding: var(--b-2) var(--b-4);
+  border: 0;
+  border-radius: var(--r-tam);
+  background: var(--kagit);
+  color: var(--murekkep);
+  font: inherit; font-size: var(--punto-md); font-weight: 700;
+  box-shadow: var(--golge-yumusak);
+  z-index: 6;
+  cursor: pointer;
+  transition: opacity .4s ease, transform .4s ease;
+}
+.safir-karsilama:focus-visible { outline: none; box-shadow: var(--odak-halka); }
+.safir-karsilama.safir-gidiyor { opacity: 0; transform: translate(-50%, 8px); }
+
+/* ---------------- fotoğraflar */
+.safir-fotolar {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--b-5) var(--b-4);
+  width: 100%;
+  max-width: 340px;
+  margin: 0 auto;
+  padding: 0 var(--b-2);
+}
+@media (min-width: 720px) { .safir-fotolar { grid-template-columns: repeat(4, minmax(0, 1fr)); max-width: 720px; } }
+.safir-polaroid {
+  display: block;
+  padding: var(--b-2) var(--b-2) var(--b-5);
+  border: 0;
+  background: var(--kagit);
+  border-radius: var(--r-xs);
+  box-shadow: var(--golge-yastik-ic);
+  transform: rotate(var(--egim, 0deg));
+  cursor: zoom-in;
+  transition: transform .25s ease;
+  min-width: 0;
+}
+.safir-polaroid img { display: block; width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 3px; background: var(--kagit-3); }
+.safir-polaroid:focus-visible { outline: none; box-shadow: var(--odak-halka); }
+.safir-polaroid:active { transform: rotate(0deg) scale(.98); }
+.safir-buyuk img { display: block; width: 100%; max-height: 70vh; object-fit: contain; border-radius: var(--r-sm); }
+
+/* ---------------- defter */
+.safir-yaz { display: flex; flex-direction: column; gap: var(--b-2); }
+.safir-girdi { font-size: max(16px, var(--punto-md)); }
+.safir-yaz-alt { justify-content: space-between; align-items: center; gap: var(--b-3); }
+.safir-sayac { font-size: var(--punto-xs); color: var(--murekkep-2); font-variant-numeric: tabular-nums; }
+.safir-bos { text-align: center; color: var(--murekkep-2); margin: var(--b-4) 0; }
+.safir-defter-liste { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--b-3); }
+.safir-ani { padding: var(--b-3) var(--b-4); background: var(--kagit-2); border-radius: var(--r-md); }
+.safir-ani-ust { display: flex; align-items: center; gap: var(--b-2); min-height: 28px; }
+.safir-ani-ust .safir-nokta { margin: 0; width: 8px; height: 8px; flex: none; }
+.safir-ani-ad { font-weight: 800; font-size: var(--punto-sm); }
+.safir-ani-zaman { font-size: var(--punto-xs); color: var(--murekkep-2); }
+.safir-ani-sil { margin-left: auto; min-height: var(--dokunma-min); font-size: var(--punto-sm); }
+.safir-ani-metin { margin: var(--b-1) 0 0; white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.5; }
+
+@media (prefers-reduced-motion: reduce) {
+  .safir-yildiz, .safir-kedi-uyku, .safir-zzz { animation: none; }
+  .safir-yildiz { opacity: .9; }
+  .safir-uyandi .safir-kedi-uyanik { animation: none; }
+  .safir-cicek.safir-yeni { animation: safir-belir .3s ease both; }
+  .safir-hap { transition: opacity .25s ease; transform: translateX(-50%); }
+  .safir-isir .safir-hap { transform: translateX(-50%); }
+  .safir-polaroid { transition: none; }
+}
+@keyframes safir-belir { from { opacity: 0; } to { opacity: 1; } }
