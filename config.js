@@ -147,5 +147,18 @@ window.CD_CONFIG = {
      "ikimiz.jpg" duvarın tepesinde büyük görünür (oneCikan: true).
      --------------------------------------------------------------- */
   BIZIM_FOTOLAR: [   /* gerçek liste: gizli-kaynak/kisisel.json (şifreli) */
-  ]
+  ],
+
+  /* ---------------------------------------------------------------
+     SAFİR'İN YERİ — fotoğraflar şifreli (gizli/ klasöründe). Sıra burada.
+     "alt" fotoğrafın kısa tarifi; boş kalırsa "Safir" yazılır. Ekranda yazı çıkmaz.
+     --------------------------------------------------------------- */
+  SAFIR: {
+    FOTOLAR: [
+      { yol: "assets/safir/safir-1.jpg",        alt: "" },
+      { yol: "assets/safir/safir-2.jpg",        alt: "" },
+      { yol: "assets/safir/safir-pittiksu.jpg", alt: "" },
+      { yol: "assets/safir/safir-cemre.jpg",    alt: "" }
+    ]
+  }
 };

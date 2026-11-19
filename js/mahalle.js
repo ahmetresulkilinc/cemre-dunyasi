@@ -21,7 +21,8 @@ window.CD = window.CD || {};
     tirnak: 'Şekil, renk, aurora krom, nail art.', petevi: 'Ayı, hayalet, tavşan ve arkadaşları tek evde.',
     angela: 'Konuş, tiz sesle tekrar etsin; giydir, besle, uyut.', panda: 'Mantı, boba, mochi… karnı şişene kadar.',
     bahce: 'Lilyum ve gül ek, sula, açmasını bekle.', ofke: 'Terliği kap, tabakları kır, sonra nefes al.',
-    xox: 'İkimiz sırayla oynayalım; hamleni yap, sırası ona geçsin.', bizim: 'İkimize dair küçük şeyler.'
+    xox: 'İkimiz sırayla oynayalım; hamleni yap, sırası ona geçsin.', bizim: 'İkimize dair küçük şeyler.',
+    safir: 'Safir için küçük, sakin bir köşe.'
   };
   const ORTAK = { P: '@pencere', o: '@topuz', Z: '@kenar' };
   const BINA = {
@@ -57,8 +58,8 @@ window.CD = window.CD || {};
     bizim: { ad: 'Bizim Köşemiz', renk: { l: '@lamba', '|': 'bz-direk', H: 'bz-kalp', T: 'bz-tente', W: 'bz-serit', D: 'bz-duvar', p: 'bz-polaroid', R: 'bz-kapi', B: 'bz-bank' }, satir: [
       '..l.................', '.lll...HH.HH........', '..|...HHHHHHH.......', '..|....HHHHH........', '..|.....HHH.........', '..|..TWTWTWTWTWTWT..', '..|..DDDDDDDDDDDDD..',
       '..|..DppDDDDRRRRDD..', '..|..DppDDDDRRRRDD..', '..|..DDDDDDDRRRRDD..', '..|..DDDDDDDRRoRDD..', '..|.BBBBB...RRRRDD..', '..|.B...B...RRRRDD..', 'ZZZZZZZZZZZZZZZZZZZZ'] },
-    // Safir'in Yeri: Ahmet ile Cemre'nin kedisi Safir için anı köşesi. Şimdilik yalnız arsa (küçük ağaç + boş yer);
-    // bölümü (id: safir) sonra ayrı iş olarak gelecek. Bölüm kaydolunca bina kendiliğinden açılır.
+    // Safir'in Yeri: Ahmet ile Cemre'nin kedisi Safir için sakin anı köşesi (bölüm: js/bolum/safir.js).
+    // Bölüm kayıtlıysa bina bağlantı olur; değilse eski sakin "yakında" hâli kalır.
     safir: { ad: "Safir'in Yeri", sakin: true, renk: { G: 'sf-yaprak', g: 'sf-yaprak-koyu', B: 'sf-govde', c: 'sf-cimen', t: 'sf-toprak', w: 'sf-cicek' }, satir: [
       '......GGGG......', '....GGGGGGGG....', '...GGgGGGGgGG...', '..GGGGGGgGGGGG..', '..GgGGGGGGGGgG..', '...GGGGgGGGGG...', '....GGGGGGGG....',
       '.......BB.......', '.......BB.......', '.......BB.......', '......BBBB......', '.w.cc.......cc.w', '.ttttttttttttttt', 'ZZZZZZZZZZZZZZZZ'] },
