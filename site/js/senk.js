@@ -31,9 +31,9 @@ window.CD = window.CD || {};
   // mahalle varlığı/postası sık değişir; bunlar gelince "Yeni kayıtlar geldi" fısıltısı çıkmaz (posta kartı zaten söyler)
   // safir.*: Safir'in Yeri'ndeki çiçek/anı da fısıltısız gelir (Cemre'yi hiçbir şey hazırlıksız yakalamasın)
   // Faz 2: gece mührü, ortak bakım, el ele sayacı, "dinliyorum", oyun durumları da posta kartı/ekranla söylenir → fısıltısız
-  // Faz 3: postane/müze/saat kulesi/eğlence/plak kayıtları da posta kartıyla söylenir → fısıltısız
-  const SESSIZ_ANAHTAR = /^(varlik|posta|saklinot|okunan|soru|mektupMuhur|safir|gece|bakim|elele|dinliyor|oyun|postane|muze|sayac|eglence|plak|defter)\./;
-  const MEDYA_ONEK = /^(kaset|sonfoto|tahta|ani):/;   // genel mağazadaki Faz 2 medyası: kendi posta kartı var, "fotoğraf geldi" denmez
+  // Faz 3: postane/müze/saat kulesi/eğlence/plak kayıtları da posta kartıyla söylenir → fısıltısız (Sanat Galerisi de: 'galeri' postası)
+  const SESSIZ_ANAHTAR = /^(varlik|posta|saklinot|okunan|soru|mektupMuhur|safir|gece|bakim|elele|dinliyor|oyun|postane|muze|sayac|eglence|plak|defter|galeri)\./;
+  const MEDYA_ONEK = /^(kaset|sonfoto|tahta|ani|galeri):/;   // genel mağazadaki Faz 2 medyası: kendi posta kartı var, "fotoğraf geldi" denmez
 
   let oda = null, acik = false, bekleyen = 0, sonSenk = 0, calisiyor = false, tekrar = false, durum = 'kapalı';
   let sessiz = false;          // true iken yerel yazmalar damgalanmaz (buluttan gelen değer yazılırken)

@@ -28,7 +28,8 @@ window.CD = window.CD || {};
     // Faz 3
     postane: 'Şu olunca aç zarfları, zaman kapsülü, minnet kutusu, QR hediye.', muze: 'İlklerimiz, anı haritası, birlikte yapacağımız 50 şey.',
     sayac: 'Buluşmaya, doğum günlerine, yıldönümüne geri sayım.', eglence: 'Buluşma kavanozu, beni ne kadar tanıyorsun, özel gün sorusu.',
-    plak: 'Ortak çalma listemiz ve şu an dinlediklerimiz.', defter: 'Hatıra Defteri.'
+    plak: 'Ortak çalma listemiz ve şu an dinlediklerimiz.', defter: 'Hatıra Defteri.',
+    galeri: "Cemre'nin fotoğrafları ve tırnak eserleri; çerçeveli, spot ışıklı."
   };
   const ORTAK = { P: '@pencere', o: '@topuz', Z: '@kenar' };
   const BINA = {
@@ -98,6 +99,10 @@ window.CD = window.CD || {};
     plak: { ad: 'Plak Dükkanı', renk: { K: 'pk-plak', k: 'pk-oluk', L: 'pk-etiket', C: 'pk-cati', D: 'pk-duvar', N: 'pk-nota', R: 'pk-kapi' }, satir: [
       '.....KKKKKK.....', '....KKkKKkKK....', '....KKKLLKKK....', '....KKKLLKKK....', '....KKkKKkKK....', '.....KKKKKK.....', '.CCCCCCCCCCCCCC.',
       '.DDDDDDDDDDDDDD.', '.DPPPPPPDDRRRRD.', '.DPNNPPPDDRRRRD.', '.DPNPPPPDDRRoRD.', '.DPPPPPPDDRRRRD.', '.DDDDDDDDDRRRRD.', 'ZZZZZZZZZZZZZZZZ'] },
+    // Sanat Galerisi: sütunlu küçük müze, alınlıkta altın çerçeveli tablo, sütun aralarında kadife afiş (bölüm: js/bolum/galeri.js)
+    galeri: { ad: 'Sanat Galerisi', renk: { G: 'gl-altin', C: 'gl-cati', p: 'gl-tablo', q: 'gl-tablo-2', S: 'gl-friz', K: 'gl-sutun', D: 'gl-duvar', V: 'gl-kadife', R: 'gl-kapi', B: 'gl-basamak' }, satir: [
+      '.......GG.......', '.....CCCCCC.....', '...CCCGGGGCCC...', '.CCCCCGpqGCCCCC.', 'CCCCCCGGGGCCCCCC', '.SSSSSSSSSSSSSS.', '.KKDKKDRRDKKDKK.',
+      '.KKVKKRRRRKKVKK.', '.KKVKKRRRRKKVKK.', '.KKDKKRRoRKKDKK.', '.KKDKKRRRRKKDKK.', '.SSSSSSSSSSSSSS.', 'BBBBBBBBBBBBBBBB', 'ZZZZZZZZZZZZZZZZ'] },
     pano: { ad: 'Mahalle Panosu', renk: { W: 'pn-cerceve', k: 'pn-kagit', q: 'pn-cizgi', '|': 'pn-direk', b: '@bayrak', m: 'pn-kutu' }, satir: [
       '.WWWWWWWW.', '.WkkkkkkW.', '.WkqqqqkW.', '.WkkkkkkW.', '.WWWWWWWW.', '....||....', '....||....', '....||.bm.', '....||.mm.', '....||.mm.', '....||....', '....||....', '....||....', 'ZZZZZZZZZZ'],
       ek: '<g class="mh-raptiye"><rect x="12" y="3" width="1" height="1"/><rect x="14" y="3" width="1" height="1"/><rect x="12" y="4" width="3" height="1"/><rect x="13" y="5" width="1" height="1"/></g>' }
@@ -158,9 +163,10 @@ window.CD = window.CD || {};
   // bahçenin yanında, oyun binalarından ayrı sakin bir teras: Safir'in Yeri
   // Faz 2: Güzellik Salonu + Çizim Atölyesi terası, El Ele Bankı kendi küçük terasında (bahçeden sonra); Öfke Odası yine en dipte
   // Faz 3: Postane + Saat Kulesi terası (evlerin altında), Anı Müzesi + Hatıra Defteri terası, Plak Dükkanı + Eğlence Köşesi terası (oyunların üstünde).
+  // Sanat Galerisi: El Ele Bankı'nın terasında, bankın yanında.
   // Ek binalar: bir bölüm dosyası kendi binasını CD.mhEkBinalar kuyruğuyla ekleyebilir ({ id, ad, aciklama, renk, satir, teras, yalniz }).
   // "yalniz: 'ahmet'" olan bina yalnız o kişinin telefonunda kurulur; tanımı da yalnız o telefonda yüklenen dosyadadır.
-  const TERASLAR = [['bizim', 'pano'], ['pittiksu', 'barbie'], ['postane', 'sayac'], ['tirnak', 'petevi'], ['angela', 'panda'], ['guzellik', 'tahta'], ['muze', 'defter'], ['bahce'], ['elele'], ['safir'], ['plak', 'eglence'], ['xox', 'ofke']];
+  const TERASLAR = [['bizim', 'pano'], ['pittiksu', 'barbie'], ['postane', 'sayac'], ['tirnak', 'petevi'], ['angela', 'panda'], ['guzellik', 'tahta'], ['muze', 'defter'], ['bahce'], ['elele', 'galeri'], ['safir'], ['plak', 'eglence'], ['xox', 'ofke']];
   const EK = {};             // id → ek bina tanımı
   const gorunsun = (id) => !EK[id] || !EK[id].yalniz || CD.kim() === EK[id].yalniz;
   function ekKaydet() {
@@ -175,7 +181,7 @@ window.CD = window.CD || {};
     });
   }
   const terasNo = (id) => TERASLAR.findIndex(t => t.indexOf(id) >= 0);
-  const BOLUMLER = ['pittiksu', 'barbie', 'tirnak', 'petevi', 'angela', 'panda', 'bahce', 'ofke', 'xox', 'bizim', 'elele', 'tahta', 'postane', 'muze', 'sayac', 'eglence', 'plak'];
+  const BOLUMLER = ['pittiksu', 'barbie', 'tirnak', 'petevi', 'angela', 'panda', 'bahce', 'ofke', 'xox', 'bizim', 'elele', 'tahta', 'postane', 'muze', 'sayac', 'eglence', 'plak', 'galeri'];
   const SONRADAN = ['safir', 'guzellik', 'defter'];   // sakin arsalar: dosyası gelince bina kendiliğinden açılır
   const evi = (kim) => { const e = (MAH().EV || {})[kim]; return BINA[e] && e !== 'pano' ? e : 'bizim'; };
   const yapimda = (id) => !/[?&]hepsi/.test(location.search) && ((CD.config || {}).YAPIM_ASAMASINDA || []).includes(id);
