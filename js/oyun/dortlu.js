@@ -103,6 +103,7 @@
     if (s) { d.kazanan = s.kim; d.cizgi = s.cizgi; d.skor[s.kim]++; }
     else if (d.tahta.every(Boolean)) { d.kazanan = 'berabere'; d.skor.berabere++; }
     else d.sira = A().rakip(kim);
+    if (d.kazanan) CD.pul && CD.pul('oyun', { kisa: 'dortlu', kazanan: d.kazanan });
     CD.depo.yaz(ANAHTAR, d);
     CD.depo.yaz('cihaz.dortlu.gorulen', d.hamle + ':' + d.no);
     ciz(i);

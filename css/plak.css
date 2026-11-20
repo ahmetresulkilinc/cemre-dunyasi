@@ -1,0 +1,23 @@
+/* plak.css — Plak Dükkanı (önek pk-). */
+body[data-bolum="plak"] { --oda: var(--seker-gok); --oda-zemin: var(--goz-zemin); --oda-vurgu: var(--seker-gok); }
+.pk-govde { display: flex; flex-direction: column; gap: var(--b-3); }
+.pk-simdi { display: flex; align-items: center; gap: var(--b-3); }
+.pk-plak svg { width: 56px; height: 56px; display: block; }
+.pk-plak.donuyor svg { animation: pk-don 2.4s linear infinite; }
+@keyframes pk-don { to { transform: rotate(360deg); } }
+.pk-simdi-metin { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.pk-simdi-metin strong { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pk-eylemler { gap: var(--b-2); }
+.pk-baslik { margin: var(--b-3) 0 0; font-family: var(--yazi-baslik); font-size: var(--punto-lg); }
+.pk-bos { padding-block: var(--b-4); }
+.pk-liste { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.pk-satir { display: flex; align-items: stretch; gap: 4px; }
+.pk-sarki { flex: 1; min-width: 0; display: flex; align-items: center; gap: var(--b-2); min-height: 52px; padding: 0 var(--b-3); border-radius: var(--r-sm); background: var(--kagit); box-shadow: var(--golge-yastik-ic); color: var(--murekkep); text-align: left; }
+.pk-sarki:focus-visible { outline: 3px solid var(--odak); outline-offset: 2px; }
+.pk-sarki:active { transform: translateY(2px); }
+.pk-satir[data-kim="cemre"] .pk-sarki { border-left: 6px solid var(--seker-kiraz); }
+.pk-satir[data-kim="ahmet"] .pk-sarki { border-left: 6px solid var(--seker-gok); }
+.pk-sarki-ad { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: var(--kalin-vurgu); }
+.pk-kaynak-svg { width: 20px; height: auto; display: block; }
+.pk-sil { flex: none; align-self: center; }
+@media (prefers-reduced-motion: reduce) { .pk-plak.donuyor svg { animation: none; } }

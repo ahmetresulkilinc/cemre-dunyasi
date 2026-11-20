@@ -48,7 +48,7 @@ window.CD = window.CD || {};
     if (!nabizMi) yay('varlik:degisti', 'ben');
   }
   // sessiz yerler: karşı telefonda "… şu an X'te" diye görünmez (Safir'in Yeri yalnız içine girene görünür)
-  const SESSIZ_YER = { safir: true };
+  const SESSIZ_YER = { safir: true, ozel: true };
   const yerim = () => { const a = CD.aktifBolum ? CD.aktifBolum() : ''; return (a && !SESSIZ_YER[a]) ? a : 'mahalle'; };
 
   /* ---------------------------------------------------------------- karşı kişinin görünümü (senk + canlı birleşimi) */
@@ -80,6 +80,7 @@ window.CD = window.CD || {};
     const liste = dizi(al('posta.' + k, [])).concat([o]).slice(-POSTA_MAKS);
     yaz('posta.' + k, liste);                                   // kalıcı kopya (senk ile karşıya gider)
     if (aktif() && CD.canli) CD.canli.yayinla({ kim: k, o });   // anlık kopya (kanal açıksa)
+    if (tur === 'elci') CD.pul && CD.pul('elci', { kisa: (v && v.hediye) || '' });   // Hatıra Defteri (mahalle.js elçiyi buradan gönderir)
     return o;
   }
 
@@ -140,11 +141,13 @@ window.CD = window.CD || {};
     if (RUHLAR.indexOf(tur) < 0 || !ben()) return;
     varlikYaz({ ruh: { tur, t: Date.now() } });
     gonder('ruh', { tur });
+    CD.pul && CD.pul('ruh', { kisa: tur });
   }
   function uyku(uyuyor) {
     if (!ben()) return;
     varlikYaz({ uyku: { uyuyor: !!uyuyor, t: Date.now() } });
     gonder('uyku', { uyuyor: !!uyuyor });
+    CD.pul && CD.pul('uyku', { kisa: uyuyor ? 'uyudu' : 'uyandı' });
   }
   function benUyuyor() { const v = benim(); return !!(v && v.uyku && v.uyku.uyuyor && Date.now() - (v.uyku.t || 0) < UYKU_GECERLI); }
   function benimRuh() { const v = benim(); return (v && v.ruh && RUHLAR.indexOf(v.ruh.tur) >= 0) ? v.ruh.tur : null; }
@@ -162,6 +165,7 @@ window.CD = window.CD || {};
     if (!o) return;
     const a = dizi(al(ELCI_ALINAN, [])); if (a.indexOf(o.id) < 0) { a.push(o.id); yaz(ELCI_ALINAN, a.slice(-60)); }
     gonder('elciAlindi', { elciId: o.id, hediye: (o.v || {}).hediye, hayvan: (o.v || {}).hayvan });
+    CD.pul && CD.pul('elci', { kisa: 'elçiyi karşıladı' });
   }
 
   /* ---------------------------------------------------------------- saklı not */
@@ -183,6 +187,7 @@ window.CD = window.CD || {};
     const liste = notlarim().filter(x => x.bina !== bina).concat([n]);   // bina başına 1 bekleyen not
     yaz('saklinot.' + k, liste.slice(-12));
     gonder('not', { bina, notId: n.id });
+    CD.pul && CD.pul('not', { kisa: bina });
     return n;
   }
   function notSil(id, sessizce) {
@@ -194,6 +199,7 @@ window.CD = window.CD || {};
     const b = ben(); if (!b || !n) return;
     const a = dizi(al('okunan.' + b, [])); if (a.indexOf(n.id) < 0) { a.push(n.id); yaz('okunan.' + b, a.slice(-60)); }
     gonder('muhur', { neyi: 'not', notId: n.id, bina: n.bina });
+    CD.pul && CD.pul('muhur', { kisa: 'not okundu' });
     yay('varlik:degisti', 'ben');
   }
 
@@ -216,6 +222,7 @@ window.CD = window.CD || {};
     Object.keys(c).forEach(g => { if (!/^\d{4}-\d{2}-\d{2}$/.test(g) || gunNo(g) < sinir) delete c[g]; });
     yaz('soru.' + k, c);
     if (metin && ilk) gonder('soru', { gun: iso });
+    if (metin && ilk) CD.pul && CD.pul('soru', { kisa: iso });
     yay('varlik:degisti', 'ben');
   }
 

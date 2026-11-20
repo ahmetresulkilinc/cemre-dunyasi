@@ -140,6 +140,7 @@
   function kutla() {
     const s = sayi();
     CD.depo.yaz(s.k, { sayi: s.sayi + 1, son: Date.now() });
+    CD.pul && CD.pul('elele');
     const m = ctx.efekt.merkez(ui.kalp);
     ctx.efekt.kalp(m.x, m.y, 18);
     ctx.ses.parilti();

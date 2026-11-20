@@ -74,6 +74,7 @@
     const hepsi = await CD.medya.liste('tahta');
     for (const x of hepsi.slice(0, Math.max(0, hepsi.length - ALBUM_MAKS))) await CD.medya.sil(x.id);
     if (aktif()) V().gonder('tahta', { id: kayit.id });
+    CD.pul && CD.pul('tahta');
     if (!ctx) return;
     ctx.ses.parilti(); ctx.toast('Albüme kondu 🎨 (' + Math.round(veri.length / 1024) + ' KB)');
     albumCiz();

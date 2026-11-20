@@ -136,6 +136,7 @@
     let sonuc = 'Iska 🌊';
     if (gemi) sonuc = gemi.every(c => atilan.has(c)) ? 'Battı! 💥' : 'Vurdun! 🔥';
     if (t.gemiler[rakip].every(g => g.every(c => atilan.has(c)))) { t.faz = 'bitti'; t.kazanan = ben; t.skor[ben] = (t.skor[ben] || 0) + 1; }
+    if (t.faz === 'bitti') CD.pul && CD.pul('oyun', { kisa: 'amiral', kazanan: ben });
     tekYaz(t); ciz();
     ctx.toast(sonuc, 1200); if (gemi) ctx.ses.gum(); else ctx.ses.blop();
     if (t.faz === 'bitti') { ctx.ses.zafer(); ctx.efekt.konfeti(undefined, undefined, 18); return; }
@@ -245,6 +246,7 @@
     // kazanma kutlaması (maç başına bir kez)
     if (o.yenildi && b.mac === o.mac && CD.depo.al(KUTLANAN, '') !== b.mac) {
       CD.depo.yaz(KUTLANAN, b.mac); b.galibiyet++; yaz(b);
+      CD.pul && CD.pul('oyun', { kisa: 'amiral', kazanan: A().ben() });
       ctx.ses.zafer(); ctx.efekt.konfeti(undefined, undefined, 18);
     }
     ui.skor.textContent = 'Kazandığın deniz savaşı: ' + benim().galibiyet + ' · ' + A().adi(k) + ': ' + o.galibiyet;

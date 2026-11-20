@@ -135,6 +135,7 @@
   function turBitir(dogru, bilen, neden) {
     if (!tur || tur.bitti) return;
     tur.bitti = true; tur.dogru = !!dogru;
+    CD.pul && CD.pul('oyun', { kisa: 'ciz', kazanan: dogru ? 'birlikte' : null });
     if (dogru) { puanEkle(); ctx.ses.zafer(); ctx.efekt.konfeti(undefined, undefined, 16); }
     else ctx.ses.uf();
     if (oda) oda.gonder('bitti', { no: tur.no, kelime: tur.kelime, dogru: !!dogru, neden: neden || (dogru ? 'bildi' : 'pas') });

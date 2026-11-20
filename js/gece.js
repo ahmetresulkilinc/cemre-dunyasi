@@ -70,6 +70,7 @@ window.CD = window.CD || {};
     if (kutlandiMi(g)) return;
     const a = CD.depo.al(KUTLANAN, []); const l = Array.isArray(a) ? a : []; l.push(g); CD.depo.yaz(KUTLANAN, l.slice(-60));
     CD.olay.yay('gece:yildiz', g);
+    CD.pul && CD.pul('yildiz', { kisa: g });
     const A = karsi() ? CD.kimAdi(karsi()) : '';
     if (CD.posta) CD.posta.kart({ kim: karsi(), tur: 'yildiz', baslik: 'Bu geceye bir yıldız eklendi ⭐', alt: (A ? 'Sen ve ' + A : 'İkiniz') + ' iyi geceler dediniz · seri ' + seri() });
     try { CD.ses.isilti(); } catch (e) {}
@@ -86,6 +87,7 @@ window.CD = window.CD || {};
     kendi[g] = 1;
     CD.depo.yaz('gece.' + k, sikistir(kendi));   // en çok son 400 gece, aralıklarla sıkıştırılmış
     if (V()) V().gonder('iyiGece', { gece: g });
+    CD.pul && CD.pul('iyigece', { kisa: g });
     CD.olay.yay('gece:degisti', g);
     const yildiz = onunMu(g) && V() && V().aktif();
     if (yildiz) setTimeout(() => kontrol(g), 900);

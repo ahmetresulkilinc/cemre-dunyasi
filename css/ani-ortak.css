@@ -1,0 +1,9 @@
+/* ani-ortak.css — Faz 3 bölümlerinin ortak parçaları (önek ao-): sekmeler, kişi ikonu, foto alanı. */
+.ao-sekmeler { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; padding-bottom: 2px; margin-bottom: var(--b-4); }
+.ao-sekmeler::-webkit-scrollbar { display: none; }
+.ao-sekmeler .cip { flex: none; white-space: nowrap; }
+.ao-kisi { display: inline-flex; align-items: center; justify-content: center; flex: none; line-height: 0; }
+.ao-kisi canvas { image-rendering: pixelated; image-rendering: crisp-edges; display: block; }
+.ao-foto-alan { display: flex; flex-direction: column; gap: var(--b-2); }
+.ao-foto-alan .satir { flex-wrap: wrap; gap: var(--b-2); align-items: center; }
+.ao-foto-oniz { display: block; max-width: 100%; max-height: 220px; object-fit: contain; border-radius: var(--r-sm); border: 3px solid var(--kagit); box-shadow: var(--golge-yastik-ic); }

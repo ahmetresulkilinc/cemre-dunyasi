@@ -137,6 +137,7 @@ window.CD = window.CD || {};
       const benim = (await medya.liste('kaset:' + k));
       for (const x of benim.slice(0, Math.max(0, benim.length - KASET_MAKS))) await medya.sil(x.id);
       if (bulut()) V().gonder('kaset', { id: kayit.id, sure: kayit.sure });
+      CD.pul && CD.pul('kaset', { kisa: kayit.sure + ' sn' });
       CD.ses.parilti();
       CD.sheetKapat();
       CD.toast(bulut() ? 'Kaset yola çıktı 📼' : 'Bulut kapalı; kaset bu telefonda rafta 📼');

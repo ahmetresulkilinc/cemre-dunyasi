@@ -5,13 +5,16 @@
    Şifreli dosyalar site/tools/gizle.js ile üretilir. Anahtar (kelime değil) bu cihazda hatırlanır. */
 (() => {
   'use strict';
-  const SCRIPTLER = ['js/cekirdek.js', 'js/senk.js', 'js/canli.js', 'js/varlik.js', 'js/petler-miras.js', 'js/giris.js', 'js/tuval.js', 'js/bakim.js',
+  const SCRIPTLER = ['js/cekirdek.js', 'js/senk.js', 'js/canli.js', 'js/varlik.js', 'js/defter.js', 'js/petler-miras.js', 'js/giris.js', 'js/tuval.js', 'js/bakim.js', 'js/ani-ortak.js', 'js/qr.js',
     'js/bolum/pittiksu.js', 'js/bolum/barbie.js', 'js/bolum/tirnak.js', 'js/bolum/petevi.js', 'js/bolum/angela.js', 'js/bolum/panda.js', 'js/bolum/bahce.js', 'js/bolum/ofke.js',
     'js/oyun/salon.js', 'js/bolum/xox.js', 'js/oyun/dortlu.js', 'js/oyun/amiral.js', 'js/oyun/ciz.js',
     'js/bolum/bizim.js', 'js/bolum/safir.js', 'js/bolum/elele.js', 'js/bolum/tahta.js', 'js/bolum/guzellik.js',
+    'js/bolum/postane.js', 'js/bolum/muze.js', 'js/bolum/sayac.js', 'js/bolum/eglence.js', 'js/bolum/plak.js', 'js/bolum/defter.js',
     'js/sorular.js', 'js/posta.js', 'js/gece.js', 'js/kaset.js', 'js/paylas.js', 'js/sehir.js', 'js/mahalle.js'];
+  // yalnız Ahmet'in telefonunda yüklenen bölüm (Cemre'nin telefonunda betik etiketi bile oluşmaz); kim sonradan seçilirse mahalle.js yükler
+  try { if (localStorage.getItem('cd.cihaz.kim') === '"ahmet"') SCRIPTLER.splice(SCRIPTLER.indexOf('js/sorular.js'), 0, 'js/bolum/ozel.js'); } catch (e) {}
   // başka ekibin yazdığı, henüz gelmemiş olabilecek dosyalar: yoksa sessizce atlanır (hata yazılmaz, akış durmaz; bina "yakında" der)
-  const SECIMLI = new Set(['js/bolum/guzellik.js']);
+  const SECIMLI = new Set(['js/bolum/guzellik.js', 'js/defter.js', 'js/bolum/defter.js']);
   const SAKLA = 'cd.kilit.anahtar';
   const ODA_SAKLA = 'cd.senk.oda';   // sihirli kelimeden türetilen bulut odası (kelime saklanmaz)
   const G = window.GIZLI = { hazir: false, _url: {}, url(p) { return this._url[p] || p; } };

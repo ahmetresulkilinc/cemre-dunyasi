@@ -73,6 +73,20 @@ window.CD_CONFIG = {
   OYUN_KELIMELERI: [],
 
   /* ---------------------------------------------------------------
+     SAAT KULESİ — geri sayımlar (Faz 3). Hepsi boş başlar; tarih uydurulmaz.
+     Buraya yazılanlar iki telefonda da "ayar" rozetiyle görünür. Uygulamadan da eklenebilir.
+     Örnek satır: { TUR: "dogum", AD: "Cemre'nin doğum günü", TARIH: "yyyy-aa-gg", YILLIK: true },
+     TUR: "bulusma" | "dogum" | "yildonumu" | "tasinma" | "ozel".  (BIZIM.BIRLIKTE_TARIH doluysa yıldönümü kendiliğinden eklenir.)
+     --------------------------------------------------------------- */
+  SAYAC: [],
+
+  /* ---------------------------------------------------------------
+     POSTANE QR HEDİYE — QR kodun açacağı adres. Boş bırakılırsa site hangi adresten açıksa o kullanılır
+     (dosyadan açıkken QR üretilmez). Örnek: "https://kullanici.github.io/cemre/"
+     --------------------------------------------------------------- */
+  SITE_ADRESI: "",
+
+  /* ---------------------------------------------------------------
      GÜNÜN SORUSU — Mahalle Panosu'nda her gün bir soru çıkar (iki telefonda aynı).
      Boş bırakırsan sitedeki 160'tan fazla hazır soru sırayla kullanılır (js/sorular.js).
      Kendi sorularını yazmak istersen her satıra bir soru: "Soru?",
@@ -181,5 +195,14 @@ window.CD_CONFIG = {
      --------------------------------------------------------------- */
   TIRNAK: {
     FOTO_ILHAM: []
+  },
+
+  /* ---------------------------------------------------------------
+     HATIRA DEFTERİ — pul eşiklerinde açılan gizli sürpriz mektuplar (5 tane: 10, 50, 200, 500, 1000 pul).
+     Sırayla tırnak içine yaz; paragrafları arasına iki ters bölü-n koy. Boş kalan mektup "Ahmet'in sürprizi yakında 💌" der.
+     Örnek: MEKTUPLAR: ["İlk on pulumuz! ...", "", "", "", ""]
+     --------------------------------------------------------------- */
+  DEFTER: {
+    MEKTUPLAR: []
   }
 };

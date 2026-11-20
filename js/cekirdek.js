@@ -74,7 +74,7 @@ window.CD = window.CD || {};
   CD.depo.iceAktar = (json) => { try { const o = typeof json === 'string' ? JSON.parse(json) : json; const v = o && o.veri ? o.veri : o; Object.keys(v).forEach(k => CD.depo.yaz(k, v[k])); return true; } catch (e) { return false; } };
 
   // sıfırla: oyun ilerlemesi, başarımlar, kayıtlar, eklenen fotoğraflar silinir; KORU listesi (tam anahtar) kalır
-  const SIFIRLA_KORU = ['cd.pittiksu.dogumTarihi', 'cd.pittiksu.dogumVarsayilan', 'cd.kilit.anahtar', 'cd.senk.oda', 'cd.senk.sifirlaGoruldu', 'cd.cihaz.kim', 'cd.ses', 'cd.cihaz.hava'];
+  const SIFIRLA_KORU = ['cd.pittiksu.dogumTarihi', 'cd.pittiksu.dogumVarsayilan', 'cd.kilit.anahtar', 'cd.senk.oda', 'cd.senk.sifirlaGoruldu', 'cd.cihaz.kim', 'cd.ses', 'cd.cihaz.hava', 'cd.cihaz.ozel.veri', 'cd.cihaz.ozel.pin'];
   CD.depo.sifirla = async function (koru) {
     const kal = new Set([].concat(SIFIRLA_KORU, koru || []));
     const sakla = {}; kal.forEach(k => { try { const v = localStorage.getItem(k); if (v != null) sakla[k] = v; } catch (e) {} });
