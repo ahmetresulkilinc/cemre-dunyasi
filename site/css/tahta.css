@@ -1,0 +1,27 @@
+/* css/tahta.css — Çizim Atölyesi. Önek: tahta- */
+[data-bolum="tahta"] { --oda: var(--seker-yaprak); --oda-zemin: var(--kagit-2); --oda-vurgu: var(--seker-kiraz); }
+
+.tahta-araclar { display: flex; flex-direction: column; gap: var(--b-2); }
+.tahta-renkler { justify-content: center; }
+.tahta-renkler .ornek { width: var(--dokunma-min); height: var(--dokunma-min); }
+.tahta-satir { justify-content: center; flex-wrap: wrap; gap: var(--b-2); }
+.tahta-kalin { padding: 0; overflow: visible; flex-wrap: wrap; }
+.tahta-kalin .cip, .tahta-silgi { min-height: var(--dokunma-min); display: inline-flex; align-items: center; gap: 6px; }
+.tahta-kalin-nokta { display: inline-block; width: var(--k); height: var(--k); border-radius: 50%; background: currentColor; }
+.tahta-silgi[aria-pressed="true"] { background: var(--murekkep); color: var(--kagit); }
+
+.tahta-cerceve { width: min(100%, 560px); margin-inline: auto; padding: 8px; border-radius: var(--r-md); background: var(--bd-th-cerceve, #9C6B4E);
+  box-shadow: 0 5px 0 color-mix(in srgb, var(--bd-th-cerceve, #9C6B4E) 70%, #000), var(--golge-yastik); }
+.tahta-tuval { display: block; width: 100%; height: auto; aspect-ratio: 1; border-radius: 4px; background: #FFFDF9; touch-action: none; cursor: crosshair; -webkit-user-select: none; user-select: none; }
+.tahta-durum { text-align: center; margin: 0; }
+
+.tahta-album { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--b-2); }
+@media (min-width: 480px) { .tahta-album { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.tahta-album > p { grid-column: 1 / -1; }
+.tahta-album-oge { display: block; padding: 4px 4px 10px; background: #FFFDF9; border-radius: 3px; box-shadow: 0 2px 0 var(--golge-sert-ic), 0 0 0 1px var(--cizgi); transform: rotate(-1.5deg); }
+.tahta-album-oge:nth-child(even) { transform: rotate(1.5deg); }
+.tahta-album-oge img { display: block; width: 100%; aspect-ratio: 1; object-fit: cover; }
+.tahta-album-oge:focus-visible { outline: 3px solid var(--odak); outline-offset: 2px; }
+.tahta-buyuk { display: block; width: min(100%, 420px); margin-inline: auto; border-radius: var(--r-sm); box-shadow: var(--golge-yastik); }
+
+@media (prefers-reduced-motion: reduce) { .tahta-album-oge { transform: none !important; } }

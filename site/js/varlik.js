@@ -241,7 +241,11 @@ window.CD = window.CD || {};
   const SESLI_BITER = (ad) => /[aeıioöuü]$/i.test(String(ad || ''));
   CD.ek = {
     den: (ad) => ad + "'" + (SERT(ad) ? 't' : 'd') + (KALIN(SONSESLI(ad)) ? 'an' : 'en'),          // Cemre'den, Ahmet'ten
-    nin: (ad) => { const u = SONSESLI(ad); const v = { a: 'ı', ı: 'ı', o: 'u', u: 'u', e: 'i', i: 'i', ö: 'ü', ü: 'ü' }[u] || 'i'; return ad + "'" + (SESLI_BITER(ad) ? 'n' : '') + v + 'n'; }   // Cemre'nin, Ahmet'in
+    nin: (ad) => { const u = SONSESLI(ad); const v = { a: 'ı', ı: 'ı', o: 'u', u: 'u', e: 'i', i: 'i', ö: 'ü', ü: 'ü' }[u] || 'i'; return ad + "'" + (SESLI_BITER(ad) ? 'n' : '') + v + 'n'; },   // Cemre'nin, Ahmet'in
+    // Faz 2: bulunma / yönelme / belirtme hâlleri
+    de: (ad) => ad + "'" + (SERT(ad) ? 't' : 'd') + (KALIN(SONSESLI(ad)) ? 'a' : 'e'),                                            // Cemre'de, Ahmet'te
+    ye: (ad) => ad + "'" + (SESLI_BITER(ad) ? 'y' : '') + (KALIN(SONSESLI(ad)) ? 'a' : 'e'),                                       // Cemre'ye, Ahmet'e
+    i: (ad) => { const v = { a: 'ı', ı: 'ı', o: 'u', u: 'u', e: 'i', i: 'i', ö: 'ü', ü: 'ü' }[SONSESLI(ad)] || 'i'; return ad + "'" + (SESLI_BITER(ad) ? 'y' : '') + v; }   // Cemre'yi, Ahmet'i
   };
   /* yer adları (şerit metni için hazır hâl ekleriyle) */
   const YERLER = {
@@ -251,6 +255,8 @@ window.CD = window.CD || {};
     bahce: { ad: 'Bahçe', de: "Bahçe'de", em: '🌷' }, ofke: { ad: 'Öfke Odası', de: "Öfke Odası'nda", em: '🍽️' },
     xox: { ad: 'Oyun Salonu', de: "Oyun Salonu'nda", em: '❌' }, bizim: { ad: 'Bizim Köşemiz', de: "Bizim Köşemiz'de", em: '💗' },
     safir: { ad: "Safir'in Yeri", de: "Safir'in Yeri'nde", em: '🤍' },
+    elele: { ad: 'El Ele Bankı', de: "El Ele Bankı'nda", em: '🤝' }, tahta: { ad: 'Çizim Atölyesi', de: "Çizim Atölyesi'nde", em: '🎨' },
+    guzellik: { ad: 'Güzellik Salonu', de: "Güzellik Salonu'nda", em: '💄' },
     mahalle: { ad: 'Mahalle', de: 'mahallede', em: '👋' }
   };
 

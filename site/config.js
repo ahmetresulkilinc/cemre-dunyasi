@@ -57,8 +57,20 @@ window.CD_CONFIG = {
       cemre: { SAC: "#3E2A22", TEN: "#F3D2BC", UST: "#2E2A30", ALT: "#4A6C93" },
       ahmet: { SAC: "#1E1A1A", TEN: "#C99A74", UST: "#2A2A2E", ALT: "#4A6C93" }
     },
-    MEKTUP_YAZARI: "ahmet"
+    MEKTUP_YAZARI: "ahmet",
+    /* İKİ ŞEHİR — mahallede iki şehrin saati ve havası görünür. İkisinden biri boşsa bu özellik gizlenir.
+       Örnek: SEHIR: { cemre: "İstanbul", ahmet: "Gaziantep" }  (eklenecek: Ahmet doldurur)
+       Büyük şehirlerin koordinatı sitede hazır; başka bir yerse SEHIR_KOORD'a [enlem, boylam] yaz, ör. cemre: [41.01, 28.98].
+       Hava Open-Meteo'dan gelir (anahtar yok, konum izni istenmez, günde en çok 6 kez). */
+    SEHIR: { cemre: "", ahmet: "" },
+    SEHIR_KOORD: { cemre: null, ahmet: null }
   },
+
+  /* ---------------------------------------------------------------
+     ÇİZ VE TAHMİN ET — Oyun Salonu'ndaki oyunun hazır 140'tan fazla kelimesi var.
+     Kendi kelimelerini eklemek istersen: OYUN_KELIMELERI: ["pıttıksu", "bizim bank"],
+     --------------------------------------------------------------- */
+  OYUN_KELIMELERI: [],
 
   /* ---------------------------------------------------------------
      GÜNÜN SORUSU — Mahalle Panosu'nda her gün bir soru çıkar (iki telefonda aynı).
@@ -160,5 +172,14 @@ window.CD_CONFIG = {
       { yol: "assets/safir/safir-pittiksu.jpg", alt: "" },
       { yol: "assets/safir/safir-cemre.jpg",    alt: "" }
     ]
+  },
+
+  /* ---------------------------------------------------------------
+     TIRNAK SALONU — Cemre'nin kendi tırnak fotoğrafları (İlham > "Cemre'nin tırnakları").
+     Fotoğraflar şifreli (gizli/ klasöründe); yol: "assets/tirnak/....jpg". Liste boşsa sekme görünmez.
+     Örnek satır: { yol: "assets/tirnak/tirnak-1.jpg", alt: "Aurora stiletto" },
+     --------------------------------------------------------------- */
+  TIRNAK: {
+    FOTO_ILHAM: []
   }
 };

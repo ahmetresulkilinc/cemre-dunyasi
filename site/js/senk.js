@@ -30,7 +30,9 @@ window.CD = window.CD || {};
   const DENEME = 4;            // iyimser kilit çakışmasında en fazla deneme
   // mahalle varlığı/postası sık değişir; bunlar gelince "Yeni kayıtlar geldi" fısıltısı çıkmaz (posta kartı zaten söyler)
   // safir.*: Safir'in Yeri'ndeki çiçek/anı da fısıltısız gelir (Cemre'yi hiçbir şey hazırlıksız yakalamasın)
-  const SESSIZ_ANAHTAR = /^(varlik|posta|saklinot|okunan|soru|mektupMuhur|safir)\./;
+  // Faz 2: gece mührü, ortak bakım, el ele sayacı, "dinliyorum", oyun durumları da posta kartı/ekranla söylenir → fısıltısız
+  const SESSIZ_ANAHTAR = /^(varlik|posta|saklinot|okunan|soru|mektupMuhur|safir|gece|bakim|elele|dinliyor|oyun)\./;
+  const MEDYA_ONEK = /^(kaset|sonfoto|tahta):/;   // genel mağazadaki Faz 2 medyası: kendi posta kartı var, "fotoğraf geldi" denmez
 
   let oda = null, acik = false, bekleyen = 0, sonSenk = 0, calisiyor = false, tekrar = false, durum = 'kapalı';
   let sessiz = false;          // true iken yerel yazmalar damgalanmaz (buluttan gelen değer yazılırken)
@@ -78,9 +80,17 @@ window.CD = window.CD || {};
   }
   const fotoAnahtar = (m, id) => m + ' ' + String(id);
   function silinenler() { const s = CD.depo.al(FOTO_SILINEN, {}); return (s && typeof s === 'object' && !Array.isArray(s)) ? s : {}; }
+  /* mezar taşı listesi budanır: en çok 200 kayıt ve 90 günden yeni (liste senk satırında sınırsız büyümesin).
+     İki telefon aynı kuralla budadığı için birleşim yine aynı sonuca varır. */
+  const SILINEN_MAKS = 200, SILINEN_GUN = 90;
+  function silinenBuda(s) {
+    const sinir = Date.now() - SILINEN_GUN * 86400000;
+    const l = Object.keys(s || {}).map(k => [k, Number(s[k]) || 0]).filter(x => x[1] >= sinir).sort((a, b) => b[1] - a[1] || (a[0] < b[0] ? -1 : 1)).slice(0, SILINEN_MAKS);
+    const o = {}; l.forEach(([k, t]) => { o[k] = t; }); return o;
+  }
   function fotoMezar(m, id, koy) {
     const s = silinenler(), a = fotoAnahtar(m, id);
-    if (koy) { s[a] = Date.now(); CD.depo.yaz(FOTO_SILINEN, s); fotoSon = 0; setTimeout(() => fotoSenk(true), 1500); }
+    if (koy) { s[a] = Date.now(); CD.depo.yaz(FOTO_SILINEN, silinenBuda(s)); fotoSon = 0; setTimeout(() => fotoSenk(true), 1500); }
     else if (s[a]) { delete s[a]; CD.depo.yaz(FOTO_SILINEN, s); }
   }
 
@@ -164,7 +174,7 @@ window.CD = window.CD || {};
     const c = (b && !mezarMi(b) && b.v && typeof b.v === 'object') ? b.v : {};
     const v = Object.assign({}, a);
     Object.keys(c).forEach(k => { v[k] = Math.max(Number(v[k]) || 0, Number(c[k]) || 0); });
-    return { v, t: Math.max((y && y.t) || 0, (b && b.t) || 0) };
+    return { v: silinenBuda(v), t: Math.max((y && y.t) || 0, (b && b.t) || 0) };
   }
   function birlestir(yerel, bulut) {
     const sonuc = {}, hepsi = new Set([].concat(Object.keys(yerel), Object.keys(bulut)));
@@ -305,7 +315,7 @@ window.CD = window.CD || {};
         } catch (e) {}
       }
 
-      let yollanan = 0, gelen = 0, silinenSay = 0;
+      let yollanan = 0, gelen = 0, silinenSay = 0, gelenFoto = 0;
       for (const magaza of (CD.depo.magazalar ? CD.depo.magazalar() : ['fotolar'])) {
         let kayitlar = [];
         try { kayitlar = (await CD.depo.idb.hepsi(magaza)) || []; } catch (e) { continue; }
@@ -333,11 +343,11 @@ window.CD = window.CD || {};
           if (!g.ok) continue;
           const d = await g.json();
           if (!d || !d[0] || !d[0].veri) continue;
-          try { await (CD.depo.idb.__asilKoy || CD.depo.idb.koy)(magaza, CD.depo.kayitIce(JSON.parse(d[0].veri))); gelen++; } catch (e) {}
+          try { await (CD.depo.idb.__asilKoy || CD.depo.idb.koy)(magaza, CD.depo.kayitIce(JSON.parse(d[0].veri))); gelen++; if (!MEDYA_ONEK.test(String(x.kayit_id))) gelenFoto++; } catch (e) {}
         }
       }
       fotoSon = Date.now();
-      if (gelen) CD.toast(gelen + ' yeni fotoğraf geldi 📷');
+      if (gelenFoto) CD.toast(gelenFoto + ' yeni fotoğraf geldi 📷');
       if (gelen || silinenSay) CD.olay.yay('senk:fotograf', { gelen, yollanan, silinen: silinenSay });
       if (yollanan || gelen || silinenSay) CD.olay.yay('senk', { durum: 'foto', yollanan, gelen, silinen: silinenSay });
     } catch (e) {

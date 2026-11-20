@@ -5,7 +5,9 @@
      kendi anahtarına yazar; karşı taraf kapalıysa olayı senk ile sonra görür. Tekilleştirme olay id'si ile varlik.js'te).
    - 25 sn'de bir heartbeat; kopunca üstel bekleme ile yeniden bağlanır; sayfa görünür olunca hemen dener.
    - Bulut yoksa (SENK.URL boş), oda yoksa, tarayıcı WebSocket/crypto desteklemiyorsa sessizce kapalı kalır.
-   Olaylar (CD.olay): 'canli:baglanti' (true|false), 'canli:varlik' (presence değişti), 'canli:olay' ({ kim, o }). */
+   - Faz 2: "anlık" yayın (kalıcı kopyası OLMAYAN geçici mesaj: çizgi, el ele basma, oyun dürtmesi). CD.canli.anlik(oda, tur, v)
+     ve CD.canli.oda(ad, fn): küçük bir "oda" (bölüm içi kanal) + karşı taraf burada mı (selam/nabız ile).
+   Olaylar (CD.olay): 'canli:baglanti' (true|false), 'canli:varlik' (presence değişti), 'canli:olay' ({ kim, o }), 'canli:anlik' ({ kim, oda, tur, v }). */
 window.CD = window.CD || {};
 (() => {
   'use strict';
@@ -100,6 +102,7 @@ window.CD = window.CD || {};
       case 'broadcast': {
         const p = m.payload || {};
         if (p.event === 'olay' && p.payload && p.payload.o) yay('canli:olay', p.payload);
+        else if (p.event === 'anlik' && p.payload && typeof p.payload.oda === 'string') yay('canli:anlik', p.payload);
         break;
       }
     }
@@ -159,6 +162,41 @@ window.CD = window.CD || {};
       return o;
     },
     burada(kim) { return !!(katildi && varlik[kim] && varlik[kim].length); },
+    /* geçici mesaj (kalıcı kopyası yok): bağlı değilse false. Çok büyük yük (≥200 KB) gönderilmez. */
+    anlik(oda, tur, v) {
+      if (!katildi) return false;
+      const yuk = { kim: CD.kim(), oda: String(oda), tur: String(tur), v: v == null ? null : v };
+      try { if (JSON.stringify(yuk).length > 200000) return false; } catch (e) { return false; }
+      return !!gonder(konu, 'broadcast', { type: 'broadcast', event: 'anlik', payload: yuk });
+    },
+    /* bölüm içi oda: fn(tur, v) — '_geldi' (karşı odaya girdi), '_gitti' (çıktı/sustu) özel türleri de gelir.
+       Karşı 4 sn'de bir nabız atar; 10 sn sessizse "gitti" sayılır. Dönen nesne: { gonder(tur, v), burada(), kapat() } */
+    oda(ad, fn) {
+      const karsi = () => { const k = CD.kim(); return k === 'ahmet' ? 'cemre' : (k === 'cemre' ? 'ahmet' : null); };
+      let son = 0, vardi = false, kapali = false;
+      const bildir = (tur, v) => { try { fn(tur, v); } catch (e) { console.warn('[canli.oda]', ad, e); } };
+      const durumBak = () => {
+        const simdi = !!(son && Date.now() - son < 10000 && katildi);
+        if (simdi !== vardi) { vardi = simdi; bildir(simdi ? '_geldi' : '_gitti', null); }
+      };
+      const cozA = CD.olay.dinle('canli:anlik', (p) => {
+        if (kapali || !p || p.oda !== ad || !p.kim || p.kim !== karsi()) return;
+        son = Date.now();
+        if (p.tur === '_selam') { CD.canli.anlik(ad, '_burada', null); durumBak(); return; }
+        if (p.tur === '_ayrildi') { son = 0; durumBak(); return; }
+        durumBak();
+        if (p.tur === '_burada' || p.tur === '_nabiz') return;
+        bildir(p.tur, p.v);
+      });
+      const cozB = CD.olay.dinle('canli:baglanti', (v) => { if (kapali) return; if (v) CD.canli.anlik(ad, '_selam', null); durumBak(); });
+      const t = setInterval(() => { if (kapali) return; if (!document.hidden) CD.canli.anlik(ad, '_nabiz', null); durumBak(); }, 4000);
+      CD.canli.anlik(ad, '_selam', null);
+      return {
+        gonder: (tur, v) => (!kapali && CD.canli.anlik(ad, tur, v)),
+        burada: () => { durumBak(); return vardi; },
+        kapat() { if (kapali) return; CD.canli.anlik(ad, '_ayrildi', null); kapali = true; clearInterval(t); cozA(); cozB(); }
+      };
+    },
     durdur
   };
 

@@ -546,12 +546,15 @@
     tazele();
   }
 
-  /* ------------------------------------------------------------ kayıt */
-  CD.kaydet({
-    id: ID,
-    baslik: 'XOX',
+  /* ------------------------------------------------------------ kayıt
+     V2 Faz 2: XOX artık Oyun Salonu'nun (js/oyun/salon.js, bölüm id'si yine 'xox') bir alt oyunu.
+     Oyunun kendisi, anahtarı (cd.xox.durum) ve davranışı değişmedi; yalnız kayıt yeri değişti. */
+  (CD.oyunlar = CD.oyunlar || {}).xox = {
+    id: 'xox',
+    ad: 'XOX',
+    aciklama: 'Üçünü yan yana diz; fiyonk mu kalp mi?',
+    sira: 1,
     ikon: IKON,
-    tamEkran: false,
     mount(el, baglam) {
       ctx = baglam; kok = el;
       d = oku();
@@ -599,5 +602,5 @@
       for (const k in ui) delete ui[k];
       ctx = null; kok = null; d = null;
     }
-  });
+  };
 })();

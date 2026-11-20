@@ -297,7 +297,11 @@ window.CD = window.CD || {};
         break;
       case 'not':
         kart({ kim, tur: 'not', baslik: A + ' bir binaya not sakladı 📌', alt: 'Hangisi acaba? Çatılarda pırıltı ara' });
-        break;
+        break;      default: {
+        // Faz 2 türleri (gece mührü, bakım, kaset, foto, şarkı…): modüller CD.postaTurleri[tur] = { kart(o, y), ozet(liste, A) } ile ekler
+        const t = (CD.postaTurleri || {})[o.tur];
+        if (t && t.kart) { try { t.kart(o, { kim, A, v, saat, kart, ses, titret, sesUygun, mahalledeMi }); } catch (e) { console.warn('[posta]', o.tur, e); } }
+      }
     }
   }
 
@@ -316,6 +320,7 @@ window.CD = window.CD || {};
     if (say('soru').some(o => (o.v || {}).gun === CD.bugun())) satir.push('📮 ' + A + ' günün sorusunu cevapladı');
     const y = say('yagmur'); if (y.length) satir.push(((y[y.length - 1].v || {}).emoji || '🌼') + ' ' + A + ' sana yağmur yağdırdı');
     if (say('elciAlindi').length) satir.push('💋 ' + A + ' hediyeni aldı');
+    Object.keys(CD.postaTurleri || {}).forEach(tur => { const t = CD.postaTurleri[tur]; if (!t || !t.ozet) return; const l = say(tur); if (!l.length) return; try { const m = t.ozet(l, A); if (m) satir.push(m); } catch (e) {} });
     if (!satir.length) return;
     const goster = () => kart({ kim, kalici: true, baslik: 'Sen yokken…', satirlar: satir.slice(0, 4), muhur: true,
       tamam: () => { const n = Math.min(18, Math.max(kalpler, 4)); CD.efekt.kalp(innerWidth / 2, innerHeight * 0.3, n); } });

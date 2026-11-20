@@ -1,0 +1,56 @@
+/* css/elele.css — El Ele Bankı. Önek: elele- */
+[data-bolum="elele"] { --oda: var(--seker-kiraz); --oda-zemin: var(--kagit-2); --oda-vurgu: var(--burun); }
+
+.elele-sahne {
+  --elele-gok-ust: #3A3358; --elele-gok-alt: #8E7BA8; --elele-yer: #6B5A7A;
+  --elele-el: clamp(96px, 30vw, 156px);
+  background: linear-gradient(var(--elele-gok-ust), var(--elele-gok-alt) 78%, var(--elele-yer) 78%);
+  touch-action: none; -webkit-touch-callout: none;
+}
+:root:not([data-hava="gece"]) .elele-sahne { --elele-gok-ust: #F7B9C8; --elele-gok-alt: #FFE3D2; --elele-yer: #C89B7B; }
+.elele-yildizlar { position: absolute; inset: 0 0 30% 0; background:
+  radial-gradient(2px 2px at 12% 20%, #FFF6D8 50%, transparent 51%), radial-gradient(2px 2px at 30% 45%, #FFF6D8 50%, transparent 51%),
+  radial-gradient(2px 2px at 64% 18%, #FFF6D8 50%, transparent 51%), radial-gradient(2px 2px at 84% 38%, #FFF6D8 50%, transparent 51%),
+  radial-gradient(2px 2px at 48% 10%, #FFF6D8 50%, transparent 51%); opacity: .8; }
+:root:not([data-hava="gece"]) .elele-yildizlar { opacity: 0; }
+
+.elele-el { position: absolute; top: 46%; width: var(--elele-el); transform: translateY(-50%); transition: transform 420ms var(--egri-zip), filter 300ms; pointer-events: none; }
+.elele-el svg { display: block; width: 100%; height: auto; filter: drop-shadow(0 4px 0 rgba(30, 20, 40, .25)); }
+.elele-cemre { left: -6%; }
+.elele-ahmet { right: -6%; }
+.elele-ahmet svg { transform: scaleX(-1); }
+/* basılınca el uzanır; ikisi birden basınca ortada buluşur */
+.elele-sahne.cemre-basili .elele-cemre { transform: translate(28%, -50%); }
+.elele-sahne.ahmet-basili .elele-ahmet { transform: translate(-28%, -50%); }
+.elele-sahne.ikisi .elele-cemre { transform: translate(calc(50vw - var(--elele-el) * .62), -50%); }
+.elele-sahne.ikisi .elele-ahmet { transform: translate(calc(-50vw + var(--elele-el) * .62), -50%); }
+@media (min-width: 560px) {
+  .elele-sahne.ikisi .elele-cemre { transform: translate(calc(min(50vw, 360px) - var(--elele-el) * .62), -50%); }
+  .elele-sahne.ikisi .elele-ahmet { transform: translate(calc(max(-50vw, -360px) + var(--elele-el) * .62), -50%); }
+  .elele-cemre { left: max(0px, calc(50% - 360px)); } .elele-ahmet { right: max(0px, calc(50% - 360px)); }
+}
+
+.elele-kalp { position: absolute; left: 50%; top: 18%; width: 72px; transform: translate(-50%, 0) scale(.85); transition: transform 400ms var(--egri-zip); pointer-events: none; }
+.elele-kalp svg { display: block; width: 100%; height: auto; }
+.elele-kalp-bos { fill: color-mix(in srgb, var(--kagit) 30%, transparent); stroke: var(--kagit); stroke-width: .5; }
+.elele-kalp-dolu { fill: var(--seker-kiraz); }
+.elele-sahne.ikisi .elele-kalp { transform: translate(-50%, 0) scale(1.1); }
+.elele-sahne.ikisi .elele-kalp svg { animation: elele-atis 900ms var(--egri-ikili) infinite; }
+@keyframes elele-atis { 0%, 100% { transform: scale(1); } 15% { transform: scale(1.12); } 30% { transform: scale(1); } 45% { transform: scale(1.08); } }
+
+.elele-adlar { position: absolute; left: 0; right: 0; bottom: 4%; display: flex; justify-content: space-between; padding: 0 var(--kenar); pointer-events: none; }
+.elele-adlar span { padding: 2px 10px; border-radius: var(--r-tam); background: color-mix(in srgb, var(--kagit) 85%, transparent); color: var(--murekkep); font-size: var(--punto-xs); font-weight: var(--kalin-baslik); }
+
+.elele-pad { position: absolute; inset: 0; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 16%; cursor: pointer; -webkit-user-select: none; user-select: none; -webkit-tap-highlight-color: transparent; }
+.elele-pad:focus-visible { outline: 3px solid var(--odak); outline-offset: -6px; }
+.elele-ipucu { padding: 6px 14px; border-radius: var(--r-tam); background: color-mix(in srgb, var(--kagit) 90%, transparent); color: var(--murekkep); font-weight: var(--kalin-baslik); font-size: var(--punto-sm); transition: opacity 200ms; }
+.elele-pad[aria-pressed="true"] .elele-ipucu { opacity: 0; }
+
+.elele-kart { text-align: center; display: flex; flex-direction: column; gap: var(--b-2); }
+.elele-durum, .elele-alt, .elele-sayac { margin: 0; }
+.elele-sayac:empty { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .elele-el, .elele-kalp { transition: transform 150ms linear; }
+  .elele-sahne.ikisi .elele-kalp svg { animation: none; }
+}
