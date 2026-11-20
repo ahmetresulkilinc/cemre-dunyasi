@@ -20,7 +20,8 @@
     { id: 'taban', ad: 'Taban', ipucu: 'Taban kat; oje daha uzun dayanır.' },
     { id: 'renk', ad: 'Renk', ipucu: 'Bir renk seç; kat kat sür.' },
     { id: 'sanat', ad: 'Sanat', ipucu: 'Parmağınla tırnağın üstüne çiz.' },
-    { id: 'ust', ad: 'Üst kat', ipucu: 'Parlak, mat ya da saten bitir.' }
+    { id: 'ust', ad: 'Üst kat', ipucu: 'Parlak, mat ya da saten bitir.' },
+    { id: 'final', ad: 'Final', ipucu: 'Vitrine çıkar, fotoğrafını çek.' }
   ];
   const HAZIRLIK = [
     { id: 'aseton', kisa: 'Aseton', ad: 'Aseton', ikon: '🧴', ipucu: 'Pamukla eski ojenin üstünden sürükle.' },
@@ -69,27 +70,27 @@
   // Palet: [ad, hex, tur, ek] — tur: krem | jelly | sheer | neon | metalik | simInce | simIri | simHolo | kediGozu | termal | glow
   const PALET = [
     { id: 'favori', ad: "Cemre'nin favorileri", renkler: [['Balerin Pembesi', '#F4CFD8'], ['Pamuk Bulut', '#F7D9DF'], ['Gül Yaprağı', '#EFC3CF'], ['Lila Fısıltı', '#E8D3F2'], ['Şeker Kâğıdı', '#FBE4EA'], ['Mırr Pembe', '#F1D8E8'], ['Lavanta Uykusu', '#DCC8F0'], ['Fiyonk', '#FFD9E1']] },
-    { id: 'nude', ad: 'Nude & ten', renkler: [['Sütlü Kahve', '#D9B49B'], ['Kurabiye', '#C99A80'], ['Badem Sütü', '#EAD3C3'], ['Kum Saati', '#D8B8A0'], ['Pudra Kutusu', '#E9C9B6'], ['Karamel Öpücük', '#B98A72'], ['Bal Köpüğü', '#E3C1A4'], ['Tarçınlı Latte', '#A97B64'], ['Çıplak Gül', '#D9A8A0'], ['İpek Ten', '#F0D6C6'], ['Fındık Kreması', '#C8A086'], ['Kakao Tozu', '#8E6450'], ['Vanilya Bulutu', '#F3E4D6'], ['Mocha Mırr', '#7A5242']] },
+    { id: 'nude', ad: 'Ten tonları', renkler: [['Sütlü Kahve', '#D9B49B'], ['Kurabiye', '#C99A80'], ['Badem Sütü', '#EAD3C3'], ['Kum Saati', '#D8B8A0'], ['Pudra Kutusu', '#E9C9B6'], ['Karamel Öpücük', '#B98A72'], ['Bal Köpüğü', '#E3C1A4'], ['Tarçınlı Latte', '#A97B64'], ['Çıplak Gül', '#D9A8A0'], ['İpek Ten', '#F0D6C6'], ['Fındık Kreması', '#C8A086'], ['Kakao Tozu', '#8E6450'], ['Vanilya Bulutu', '#F3E4D6'], ['Kahveli Mırr', '#7A5242']] },
     { id: 'kirmizi', ad: 'Kırmızılar', renkler: [['Vişne Reçeli', '#8C0F26'], ['Kiraz Dudak', '#B3122E'], ['Klasik Ruj', '#C8102E'], ['Gelincik', '#E03C31'], ['Çilek Şekeri', '#E63950'], ['Nar Tanesi', '#A31633'], ['Bordo Kadife', '#5B1A2A'], ['Domates Kırmızısı', '#D7263D'], ['Şarap Damlası', '#6E0B1D'], ['Mercan Öpücük', '#F2545B'], ['Kırmızı Elma', '#C21F30'], ['Kızıl Kedi', '#9E2A2B']] },
-    { id: 'pembe', ad: 'Pembeler', renkler: [['Pamuk Şeker', '#FBC4D4'], ['Gül Kurusu', '#C98B95'], ['Flamingo', '#F48FB1'], ['Şeker Pembe', '#F06292'], ['Fuşya Fırtına', '#D81B60'], ['Gül Bahçesi', '#E8A0B4'], ['Sakız', '#FF9EC4'], ['Pembe Bulut', '#FFD6E4'], ['Bebek Yanağı', '#F7C6C7'], ['Ahududu', '#C2185B'], ['Pıttıksu Burnu', '#EE8AAA'], ['Blush', '#EBB3B8']] },
+    { id: 'pembe', ad: 'Pembeler', renkler: [['Pamuk Şeker', '#FBC4D4'], ['Gül Kurusu', '#C98B95'], ['Flamingo Dansı', '#F48FB1'], ['Şeker Pembe', '#F06292'], ['Fuşya Fırtına', '#D81B60'], ['Gül Bahçesi', '#E8A0B4'], ['Sakız', '#FF9EC4'], ['Pembe Bulut', '#FFD6E4'], ['Bebek Yanağı', '#F7C6C7'], ['Ahududu', '#C2185B'], ['Pıttıksu Burnu', '#EE8AAA'], ['Yanak Allığı', '#EBB3B8']] },
     { id: 'pastel', ad: 'Pasteller', renkler: [['Lavanta Rüyası', '#DDD1F7'], ['Nane Şekeri', '#C7F2D8'], ['Bebek Mavisi', '#BDE3F5'], ['Limonata', '#FFF5BA'], ['Şeftali Tozu', '#FFD9C2'], ['Leylak', '#E3C8F2'], ['Fıstık Dondurma', '#D4EDC9'], ['Bulut Grisi', '#DCDDE5'], ['Kayısı Reçeli', '#FFD1A6'], ['Mercan Köpüğü', '#FFC9C2'], ['Su Yeşili', '#CDEFEA'], ['Menekşe Sütü', '#D7C4EC']] },
-    { id: 'koyu', ad: 'Koyular', renkler: [['Gece Yarısı', '#12244A'], ['Patlıcan', '#3A1C2E'], ['Orman', '#14361F'], ['Mürekkep', '#1E1B2B'], ['Kuzgun', '#19161C'], ['Kahve Çekirdeği', '#3B2420'], ['Gece Moru', '#2E1A47'], ['Petrol', '#0F2E3B'], ['Antrasit', '#2E2E33'], ['Bordo Gece', '#4A0F1F'], ['Zeytin Dalı', '#3D4A2A'], ['Fırtına', '#34414E']] },
-    { id: 'neon', ad: 'Neonlar', renkler: [['Limon Neon', '#E6FF2E', 'neon'], ['Neon Pembe', '#FF2E93', 'neon'], ['Neon Turuncu', '#FF6A13', 'neon'], ['Neon Yeşil', '#39FF6A', 'neon'], ['Elektrik Mavi', '#1FB5FF', 'neon'], ['Neon Mor', '#B43CFF', 'neon'], ['Neon Mercan', '#FF4F5E', 'neon'], ['Fosforlu Sarı', '#FFE600', 'neon']] },
-    { id: 'metalik', ad: 'Metalikler', renkler: [['Altın Varak', '#D4AF37', 'metalik'], ['Gümüş Ay', '#C0C7D1', 'metalik'], ['Rose Gold', '#E8B4A8', 'metalik'], ['Bakır Kalp', '#B87333', 'metalik'], ['Şampanya', '#E9D3A9', 'metalik'], ['Bronz', '#9C6B30', 'metalik'], ['Platin', '#DCDDE0', 'metalik'], ['Metalik Bordo', '#7A1F3D', 'metalik'], ['Metalik Lila', '#A895C9', 'metalik'], ['Gece Mavisi Metal', '#2B3F73', 'metalik']] },
-    { id: 'sim', ad: 'Glitter', renkler: [['Yıldız Tozu', '#F3E6FF', 'simInce'], ['Peri Tozu', '#FFD6EA', 'simInce'], ['Altın Sim', '#E7C15A', 'simInce'], ['Şampanya Köpüğü', '#F5E2C0', 'simInce'], ['Gümüş Pul', '#D7DCE3', 'simIri'], ['Pembe Konfeti', '#FF8FC0', 'simIri'], ['Gece Galaksi', '#1E2350', 'simIri'], ['Bakır Pul', '#C27A4A', 'simIri'], ['Disko Topu', '#E8E8F0', 'simHolo'], ['Holo Unicorn', '#F2DFFF', 'simHolo'], ['Holo Gece', '#2A2346', 'simHolo']] },
-    { id: 'jelly', ad: 'Jelly & sheer', renkler: [['Jelibon Kiraz', '#D81E3C', 'jelly'], ['Ahududu Jöle', '#E0457B', 'jelly'], ['Yaban Mersini', '#4B5FD6', 'jelly'], ['Lime Jöle', '#8FD14F', 'jelly'], ['Portakal Şurubu', '#FF8A3D', 'jelly'], ['Mor Lolipop', '#8E44D8', 'jelly'], ['Bal Şurubu', '#D99A2B', 'jelly'], ['Kola Şekeri', '#5A2A1A', 'jelly'], ['Sütlü Pembe', '#F6C9D3', 'sheer'], ['Sütlü Beyaz', '#F7F1EE', 'sheer'], ['Şeftali Sheer', '#F9CDB5', 'sheer'], ['Kristal Şeker', '#EFE8FF', 'sheer']] },
+    { id: 'koyu', ad: 'Koyular', renkler: [['Gece Yarısı', '#12244A'], ['Patlıcan', '#3A1C2E'], ['Orman', '#14361F'], ['Mürekkep', '#1E1B2B'], ['Kuzgun', '#19161C'], ['Kahve Çekirdeği', '#3B2420'], ['Gece Moru', '#2E1A47'], ['Derin Deniz', '#0F2E3B'], ['Kömür Kedi', '#2E2E33'], ['Bordo Gece', '#4A0F1F'], ['Zeytin Dalı', '#3D4A2A'], ['Fırtına', '#34414E']] },
+    { id: 'neon', ad: 'Neonlar', renkler: [['Limon Neon', '#E6FF2E', 'neon'], ['Neon Pembe', '#FF2E93', 'neon'], ['Neon Turuncu', '#FF6A13', 'neon'], ['Neon Yeşil', '#39FF6A', 'neon'], ['Şimşek Mavisi', '#1FB5FF', 'neon'], ['Neon Mor', '#B43CFF', 'neon'], ['Neon Mercan', '#FF4F5E', 'neon'], ['Fosforlu Sarı', '#FFE600', 'neon']] },
+    { id: 'metalik', ad: 'Metalikler', renkler: [['Altın Varak', '#D4AF37', 'metalik'], ['Gümüş Ay', '#C0C7D1', 'metalik'], ['Gül Altını', '#E8B4A8', 'metalik'], ['Bakır Kalp', '#B87333', 'metalik'], ['Şampanya', '#E9D3A9', 'metalik'], ['Bronz', '#9C6B30', 'metalik'], ['Ay Platini', '#DCDDE0', 'metalik'], ['Metalik Bordo', '#7A1F3D', 'metalik'], ['Metalik Lila', '#A895C9', 'metalik'], ['Gece Mavisi Pul', '#2B3F73', 'metalik']] },
+    { id: 'sim', ad: 'Simler', renkler: [['Yıldız Tozu', '#F3E6FF', 'simInce'], ['Peri Tozu', '#FFD6EA', 'simInce'], ['Altın Sim', '#E7C15A', 'simInce'], ['Şampanya Köpüğü', '#F5E2C0', 'simInce'], ['Gümüş Pul', '#D7DCE3', 'simIri'], ['Pembe Konfeti', '#FF8FC0', 'simIri'], ['Gece Galaksi', '#1E2350', 'simIri'], ['Bakır Pul', '#C27A4A', 'simIri'], ['Disko Topu', '#E8E8F0', 'simHolo'], ['Gökkuşağı Tekboynuz', '#F2DFFF', 'simHolo'], ['Gökkuşağı Gece', '#2A2346', 'simHolo']] },
+    { id: 'jelly', ad: 'Jöle & tül', renkler: [['Jelibon Kiraz', '#D81E3C', 'jelly'], ['Ahududu Jöle', '#E0457B', 'jelly'], ['Yaban Mersini', '#4B5FD6', 'jelly'], ['Misket Limonu Jöle', '#8FD14F', 'jelly'], ['Portakal Şurubu', '#FF8A3D', 'jelly'], ['Mor Lolipop', '#8E44D8', 'jelly'], ['Bal Şurubu', '#D99A2B', 'jelly'], ['Kola Şekeri', '#5A2A1A', 'jelly'], ['Sütlü Pembe', '#F6C9D3', 'sheer'], ['Sütlü Beyaz', '#F7F1EE', 'sheer'], ['Şeftali Tülü', '#F9CDB5', 'sheer'], ['Kristal Şeker', '#EFE8FF', 'sheer']] },
     { id: 'kedi', ad: 'Kedi gözü', renkler: [['Gece Kedisi', '#2E1A47', 'kediGozu'], ['Kadife Bordo', '#4A0F1F', 'kediGozu'], ['Galaksi Mavi', '#12244A', 'kediGozu'], ['Zümrüt Göz', '#0F3B2E', 'kediGozu'], ['Pembe Pati', '#B0175A', 'kediGozu'], ['Sütlü Ay', '#D9D2DE', 'kediGozu'], ['Kahve Kedisi', '#4A2E22', 'kediGozu'], ['Lila Mırr', '#6F57A8', 'kediGozu']] },
     { id: 'termal', ad: 'Termal', renkler: [['Gün Batımı', '#FF5C8A', 'termal', '#FFD166'], ['Yaz Esintisi', '#5B8DEF', 'termal', '#B8F0D6'], ['Böğürtlen Buz', '#5B1A5E', 'termal', '#F5A3D0'], ['Çay Çiçeği', '#B3122E', 'termal', '#FFC2CF'], ['Leylak Sis', '#6F57A8', 'termal', '#E6DAFF'], ['Sütlü Kahve Isısı', '#5A3A2C', 'termal', '#E9C9B6']] },
     { id: 'glow', ad: 'Parlayan', renkler: [['Ateş Böceği', '#C6FF8A', 'glow'], ['Ay Işığı', '#A8ECFF', 'glow'], ['Gece Pembesi', '#FFB0DC', 'glow'], ['Fosfor Sarısı', '#FFF6A8', 'glow'], ['Lila Işık', '#D9C2FF', 'glow']] },
-    { id: 'krom', ad: 'Krom tozlar', krom: true, renkler: [['Ayna Gümüş', '#DDE1E8', 'kromAyna'], ['Altın Krom', '#E6C35C', 'kromAltin'], ['Rose Krom', '#EAB2A6', 'kromRose'], ['Aurora', '#F6D3DC', 'aurora'], ['İnci', '#F7EFEA', 'inci'], ['Holografik', '#E0E4FF', 'holo']] }
+    { id: 'krom', ad: 'Krom tozlar', krom: true, renkler: [['Ayna Gümüş', '#DDE1E8', 'kromAyna'], ['Altın Krom', '#E6C35C', 'kromAltin'], ['Gül Krom', '#EAB2A6', 'kromRose'], ['Kuzey Işığı', '#F6D3DC', 'aurora'], ['İnci', '#F7EFEA', 'inci'], ['Gökkuşağı Krom', '#E0E4FF', 'holo']] }
   ];
-  const TUR_AD = { krem: 'Krem', jelly: 'Jelly', sheer: 'Sheer', neon: 'Neon', metalik: 'Metalik', simInce: 'İnce sim', simIri: 'İri sim', simHolo: 'Holo sim', kediGozu: 'Kedi gözü', termal: 'Termal', glow: 'Parlayan' };
+  const TUR_AD = { krem: 'Krem', jelly: 'Jöle', sheer: 'Tül', neon: 'Neon', metalik: 'Metalik', simInce: 'İnce sim', simIri: 'İri sim', simHolo: 'Gökkuşağı sim', kediGozu: 'Kedi gözü', termal: 'Termal', glow: 'Parlayan' };
   const OJE_TURLERI = Object.keys(TUR_AD);
   // Efekt (krom tozu / eski finish): rengin üstüne ovulan katman
   const EFEKTLER = [
-    { id: 'yok', ad: 'Yok' }, { id: 'kromAyna', ad: 'Ayna gümüş' }, { id: 'kromAltin', ad: 'Altın krom' }, { id: 'kromRose', ad: 'Rose krom' },
-    { id: 'aurora', ad: 'Aurora' }, { id: 'inci', ad: 'İnci' }, { id: 'holo', ad: 'Holografik' },
-    { id: 'krom', ad: 'Renkli krom' }, { id: 'glitter', ad: 'Sim yağmuru' }, { id: 'shimmer', ad: 'Şimmer' }
+    { id: 'yok', ad: 'Yok' }, { id: 'kromAyna', ad: 'Ayna gümüş' }, { id: 'kromAltin', ad: 'Altın krom' }, { id: 'kromRose', ad: 'Gül krom' },
+    { id: 'aurora', ad: 'Kuzey ışığı' }, { id: 'inci', ad: 'İnci' }, { id: 'holo', ad: 'Gökkuşağı' },
+    { id: 'krom', ad: 'Renkli krom' }, { id: 'glitter', ad: 'Sim yağmuru' }, { id: 'shimmer', ad: 'Işıltı tozu' }
   ];
   const USTLER = [
     { id: 'parlak', ad: 'Parlak', not: 'Cam gibi, ayna yansımalı.' },
@@ -112,12 +113,16 @@
     { id: 'folyo', grup: 'folyo', ad: 'Folyo', ikon: '▦' },
     { id: 'damga', grup: 'folyo', ad: 'Damga', ikon: '❀' },
     { id: 'cikartma', grup: 'sus', ad: 'Çıkartma', ikon: '♥' },
-    { id: 'sus', grup: 'sus', ad: '3D süs', ikon: '◆' }
+    { id: 'sus', grup: 'sus', ad: '3D süs', ikon: '◆' },
+    { id: 'ek', grup: 'doku', ad: 'Doku & desen', ikon: '✦' }
   ];
-  const ARAC_GRUPLARI = [['firca', 'Fırçalar'], ['gecis', 'Geçişler'], ['french', 'French'], ['mermer', 'Mermer & mıknatıs'], ['folyo', 'Folyo & damga'], ['sus', 'Süsler']];
+  const ARAC_GRUPLARI = [['firca', 'Fırçalar'], ['gecis', 'Geçişler'], ['french', 'French'], ['mermer', 'Mermer & mıknatıs'], ['folyo', 'Folyo & damga'], ['doku', 'Doku & desen'], ['sus', 'Süsler']];
   const NOKTA_BOYLARI = [{ id: 's', ad: 'Küçük', r: .05 }, { id: 'm', ad: 'Orta', r: .085 }, { id: 'l', ad: 'Büyük', r: .13 }];
-  const FRENCH_STILLER = [{ id: 'klasik', ad: 'Klasik' }, { id: 'renkli', ad: 'Renkli' }, { id: 'mikro', ad: 'Mikro' }, { id: 'v', ad: 'V French' }];
-  const FOLYOLAR = [{ id: 'altin', ad: 'Altın', renk: '#E2B74A' }, { id: 'gumus', ad: 'Gümüş', renk: '#D5DAE2' }, { id: 'rose', ad: 'Rose', renk: '#E9A99B' }, { id: 'holo', ad: 'Holo', renk: '#D9D2FF' }, { id: 'yesil', ad: 'Zümrüt', renk: '#3FB58A' }];
+  const FRENCH_STILLER = [
+    { id: 'klasik', ad: 'Klasik' }, { id: 'renkli', ad: 'Renkli' }, { id: 'mikro', ad: 'Mikro' }, { id: 'mikroCizgi', ad: 'Mikro çizgili' },
+    { id: 'v', ad: 'V uç' }, { id: 'ters', ad: 'Ters French' }, { id: 'cift', ad: 'Çift French' }, { id: 'ombre', ad: 'Ombre French' }, { id: 'asimetrik', ad: 'Yan French' }
+  ];
+  const FOLYOLAR = [{ id: 'altin', ad: 'Altın', renk: '#E2B74A' }, { id: 'gumus', ad: 'Gümüş', renk: '#D5DAE2' }, { id: 'rose', ad: 'Gül', renk: '#E9A99B' }, { id: 'holo', ad: 'Gökkuşağı', renk: '#D9D2FF' }, { id: 'yesil', ad: 'Zümrüt', renk: '#3FB58A' }];
   const DAMGALAR = [
     { id: 'cicek', ad: 'Çiçek' }, { id: 'kalp', ad: 'Kalp' }, { id: 'leopar', ad: 'Leopar' }, { id: 'dantel', ad: 'Dantel' },
     { id: 'yildiz', ad: 'Yıldız' }, { id: 'damla', ad: 'Damla' }, { id: 'geometrik', ad: 'Geometrik' }, { id: 'kelebek', ad: 'Kelebek' },
@@ -128,10 +133,42 @@
     { id: 'puantiye', ad: 'Puantiye' }, { id: 'cizgi', ad: 'Çizgi' }, { id: 'ekose', ad: 'Ekose' },
     { id: 'kaplumbaga', ad: 'Kaplumbağa' }, { id: 'cilek', ad: 'Çilek' }, { id: 'leoparDesen', ad: 'Leopar' }
   ];
+  /* Ek katmanlar (yeni bitişler ve desenler): bir tırnakta üst üste birden çok olabilir; sırası, görünürlüğü ve opaklığı
+     Katmanlar panelinden ayarlanır. 3D'de bazıları malzemeyi de değiştirir (kadife → sheen, şeker/kum/kazak → normal haritası). */
+  const EKLER = [
+    { id: 'kadife', grup: 'Dokular', ad: 'Kadife', renk: '#7A1F3D', renk2: '#F4B8C8' },
+    { id: 'kazak', grup: 'Dokular', ad: 'Kazak örgüsü', renk: '#E9D8C4', renk2: '#FFFFFF' },
+    { id: 'seker', grup: 'Dokular', ad: 'Şeker kaplama', renk: '#FFB3C7', renk2: '#FFFFFF' },
+    { id: 'kum', grup: 'Dokular', ad: 'Kum doku', renk: '#E3C1A4', renk2: '#FFFFFF' },
+    { id: 'kirilgan', grup: 'Dokular', ad: 'Kırılgan çatlak', renk: '#19161C', renk2: '#F7F1EE' },
+    { id: 'sedef', grup: 'Gömme & parça', ad: 'Sedef parçaları', renk: '#F7EFEA', renk2: '#D9E4FF' },
+    { id: 'kuruCicek', grup: 'Gömme & parça', ad: 'Kuru çiçek', renk: '#F48FB1', renk2: '#FFE28A' },
+    { id: 'folyoParca', grup: 'Gömme & parça', ad: 'Folyo parçaları', renk: '#E2B74A', renk2: '#FFF1B8' },
+    { id: 'kapsul', grup: 'Gömme & parça', ad: 'Kapsül (gömülü süs)', renk: '#FFFFFF', renk2: '#F48FB1' },
+    { id: 'airbrush', grup: 'Sprey & geçiş', ad: 'Airbrush', renk: '#FF7FB0', renk2: '#FFB36B' },
+    { id: 'blooming', grup: 'Sprey & geçiş', ad: 'Blooming jel', renk: '#5B8DEF', renk2: '#FFFFFF' },
+    { id: 'suCikartma', grup: 'Sprey & geçiş', ad: 'Su çıkartması', renk: '#D81E3C', renk2: '#5BAF5B' },
+    { id: 'simGecis', grup: 'Sprey & geçiş', ad: 'Sim geçişi', renk: '#E7C15A', renk2: '#FFFFFF' },
+    { id: 'yansitici', grup: 'Sprey & geçiş', ad: 'Yansıtıcı sim', renk: '#D7DCE3', renk2: '#FFFFFF' },
+    { id: 'mermerBeyaz', grup: 'Desenler', ad: 'Beyaz mermer', renk: '#FBF8F5', renk2: '#9AA0AA' },
+    { id: 'mermerGece', grup: 'Desenler', ad: 'Gece mermeri', renk: '#16141A', renk2: '#D4AF37' },
+    { id: 'mermerPembe', grup: 'Desenler', ad: 'Pembe kuvars', renk: '#F7D3DC', renk2: '#FFFFFF' },
+    { id: 'mermerYesim', grup: 'Desenler', ad: 'Yeşim taşı', renk: '#2F7A5B', renk2: '#BDE8CF' },
+    { id: 'tortoise', grup: 'Desenler', ad: 'Kaplumbağa kabuğu', renk: '#C9862B', renk2: '#3B2014' },
+    { id: 'leopar', grup: 'Desenler', ad: 'Leopar', renk: '#D9B49B', renk2: '#3B2420' },
+    { id: 'inek', grup: 'Desenler', ad: 'İnek', renk: '#FFFFFF', renk2: '#19161C' },
+    { id: 'damali', grup: 'Desenler', ad: 'Damalı', renk: '#FFFFFF', renk2: '#EE8AAA' },
+    { id: 'ekose', grup: 'Desenler', ad: 'Ekose', renk: '#8C0F26', renk2: '#14361F' },
+    { id: 'zebra', grup: 'Desenler', ad: 'Zebra', renk: '#FFFFFF', renk2: '#19161C' }
+  ];
+  const EK_MAKS = 6;
   const CIKARTMALAR = [
     { id: 'kalp', ad: 'Kalp' }, { id: 'yildiz', ad: 'Yıldız' }, { id: 'cicek', ad: 'Çiçek' }, { id: 'kelebek', ad: 'Kelebek' },
     { id: 'kiraz', ad: 'Kiraz' }, { id: 'fiyonk', ad: 'Fiyonk' }, { id: 'gulen', ad: 'Gülen yüz' }, { id: 'ayYildiz', ad: 'Ay-yıldız' },
-    { id: 'pati', ad: 'Kedi patisi' }, { id: 'papatya', ad: 'Papatya' }, { id: 'cilekK', ad: 'Çilek' }, { id: 'goz', ad: 'Nazar' }
+    { id: 'pati', ad: 'Kedi patisi' }, { id: 'papatya', ad: 'Papatya' }, { id: 'cilekK', ad: 'Çilek' }, { id: 'goz', ad: 'Nazar' },
+    { id: 'gokkusagi', ad: 'Gökkuşağı' }, { id: 'bulut', ad: 'Bulut' }, { id: 'limon', ad: 'Limon dilimi' }, { id: 'karpuz', ad: 'Karpuz' },
+    { id: 'dondurma', ad: 'Dondurma' }, { id: 'ayicik', ad: 'Ayıcık' }, { id: 'kediYuz', ad: 'Kedicik' }, { id: 'mantar', ad: 'Mantar' },
+    { id: 'yonca', ad: 'Dört yaprak' }, { id: 'opucuk', ad: 'Öpücük' }, { id: 'elmas', ad: 'Elmas' }, { id: 'kayanYildiz', ad: 'Kayan yıldız' }
   ];
   const SUSLER = [
     { id: 'tasS', ad: 'Taş S', olcek: .2 }, { id: 'tasM', ad: 'Taş M', olcek: .3 }, { id: 'tasL', ad: 'Taş L', olcek: .42 },
@@ -139,9 +176,16 @@
     { id: 'inci', ad: 'İnci', olcek: .26 }, { id: 'inciMini', ad: 'Mini inci', olcek: .14 },
     { id: 'kalp3d', ad: '3D kalp', olcek: .38 }, { id: 'fiyonk3d', ad: '3D fiyonk', olcek: .55 }, { id: 'cicek3d', ad: '3D çiçek', olcek: .55 },
     { id: 'charmYildiz', ad: 'Yıldız charm', olcek: .36 }, { id: 'charmKalp', ad: 'Kalp charm', olcek: .36 }, { id: 'charmAy', ad: 'Ay charm', olcek: .36 },
-    { id: 'zincir', ad: 'Zincir', olcek: .9 }
+    { id: 'zincir', ad: 'Zincir', olcek: .9 },
+    { id: 'tasMini', ad: 'Mikro taş', olcek: .12 }, { id: 'tasOval', ad: 'Oval taş', olcek: .3 }, { id: 'tasMekik', ad: 'Mekik taş', olcek: .34 },
+    { id: 'tasKare', ad: 'Kare taş', olcek: .28 }, { id: 'tasUcgen', ad: 'Üçgen taş', olcek: .3 }, { id: 'tasOpal', ad: 'Opal taş', olcek: .32 },
+    { id: 'inciYarim', ad: 'Yarım inci', olcek: .24 }, { id: 'inciDamla', ad: 'Damla inci', olcek: .3 }, { id: 'inciSira', ad: 'İnci dizisi', olcek: .8 },
+    { id: 'charmKelebek', ad: 'Kelebek charm', olcek: .42 }, { id: 'charmFiyonk', ad: 'Fiyonk charm', olcek: .44 }, { id: 'charmPati', ad: 'Pati charm', olcek: .36 },
+    { id: 'halka', ad: 'Altın halka', olcek: .3 }, { id: 'civi', ad: 'Altın çivi', olcek: .14 },
+    { id: 'heykelGul', ad: 'Jel gül', olcek: .5 }, { id: 'heykelDamla', ad: 'Jel damla', olcek: .3 }
   ];
-  const TAS_RENKLERI = ['#FFFFFF', '#FFB3C7', '#E8546F', '#B48CFF', '#7EC8FF', '#7CE0B4', '#FFD86B', '#2B2B33', '#F2A65A'];
+  const TAS_RENKLERI = ['#FFFFFF', '#FFB3C7', '#E8546F', '#B48CFF', '#7EC8FF', '#7CE0B4', '#FFD86B', '#2B2B33', '#F2A65A',
+    '#C7F0FF', '#9E1B32', '#0F7B5F', '#1E3FA8', '#E7C9FF', '#F7E7CE', '#5C3B8A', '#FF8FB8', '#B8B8C2'];
   const SANAT_RENKLERI = ['#FFFFFF', '#F7F1EE', '#3B3444', '#16141A', '#FFD1DC', '#EE8AAA', '#D81E3C', '#8C0F26', '#D4AF37', '#C0C7D1', '#8E7CC3', '#2D9CFF', '#7CCB9A', '#FFE28A', '#FF7A00', '#8E6450'];
   const PARMAK_AD = ['Baş', 'İşaret', 'Orta', 'Yüzük', 'Serçe'];
   const POZLAR = [{ id: 'duz', ad: 'Düz' }, { id: 'kalp', ad: 'Kalp' }, { id: 'fincan', ad: 'Fincan' }];
@@ -157,27 +201,28 @@
 
   /* ------------------------------------------------------------ hazır trend tasarımlar (i = parmak 0–4) */
   const st = (o) => Object.assign({ top: true, ust: 'parlak', kat: 2, ojeTur: 'krem' }, o);
+  const ek = (id, renk, renk2) => ({ u: id, id, renk: renk || (EKLER.find(e => e.id === id) || {}).renk || '#FFFFFF', renk2: renk2 || (EKLER.find(e => e.id === id) || {}).renk2 || '#FFFFFF', tohum: 4242 });
   const TRENDLER = [
     { id: 'cemre', ad: "Cemre'nin imzası", inci: true, aciklama: 'Uzun stiletto, sütlü pembe, aurora inci krom.', yap: () => st({ sekil: 'stiletto', uzunluk: .86, protez: 'polygel', baz: 'sutlu', renk: '#F6D3DC', ojeTur: 'sheer', kat: 3, efekt: 'aurora' }) },
-    { id: 'glazed', ad: 'Glazed donut', aciklama: 'Sütlü nude + inci krom; şekerli donut gibi parlak.', yap: () => st({ sekil: 'badem', uzunluk: .5, baz: 'sutlu', renk: '#F2E6DE', ojeTur: 'sheer', kat: 2, efekt: 'inci' }) },
-    { id: 'milkyFrench', ad: 'Milky white French', aciklama: 'Sütlü beyaz zemin, ince beyaz uç.', yap: () => st({ sekil: 'oval', uzunluk: .5, baz: 'pembe', renk: '#F7F1EE', ojeTur: 'sheer', kat: 2, teknik: { id: 'french', renk2: '#FFFFFF', kalinlik: .24, stil: 'klasik' } }) },
-    { id: 'cherryChrome', ad: 'Cherry red chrome', aciklama: 'Vişne jöle üstüne renkli krom.', yap: () => st({ sekil: 'badem', uzunluk: .55, renk: '#8C0F26', ojeTur: 'jelly', kat: 3, efekt: 'krom' }) },
-    { id: 'aura', ad: 'Aura nails', aciklama: 'Ortada mor ışık halesi, kenarlar pembe.', yap: () => st({ sekil: 'badem', uzunluk: .62, renk: '#FFC2D6', teknik: { id: 'aura', renk2: '#9F7BE8', kalinlik: .34, x: 0, y: .52 } }) },
-    { id: 'tortoise', ad: 'Tortoise', aciklama: 'Bal jöle, kahve lekeler: kaplumbağa kabuğu.', yap: () => st({ sekil: 'oval', uzunluk: .5, renk: '#C9862B', ojeTur: 'jelly', kat: 2, desen: { id: 'kaplumbaga', renk: '#3B2014' } }) },
-    { id: 'strawberry', ad: 'Strawberry', aciklama: 'Çilek kırmızısı, minik çekirdekler, yaprak uç.', yap: i => st({ sekil: 'yuvarlak', uzunluk: .35, renk: i === 3 ? '#FBE4EA' : '#E63950', desen: i === 3 ? null : { id: 'cilek', renk: '#FFE9A8' }, cikartmalar: i === 3 ? [{ id: 'cilekK', x: 0, y: .5, olcek: .62, don: -.15, renk: '#E63950' }] : [] }) },
-    { id: 'catVelvet', ad: 'Cat-eye velvet', aciklama: 'Kadife kedi gözü: geniş, yumuşak ışık.', yap: () => st({ sekil: 'coffin', uzunluk: .62, renk: '#4A0F1F', ojeTur: 'kediGozu', kat: 2, kedi: { x: 0, y: .5, aci: 0, gen: .9 } }) },
+    { id: 'glazed', ad: 'Şekerli çörek', aciklama: 'Sütlü nude + inci krom; şekerli çörek gibi parlak.', yap: () => st({ sekil: 'badem', uzunluk: .5, baz: 'sutlu', renk: '#F2E6DE', ojeTur: 'sheer', kat: 2, efekt: 'inci' }) },
+    { id: 'milkyFrench', ad: 'Sütlü French', aciklama: 'Sütlü beyaz zemin, ince beyaz uç.', yap: () => st({ sekil: 'oval', uzunluk: .5, baz: 'pembe', renk: '#F7F1EE', ojeTur: 'sheer', kat: 2, teknik: { id: 'french', renk2: '#FFFFFF', kalinlik: .24, stil: 'klasik' } }) },
+    { id: 'cherryChrome', ad: 'Vişne krom', aciklama: 'Vişne jöle üstüne renkli krom.', yap: () => st({ sekil: 'badem', uzunluk: .55, renk: '#8C0F26', ojeTur: 'jelly', kat: 3, efekt: 'krom' }) },
+    { id: 'aura', ad: 'Aura ışığı', aciklama: 'Ortada mor ışık halesi, kenarlar pembe.', yap: () => st({ sekil: 'badem', uzunluk: .62, renk: '#FFC2D6', teknik: { id: 'aura', renk2: '#9F7BE8', kalinlik: .34, x: 0, y: .52 } }) },
+    { id: 'tortoise', ad: 'Kaplumbağa kabuğu', aciklama: 'Bal jöle, kahve lekeler: kaplumbağa kabuğu.', yap: () => st({ sekil: 'oval', uzunluk: .5, renk: '#C9862B', ojeTur: 'jelly', kat: 2, desen: { id: 'kaplumbaga', renk: '#3B2014' } }) },
+    { id: 'strawberry', ad: 'Çilek tarlası', aciklama: 'Çilek kırmızısı, minik çekirdekler, yaprak uç.', yap: i => st({ sekil: 'yuvarlak', uzunluk: .35, renk: i === 3 ? '#FBE4EA' : '#E63950', desen: i === 3 ? null : { id: 'cilek', renk: '#FFE9A8' }, cikartmalar: i === 3 ? [{ id: 'cilekK', x: 0, y: .5, olcek: .62, don: -.15, renk: '#E63950' }] : [] }) },
+    { id: 'catVelvet', ad: 'Kadife kedi gözü', aciklama: 'Kadife kedi gözü: geniş, yumuşak ışık.', yap: () => st({ sekil: 'coffin', uzunluk: .62, renk: '#4A0F1F', ojeTur: 'kediGozu', kat: 2, kedi: { x: 0, y: .5, aci: 0, gen: .9 } }) },
     { id: 'cicek3d', ad: '3D çiçek', aciklama: 'Sütlü pembe, yüzükte jel çiçek ve inci.', yap: i => st({ sekil: 'oval', uzunluk: .48, renk: '#F6C9D3', ojeTur: 'sheer', kat: 2, susler: i === 3 || i === 1 ? [{ id: 'cicek3d', x: 0, y: .5, olcek: .62, don: .2, renk: '#FFFFFF' }, { id: 'inciMini', x: .5, y: .78, olcek: .14, don: 0, renk: '#FFFFFF' }] : [] }) },
-    { id: 'blush', ad: 'Blush nails', aciklama: 'Ortada yanak pembesi, sheer zemin.', yap: () => st({ sekil: 'squoval', uzunluk: .4, renk: '#F7EDEA', ojeTur: 'sheer', teknik: { id: 'aura', renk2: '#F2A0B0', kalinlik: .4, x: 0, y: .45 } }) },
-    { id: 'chromeFrench', ad: 'Chrome French', aciklama: 'Nude zemin, ayna gümüş uç.', yap: () => st({ sekil: 'badem', uzunluk: .58, renk: '#EBD2C4', ojeTur: 'sheer', kat: 2, teknik: { id: 'kromUc', renk2: '#C0C7D1', kalinlik: .3 } }) },
-    { id: 'leopardNude', ad: 'Leopard nude', aciklama: 'Nude üstüne leopar damgası, iki parmakta.', yap: i => st({ sekil: 'badem', uzunluk: .52, renk: '#D9B49B', damgalar: i === 1 || i === 3 ? [{ desen: 'leopar', renk: '#3B2420', x: 0, y: .5, aci: .2, olcek: 1 }] : [] }) },
+    { id: 'blush', ad: 'Yanak pembesi', aciklama: 'Ortada yanak pembesi, sheer zemin.', yap: () => st({ sekil: 'squoval', uzunluk: .4, renk: '#F7EDEA', ojeTur: 'sheer', teknik: { id: 'aura', renk2: '#F2A0B0', kalinlik: .4, x: 0, y: .45 } }) },
+    { id: 'chromeFrench', ad: 'Krom French', aciklama: 'Nude zemin, ayna gümüş uç.', yap: () => st({ sekil: 'badem', uzunluk: .58, renk: '#EBD2C4', ojeTur: 'sheer', kat: 2, teknik: { id: 'kromUc', renk2: '#C0C7D1', kalinlik: .3 } }) },
+    { id: 'leopardNude', ad: 'Leoparlı nude', aciklama: 'Nude üstüne leopar damgası, iki parmakta.', yap: i => st({ sekil: 'badem', uzunluk: .52, renk: '#D9B49B', damgalar: i === 1 || i === 3 ? [{ desen: 'leopar', renk: '#3B2420', x: 0, y: .5, aci: .2, olcek: 1 }] : [] }) },
     { id: 'cherry', ad: 'Klasik kırmızı', aciklama: 'Kısa kare, vişne kırmızısı, cam parlaklığı.', yap: () => st({ sekil: 'kare', uzunluk: .22, renk: '#B3122E', kat: 2 }) },
-    { id: 'babyBoomer', ad: 'Baby boomer', aciklama: 'Pembeden beyaza sünger geçişi.', yap: () => st({ sekil: 'badem', uzunluk: .6, renk: '#F5CFD5', teknik: { id: 'ombre', renk2: '#FFFFFF', kalinlik: .3 } }) },
+    { id: 'babyBoomer', ad: 'Bebek geçişi', aciklama: 'Pembeden beyaza sünger geçişi.', yap: () => st({ sekil: 'badem', uzunluk: .6, renk: '#F5CFD5', teknik: { id: 'ombre', renk2: '#FFFFFF', kalinlik: .3 } }) },
     { id: 'mermerAltin', ad: 'Mermer & altın', aciklama: 'Beyaz mermer, altın damar, yüzükte taş.', yap: i => st({ sekil: 'coffin', uzunluk: .6, renk: '#FBF8F5', teknik: { id: 'mermer', renk2: '#D4AF37', kalinlik: .3 }, susler: i === 3 ? [{ id: 'tasM', x: 0, y: .42, olcek: .32, don: 0, renk: '#FFFFFF' }] : [] }) },
     { id: 'suMermer', ad: 'Su mermeri', aciklama: 'Pembe, beyaz, lila halkalar suda çekildi.', yap: i => st({ sekil: 'oval', uzunluk: .5, renk: '#FFFFFF', suMermer: { damlalar: [{ x: (i % 2 ? .3 : -.2), y: .5, renkler: ['#F48FB1', '#FFFFFF', '#C9A7F5', '#FFFFFF', '#F48FB1'] }], cizgiler: [[-1, .2 + i * .05, 1, .85 - i * .04], [.6, -.05, -.6, 1.05]] } }) },
     { id: 'neonYaz', ad: 'Neon yaz', aciklama: 'Her parmak başka neon, kısa yuvarlak.', yap: i => st({ sekil: 'yuvarlak', uzunluk: .3, renk: ['#FF2E93', '#FF6A13', '#E6FF2E', '#39FF6A', '#1FB5FF'][i], ojeTur: 'neon' }) },
     { id: 'altinFolyo', ad: 'Altın folyo', aciklama: 'Gece mavisi, rastgele altın folyo parçaları.', yap: i => st({ sekil: 'squoval', uzunluk: .45, renk: '#12244A', firca: [{ tur: 'folyo', renk: '#E2B74A', boy: .28, n: [[-.6, .7 - i * .03, 1], [-.1, .6, 1], [.4, .75, 1], [.7, .45, 1]] }] }) },
     { id: 'yarimAy', ad: 'Retro yarım ay', aciklama: 'Bordo zemin, dipte çıplak yarım ay.', yap: () => st({ sekil: 'oval', uzunluk: .45, renk: '#7A1F3D', teknik: { id: 'yarimAy', renk2: '#F3E4D6', kalinlik: .28 } }) },
-    { id: 'vFrench', ad: 'V French', aciklama: 'Sivri V uç, siyah çizgi, nude zemin.', yap: () => st({ sekil: 'badem', uzunluk: .62, renk: '#EAD3C3', ojeTur: 'sheer', teknik: { id: 'french', renk2: '#19161C', kalinlik: .3, stil: 'v' } }) },
+    { id: 'vFrench', ad: 'V uçlu French', aciklama: 'Sivri V uç, siyah çizgi, nude zemin.', yap: () => st({ sekil: 'badem', uzunluk: .62, renk: '#EAD3C3', ojeTur: 'sheer', teknik: { id: 'french', renk2: '#19161C', kalinlik: .3, stil: 'v' } }) },
     { id: 'dantel', ad: 'Gelin danteli', aciklama: 'Sütlü beyaz, beyaz dantel damga, inciler.', yap: i => st({ sekil: 'oval', uzunluk: .55, renk: '#F7F1EE', ojeTur: 'sheer', kat: 3, damgalar: [{ desen: 'dantel', renk: '#FFFFFF', x: 0, y: .6, aci: 0, olcek: 1 }], susler: i === 2 ? [{ id: 'inciMini', x: -.3, y: .2, olcek: .14, don: 0, renk: '#FFFFFF' }, { id: 'inciMini', x: 0, y: .16, olcek: .14, don: 0, renk: '#FFFFFF' }, { id: 'inciMini', x: .3, y: .2, olcek: .14, don: 0, renk: '#FFFFFF' }] : [], ust: 'saten' }) },
     { id: 'glowGece', ad: 'Gece parlayanı', aciklama: 'Loş ışıkta parlayan pastel uçlar.', yap: () => st({ sekil: 'coffin', uzunluk: .6, renk: '#FFB0DC', ojeTur: 'glow' }) },
     { id: 'termal', ad: 'Gün batımı termal', aciklama: 'Dokununca rengi değişir.', yap: () => st({ sekil: 'badem', uzunluk: .55, renk: '#FF5C8A', renk2: '#FFD166', ojeTur: 'termal' }) },
@@ -185,7 +230,46 @@
     { id: 'pati', ad: 'Kedi patisi', aciklama: 'Pıttıksu onaylı: gri zemin, pembe patiler.', yap: i => st({ sekil: 'yuvarlak', uzunluk: .3, renk: '#E9EBEF', cikartmalar: [{ id: 'pati', x: i % 2 ? .2 : -.2, y: .5, olcek: .5, don: i % 2 ? .3 : -.3, renk: '#EE8AAA' }] }) },
     { id: 'holoPastel', ad: 'Holo pastel', aciklama: 'Lila zemin, gökkuşağı tozu.', yap: () => st({ sekil: 'squoval', uzunluk: .42, renk: '#DDD1F7', efekt: 'holo' }) },
     { id: 'galaksi', ad: 'Galaksi sim', aciklama: 'Lacivert iri sim, yüzükte yıldız charm.', yap: i => st({ sekil: 'stiletto', uzunluk: .75, renk: '#1E2350', ojeTur: 'simIri', kat: 3, susler: i === 3 ? [{ id: 'charmYildiz', x: 0, y: .4, olcek: .36, don: 0, renk: '#E6C35C' }] : [] }) },
-    { id: 'kelebek', ad: 'Kelebekli gök', aciklama: 'Açık mavi, kelebek ve yıldızlar.', yap: i => st({ sekil: 'badem', uzunluk: .55, renk: '#BDE3F5', efekt: 'shimmer', cikartmalar: i === 1 || i === 3 ? [{ id: 'kelebek', x: 0, y: .5, olcek: .62, don: .15, renk: '#8E7CC3' }] : [{ id: 'yildiz', x: -.3, y: .35, olcek: .3, don: 0, renk: '#FFFFFF' }, { id: 'yildiz', x: .35, y: .65, olcek: .22, don: .4, renk: '#FFFFFF' }] }) }
+    { id: 'kelebek', ad: 'Kelebekli gök', aciklama: 'Açık mavi, kelebek ve yıldızlar.', yap: i => st({ sekil: 'badem', uzunluk: .55, renk: '#BDE3F5', efekt: 'shimmer', cikartmalar: i === 1 || i === 3 ? [{ id: 'kelebek', x: 0, y: .5, olcek: .62, don: .15, renk: '#8E7CC3' }] : [{ id: 'yildiz', x: -.3, y: .35, olcek: .3, don: 0, renk: '#FFFFFF' }, { id: 'yildiz', x: .35, y: .65, olcek: .22, don: .4, renk: '#FFFFFF' }] }) },
+    // ---- V3: yeni bitişler ve kombinasyonlar
+    { id: 'kadifeBordo', ad: 'Kadife bordo', aciklama: 'Bordo kadife; ışıkta yumuşacık parlar.', yap: () => st({ sekil: 'badem', uzunluk: .55, renk: '#5B1A2A', kat: 2, ekler: [ek('kadife', '#5B1A2A', '#F4B8C8')], ust: 'mat' }) },
+    { id: 'kazakKis', ad: 'Kış kazağı', aciklama: 'Krem örgü; yüzükte minik kalp.', yap: i => st({ sekil: 'squoval', uzunluk: .32, renk: '#E9D8C4', ekler: [ek('kazak', '#E9D8C4')], ust: 'mat', cikartmalar: i === 3 ? [{ id: 'kalp', x: 0, y: .5, olcek: .4, don: 0, renk: '#D81E3C' }] : [] }) },
+    { id: 'sekerPembe', ad: 'Pamuk şeker', aciklama: 'Şekerli doku; parmakla dokunulacak gibi.', yap: () => st({ sekil: 'yuvarlak', uzunluk: .35, renk: '#FFB3C7', ekler: [ek('seker', '#FFB3C7', '#FFFFFF')], top: false }) },
+    { id: 'kumPlaj', ad: 'Kumsal', aciklama: 'Kum dokulu ten rengi, beyaz mikro uç.', yap: () => st({ sekil: 'oval', uzunluk: .4, renk: '#E3C1A4', ekler: [ek('kum', '#E3C1A4')], teknik: { id: 'french', renk2: '#FFFFFF', kalinlik: .1, stil: 'mikro' }, ust: 'mat' }) },
+    { id: 'catlakVintage', ad: 'Eskitme çatlak', aciklama: 'Siyah üstüne sütlü çatlaklar.', yap: () => st({ sekil: 'kare', uzunluk: .3, renk: '#F7F1EE', ekler: [ek('kirilgan', '#19161C', '#F7F1EE')] }) },
+    { id: 'sedefDeniz', ad: 'Deniz kabuğu', aciklama: 'Sütlü zemin, gökkuşağı sedef parçaları.', yap: () => st({ sekil: 'badem', uzunluk: .58, renk: '#F7F1EE', ojeTur: 'sheer', kat: 3, ekler: [ek('sedef', '#F7EFEA', '#D9E4FF')] }) },
+    { id: 'kuruCicekBahar', ad: 'Kuru çiçek baharı', aciklama: 'Tül pembe içinde preslenmiş çiçekler.', yap: i => st({ sekil: 'oval', uzunluk: .5, renk: '#F6C9D3', ojeTur: 'sheer', kat: 2, ekler: i % 2 ? [ek('kuruCicek', '#F48FB1', '#FFE28A')] : [] }) },
+    { id: 'altinVarak', ad: 'Altın varak', aciklama: 'Nude zemin, altın folyo parçaları.', yap: () => st({ sekil: 'coffin', uzunluk: .6, renk: '#EAD3C3', ojeTur: 'sheer', ekler: [ek('folyoParca', '#E2B74A', '#FFF1B8')] }) },
+    { id: 'kapsulKalp', ad: 'Kapsüllü kalpler', aciklama: 'Kalın jel içinde minik kalpler ve sim.', yap: i => st({ sekil: 'badem', uzunluk: .62, protez: 'builder', renk: '#FBE4EA', ojeTur: 'sheer', ekler: [ek('kapsul', '#FFFFFF', i % 2 ? '#F48FB1' : '#B48CFF')] }) },
+    { id: 'airbrushGun', ad: 'Airbrush gün batımı', aciklama: 'Pembe ile turuncu püskürtme geçişi.', yap: () => st({ sekil: 'stiletto', uzunluk: .7, renk: '#FFD1DC', ekler: [ek('airbrush', '#FF7FB0', '#FFB36B')] }) },
+    { id: 'bloomingMavi', ad: 'Açan mavi çiçek', aciklama: 'Beyaz zeminde dağılan blooming mavi.', yap: () => st({ sekil: 'oval', uzunluk: .48, renk: '#F7F1EE', ekler: [ek('blooming', '#5B8DEF', '#FFFFFF')] }) },
+    { id: 'suCikartmaKiraz', ad: 'Kiraz baskılı', aciklama: 'Tül zemin, minik kiraz su çıkartması.', yap: () => st({ sekil: 'yuvarlak', uzunluk: .34, renk: '#FBEDEF', ojeTur: 'sheer', ekler: [ek('suCikartma', '#D81E3C', '#5BAF5B')] }) },
+    { id: 'simGecisGece', ad: 'Yıldızlı gece geçişi', aciklama: 'Lacivert; uçtan dibe sönen altın sim.', yap: () => st({ sekil: 'badem', uzunluk: .62, renk: '#12244A', ekler: [ek('simGecis', '#E7C15A', '#FFFFFF')] }) },
+    { id: 'yansiticiDisko', ad: 'Disko gecesi', aciklama: 'Flaşta parlayan yansıtıcı sim.', yap: () => st({ sekil: 'coffin', uzunluk: .7, renk: '#2E2E33', ekler: [ek('yansitici', '#D7DCE3')] }) },
+    { id: 'mermerGeceT', ad: 'Gece mermeri', aciklama: 'Siyah mermer, altın damarlar.', yap: i => st({ sekil: 'squoval', uzunluk: .45, renk: '#16141A', ekler: [ek('mermerGece', '#16141A', '#D4AF37')], susler: i === 3 ? [{ id: 'civi', x: 0, y: .3, olcek: .14, don: 0, renk: '#FFFFFF' }] : [] }) },
+    { id: 'kuvarsPembe', ad: 'Pembe kuvars', aciklama: 'Kuvars mermer, yüzükte damla kristal.', yap: i => st({ sekil: 'badem', uzunluk: .58, renk: '#F7D3DC', ekler: [ek('mermerPembe', '#F7D3DC', '#FFFFFF')], susler: i === 3 ? [{ id: 'kristalDamla', x: 0, y: .35, olcek: .34, don: 0, renk: '#FFB3C7' }] : [] }) },
+    { id: 'yesimTasi', ad: 'Yeşim taşı', aciklama: 'Yeşil taş deseni, altın varak.', yap: () => st({ sekil: 'oval', uzunluk: .5, renk: '#2F7A5B', ekler: [ek('mermerYesim', '#2F7A5B', '#BDE8CF'), ek('folyoParca', '#E2B74A', '#FFF1B8')] }) },
+    { id: 'inekDesen', ad: 'Süt ineği', aciklama: 'Beyaz zemin, siyah lekeler.', yap: () => st({ sekil: 'yuvarlak', uzunluk: .32, renk: '#FFFFFF', ekler: [ek('inek', '#FFFFFF', '#19161C')] }) },
+    { id: 'damaliPiknik', ad: 'Damalı piknik', aciklama: 'Pembe damalı, işarette çilek.', yap: i => st({ sekil: 'squoval', uzunluk: .34, renk: '#FFFFFF', ekler: i === 1 ? [] : [ek('damali', '#FFFFFF', '#EE8AAA')], cikartmalar: i === 1 ? [{ id: 'cilekK', x: 0, y: .5, olcek: .55, don: 0, renk: '#E63950' }] : [] }) },
+    { id: 'ekoseSonbahar', ad: 'Ekose sonbahar', aciklama: 'Bordo-yeşil ekose, mat.', yap: () => st({ sekil: 'kare', uzunluk: .35, renk: '#8C0F26', ekler: [ek('ekose', '#8C0F26', '#14361F')], ust: 'mat' }) },
+    { id: 'zebraGece', ad: 'Zebra gece', aciklama: 'Siyah beyaz zebra, yüzük düz siyah.', yap: i => st({ sekil: 'stiletto', uzunluk: .7, renk: i === 3 ? '#19161C' : '#FFFFFF', ekler: i === 3 ? [] : [ek('zebra', '#FFFFFF', '#19161C')] }) },
+    { id: 'tersFrench', ad: 'Ters French', aciklama: 'Dipte ince altın hilal.', yap: () => st({ sekil: 'oval', uzunluk: .45, renk: '#F3E4D6', teknik: { id: 'french', renk2: '#D4AF37', kalinlik: .2, stil: 'ters' } }) },
+    { id: 'ciftFrench', ad: 'Çift French', aciklama: 'İki ince çizgili uç.', yap: () => st({ sekil: 'badem', uzunluk: .6, renk: '#F6D8DF', ojeTur: 'sheer', teknik: { id: 'french', renk2: '#3B3444', kalinlik: .22, stil: 'cift' } }) },
+    { id: 'ombreFrenchT', ad: 'Ombre French', aciklama: 'Ucu buğulu beyaz geçişli French.', yap: () => st({ sekil: 'coffin', uzunluk: .6, renk: '#F5CFD5', ojeTur: 'sheer', teknik: { id: 'french', renk2: '#FFFFFF', kalinlik: .4, stil: 'ombre' } }) },
+    { id: 'yanFrench', ad: 'Yan French', aciklama: 'Çapraz kesik renkli uç.', yap: i => st({ sekil: 'squoval', uzunluk: .42, renk: '#F7EDEA', teknik: { id: 'french', renk2: ['#EE8AAA', '#B48CFF', '#7EC8FF', '#7CE0B4', '#FFD86B'][i], kalinlik: .32, stil: 'asimetrik' } }) },
+    { id: 'mikroAltin', ad: 'Mikro altın French', aciklama: 'İnce uç ve altın çizgi.', yap: () => st({ sekil: 'badem', uzunluk: .55, renk: '#F2E6DE', ojeTur: 'sheer', teknik: { id: 'french', renk2: '#D4AF37', kalinlik: .1, stil: 'mikroCizgi' } }) },
+    { id: 'jelGul', ad: 'Jel gül', aciklama: 'Yüzük ve işarette 3D jel gül.', yap: i => st({ sekil: 'oval', uzunluk: .5, renk: '#FBE4EA', ojeTur: 'sheer', kat: 2, susler: i === 3 || i === 1 ? [{ id: 'heykelGul', x: 0, y: .45, olcek: .55, don: 0, renk: '#F48FB1' }, { id: 'inciMini', x: .45, y: .8, olcek: .14, don: 0, renk: '#FFFFFF' }] : [] }) },
+    { id: 'jelDamla', ad: 'Yağmur damlası', aciklama: 'Buz mavisinde jel damlalar.', yap: i => st({ sekil: 'badem', uzunluk: .56, renk: '#BDE3F5', ojeTur: 'sheer', kat: 2, susler: [{ id: 'heykelDamla', x: -.3, y: .35 + i * .04, olcek: .28, don: 0, renk: '#FFFFFF' }, { id: 'heykelDamla', x: .35, y: .7, olcek: .18, don: 0, renk: '#FFFFFF' }] }) },
+    { id: 'inciKralice', ad: 'İnci kraliçesi', aciklama: 'Sütlü beyaz, dipte inci dizisi.', yap: () => st({ sekil: 'oval', uzunluk: .55, renk: '#F7F1EE', ojeTur: 'sheer', kat: 3, efekt: 'inci', susler: [{ id: 'inciSira', x: 0, y: .16, olcek: .8, don: 0, renk: '#FFFFFF' }] }) },
+    { id: 'kelebekBahce', ad: 'Kelebek bahçesi', aciklama: 'Lila zemin, altın kelebek charm.', yap: i => st({ sekil: 'badem', uzunluk: .58, renk: '#E3C8F2', efekt: 'shimmer', susler: i === 3 ? [{ id: 'charmKelebek', x: 0, y: .45, olcek: .48, don: .2, renk: '#E6C35C' }] : [] }) },
+    { id: 'sekerKavanozu', ad: 'Şeker kavanozu', aciklama: 'Her parmak başka pastel.', yap: i => st({ sekil: 'yuvarlak', uzunluk: .34, renk: ['#FFD9C2', '#C7F2D8', '#DDD1F7', '#BDE3F5', '#FFF5BA'][i] }) },
+    { id: 'kuzeyKrom', ad: 'Kuzey ışığı', aciklama: 'Siyah üstüne kuzey ışığı krom.', yap: () => st({ sekil: 'stiletto', uzunluk: .78, renk: '#19161C', efekt: 'aurora' }) },
+    { id: 'gulAltini', ad: 'Gül altını', aciklama: 'Gül krom ayna, kısa badem.', yap: () => st({ sekil: 'badem', uzunluk: .42, renk: '#E9C9B6', efekt: 'kromRose' }) },
+    { id: 'zumrutKedi', ad: 'Zümrüt kedi', aciklama: 'Zümrüt kedi gözü, ince ışık bandı.', yap: () => st({ sekil: 'coffin', uzunluk: .62, renk: '#0F3B2E', ojeTur: 'kediGozu', kat: 2, kedi: { x: 0, y: .5, aci: -.35, gen: .35 } }) },
+    { id: 'lavantaSaten', ad: 'Lavanta saten', aciklama: 'Lavanta, saten üst kat.', yap: () => st({ sekil: 'squoval', uzunluk: .4, renk: '#DCC8F0', ust: 'saten', kat: 3 }) },
+    { id: 'matGeceTas', ad: 'Mat gece taşları', aciklama: 'Mat siyah, dipte üç kristal.', yap: () => st({ sekil: 'coffin', uzunluk: .66, renk: '#19161C', ust: 'mat', susler: [{ id: 'tasMini', x: -.35, y: .16, olcek: .12, don: 0, renk: '#FFFFFF' }, { id: 'tasS', x: 0, y: .14, olcek: .2, don: 0, renk: '#FFFFFF' }, { id: 'tasMini', x: .35, y: .16, olcek: .12, don: 0, renk: '#FFFFFF' }] }) },
+    { id: 'limonata', ad: 'Limonata', aciklama: 'Limon sarısı, yüzükte limon dilimi.', yap: i => st({ sekil: 'yuvarlak', uzunluk: .32, renk: i === 3 ? '#FFFDF2' : '#FFF5BA', cikartmalar: i === 3 ? [{ id: 'limon', x: 0, y: .5, olcek: .6, don: .3, renk: '#FFD84A' }] : [] }) },
+    { id: 'bulutluGok', ad: 'Bulutlu gök', aciklama: 'Gök mavisi, bulutlar ve gökkuşağı.', yap: i => st({ sekil: 'oval', uzunluk: .46, renk: '#BDE3F5', cikartmalar: i === 2 ? [{ id: 'gokkusagi', x: 0, y: .5, olcek: .7, don: 0, renk: '#FFFFFF' }] : [{ id: 'bulut', x: i % 2 ? .25 : -.2, y: .55, olcek: .5, don: 0, renk: '#FFFFFF' }] }) }
   ];
 
   /* ------------------------------------------------------------ durum */
@@ -210,7 +294,7 @@
       v: SURUM, sekil: 'yuvarlak', uzunluk: .2, protez: null,
       baz: 'seffaf', renk: null, ojeTur: 'krem', kat: 0, renk2: null, kedi: null,
       teknik: { id: 'yok', renk2: '#FFFFFF', kalinlik: .3 }, efekt: 'yok', ust: 'parlak', top: false,
-      desen: null, damgalar: [], suMermer: null, cikartmalar: [], susler: [], firca: [],
+      desen: null, damgalar: [], suMermer: null, cikartmalar: [], susler: [], firca: [], ekler: [], katman: null,
       kur: { baz: true, renk: true, top: true }, tohum: yeniTohum(), finish: 'parlak'
     };
   }
@@ -242,7 +326,9 @@
   function tirnakDuzelt(t) {
     const v = Object.assign(tirnakVarsayilan(), tirnakGoc(t));
     v.teknik = Object.assign({ id: 'yok', renk2: '#FFFFFF', kalinlik: .3 }, (v.teknik && typeof v.teknik === 'object') ? v.teknik : {});
-    ['cikartmalar', 'susler', 'firca', 'damgalar'].forEach(k => { if (!Array.isArray(v[k])) v[k] = []; });
+    ['cikartmalar', 'susler', 'firca', 'damgalar', 'ekler'].forEach(k => { if (!Array.isArray(v[k])) v[k] = []; });
+    v.ekler = v.ekler.filter(e => e && EKLER.some(x => x.id === e.id)).slice(0, EK_MAKS).map(e => Object.assign({}, e, { u: String(e.u || e.id), renk: hexMi(e.renk) ? e.renk : '#FFFFFF', renk2: hexMi(e.renk2) ? e.renk2 : '#FFFFFF', tohum: Number(e.tohum) || 1 }));
+    v.katman = katmanDuzelt(v.katman, v);
     if (!SEKILLER.some(s => s.id === v.sekil)) v.sekil = 'badem';
     if (!BAZLAR.some(b => b.id === v.baz)) v.baz = 'seffaf';
     if (!OJE_TURLERI.includes(v.ojeTur)) v.ojeTur = 'krem';
@@ -257,6 +343,33 @@
     v.finish = finishUyum(v);
     return v;
   }
+  /* ------------------------------------------------------------ katman sistemi
+     t.katman = { sira: ['renk', 'ek:<u>', 'teknik', …], gizli: { anahtar: true }, opak: { anahtar: 0..1 } } ya da null (varsayılan).
+     Sıralanabilen katmanlar: renk, ek katmanlar, teknik, mermer, desen, damga, fırça, çıkartma, efekt. 'sus' ve 'ust' hep en üstte
+     kalır ama gizlenebilir ve opaklığı ayarlanabilir. Eski kayıtta katman yoksa çizim eskisiyle birebir aynıdır. */
+  const KATMAN_ANA = ['renk', 'teknik', 'mermer', 'desen', 'damga', 'firca', 'cikartma', 'efekt'];
+  const KATMAN_SABIT = ['sus', 'ust'];
+  function katmanVarsayilanSira(t) { return ['renk'].concat((t.ekler || []).map(e => 'ek:' + e.u), KATMAN_ANA.slice(1)); }
+  function katmanSira(t) {
+    const D = katmanVarsayilanSira(t), kayit = t.katman && Array.isArray(t.katman.sira) ? t.katman.sira : null;
+    if (!kayit) return D;
+    const gecerli = new Set(D), s = kayit.filter((k, i) => gecerli.has(k) && kayit.indexOf(k) === i);
+    D.forEach((k, i) => { if (s.includes(k)) return; let yer = 0; for (let j = i - 1; j >= 0; j--) { const q = s.indexOf(D[j]); if (q >= 0) { yer = q + 1; break; } } s.splice(yer, 0, k); });
+    return s;
+  }
+  function katmanDuzelt(k, t) {
+    if (!k || typeof k !== 'object') return null;
+    const anahtarMi = (x) => typeof x === 'string' && (KATMAN_ANA.includes(x) || KATMAN_SABIT.includes(x) || /^ek:[\w-]{1,24}$/.test(x));
+    const v = { sira: Array.isArray(k.sira) ? k.sira.filter(anahtarMi).slice(0, 30) : null, gizli: {}, opak: {} };
+    if (k.gizli && typeof k.gizli === 'object') Object.keys(k.gizli).forEach(a => { if (anahtarMi(a) && k.gizli[a]) v.gizli[a] = true; });
+    if (k.opak && typeof k.opak === 'object') Object.keys(k.opak).forEach(a => { const n = Number(k.opak[a]); if (anahtarMi(a) && n >= 0 && n < .999) v.opak[a] = Math.round(sinir(n, .05, 1) * 100) / 100; });
+    if (v.sira && t && v.sira.join() === katmanVarsayilanSira(t).filter(x => v.sira.includes(x)).join() && v.sira.length >= katmanVarsayilanSira(t).length) v.sira = null;
+    if (!v.sira && !Object.keys(v.gizli).length && !Object.keys(v.opak).length) return null;
+    if (!v.sira) delete v.sira;
+    return v;
+  }
+  const katmanGizli = (t, k) => !!(t.katman && t.katman.gizli && t.katman.gizli[k]);
+  const katmanOpak = (t, k) => { const a = t.katman && t.katman.opak && t.katman.opak[k]; return a == null ? 1 : a; };
   function elDuzelt(a) { const l = Array.isArray(a) ? a : []; const s = []; for (let i = 0; i < 5; i++) s.push(tirnakDuzelt(l[i])); return s; }
   function ellerDuzelt(e) { return { sol: elDuzelt(e && e.sol), sag: elDuzelt(e && e.sag) }; }
 
@@ -286,7 +399,7 @@
     return {
       v: SURUM, ten: null, el: 'sag', poz: 'duz', zemin: 'mermer', isik: 'gun', isikAci: .8, adim: 'hazirlik',
       secim: { hepsi: true, parmak: 2 }, eller: ellerDuzelt(), hazirlik: null, sistem: 'klasik', lambaSure: 30,
-      sonRenkler: [], kayitSayisi: 0, sonGorulme: Date.now()
+      sonRenkler: [], kayitSayisi: 0, vurgu: null, sonGorulme: Date.now()
     };
   }
   /* durum göçü: v1 { ten, el, adim, secim, eller, sonRenkler, kayitSayisi } → v2 */
@@ -308,6 +421,7 @@
     if (!v.secim || typeof v.secim !== 'object') v.secim = { hepsi: true, parmak: 2 };
     v.secim.parmak = sinir(Number(v.secim.parmak) || 0, 0, 4); v.secim.hepsi = !!v.secim.hepsi;
     if (!Array.isArray(v.sonRenkler)) v.sonRenkler = [];
+    v.vurgu = v.vurgu == null || !(Number(v.vurgu) >= 0 && Number(v.vurgu) <= 4) ? null : Math.round(Number(v.vurgu));
     // eski kullanıcı: elleri zaten yapılmış sayılır (hazırlık tamam); yeni kullanıcı: eski ojeyle başlar
     const doluMu = (el) => el.some(t => t.renk);
     const hz = eski.hazirlik && typeof eski.hazirlik === 'object' ? eski.hazirlik : {};
@@ -855,28 +969,33 @@
     // 3) taban
     const baz = BAZLAR.find(b => b.id === t.baz);
     if (baz && baz.renk) { g.fillStyle = baz.renk; kutu(); }
-    // 4) renk
-    if (t.renk && t.kat > 0) ojeKatmani(g, t, nw, L, o, seed, ph);
-    // 5) teknik, su mermeri, desen, damga
-    teknikCiz(g, t, nw, L, seed, ph, o);
-    if (t.suMermer) suMermerCiz(g, t, nw, L, S);
-    if (t.desen) desenCiz(g, t.desen, nw, L, seed);
-    t.damgalar.forEach(dm => damgaCiz(g, dm, nw, L));
-    // 6) fırça/sünger/folyo/nokta katmanı
-    if (t.firca.length) sanatKatmani(g, t, nw, L, S, seed);
-    // 7) çıkartmalar
-    t.cikartmalar.forEach(c => { g.save(); g.translate(c.x * hw, -c.y * L); g.rotate(c.don || 0); const f = CIKARTMA_CIZ[c.id]; if (f) f(g, (c.olcek || .5) * nw, c.renk || '#FFFFFF'); g.restore(); });
-    // 8) krom tozu / efekt
-    efektCiz(g, t, nw, L, ph, seed);
-    // 9) hacim: yan duvarlar (C eğrisi) ve dip gölgesi
+    // 4–8) sıralı katmanlar: renk, ek bitişler/desenler, teknik, su mermeri, desen, damga, fırça, çıkartma, efekt
+    const ekler = new Map((t.ekler || []).map(e => ['ek:' + e.u, e]));
+    katmanSira(t).forEach(k => {
+      if (katmanGizli(t, k)) return;
+      opakCiz(g, katmanOpak(t, k), h => {
+        if (k === 'renk') { if (t.renk && t.kat > 0) ojeKatmani(h, t, nw, L, o, seed, ph); }
+        else if (k === 'teknik') teknikCiz(h, t, nw, L, seed, ph, o);
+        else if (k === 'mermer') { if (t.suMermer) suMermerCiz(h, t, nw, L, S); }
+        else if (k === 'desen') { if (t.desen) desenCiz(h, t.desen, nw, L, seed); }
+        else if (k === 'damga') t.damgalar.forEach(dm => damgaCiz(h, dm, nw, L));
+        else if (k === 'firca') { if (t.firca.length) sanatKatmani(h, t, nw, L, S, seed); }
+        else if (k === 'cikartma') t.cikartmalar.forEach(c => { h.save(); h.translate(c.x * hw, -c.y * L); h.rotate(c.don || 0); const f = CIKARTMA_CIZ[c.id]; if (f) f(h, (c.olcek || .5) * nw, c.renk || '#FFFFFF'); h.restore(); });
+        else if (k === 'efekt') efektCiz(h, t, nw, L, ph, seed, o);
+        else if (ekler.has(k)) { const e = ekler.get(k), f = EK_CIZ[e.id]; if (f) { h.save(); f(h, e, t, nw, L, (e.tohum || 1) + seed, o); h.restore(); } }
+      });
+    });
+    // 9) hacim: yan duvarlar (C eğrisi) ve dip gölgesi (3D'de gerçek ışık yapar)
+    if (!o.d3) {
     const vg = g.createLinearGradient(-hw, 0, hw, 0);
     vg.addColorStop(0, 'rgba(70,30,50,.26)'); vg.addColorStop(.2, 'rgba(70,30,50,0)'); vg.addColorStop(.74, 'rgba(70,30,50,0)'); vg.addColorStop(1, 'rgba(70,30,50,.32)');
     g.fillStyle = vg; kutu();
     const cg = g.createLinearGradient(0, nw * .3, 0, -nw * .25); cg.addColorStop(0, 'rgba(70,30,50,.24)'); cg.addColorStop(1, 'rgba(70,30,50,0)');
     g.fillStyle = cg; g.fillRect(-hw - 2, -nw * .25, nw + 4, nw * .6);
     // 10) üst kat / doğal parlaklık
-    ustKatmani(g, t, nw, L, hz, ph, o);
+    ustKatmani(g, katmanGizli(t, 'ust') ? Object.assign({}, t, { top: false }) : t, nw, L, hz, ph, o);
     if (o.los && t.ojeTur !== 'glow') { g.fillStyle = 'rgba(22,12,36,.36)'; kutu(); }
+    } else if (t.top && t.ust === 'mat' && !katmanGizli(t, 'ust') && doku.mat) { g.save(); g.globalAlpha = .35; g.fillStyle = g.createPattern(doku.mat, 'repeat'); kutu(); g.restore(); }
     // 11) kürlenmemiş jel: yapışkan ıslak görünüm
     if (yapiskanMi(t)) {
       g.globalAlpha = .55; g.strokeStyle = 'rgba(255,255,255,.7)'; g.lineWidth = nw * .05; const r = tohumla(seed + 5);
@@ -889,18 +1008,19 @@
     g.strokeStyle = 'rgba(80,40,60,.22)'; g.lineWidth = .7; g.stroke(yol);
     g.save(); g.clip(yol); g.strokeStyle = 'rgba(255,255,255,.35)'; g.lineWidth = nw * .05; g.translate(0, nw * .04); g.stroke(yol); g.restore();
     // 13) deri kıvrımları: kütikül + yan kıvrımlar (tırnağın dibini ve yanlarını hafifçe örter)
-    kivrimCiz(g, nw, o.los ? karis(ten, '#2A1B33', .45) : ten, hz, t, S);
-    // 14) 3D süsler (kırpma yok)
-    t.susler.forEach(s => { g.save(); g.translate(s.x * hw, -s.y * L); g.rotate(s.don || 0); const f = SUS_CIZ[s.id]; if (f) f(g, (s.olcek || .3) * nw, s.renk || '#FFFFFF', S); g.restore(); });
-    if (o.anim && o.anim.tur === 'oje' && t.renk) {
+    kivrimCiz(g, nw, o.los ? karis(ten, '#2A1B33', .45) : ten, hz, t, S, o.d3);
+    // 14) 3D süsler (kırpma yok; 3D sahnede gerçek nesne olarak çizilir)
+    if (!o.d3 && !katmanGizli(t, 'sus')) { const a = katmanOpak(t, 'sus'); g.save(); g.globalAlpha = a; t.susler.forEach(s => { g.save(); g.translate(s.x * hw, -s.y * L); g.rotate(s.don || 0); const f = SUS_CIZ[s.id]; if (f) f(g, (s.olcek || .3) * nw, s.renk || '#FFFFFF', S); g.restore(); }); g.restore(); }
+    if (o.anim && o.anim.tur === 'oje' && t.renk && !o.d3) {
       const p = o.anim.p, kul = [[0, 0], [-2 / 3, .18], [2 / 3, .36]];
       for (const [kx, bas] of kul) { const lp = (p - bas) / .58; if (lp > 0 && lp < 1) { fircaSprite(g, kx * hw, -L * lp, t.renk, hw); break; } }
     }
   }
   function yapiskanMi(t) { return !!(t.kur && (t.kur.baz === false || t.kur.renk === false || t.kur.top === false)); }
-  function kivrimCiz(g, nw, ten, hz, t, S) {
+  function kivrimCiz(g, nw, ten, hz, t, S, d3) {
     const hw = nw / 2, yatak = nw * 1.28;
     const deri = karis(ten, '#E6A0A0', .12);
+    if (d3) { kutikulCizgi(g, nw, hz); return; }   // 3D: deri kıvrımları gerçek geometri
     // yan kıvrımlar
     [-1, 1].forEach(s => {
       const yg = g.createLinearGradient(0, 0, 0, -yatak * .9); yg.addColorStop(0, rgba(deri, .95)); yg.addColorStop(.8, rgba(deri, .5)); yg.addColorStop(1, rgba(deri, 0));
@@ -914,6 +1034,10 @@
     kv.moveTo(-hw - nw * .12, -nw * .06); kv.quadraticCurveTo(0, nw * .34, hw + nw * .12, -nw * .06); kv.lineTo(hw + nw * .14, nw * .55); kv.lineTo(-hw - nw * .14, nw * .55); kv.closePath();
     const kg = g.createLinearGradient(0, nw * .06, 0, nw * .55); kg.addColorStop(0, deri); kg.addColorStop(.55, rgba(ten, .85)); kg.addColorStop(1, rgba(ten, 0));
     g.save(); g.shadowColor = 'rgba(80,30,50,.35)'; g.shadowBlur = 2.2 * S; g.shadowOffsetY = -.8 * S; g.fillStyle = kg; g.fill(kv); g.restore();
+    kutikulCizgi(g, nw, hz);
+  }
+  function kutikulCizgi(g, nw, hz) {
+    const hw = nw / 2;
     // kütikül çizgisi: itilmemişse kalın ve beyazımsı, itilmiş + yağlıysa ince ve parlak
     const itildi = !hz || hz.kutikul > .95;
     g.strokeStyle = itildi ? 'rgba(255,236,236,.65)' : 'rgba(248,226,220,.9)'; g.lineWidth = itildi ? nw * .03 : nw * .07;
@@ -972,7 +1096,7 @@
       const tg = g.createLinearGradient(0, 0, 0, -L); tg.addColorStop(0, renk); tg.addColorStop(sinir(.35 + sic * .55, 0, .98), renk); tg.addColorStop(sinir(.62 + sic * .37, .02, 1), r2); tg.addColorStop(1, r2);
       g.globalAlpha = alfa; g.fillStyle = tg; kutu();
     } else if (tur === 'metalik') {
-      g.globalAlpha = alfa; metalik(g, hw, L, -.4, ph, renk);
+      g.globalAlpha = alfa; if (o.d3) { g.fillStyle = renk; kutu(); } else metalik(g, hw, L, -.4, ph, renk);
       g.globalAlpha = alfa * .25; g.strokeStyle = 'rgba(255,255,255,.6)'; g.lineWidth = .4; const r = tohumla(seed + 9);
       for (let k = 0; k < 26; k++) { const x = (r() * 2 - 1) * hw; g.beginPath(); g.moveTo(x, nw * .2); g.lineTo(x + (r() - .5) * 2, -L); g.stroke(); }
     } else {
@@ -993,7 +1117,7 @@
     if (tur === 'neon') { const ng = g.createRadialGradient(0, -L * .45, 0, 0, -L * .45, L * .7); ng.addColorStop(0, 'rgba(255,255,255,.18)'); ng.addColorStop(1, 'rgba(255,255,255,0)'); g.fillStyle = ng; kutu(); }
     if (tur === 'glow' && o.los) { g.globalCompositeOperation = 'lighter'; const gg = g.createRadialGradient(0, -L * .5, 0, 0, -L * .5, L * .8); gg.addColorStop(0, rgba(renk, .32)); gg.addColorStop(1, rgba(renk, 0)); g.fillStyle = gg; kutu(); g.globalCompositeOperation = 'source-over'; }
     if (tur === 'simInce' || tur === 'simIri' || tur === 'simHolo') simKatmani(g, hw, L, tohumla(seed + 17), ph, tur, renk, t.kat);
-    if (tur === 'kediGozu') kediBandi(g, hw, L, t.kedi || { x: 0, y: .5, aci: -.5, gen: .5 }, renk, seed);
+    if (tur === 'kediGozu') kediBandi(g, hw, L, t.kedi || { x: 0, y: .5, aci: -.5, gen: .5 }, renk, seed, o.d3);
     g.restore();
   }
   function simKatmani(g, hw, L, rnd, ph, tur, renk, kat) {
@@ -1014,9 +1138,10 @@
     if (!iri) for (let k = 0; k < 6; k++) { const x = (rnd() * 2 - 1) * hw * .8, y = -rnd() * L; g.globalAlpha = .35 + .65 * Math.abs(Math.sin(ph * 2.2 + k * 1.7)); yildiz4(g, x, y, hw * (.1 + rnd() * .1)); }
     g.globalAlpha = 1;
   }
-  function kediBandi(g, hw, L, k, renk, seed) {
+  function kediBandi(g, hw, L, k, renk, seed, d3) {
     const acikZemin = parlaklik(renk) > 150;
     g.fillStyle = acikZemin ? 'rgba(90,80,100,.12)' : 'rgba(0,0,0,.28)'; g.fillRect(-hw - 2, -L - 2, hw * 2 + 4, L + hw * 3);
+    if (d3) return;                     // 3D: ışık bandını gölgelendirici çizer (bakış açısıyla kayar)
     g.save(); g.translate(k.x * hw, -k.y * L); g.rotate(k.aci || 0);
     const gen = hw * (k.gen || .5) * 1.3;
     const bg = g.createLinearGradient(-gen, 0, gen, 0);
@@ -1046,10 +1171,25 @@
     const hw = nw / 2, r2 = tk.renk2 || '#FFFFFF';
     switch (tk.id) {
       case 'french': {
-        const stil = tk.stil || 'klasik', k = sinir(stil === 'mikro' ? Math.min(tk.kalinlik, .12) : tk.kalinlik, .06, .6);
-        g.save(); gulumseme(g, hw, L, k, stil); g.fillStyle = r2; g.fill();
-        if (stil === 'v') { g.strokeStyle = koyu(r2, .15); g.lineWidth = nw * .03; g.stroke(); }
-        g.globalAlpha = .25; g.fillStyle = '#FFFFFF'; g.fillRect(-hw, -L, nw * .25, L * k * .8); g.restore(); break;
+        const stil = tk.stil || 'klasik', k = sinir(/^mikro/.test(stil) ? Math.min(tk.kalinlik, .12) : tk.kalinlik, .06, .6);
+        g.save(); g.fillStyle = r2;
+        if (stil === 'ters') {
+          const dd = L * k; g.beginPath(); g.moveTo(-hw - 2, nw * .6); g.lineTo(-hw - 2, -dd * .3); g.quadraticCurveTo(0, -dd * 1.7, hw + 2, -dd * .3); g.lineTo(hw + 2, nw * .6); g.closePath(); g.fill();
+        } else if (stil === 'ombre') {
+          const boy = L * k * 1.9, grd = g.createLinearGradient(0, -L, 0, -L + boy); grd.addColorStop(0, rgba(r2, 1)); grd.addColorStop(.4, rgba(r2, .78)); grd.addColorStop(1, rgba(r2, 0));
+          g.fillStyle = grd; g.fillRect(-hw - 2, -L - 4, nw + 4, boy + 4);
+        } else if (stil === 'asimetrik') {
+          g.beginPath(); g.moveTo(-hw - 2, -L + L * k * 1.8); g.quadraticCurveTo(-hw * .1, -L + L * k * .9, hw + 2, -L + L * k * .15); g.lineTo(hw + 2, -L - 4); g.lineTo(-hw - 2, -L - 4); g.closePath(); g.fill();
+        } else {
+          gulumseme(g, hw, L, k, stil === 'v' ? 'v' : 'klasik'); g.fill();
+          if (stil === 'v') { g.strokeStyle = koyu(r2, .15); g.lineWidth = nw * .03; g.stroke(); }
+          if (stil === 'cift' || stil === 'mikroCizgi') {
+            const k2 = k + (stil === 'cift' ? .13 : .08), yy = -L + L * k2; g.strokeStyle = r2; g.lineWidth = nw * (stil === 'cift' ? .05 : .028); g.lineCap = 'round';
+            g.beginPath(); g.moveTo(-hw - 2, yy + L * .12); g.quadraticCurveTo(0, yy - L * .14, hw + 2, yy + L * .12); g.stroke();
+          }
+          g.globalAlpha = .25; g.fillStyle = '#FFFFFF'; g.fillRect(-hw, -L, nw * .25, L * k * .8);
+        }
+        g.restore(); break;
       }
       case 'yarimAy': {
         const k = sinir(tk.kalinlik, .1, .5);
@@ -1141,6 +1281,179 @@
       for (let s = 0; s < 3; s++) { const a = rnd() * Math.PI * 2; g.beginPath(); g.arc(x, y, r, a, a + .7 + rnd() * .8); g.stroke(); }
     }
   }
+
+  /* ------------------------------------------------------------ katman opaklığı: yarı saydam katman ayrı tuvalde çizilip tek seferde bindirilir */
+  function opakCiz(g, a, fn) {
+    if (a >= .999) { fn(g); return; }
+    const c = tuvalHavuz('katmanOpak', g.canvas.width, g.canvas.height), h = c.getContext('2d'), T = g.getTransform();
+    h.setTransform(1, 0, 0, 1, 0, 0); h.globalAlpha = 1; h.globalCompositeOperation = 'source-over'; h.clearRect(0, 0, c.width, c.height);
+    h.setTransform(T.a, T.b, T.c, T.d, T.e, T.f);
+    fn(h);
+    g.save(); g.setTransform(1, 0, 0, 1, 0, 0); g.globalAlpha = a; g.drawImage(c, 0, 0); g.restore();
+  }
+
+  /* ------------------------------------------------------------ ek katmanlar: yeni bitişler, gömme süsler, spreyler, desenler
+     g kırpılmış tırnak yerel koordinatında: x ∈ [-hw, hw], y ∈ [-L (uç), ~nw*.3 (dip)] */
+  function mermerDamar(g, hw, L, renk2, rnd, kalin, adet) {
+    g.strokeStyle = renk2; g.lineCap = 'round'; g.lineJoin = 'round';
+    for (let k = 0; k < adet; k++) {
+      g.globalAlpha = .3 + rnd() * .6; g.lineWidth = (.3 + rnd() * kalin) * hw / 13; g.beginPath();
+      let x = (rnd() * 2 - 1) * hw * 1.2, y = hw * .4 - rnd() * L * .3; g.moveTo(x, y);
+      for (let s = 0; s < 7; s++) { const nx = x + (rnd() * 2 - 1) * hw * .7, ny = y - L * (.1 + rnd() * .2); g.quadraticCurveTo(x + (rnd() * 2 - 1) * hw * .6, (y + ny) / 2, nx, ny); x = nx; y = ny; }
+      g.stroke();
+      if (rnd() < .5) { g.lineWidth *= .4; g.beginPath(); g.moveTo(x, y); g.lineTo(x + (rnd() - .5) * hw, y + L * .15); g.stroke(); }
+    }
+    g.globalAlpha = 1;
+  }
+  const EK_CIZ = {
+    kadife(g, e, t, nw, L, seed, o) {
+      const hw = nw / 2, r = tohumla(seed); g.fillStyle = e.renk; g.fillRect(-hw - 2, -L - 2, nw + 4, L + nw);
+      if (!o.d3) { const rg = g.createRadialGradient(-hw * .25, -L * .5, 0, 0, -L * .5, L * .75); rg.addColorStop(0, rgba(e.renk2, .42)); rg.addColorStop(1, rgba(e.renk2, 0)); g.fillStyle = rg; g.fillRect(-hw - 2, -L - 2, nw + 4, L + nw); }
+      for (let k = 0; k < 340; k++) { g.fillStyle = rgba(k % 3 ? e.renk2 : koyu(e.renk, .3), .06 + r() * .12); g.fillRect((r() * 2 - 1) * hw, -r() * L * 1.05, .45, .45); }
+    },
+    kazak(g, e, t, nw, L) {
+      const hw = nw / 2, sx = nw * .2, sy = nw * .15; g.fillStyle = e.renk; g.fillRect(-hw - 2, -L - 2, nw + 4, L + nw);
+      g.lineCap = 'round'; g.lineWidth = nw * .055;
+      for (let x = -hw - sx; x < hw + sx; x += sx) {
+        for (let y = nw * .3; y > -L - sy; y -= sy) {
+          g.strokeStyle = rgba(acik(e.renk, .35), .9); g.beginPath(); g.moveTo(x, y - sy * .9); g.quadraticCurveTo(x + sx * .2, y, x + sx * .5, y + sy * .05); g.stroke();
+          g.strokeStyle = rgba(koyu(e.renk, .12), .8); g.beginPath(); g.moveTo(x + sx, y - sy * .9); g.quadraticCurveTo(x + sx * .8, y, x + sx * .5, y + sy * .05); g.stroke();
+        }
+        g.strokeStyle = rgba(koyu(e.renk, .25), .5); g.lineWidth = nw * .018; g.beginPath(); g.moveTo(x + sx, nw); g.lineTo(x + sx, -L - 2); g.stroke(); g.lineWidth = nw * .055;
+      }
+    },
+    seker(g, e, t, nw, L, seed) {
+      const hw = nw / 2, r = tohumla(seed); g.fillStyle = e.renk; g.fillRect(-hw - 2, -L - 2, nw + 4, L + nw);
+      for (let k = 0; k < 420; k++) { const x = (r() * 2 - 1) * hw * 1.05, y = -r() * L * 1.04 + hw * .2, rr = nw * (.012 + r() * .02); g.fillStyle = r() < .45 ? rgba(e.renk2, .85) : rgba(acik(e.renk, .3), .9); g.beginPath(); g.arc(x, y, rr, 0, 7); g.fill(); g.fillStyle = 'rgba(255,255,255,.75)'; g.fillRect(x - rr * .4, y - rr * .5, rr * .45, rr * .45); }
+    },
+    kum(g, e, t, nw, L, seed) {
+      const hw = nw / 2, r = tohumla(seed); g.fillStyle = e.renk; g.fillRect(-hw - 2, -L - 2, nw + 4, L + nw);
+      for (let k = 0; k < 900; k++) { g.fillStyle = r() < .5 ? rgba(koyu(e.renk, .25), .35) : rgba(acik(e.renk, .45), .45); g.fillRect((r() * 2 - 1) * hw * 1.05, -r() * L * 1.05 + hw * .2, .4 + r() * .4, .4 + r() * .4); }
+    },
+    kirilgan(g, e, t, nw, L, seed) {
+      const hw = nw / 2, r = tohumla(seed); g.fillStyle = e.renk2; g.fillRect(-hw - 2, -L - 2, nw + 4, L + nw);
+      g.strokeStyle = e.renk; g.lineJoin = 'round'; g.lineCap = 'round';
+      for (let k = 0; k < 16; k++) {
+        let x = (r() * 2 - 1) * hw * 1.1, y = -r() * L * 1.05; g.lineWidth = nw * (.02 + r() * .04); g.beginPath(); g.moveTo(x, y);
+        for (let s = 0; s < 6; s++) { x += (r() * 2 - 1) * nw * .22; y += (r() * 2 - 1) * nw * .3; g.lineTo(x, y); if (r() < .3) { g.moveTo(x, y); } }
+        g.stroke();
+      }
+    },
+    sedef(g, e, t, nw, L, seed) {
+      const hw = nw / 2, r = tohumla(seed);
+      for (let k = 0; k < 15; k++) {
+        const x = (r() * 2 - 1) * hw, y = -r() * L, s = nw * (.12 + r() * .18), a = r() * 6, n = 3 + Math.floor(r() * 3);
+        const grd = g.createLinearGradient(x - s, y - s, x + s, y + s); grd.addColorStop(0, e.renk); grd.addColorStop(.35, 'hsl(' + Math.round(r() * 360) + ',70%,88%)'); grd.addColorStop(.7, e.renk2); grd.addColorStop(1, 'hsl(' + Math.round(r() * 360) + ',60%,92%)');
+        g.fillStyle = grd; g.globalAlpha = .85; g.beginPath(); for (let q = 0; q < n; q++) { const aa = a + q * Math.PI * 2 / n + r() * .5, rr = s * (.6 + r() * .5); g.lineTo(x + Math.cos(aa) * rr, y + Math.sin(aa) * rr); } g.closePath(); g.fill();
+        g.globalAlpha = .6; g.strokeStyle = '#FFFFFF'; g.lineWidth = nw * .01; g.stroke();
+      }
+      g.globalAlpha = 1;
+    },
+    kuruCicek(g, e, t, nw, L, seed) {
+      const hw = nw / 2, r = tohumla(seed);
+      for (let k = 0; k < 4; k++) {
+        const x = (r() * 2 - 1) * hw * .7, y = -L * (.2 + r() * .65), s = nw * (.16 + r() * .1);
+        g.save(); g.translate(x, y); g.rotate(r() * 6); g.globalAlpha = .72;
+        g.strokeStyle = 'rgba(110,150,90,.7)'; g.lineWidth = nw * .015; g.beginPath(); g.moveTo(0, 0); g.quadraticCurveTo(s * .6, s * .8, s * .3, s * 1.6); g.stroke();
+        for (let p = 0; p < 5; p++) { const a = p * Math.PI * 2 / 5; g.fillStyle = rgba(k % 2 ? e.renk : acik(e.renk, .35), .8); g.beginPath(); g.ellipse(Math.cos(a) * s * .45, Math.sin(a) * s * .45, s * .32, s * .2, a, 0, 7); g.fill(); g.strokeStyle = rgba(koyu(e.renk, .2), .4); g.lineWidth = nw * .006; g.beginPath(); g.moveTo(0, 0); g.lineTo(Math.cos(a) * s * .7, Math.sin(a) * s * .7); g.stroke(); }
+        g.fillStyle = e.renk2; g.beginPath(); g.arc(0, 0, s * .16, 0, 7); g.fill(); g.restore();
+      }
+      g.globalAlpha = 1;
+    },
+    folyoParca(g, e, t, nw, L, seed) {
+      const hw = nw / 2, r = tohumla(seed);
+      for (let k = 0; k < 11; k++) {
+        const x = (r() * 2 - 1) * hw, y = -r() * L, s = nw * (.08 + r() * .2), a = r() * 6;
+        g.fillStyle = r() < .5 ? e.renk : karis(e.renk, e.renk2, .4); g.beginPath();
+        for (let q = 0; q < 6; q++) { const aa = a + q * 1.05 + r() * .4, rr = s * (.5 + r() * .6); g.lineTo(x + Math.cos(aa) * rr, y + Math.sin(aa) * rr); } g.closePath(); g.fill();
+        g.strokeStyle = rgba(e.renk2, .8); g.lineWidth = nw * .008; g.beginPath(); g.moveTo(x - s * .4, y); g.lineTo(x + s * .3, y + s * .2); g.stroke();
+      }
+    },
+    kapsul(g, e, t, nw, L, seed) {
+      const hw = nw / 2, r = tohumla(seed);
+      for (let k = 0; k < 70; k++) { g.globalAlpha = .5 + r() * .5; g.fillStyle = k % 3 ? '#FFFFFF' : e.renk2; g.fillRect((r() * 2 - 1) * hw, -r() * L, .6, .6); }
+      g.globalAlpha = .9;
+      for (let k = 0; k < 5; k++) { g.save(); g.translate((r() * 2 - 1) * hw * .6, -L * (.2 + r() * .6)); g.rotate((r() - .5) * 1.2); CIKARTMA_CIZ.kalp(g, nw * (.14 + r() * .1), e.renk2); g.restore(); }
+      g.globalAlpha = 1;
+      const dg = g.createLinearGradient(-hw, 0, hw, 0); dg.addColorStop(0, rgba(e.renk, .3)); dg.addColorStop(.35, rgba(e.renk, .06)); dg.addColorStop(.65, rgba(e.renk, .04)); dg.addColorStop(1, rgba(e.renk, .26));
+      g.fillStyle = dg; g.fillRect(-hw - 2, -L - 2, nw + 4, L + nw);
+    },
+    airbrush(g, e, t, nw, L, seed) {
+      const hw = nw / 2, r = tohumla(seed), grd = g.createLinearGradient(0, hw * .3, 0, -L);
+      grd.addColorStop(0, e.renk); grd.addColorStop(.5, karis(e.renk, e.renk2, .5)); grd.addColorStop(1, e.renk2);
+      g.fillStyle = grd; g.globalAlpha = .92; g.fillRect(-hw - 2, -L - 2, nw + 4, L + nw); g.globalAlpha = 1;
+      for (let k = 0; k < 500; k++) { const y = -r() * L * 1.05 + hw * .2, tt = sinir(-y / L, 0, 1); g.fillStyle = rgba(r() < tt ? e.renk2 : e.renk, .5); g.fillRect((r() * 2 - 1) * hw, y, .5, .5); }
+    },
+    blooming(g, e, t, nw, L, seed) {
+      const hw = nw / 2, r = tohumla(seed);
+      for (let k = 0; k < 5; k++) {
+        const x = (r() * 2 - 1) * hw * .8, y = -L * (.12 + r() * .8), R = nw * (.18 + r() * .22);
+        const rg = g.createRadialGradient(x, y, 0, x, y, R); rg.addColorStop(0, rgba(e.renk, .95)); rg.addColorStop(.55, rgba(e.renk, .75)); rg.addColorStop(.85, rgba(koyu(e.renk, .2), .45)); rg.addColorStop(1, rgba(e.renk, 0));
+        g.fillStyle = rg; g.beginPath(); for (let q = 0; q <= 16; q++) { const a = q * Math.PI / 8, rr = R * (.8 + r() * .3); g.lineTo(x + Math.cos(a) * rr, y + Math.sin(a) * rr); } g.closePath(); g.fill();
+        g.fillStyle = rgba(e.renk2, .35); g.beginPath(); g.arc(x - R * .2, y - R * .2, R * .2, 0, 7); g.fill();
+      }
+    },
+    suCikartma(g, e, t, nw, L, seed) {
+      const hw = nw / 2, r = tohumla(seed), s = nw * .3;
+      g.globalAlpha = .08; g.fillStyle = '#FFFFFF'; g.fillRect(-hw * .9, -L * .95, hw * 1.8, L * .9); g.globalAlpha = 1;
+      for (let y = -L * .85, j = 0; y < -L * .05; y += s * .95, j++) for (let x = -hw + (j % 2 ? s * .5 : 0); x < hw + s * .3; x += s) {
+        g.save(); g.translate(x + (r() - .5) * s * .2, y); g.rotate((r() - .5) * .6);
+        g.strokeStyle = e.renk2; g.lineWidth = nw * .02; g.beginPath(); g.moveTo(-s * .12, s * .05); g.quadraticCurveTo(0, -s * .2, s * .05, -s * .3); g.moveTo(s * .14, s * .08); g.quadraticCurveTo(s * .1, -s * .15, s * .05, -s * .3); g.stroke();
+        g.fillStyle = e.renk; [[-.13, .1], [.15, .13]].forEach(p => { g.beginPath(); g.arc(p[0] * s, p[1] * s, s * .13, 0, 7); g.fill(); });
+        g.fillStyle = 'rgba(255,255,255,.6)'; g.beginPath(); g.arc(-s * .17, s * .05, s * .035, 0, 7); g.fill();
+        g.restore();
+      }
+    },
+    simGecis(g, e, t, nw, L, seed) {
+      const hw = nw / 2, r = tohumla(seed);
+      for (let k = 0; k < 520; k++) { const y = -L * (1 - Math.pow(r(), 2.2)) * 1.02, x = (r() * 2 - 1) * hw * 1.05, s = nw * (.012 + r() * .028); g.globalAlpha = .5 + r() * .5; g.fillStyle = k % 4 ? e.renk : e.renk2; g.beginPath(); g.arc(x, y, s, 0, 7); g.fill(); }
+      g.globalAlpha = 1;
+    },
+    yansitici(g, e, t, nw, L, seed, o) {
+      const hw = nw / 2, r = tohumla(seed); g.fillStyle = rgba(koyu(e.renk, .45), .75); g.fillRect(-hw - 2, -L - 2, nw + 4, L + nw);
+      for (let k = 0; k < 900; k++) { const v = r(); g.fillStyle = v > (o.d3 ? .7 : .92) ? '#FFFFFF' : v > .45 ? e.renk : koyu(e.renk, .3); g.fillRect((r() * 2 - 1) * hw * 1.05, -r() * L * 1.05 + hw * .2, .55, .55); }
+    },
+    mermerBeyaz(g, e, t, nw, L, seed) { const hw = nw / 2; g.fillStyle = e.renk; g.fillRect(-hw - 2, -L - 2, nw + 4, L + nw); mermerDamar(g, hw, L, e.renk2, tohumla(seed), 1.6, 6); },
+    mermerGece(g, e, t, nw, L, seed) { const hw = nw / 2; g.fillStyle = e.renk; g.fillRect(-hw - 2, -L - 2, nw + 4, L + nw); mermerDamar(g, hw, L, e.renk2, tohumla(seed), 1.2, 5); mermerDamar(g, hw, L, '#FFFFFF', tohumla(seed + 3), .5, 3); },
+    mermerPembe(g, e, t, nw, L, seed) {
+      const hw = nw / 2, r = tohumla(seed); g.fillStyle = e.renk; g.fillRect(-hw - 2, -L - 2, nw + 4, L + nw);
+      for (let k = 0; k < 4; k++) { g.globalAlpha = .25; g.fillStyle = k % 2 ? e.renk2 : koyu(e.renk, .12); g.beginPath(); g.ellipse((r() * 2 - 1) * hw, -r() * L, hw * .7, L * .18, r() * 3, 0, 7); g.fill(); }
+      g.globalAlpha = 1; mermerDamar(g, hw, L, e.renk2, r, 2.2, 4);
+    },
+    mermerYesim(g, e, t, nw, L, seed) {
+      const hw = nw / 2, r = tohumla(seed); g.fillStyle = e.renk; g.fillRect(-hw - 2, -L - 2, nw + 4, L + nw);
+      for (let k = 0; k < 9; k++) { g.globalAlpha = .18 + r() * .25; g.fillStyle = k % 3 ? e.renk2 : koyu(e.renk, .3); g.beginPath(); g.ellipse((r() * 2 - 1) * hw, -r() * L, hw * (.3 + r() * .5), L * (.06 + r() * .1), r() * 3, 0, 7); g.fill(); }
+      g.globalAlpha = 1; mermerDamar(g, hw, L, e.renk2, r, .8, 4);
+    },
+    tortoise(g, e, t, nw, L, seed) { const hw = nw / 2; g.fillStyle = e.renk; g.fillRect(-hw - 2, -L - 2, nw + 4, L + nw); desenCiz(g, { id: 'kaplumbaga', renk: e.renk2 }, nw, L, seed); },
+    leopar(g, e, t, nw, L, seed) { const hw = nw / 2; g.fillStyle = e.renk; g.fillRect(-hw - 2, -L - 2, nw + 4, L + nw); leoparCiz(g, nw * 1.2, L * 1.1, e.renk2, tohumla(seed), -hw, -L); },
+    inek(g, e, t, nw, L, seed) {
+      const hw = nw / 2, r = tohumla(seed); g.fillStyle = e.renk; g.fillRect(-hw - 2, -L - 2, nw + 4, L + nw);
+      g.fillStyle = e.renk2;
+      for (let k = 0; k < 5; k++) { const x = (r() * 2 - 1) * hw, y = -r() * L, R = nw * (.15 + r() * .22), n = []; for (let q = 0; q < 8; q++) { const a = q * Math.PI / 4, rr = R * (.6 + r() * .6); n.push({ x: x + Math.cos(a) * rr, y: y + Math.sin(a) * rr * 1.2 }); } const p = new Path2D(); egriCiz(p, n, true); g.fill(p); }
+    },
+    damali(g, e, t, nw, L) {
+      const hw = nw / 2, s = nw * .25; g.fillStyle = e.renk; g.fillRect(-hw - 2, -L - 2, nw + 4, L + nw); g.fillStyle = e.renk2;
+      for (let y = nw * .3, i = 0; y > -L - s; y -= s, i++) for (let x = -hw - s, j = 0; x < hw + s; x += s, j++) if ((i + j) % 2) g.fillRect(x, y - s, s, s);
+    },
+    ekose(g, e, t, nw, L) {
+      const hw = nw / 2, s = nw * .46; g.fillStyle = e.renk; g.fillRect(-hw - 2, -L - 2, nw + 4, L + nw);
+      g.globalAlpha = .55; g.fillStyle = e.renk2;
+      for (let y = nw * .3; y > -L - s; y -= s) g.fillRect(-hw - 2, y - s * .35, nw + 4, s * .35);
+      for (let x = -hw; x < hw + s; x += s) g.fillRect(x, -L - 2, s * .35, L + nw);
+      g.globalAlpha = .8; g.fillStyle = '#FFE28A';
+      for (let y = nw * .3 - s * .5; y > -L - s; y -= s) g.fillRect(-hw - 2, y, nw + 4, nw * .02);
+      for (let x = -hw + s * .55; x < hw + s; x += s) g.fillRect(x, -L - 2, nw * .02, L + nw);
+      g.globalAlpha = 1;
+    },
+    zebra(g, e, t, nw, L, seed) {
+      const hw = nw / 2, r = tohumla(seed); g.fillStyle = e.renk; g.fillRect(-hw - 2, -L - 2, nw + 4, L + nw); g.fillStyle = e.renk2;
+      for (let y = nw * .2; y > -L - nw * .2; y -= nw * (.2 + r() * .1)) {
+        const w = nw * (.04 + r() * .06), egri = (r() - .5) * nw * .3, p = new Path2D();
+        p.moveTo(-hw - 2, y); p.quadraticCurveTo(0, y + egri, hw * (.2 + r() * .9), y - w * .3); p.quadraticCurveTo(0, y + egri + w, -hw - 2, y + w * 1.6); p.closePath(); g.fill(p);
+      }
+    }
+  };
 
   /* ------------------------------------------------------------ sanat katmanı (fırça, nokta, sünger, folyo, silgi) */
   const boyaliOnbellek = new Map();
@@ -1312,9 +1625,18 @@
     g.globalAlpha = 1;
   }
   function yildiz4(g, x, y, r) { g.fillStyle = '#FFFFFF'; g.beginPath(); g.moveTo(x, y - r); g.quadraticCurveTo(x, y, x + r, y); g.quadraticCurveTo(x, y, x, y + r); g.quadraticCurveTo(x, y, x - r, y); g.quadraticCurveTo(x, y, x, y - r); g.fill(); }
-  function efektCiz(g, t, nw, L, ph, seed) {
+  function efektCiz(g, t, nw, L, ph, seed, o) {
     const hw = nw / 2, f = t.efekt;
     if (!f || f === 'yok') return;
+    if (o && o.d3) {
+      // 3D: yansımayı gerçek ortam yapar; dokuya yalnız metalin kendi rengi ve hafif renk tülü çizilir
+      const kutu = () => g.fillRect(-hw - 1, -L - 1, hw * 2 + 2, L + hw + 2);
+      if (f === 'kromAyna' || f === 'kromAltin' || f === 'kromRose') { g.fillStyle = { kromAyna: '#C9CED8', kromAltin: '#D6A93E', kromRose: '#DB9C8C' }[f]; kutu(); return; }
+      if (f === 'krom') { g.save(); g.globalAlpha = .8; g.fillStyle = doygun(t.renk || '#E8E8EE', 1.1); kutu(); g.restore(); return; }
+      if (f === 'aurora') { g.save(); g.globalAlpha = .85; auroraCiz(g, hw, L, ph, t.renk); g.restore(); return; }
+      if (f === 'holo') { g.save(); g.globalAlpha = .45; holoCiz(g, hw, L, ph); g.restore(); return; }
+      if (f === 'inci') { g.save(); g.globalAlpha = .6; inciCiz(g, hw, L, ph); g.restore(); return; }
+    }
     if (f === 'krom') metalik(g, hw, L, -.35, ph, t.renk || '#E8E8EE');
     else if (f === 'kromAyna') aynaKrom(g, hw, L, ph, '#D9DEE6');
     else if (f === 'kromAltin') aynaKrom(g, hw, L, ph, '#D9AE45');
@@ -1411,6 +1733,56 @@
     goz(g, s) {
       [['#1C4FA0', .5], ['#FFFFFF', .34], ['#6EC6FF', .22], ['#151820', .1]].forEach(([c, r]) => { g.fillStyle = c; g.beginPath(); g.arc(0, 0, s * r, 0, Math.PI * 2); g.fill(); });
       g.fillStyle = 'rgba(255,255,255,.75)'; g.beginPath(); g.ellipse(-s * .16, -s * .18, s * .1, s * .06, -.6, 0, Math.PI * 2); g.fill();
+    },
+    gokkusagi(g, s) {
+      g.lineCap = 'round'; ['#FF6B8A', '#FFB36B', '#FFE28A', '#7CE0B4', '#7EC8FF', '#B48CFF'].forEach((c, k) => { g.strokeStyle = c; g.lineWidth = s * .07; g.beginPath(); g.arc(0, s * .2, s * (.44 - k * .065), Math.PI, 0); g.stroke(); });
+      g.fillStyle = '#FFFFFF'; [[-.4, .22], [.4, .22]].forEach(p => { g.beginPath(); g.arc(p[0] * s, p[1] * s, s * .1, 0, 7); g.arc(p[0] * s + s * .08, p[1] * s - s * .04, s * .08, 0, 7); g.fill(); });
+    },
+    bulut(g, s, renk) { g.fillStyle = renk; [[-.2, .05, .18], [0, -.06, .22], [.22, .04, .17], [0, .1, .2]].forEach(([x, y, r]) => { g.beginPath(); g.arc(x * s, y * s, r * s, 0, 7); g.fill(); }); g.fillStyle = 'rgba(160,190,220,.35)'; g.beginPath(); g.ellipse(0, s * .2, s * .34, s * .05, 0, 0, 7); g.fill(); },
+    limon(g, s, renk) {
+      g.fillStyle = '#F2D23A'; g.beginPath(); g.arc(0, 0, s * .46, 0, 7); g.fill(); g.fillStyle = '#FFF8D6'; g.beginPath(); g.arc(0, 0, s * .4, 0, 7); g.fill();
+      g.fillStyle = renk; for (let k = 0; k < 8; k++) { const a = k * Math.PI / 4; g.beginPath(); g.moveTo(0, 0); g.arc(0, 0, s * .36, a + .1, a + Math.PI / 4 - .1); g.closePath(); g.fill(); }
+    },
+    karpuz(g, s) {
+      g.fillStyle = '#3FA35B'; g.beginPath(); g.arc(0, -s * .1, s * .46, 0, Math.PI); g.fill(); g.fillStyle = '#E8F5D0'; g.beginPath(); g.arc(0, -s * .1, s * .4, 0, Math.PI); g.fill();
+      g.fillStyle = '#F25C6E'; g.beginPath(); g.arc(0, -s * .1, s * .36, 0, Math.PI); g.fill();
+      g.fillStyle = '#2B2B33'; [[-.15, .02], [0, .1], [.15, .02], [-.06, .2], [.08, .2]].forEach(p => { g.beginPath(); g.ellipse(p[0] * s, p[1] * s, s * .025, s * .04, 0, 0, 7); g.fill(); });
+    },
+    dondurma(g, s, renk) {
+      g.fillStyle = '#E2B07A'; g.beginPath(); g.moveTo(-s * .2, 0); g.lineTo(s * .2, 0); g.lineTo(0, s * .48); g.closePath(); g.fill();
+      g.strokeStyle = 'rgba(150,100,50,.5)'; g.lineWidth = s * .03; g.beginPath(); g.moveTo(-s * .12, s * .08); g.lineTo(s * .06, s * .3); g.moveTo(s * .12, s * .08); g.lineTo(-s * .06, s * .3); g.stroke();
+      g.fillStyle = renk; g.beginPath(); g.arc(0, -s * .1, s * .24, 0, 7); g.fill(); g.fillStyle = 'rgba(255,255,255,.55)'; g.beginPath(); g.arc(-s * .08, -s * .18, s * .06, 0, 7); g.fill();
+    },
+    ayicik(g, s, renk) {
+      const r = renk === '#FFFFFF' ? '#C98B5E' : renk; g.fillStyle = r; [[-.28, -.28], [.28, -.28]].forEach(p => { g.beginPath(); g.arc(p[0] * s, p[1] * s, s * .14, 0, 7); g.fill(); });
+      g.beginPath(); g.arc(0, 0, s * .38, 0, 7); g.fill(); g.fillStyle = acik(r, .5); g.beginPath(); g.ellipse(0, s * .12, s * .16, s * .12, 0, 0, 7); g.fill();
+      g.fillStyle = '#3B3444'; [[-.13, -.06], [.13, -.06]].forEach(p => { g.beginPath(); g.arc(p[0] * s, p[1] * s, s * .04, 0, 7); g.fill(); }); g.beginPath(); g.ellipse(0, s * .08, s * .05, s * .035, 0, 0, 7); g.fill();
+    },
+    kediYuz(g, s, renk) {
+      const r = renk === '#FFFFFF' ? '#9AA0AA' : renk; g.fillStyle = r; g.beginPath(); g.moveTo(-s * .36, -s * .05); g.lineTo(-s * .3, -s * .42); g.lineTo(-s * .1, -s * .25); g.lineTo(s * .1, -s * .25); g.lineTo(s * .3, -s * .42); g.lineTo(s * .36, -s * .05); g.quadraticCurveTo(s * .4, s * .36, 0, s * .36); g.quadraticCurveTo(-s * .4, s * .36, -s * .36, -s * .05); g.fill();
+      g.fillStyle = '#3B3444'; [[-.13, 0], [.13, 0]].forEach(p => { g.beginPath(); g.ellipse(p[0] * s, p[1] * s, s * .04, s * .06, 0, 0, 7); g.fill(); });
+      g.fillStyle = '#EE8AAA'; g.beginPath(); g.moveTo(-s * .04, s * .1); g.lineTo(s * .04, s * .1); g.lineTo(0, s * .15); g.closePath(); g.fill();
+    },
+    mantar(g, s, renk) {
+      g.fillStyle = '#FFF4E6'; g.fillRect(-s * .1, -s * .02, s * .2, s * .38);
+      g.fillStyle = renk === '#FFFFFF' ? '#E8546F' : renk; g.beginPath(); g.arc(0, 0, s * .4, Math.PI, 0); g.closePath(); g.fill();
+      g.fillStyle = '#FFFFFF'; [[-.2, -.12, .06], [.05, -.25, .07], [.22, -.08, .05]].forEach(p => { g.beginPath(); g.arc(p[0] * s, p[1] * s, p[2] * s, 0, 7); g.fill(); });
+    },
+    yonca(g, s, renk) { const r = renk === '#FFFFFF' ? '#4DAF6B' : renk; g.fillStyle = r; for (let k = 0; k < 4; k++) { g.save(); g.rotate(k * Math.PI / 2); g.translate(0, -s * .2); CIKARTMA_CIZ.kalp(g, s * .4, r); g.restore(); } g.strokeStyle = koyu(r, .2); g.lineWidth = s * .05; g.beginPath(); g.moveTo(0, 0); g.quadraticCurveTo(s * .1, s * .3, s * .2, s * .46); g.stroke(); },
+    opucuk(g, s, renk) {
+      const r = renk === '#FFFFFF' ? '#D81E3C' : renk; g.fillStyle = r;
+      g.beginPath(); g.moveTo(-s * .42, 0); g.quadraticCurveTo(-s * .2, -s * .28, 0, -s * .1); g.quadraticCurveTo(s * .2, -s * .28, s * .42, 0); g.quadraticCurveTo(s * .2, s * .32, 0, s * .26); g.quadraticCurveTo(-s * .2, s * .32, -s * .42, 0); g.fill();
+      g.strokeStyle = koyu(r, .3); g.lineWidth = s * .03; g.beginPath(); g.moveTo(-s * .38, 0); g.quadraticCurveTo(0, s * .06, s * .38, 0); g.stroke();
+      g.fillStyle = 'rgba(255,255,255,.45)'; g.beginPath(); g.ellipse(-s * .14, s * .1, s * .08, s * .03, 0, 0, 7); g.fill();
+    },
+    elmas(g, s, renk) {
+      g.fillStyle = renk === '#FFFFFF' ? '#BFE6FF' : renk; g.beginPath(); g.moveTo(-s * .4, -s * .12); g.lineTo(-s * .22, -s * .32); g.lineTo(s * .22, -s * .32); g.lineTo(s * .4, -s * .12); g.lineTo(0, s * .4); g.closePath(); g.fill();
+      g.strokeStyle = 'rgba(255,255,255,.8)'; g.lineWidth = s * .025; g.beginPath(); g.moveTo(-s * .4, -s * .12); g.lineTo(s * .4, -s * .12); g.moveTo(-s * .22, -s * .32); g.lineTo(-s * .1, -s * .12); g.lineTo(0, s * .4); g.lineTo(s * .1, -s * .12); g.lineTo(s * .22, -s * .32); g.stroke();
+    },
+    kayanYildiz(g, s, renk) {
+      const r = renk === '#FFFFFF' ? '#FFD86B' : renk; g.strokeStyle = rgba(r, .6); g.lineCap = 'round';
+      [[.08, .3], [.05, .2], [.03, .1]].forEach(([w, dy], k) => { g.lineWidth = s * w; g.beginPath(); g.moveTo(s * .05, -s * .02 + dy * s * .3); g.lineTo(s * (.45 - k * .05), s * (.3 + k * .05)); g.stroke(); });
+      g.save(); g.translate(-s * .1, -s * .12); CIKARTMA_CIZ.yildiz(g, s * .5, r); g.restore();
     }
   };
   /* 3D süsler: hepsi gölge + ışık yansımalı (s = çap, yerel merkez 0,0; ışık sol üstten) */
@@ -1515,6 +1887,54 @@
       g.strokeStyle = 'rgba(255,255,255,.75)'; g.lineWidth = Math.max(.3, R * .07); g.beginPath(); g.arc(0, 0, R * .82, Math.PI * .9, Math.PI * 1.4); g.stroke();
       tasCiz(g, s * .22, '#FFFFFF', S);
     },
+    tasMini: tasCiz, tasOpal(g, s, renk, S) { const r = s / 2; tasCiz(g, s, renk, S); g.save(); g.globalCompositeOperation = 'screen'; const grd = g.createLinearGradient(-r, -r, r, r); ['#FFB3E6', '#B3E6FF', '#D9FFB3', '#FFE6B3'].forEach((c, k) => grd.addColorStop(k / 3, c)); g.globalAlpha = .55; g.fillStyle = grd; g.beginPath(); g.arc(0, 0, r, 0, 7); g.fill(); g.restore(); },
+    tasOval(g, s, renk, S) { g.save(); g.scale(.75, 1.15); tasCiz(g, s, renk, S); g.restore(); },
+    tasMekik(g, s, renk, S) {
+      const r = s / 2, yol = new Path2D(); yol.moveTo(0, -r); yol.quadraticCurveTo(r * .65, 0, 0, r); yol.quadraticCurveTo(-r * .65, 0, 0, -r); yol.closePath();
+      golgeli(g, S, () => { g.fillStyle = koyu(renk, .2); g.fill(yol); });
+      const lg = g.createLinearGradient(-r * .4, -r, r * .4, r); lg.addColorStop(0, '#FFFFFF'); lg.addColorStop(.4, acik(renk, .4)); lg.addColorStop(1, koyu(renk, .25)); g.fillStyle = lg; g.fill(yol);
+      g.strokeStyle = 'rgba(255,255,255,.6)'; g.lineWidth = Math.max(.25, r * .05); g.beginPath(); g.moveTo(0, -r); g.lineTo(0, r); g.moveTo(-r * .32, 0); g.lineTo(r * .32, 0); g.stroke(); yildiz4(g, -r * .12, -r * .35, r * .4);
+    },
+    tasKare(g, s, renk, S) {
+      const r = s / 2; golgeli(g, S, () => { g.fillStyle = koyu(renk, .25); g.fillRect(-r, -r, s, s); });
+      [[0, -1], [1, 0], [0, 1], [-1, 0]].forEach(([x, y], k) => { g.fillStyle = karis(koyu(renk, .3), acik(renk, .6), [.9, .5, .2, .6][k]); g.beginPath(); g.moveTo(-r, -r); g.lineTo(r, -r); g.lineTo(r * .5, -r * .5); g.lineTo(-r * .5, -r * .5); g.closePath(); g.save(); g.rotate(k * Math.PI / 2); g.fill(); g.restore(); void x; void y; });
+      g.fillStyle = acik(renk, .45); g.fillRect(-r * .5, -r * .5, r, r); yildiz4(g, -r * .3, -r * .3, r * .5);
+    },
+    tasUcgen(g, s, renk, S) {
+      const r = s / 2, yol = new Path2D(); yol.moveTo(0, -r); yol.lineTo(r * .9, r * .6); yol.lineTo(-r * .9, r * .6); yol.closePath();
+      golgeli(g, S, () => { g.fillStyle = koyu(renk, .2); g.fill(yol); });
+      const lg = g.createLinearGradient(0, -r, 0, r); lg.addColorStop(0, '#FFFFFF'); lg.addColorStop(.5, renk); lg.addColorStop(1, koyu(renk, .3)); g.fillStyle = lg; g.fill(yol);
+      g.strokeStyle = 'rgba(255,255,255,.6)'; g.lineWidth = Math.max(.25, r * .05); g.beginPath(); g.moveTo(0, -r); g.lineTo(0, r * .15); g.lineTo(r * .9, r * .6); g.moveTo(0, r * .15); g.lineTo(-r * .9, r * .6); g.stroke();
+    },
+    inciYarim(g, s, renk, S) { g.save(); g.scale(1, .82); inciCiz3(g, s, renk, S); g.restore(); },
+    inciDamla(g, s, renk, S) { g.save(); g.scale(.82, 1.12); inciCiz3(g, s, renk, S); g.restore(); },
+    inciSira(g, s, renk, S) { for (let k = 0; k < 5; k++) { g.save(); g.translate(-s * .4 + k * s * .2, Math.sin(k / 4 * Math.PI) * -s * .04); inciCiz3(g, s * .19, renk, S); g.restore(); } },
+    charmKelebek(g, s, renk, S) {
+      const yol = new Path2D(); [[-1, -.12, .27, .22, -.5], [1, -.12, .27, .22, .5], [-1, .18, .19, .15, .4], [1, .18, .19, .15, -.4]].forEach(w => yol.ellipse(w[0] * s * .22, w[1] * s, s * w[2], s * w[3], w[4], 0, Math.PI * 2));
+      golgeli(g, S, () => { g.fillStyle = metalRenk(renk); g.fill(yol); }); g.fillStyle = metalDolgu(g, s / 2, renk); g.fill(yol);
+      g.strokeStyle = 'rgba(255,255,255,.6)'; g.lineWidth = Math.max(.3, s * .03); g.stroke(yol);
+    },
+    charmFiyonk(g, s, renk, S) {
+      const yol = new Path2D(); yol.ellipse(-s * .25, 0, s * .25, s * .16, -.2, 0, 7); yol.ellipse(s * .25, 0, s * .25, s * .16, .2, 0, 7);
+      golgeli(g, S, () => { g.fillStyle = metalRenk(renk); g.fill(yol); }); g.fillStyle = metalDolgu(g, s / 2, renk); g.fill(yol);
+      tasCiz(g, s * .2, '#FFFFFF', S);
+    },
+    charmPati(g, s, renk, S) {
+      const yol = new Path2D(); yol.ellipse(0, s * .14, s * .25, s * .19, 0, 0, 7); [[-.3, -.06], [-.11, -.26], [.11, -.26], [.3, -.06]].forEach(p => { yol.moveTo(p[0] * s + s * .1, p[1] * s); yol.arc(p[0] * s, p[1] * s, s * .1, 0, 7); });
+      golgeli(g, S, () => { g.fillStyle = metalRenk(renk); g.fill(yol); }); g.fillStyle = metalDolgu(g, s / 2, renk); g.fill(yol);
+    },
+    halka(g, s, renk, S) { const r = s / 2; golgeli(g, S, () => { g.strokeStyle = metalRenk(renk); g.lineWidth = r * .28; g.beginPath(); g.arc(0, 0, r * .8, 0, 7); g.stroke(); }); g.strokeStyle = 'rgba(255,255,255,.7)'; g.lineWidth = r * .08; g.beginPath(); g.arc(0, 0, r * .8, Math.PI * 1.1, Math.PI * 1.6); g.stroke(); },
+    civi(g, s, renk, S) { const r = s / 2; golgeli(g, S, () => { g.fillStyle = metalDolgu(g, r, renk); g.beginPath(); g.arc(0, 0, r, 0, 7); g.fill(); }); g.fillStyle = 'rgba(255,255,255,.85)'; g.beginPath(); g.arc(-r * .3, -r * .3, r * .28, 0, 7); g.fill(); },
+    heykelGul(g, s, renk, S) {
+      golgeli(g, S, () => { g.fillStyle = renk; g.beginPath(); g.arc(0, 0, s * .45, 0, 7); g.fill(); }, .3);
+      for (let k = 0; k < 9; k++) { const a = k * 2.4, r = s * (.42 - k * .04); g.strokeStyle = k % 2 ? koyu(renk, .15) : acik(renk, .35); g.lineWidth = s * .05; g.beginPath(); g.arc(Math.cos(a) * s * .03, Math.sin(a) * s * .03, r, a, a + 3.6); g.stroke(); }
+      g.fillStyle = 'rgba(255,255,255,.55)'; g.beginPath(); g.ellipse(-s * .15, -s * .18, s * .1, s * .05, -.6, 0, 7); g.fill();
+    },
+    heykelDamla(g, s, renk, S) {
+      const r = s / 2; golgeli(g, S, () => { g.fillStyle = 'rgba(255,255,255,.25)'; g.beginPath(); g.arc(0, 0, r, 0, 7); g.fill(); }, .25);
+      const rg = g.createRadialGradient(-r * .3, -r * .3, 0, 0, 0, r); rg.addColorStop(0, 'rgba(255,255,255,.9)'); rg.addColorStop(.4, rgba(renk === '#FFFFFF' ? '#E8F6FF' : renk, .35)); rg.addColorStop(1, 'rgba(255,255,255,.15)');
+      g.fillStyle = rg; g.beginPath(); g.arc(0, 0, r, 0, 7); g.fill(); g.strokeStyle = 'rgba(255,255,255,.6)'; g.lineWidth = r * .08; g.beginPath(); g.arc(0, 0, r * .85, Math.PI * .2, Math.PI * .7); g.stroke();
+    },
     zincir(g, s, renk, S) {
       const altin = metalRenk(renk), n = 7, adim = s / n;
       g.save(); g.shadowColor = 'rgba(59,52,68,.35)'; g.shadowBlur = 1.2 * (S || 2); g.shadowOffsetY = .6 * (S || 2);
@@ -1555,11 +1975,12 @@
     return [s * dpr, 0, 0, s * dpr, (cssW / 2 - cx * s) * dpr, (cssH / 2 - cy * s) * dpr];
   }
   function sahneNokta(e) {
+    if (e.__s) return e.__s;           // 3D: ışın tırnağa çevrildi, sahne noktası hazır
     const r = tuvalU.getBoundingClientRect(), V = gorunumMatrisi(), s = V[0] / dpr;
     return { x: ((e.clientX - r.left) - V[4] / dpr) / s, y: ((e.clientY - r.top) - V[5] / dpr) / s };
   }
   function istemciNokta(x, y) { const r = tuvalU.getBoundingClientRect(), V = gorunumMatrisi(), s = V[0] / dpr; return { x: r.left + V[4] / dpr + x * s, y: r.top + V[5] / dpr + y * s }; }
-  function pozYenile() { ornekler = pozKur(d.poz, d.el); yerlesim = tirnakYerlesimi(ornekler); onbellek.clear(); }
+  function pozYenile() { ornekler = pozKur(d.poz, d.el); yerlesim = tirnakYerlesimi(ornekler); onbellek.clear(); if (mod3d && api3) { d3Anahtar.clear(); d3SahneKur(); } }
   const gorunurTaraflar = () => ornekler.map(o => o.taraf);
   function hepsiniCiz() { kirli.arka = kirli.tirnak = kirli.ust = true; iste(); if (ui.balon && d) { try { balonYeriGuncelle(); } catch (e) {} } }
   function tirnakCizIste() { kirli.tirnak = true; kirli.ust = true; iste(); }
@@ -1613,7 +2034,7 @@
       gT.drawImage(k.c, k.bx, k.by, k.bw, k.bh);
     });
   }
-  function hedefYerlesim() { return yerlesim.filter(y => y.taraf === d.el && (d.secim.hepsi || y.i === d.secim.parmak)); }
+  function hedefYerlesim() { const vh = d.secim.hepsi && d.vurgu != null && VURGU_ADIM.includes(d.adim); return yerlesim.filter(y => y.taraf === d.el && (d.secim.hepsi || y.i === d.secim.parmak) && !(vh && y.i === d.vurgu)); }
   function ustCiz(simdi) {
     const V = gorunumMatrisi();
     gU.setTransform(1, 0, 0, 1, 0, 0); gU.clearRect(0, 0, tuvalU.width, tuvalU.height);
@@ -1637,6 +2058,21 @@
   function dongu(ts) {
     raf = 0; if (!ctx || !tuvalA) return;
     const t0 = performance.now();
+    if (mod3d && api3) {
+      let anim3 = false;
+      animler.forEach((a, k) => {
+        const p = (ts - a.bas) / a.sure;
+        if (p >= 1) { animler.delete(k); if (a.bitti) a.bitti(); if (a.tirnak) kirli.tirnak = true; }
+        else { anim3 = true; if (a.tirnak) kirli.tirnak = true; if (a.adim) a.adim(sinir(p, 0, 1)); }
+      });
+      if (sicaklik.size) { kirli.tirnak = true; anim3 = true; }
+      if (kirli.arka) { kirli.arka = false; d3Ortam(); }
+      if (kirli.tirnak) { kirli.tirnak = false; d3Dokular(); }
+      if (kirli.ust) { kirli.ust = false; d3Secim(); }
+      if (window.__tirnakOlcum) { window.__tirnakOlcum.push(performance.now() - t0); if (window.__tirnakOlcum.length > 600) window.__tirnakOlcum.shift(); }
+      if (anim3 || kirli.arka || kirli.tirnak) raf = requestAnimationFrame(dongu);
+      return;
+    }
     const hareket = !ctx.azHareket && document.visibilityState !== 'hidden';
     // animasyonlar
     let anim = false;
@@ -1661,9 +2097,11 @@
     [tuvalA, tuvalT, tuvalU].forEach(c => { c.width = Math.round(cssW * dpr); c.height = Math.round(cssH * dpr); c.style.width = cssW + 'px'; c.style.height = cssH + 'px'; });
     if (!gorunum.odak && d) gorunumSifirla();
     onbellek.clear(); hepsiniCiz();
+    if (mod3d && api3) api3.boyutla();
   }
   /* yakınlaştırma: tek tırnağa odak ya da genel görünüm */
   function odakla(y) {
+    if (mod3d && api3) { gorunum.odak = !!y; api3.kamera(y ? { taraf: y.taraf, i: y.i } : d.adim); odakDugmesi(); return; }
     let hedef;
     if (y) {
       const t = d.eller[y.taraf][y.i], L = tirnakBoyu(t, y.nw), mid = M.uygula(y.m, 0, -L * .38);
@@ -1737,11 +2175,13 @@
 
   /* ------------------------------------------------------------ düzenleme yardımcıları ve geçmiş (60 adım) */
   const aktifTirnak = () => d.eller[d.el][d.secim.parmak];
-  function hedefler() { return d.secim.hepsi ? [0, 1, 2, 3, 4] : [d.secim.parmak]; }
+  /* vurgu tırnağı: "Hepsi" seçiliyken renk, efekt ve sanat o tırnağa gitmez (o tırnak ayrıca seçilip süslenir) */
+  function hedefler(vurguHaric) { return d.secim.hepsi ? [0, 1, 2, 3, 4].filter(i => !(vurguHaric && d.vurgu != null && i === d.vurgu)) : [d.secim.parmak]; }
   function anlik() { return JSON.stringify({ e: d.eller, h: d.hazirlik }); }
   function gecmisKaydet() { gecmis.push(anlik()); if (gecmis.length > GECMIS_SINIR) gecmis.shift(); gelecek.length = 0; altbarGuncelle(); }
   function anlikYukle(s) { const o = JSON.parse(s); d.eller = ellerDuzelt(o.e); d.hazirlik = { sol: hazirlikDuzelt(o.h && o.h.sol, true), sag: hazirlikDuzelt(o.h && o.h.sag, true) }; }
-  function uygula(fn, sessiz) { if (!sessiz) gecmisKaydet(); hedefler().forEach(i => fn(d.eller[d.el][i], i)); tirnakCizIste(); kaydetGec(); }
+  function uygula(fn, sessiz, vurguHaric) { if (!sessiz) gecmisKaydet(); hedefler(vurguHaric).forEach(i => fn(d.eller[d.el][i], i)); tirnakCizIste(); kaydetGec(); }
+  const VURGU_ADIM = ['renk', 'sanat'];
   function geriAl() {
     if (!gecmis.length) { ctx.toast('Geri alınacak bir şey yok'); return; }
     gelecek.push(anlik()); anlikYukle(gecmis.pop());
@@ -1775,7 +2215,7 @@
     yerlesim.forEach(y => {
       const t = d.eller[y.taraf][y.i], L = tirnakBoyu(t, y.nw);
       [-.1, 0, .1, .2, .3, .4, .5, .6, .7, .8, .9, 1].forEach(k => {
-        const s = M.uygula(y.m, 0, -L * k), c = istemciNokta(s.x, s.y);
+        const s = M.uygula(y.m, 0, -L * k), c = mod3d && api3 ? api3.ekran(y.taraf, y.i, k) : istemciNokta(s.x, s.y);
         if (c.x < r.left || c.x > r.right) return;
         if (c.y > alt[0] && c.y < alt[1]) altSay++;
         if (c.y > ust[0] && c.y < ust[1]) ustSay++;
@@ -1786,6 +2226,7 @@
     return 'dar';
   }
   function konumIstemci(taraf, i, ny) {
+    if (mod3d && api3) return api3.ekran(taraf, i, ny);
     const y = yerlesim.find(q => q.taraf === taraf && q.i === i); if (!y) return { x: innerWidth / 2, y: innerHeight / 2 };
     const t = d.eller[taraf][i], p = M.uygula(y.m, 0, -tirnakBoyu(t, y.nw) * (ny == null ? .5 : ny));
     return istemciNokta(p.x, p.y);
@@ -1852,6 +2293,7 @@
     ctx.ses.su && ctx.ses.su(); sonra(() => ctx.ses.kopuk && ctx.ses.kopuk(), 900);
     balon('Ilık su… 3 dakika (hızlandırılmış)', 2600);
     const sure = ctx.azHareket ? 500 : 3600;
+    if (mod3d && api3) api3.kase(sure);
     animler.set('kase', { bas: performance.now(), sure, adim: p => { h.su = Math.min(1, p * 1.05); }, bitti: () => { h.su = 1; tirnakCizIste(); kaydetGec(); hzIlerle(); } });
     iste();
   }
@@ -1917,7 +2359,7 @@
     if (surukle && surukle.pid !== e.pointerId) return;       // ikinci parmak yok sayılır
     e.preventDefault(); ctx.ses.uyandir();
     if (ui.balon) { clearTimeout(balonT); ui.balon.classList.remove('goster'); }   // dokununca balon çekilir
-    try { tuvalU.setPointerCapture(e.pointerId); } catch (err) {}
+    if (!mod3d) { try { tuvalU.setPointerCapture(e.pointerId); } catch (err) {} }
     const p = sahneNokta(e), y = tirnakBul(p.x, p.y, 8);
     surukle = { pid: e.pointerId, tur: 'bos', x: p.x, y: p.y, sx: p.x, sy: p.y, bx: p.x, by: p.y, t: performance.now(), t0: performance.now(), y0: y, w: 1, gecmis: false };
     // çift dokunuş: tırnağa odaklan / geri çık
@@ -1981,7 +2423,7 @@
   function tuvalBirak(e) {
     if (!surukle || (e && e.pointerId !== surukle.pid)) return;
     const s = surukle; surukle = null;
-    try { if (e && e.pointerId != null) tuvalU.releasePointerCapture(e.pointerId); } catch (err) {}
+    if (!mod3d) { try { if (e && e.pointerId != null) tuvalU.releasePointerCapture(e.pointerId); } catch (err) {} }
     // yalnız kısa ve kıpırdamadan yapılan dokunuş çift dokunuşa sayılır
     const kisa = performance.now() - s.t0 < 280 && Math.hypot(s.x - s.bx, s.y - s.by) < 4 && !['firca', 'hazirlik', 'parca', 'sanatAyar', 'mermerBas'].includes(s.tur);
     tuvalBas.son = kisa ? { t: performance.now(), x: s.bx, y: s.by } : null;
@@ -2006,7 +2448,7 @@
     if (id === 'folyo') return .14 + b * .03;
     return .1;
   }
-  function hedefTirnaklar(y) { return d.secim.hepsi && y.taraf === d.el ? yerlesim.filter(q => q.taraf === y.taraf) : [y]; }
+  function hedefTirnaklar(y) { return d.secim.hepsi && y.taraf === d.el && !(d.vurgu != null && y.i === d.vurgu) ? yerlesim.filter(q => q.taraf === y.taraf && !(d.vurgu != null && q.i === d.vurgu)) : [y]; }
   function sanatBas(e, p, y) {
     const s = surukle, id = arac.id, t = d.eller[y.taraf][y.i], n = normalNokta(y, p.x, p.y);
     if (!d.secim.hepsi && d.secim.parmak !== y.i) { d.secim.parmak = y.i; secimYaz(); panelYenile(); }
@@ -2018,7 +2460,7 @@
       const hedef = hedefTirnaklar(y);
       s.vuruslar = hedef.map(q => { const v = kopya(yeni); const l = d.eller[q.taraf][q.i].firca; if (l.length >= 120) l.shift(); l.push(v); return { y: q, v }; });
       s.tur = 'firca'; s.arac = id; s.yAna = y; s.sonN = null;
-      canliCizim = true; imlec = null; ustCiz(performance.now());
+      canliCizim = true; imlec = null; if (!mod3d) ustCiz(performance.now());
       fircaEkle(n, 1);
       if (id === 'silgi') ctx.ses.pit(); else ctx.ses.slip();
       return;
@@ -2075,13 +2517,16 @@
   /* canlı fırça izi: sadece yeni parçayı üst katmana çizer (tam yeniden çizim yok) */
   function canliParca(y, v, k) {
     if (v.tur === 'silgi') return;
-    const t = d.eller[y.taraf][y.i], L = tirnakBoyu(t, y.nw), hw = y.nw / 2, V = gorunumMatrisi();
-    gU.save(); gU.setTransform(V[0], V[1], V[2], V[3], V[4], V[5]); uygulaG(gU, y.m); gU.clip(tirnakYol2D(t.sekil, y.nw, L));
+    const t = d.eller[y.taraf][y.i], L = tirnakBoyu(t, y.nw), hw = y.nw / 2;
+    let gU = ui.gUst;
+    if (mod3d && api3) { const dt = api3.dokuTuval(y.taraf, y.i); if (!dt) return; gU = dt.g; gU.save(); gU.clip(tirnakYol2D(t.sekil, y.nw, L)); }
+    else { const V = gorunumMatrisi(); gU.save(); gU.setTransform(V[0], V[1], V[2], V[3], V[4], V[5]); uygulaG(gU, y.m); gU.clip(tirnakYol2D(t.sekil, y.nw, L)); }
     const tek = { tur: v.tur, renk: v.renk, renk2: v.renk2, boy: v.boy, n: v.n.slice(Math.max(0, k - 1), k + 1) };
     if (v.tur === 'folyo') { gU.strokeStyle = v.renk; gU.lineWidth = v.boy * y.nw; gU.lineCap = 'round'; const a = tek.n[0], b = tek.n[tek.n.length - 1]; gU.beginPath(); gU.moveTo(a[0] * hw, -a[1] * L); gU.lineTo(b[0] * hw + .01, -b[1] * L); gU.stroke(); }
     else if (v.tur === 'nokta' || v.tur === 'sunger') { tek.n = [v.n[k]]; cizgiCiz(gU, tek, hw, L, y.nw, (t.tohum || 1) + k, gU.getTransform()); }
     else cizgiCiz(gU, tek, hw, L, y.nw, 1, gU.getTransform());
     gU.restore();
+    if (mod3d && api3) api3.dokuBitti(y.taraf, y.i);
   }
   function sanatAyarTasi(px, py, e) {
     const s = surukle, y = s.yAna, n = normalNokta(y, px, py), id = s.arac;
@@ -2093,7 +2538,7 @@
       } else if (id === 'aura') {
         const R = Math.hypot((n.x - s.n0.x) * .5, n.y - s.n0.y);
         t.teknik.kalinlik = sinir(.15 + R * 1.4, .1, .9);
-      } else if (id === 'french') t.teknik.kalinlik = sinir(1 - n.y, .06, .6);
+      } else if (id === 'french') t.teknik.kalinlik = t.teknik.stil === 'ters' ? sinir(n.y, .06, .6) : sinir(1 - n.y, .06, .6);
       else if (id === 'yarimAy') t.teknik.kalinlik = sinir(n.y, .1, .5);
     });
     if (id === 'miknatis') { imlec = { tur: 'miknatis', x: px, y: py }; sesAralikli(() => ctx.ses.tink(), 300); }
@@ -2149,21 +2594,41 @@
       else if (!ayniMi) { t.renk = r; t.ojeTur = tur || 'krem'; t.kat = 1; t.renk2 = renk2 || null; if (t.ojeTur === 'kediGozu' && !t.kedi) t.kedi = { x: 0, y: .5, aci: -.5, gen: .5 }; t.tohum = yeniTohum(); }
       kurBozuldu(t, 'renk');
       if (!ctx.azHareket) animler.set('oje' + d.el + i, { bas: performance.now() + i * 90, sure: 780, tirnak: true });
-    });
+      if (mod3d && api3) api3.islak(d.el, i);
+    }, false, true);
     d.sonRenkler = [r].concat(d.sonRenkler.filter(x => x !== r)).slice(0, 10);
     [0, 150, 300].forEach(ms => sonra(() => ctx.ses.slip(), ms));
     const t = aktifTirnak(), ad = renkAdi(r);
     balon((ad ? ad + ' · ' : '') + t.kat + '. kat' + (t.kat < 3 && (KAT_ALFA[t.ojeTur] || [])[t.kat] < .95 ? ' — bir kat daha örtücü olur' : '') + (d.sistem === 'jel' ? ' · lambaya koy' : ''), 2400);
     panelYenile(); iste();
   }
-  function katAyarla(k) { if (yapiskanUyar() && k > aktifTirnak().kat) return; uygula(t => { if (t.renk) { t.kat = k; kurBozuldu(t, 'renk'); } }); ctx.ses.slip(); panelYenile(); }
-  function ojeSil() { uygula(t => { t.renk = null; t.kat = 0; t.kedi = null; t.efekt = 'yok'; t.kur.renk = true; }); balon('Oje silindi, tırnak nefes alıyor.'); panelYenile(); }
-  function efektUygula(id) { uygula(t => { t.efekt = id; t.tohum = yeniTohum(); if (!t.renk) { t.renk = '#F4CFD8'; t.kat = 2; } }); ctx.ses.tink(); const e = EFEKTLER.find(x => x.id === id); balon(e ? e.ad + ' tozu ovuldu.' : ''); panelYenile(); }
+  function katAyarla(k) { if (yapiskanUyar() && k > aktifTirnak().kat) return; uygula((t, i) => { if (t.renk) { t.kat = k; kurBozuldu(t, 'renk'); if (mod3d && api3) api3.islak(d.el, i); } }, false, true); ctx.ses.slip(); panelYenile(); }
+  function ojeSil() { uygula(t => { t.renk = null; t.kat = 0; t.kedi = null; t.efekt = 'yok'; t.kur.renk = true; }, false, true); balon('Oje silindi, tırnak nefes alıyor.'); panelYenile(); }
+  function efektUygula(id) {
+    uygula((t, i) => { t.efekt = id; t.tohum = yeniTohum(); if (!t.renk) { t.renk = '#F4CFD8'; t.kat = 2; } if (mod3d && api3 && id !== 'yok') api3.parilti(d.el, i, 16, id === 'kromAltin' ? '#FFE3A0' : id === 'kromRose' ? '#FFD3C8' : '#FFFFFF'); }, false, true);
+    ctx.ses.tink(); const e = EFEKTLER.find(x => x.id === id); balon(e ? e.ad + ' tozu ovuldu.' : ''); panelYenile();
+  }
+  /* ek katman (doku, gömme, sprey, desen): aynı türden varsa rengi güncellenir, yoksa en üste eklenir */
+  function ekUygula(id) {
+    const tanim = EKLER.find(x => x.id === id); if (!tanim) return;
+    if (yapiskanUyar()) return;
+    const u = id + '-' + Math.random().toString(36).slice(2, 6), renk = arac.ekRenk || tanim.renk, renk2 = arac.ekRenk2 || tanim.renk2;
+    uygula((t, i) => {
+      const var_ = t.ekler.find(e => e.id === id);
+      if (var_) { var_.renk = renk; var_.renk2 = renk2; }
+      else { if (t.ekler.length >= EK_MAKS) t.ekler.shift(); t.ekler.push({ u, id, renk, renk2, tohum: yeniTohum() }); }
+      if (!t.renk) { t.renk = tanim.renk; t.kat = 2; }
+      t.katman = katmanDuzelt(t.katman, t);
+      if (mod3d && api3) { api3.islak(d.el, i); if (/sim|yansitici|folyo|sedef/i.test(id)) api3.parilti(d.el, i, 10); }
+    }, false, true);
+    ctx.ses.slip(); balon(tanim.ad + ' eklendi. Katmanlar\'dan sırasını değiştirebilirsin.', 2400); panelYenile();
+  }
   function ustUygula(id) {
     if (yapiskanMi(aktifTirnak()) && aktifTirnak().kur.renk === false) { yapiskanUyar(); return; }
-    uygula((t, i) => { t.top = true; t.ust = id; kurBozuldu(t, 'top'); });
+    uygula((t, i) => { t.top = true; t.ust = id; kurBozuldu(t, 'top'); if (mod3d && api3) api3.islak(d.el, i); });
     const yer = hedefYerlesim();
     if (!ctx.azHareket) animler.set('topParilti', { bas: performance.now(), sure: 900, yer });
+    if (mod3d && api3) api3.parlama(1100);
     ctx.ses.tink(); sonra(() => ctx.ses.parilti(), 350);
     hedefler().forEach((i, k) => sonra(() => { const c = konumIstemci(d.el, i, .6); ctx.efekt.yildiz(c.x, c.y, 3); }, 120 + k * 80));
     const u = USTLER.find(x => x.id === id);
@@ -2176,13 +2641,19 @@
     ctx.ses.tik();
     const bitir = () => { d.eller[d.el].forEach(t => { t.kur = { baz: true, renk: true, top: true }; }); tirnakCizIste(); kaydetGec(); panelYenile(); ctx.ses.can(); balon(bekleyen ? 'Kürlendi; artık yapışmıyor ✨' : 'Kürlendi. Zaten sertti ama olsun ✨', 2400); };
     if (ctx.azHareket) { bitir(); return; }
-    animler.set('lamba', { bas: performance.now(), sure: d.lambaSure === 60 ? 4200 : 2800, bitti: bitir });
+    const sure = d.lambaSure === 60 ? 4200 : 2800;
+    if (mod3d && api3) {
+      api3.lamba(sure);
+      if (ui.kurSayac) { ui.kurSayac.hidden = false; ui.kurSayac.textContent = d.lambaSure + ' sn'; }
+    }
+    animler.set('lamba', { bas: performance.now(), sure, bitti: () => { if (ui.kurSayac) ui.kurSayac.hidden = true; bitir(); },
+      adim: p => { if (ui.kurSayac && !ui.kurSayac.hidden) { const kalan = Math.ceil(d.lambaSure * (1 - p)); const m = kalan + ' sn'; if (ui.kurSayac.textContent !== m) ui.kurSayac.textContent = m; ui.kurSayac.style.setProperty('--kur', String(p)); } } });
     balon(d.lambaSure + ' saniye (hızlandırılmış)…', 1800); iste();
   }
   function sistemDegistir(s) { d.sistem = s; ctx.ses.tik(); kaydetGec(); panelYenile(); balon(s === 'jel' ? 'Jel sistem: her kattan sonra UV/LED lamba.' : 'Klasik oje: lamba gerekmez, kendiliğinden kurur.', 2600); }
   function parcalariTemizle(liste) { uygula(t => { t[liste] = []; }); seciliParca = null; ctx.ses.pit(); panelYenile(); }
   function sanatTemizle() { uygula(t => { t.firca = []; t.damgalar = []; t.suMermer = null; t.cikartmalar = []; t.susler = []; t.teknik = { id: 'yok', renk2: '#FFFFFF', kalinlik: .3 }; t.desen = null; }); seciliParca = null; ctx.ses.pit(); panelYenile(); }
-  function desenUygula(id) { uygula(t => { t.desen = id ? { id, renk: arac.renk } : null; if (id && !t.renk) { t.renk = '#F4CFD8'; t.kat = 2; } }); ctx.ses.pop(); panelYenile(); }
+  function desenUygula(id) { uygula(t => { t.desen = id ? { id, renk: arac.renk } : null; if (id && !t.renk) { t.renk = '#F4CFD8'; t.kat = 2; } }, false, true); ctx.ses.pop(); panelYenile(); }
   function aynala() {
     const kaynak = d.el, hedef = kaynak === 'sol' ? 'sag' : 'sol';
     gecmisKaydet(); d.eller[hedef] = elDuzelt(kopya(d.eller[kaynak])); d.eller[hedef].forEach(t => { t.tohum = yeniTohum(); });
@@ -2237,6 +2708,23 @@
     g.restore();
     if (bant) {
       g.setTransform(1, 0, 0, 1, 0, 0);
+      g.fillStyle = '#FFF7F4'; g.fillRect(0, sh, w, bant);
+      g.fillStyle = '#F1C9D3'; g.fillRect(0, sh, w, Math.max(2, h * .004));
+      g.textAlign = 'center'; g.fillStyle = '#3B3444'; g.font = '800 ' + Math.round(bant * .3) + 'px "Sour Gummy", "Nunito", sans-serif';
+      g.fillText(o.ad || "Cemre'nin tırnakları", w / 2, sh + bant * .45);
+      g.font = '600 ' + Math.round(bant * .17) + 'px "Nunito", sans-serif'; g.fillStyle = '#8A7F8E';
+      g.fillText("Cemre'nin Tırnak Salonu, " + CD.tarihYaz(CD.bugun()), w / 2, sh + bant * .78);
+    }
+    return c;
+  }
+  /* 3D açıkken fotoğraf gerçek render'dan alınır (aynı çerçeve bandıyla); kapalıysa 2D sahne çizilir */
+  function fotoUret(w, h, o) {
+    if (!(mod3d && api3)) return fotografCiz(w, h, veriSimdi(), o);
+    const bant = o.cerceve ? Math.round(h * .12) : 0, sh = h - bant;
+    const r = api3.foto(w, sh);
+    const c = document.createElement('canvas'); c.width = w; c.height = h; const g = c.getContext('2d');
+    g.drawImage(r, 0, 0);
+    if (bant) {
       g.fillStyle = '#FFF7F4'; g.fillRect(0, sh, w, bant);
       g.fillStyle = '#F1C9D3'; g.fillRect(0, sh, w, Math.max(2, h * .004));
       g.textAlign = 'center'; g.fillStyle = '#3B3444'; g.font = '800 ' + Math.round(bant * .3) + 'px "Sour Gummy", "Nunito", sans-serif';
@@ -2327,11 +2815,11 @@
     if (ui.masa && !ctx.azHareket) { ui.masa.classList.remove('tirnak-flas'); void ui.masa.offsetWidth; ui.masa.classList.add('tirnak-flas'); }
     const oneri = CD.rastgele(ISIM_SIFAT) + ' ' + CD.rastgele(ISIM_AD);
     let onizleme;
-    try { onizleme = fotografCiz(540, 675, veriSimdi(), { cerceve: true, ad: oneri }); } catch (e) { console.warn('[tirnak] önizleme', e); ctx.toast('Fotoğraf hazırlanamadı; bir daha dener misin?'); return; }
+    try { onizleme = fotoUret(540, 675, { cerceve: true, ad: oneri }); } catch (e) { console.warn('[tirnak] önizleme', e); ctx.toast('Fotoğraf hazırlanamadı; bir daha dener misin?'); return; }
     onizleme.className = 'tirnak-fotoOnizleme'; onizleme.setAttribute('role', 'img'); onizleme.setAttribute('aria-label', 'Tasarımın fotoğrafı');
     const girdi = ctx.el('input.girdi', { type: 'text', maxlength: '40', placeholder: oneri, 'aria-label': 'Tasarım adı', autocomplete: 'off' });
     const ad = () => girdi.value.trim() || oneri;
-    const buyuk = () => fotografCiz(1080, 1350, veriSimdi(), { cerceve: true, ad: ad() });
+    const buyuk = () => fotoUret(1080, 1350, { cerceve: true, ad: ad() });
     const kutu = ctx.el('div.dikey.tirnak-fotoKutu', [
       onizleme,
       ctx.el('label.tirnak-etiket', ['Adı', girdi]),
@@ -2348,7 +2836,7 @@
     const tam = { id, v: SURUM, ad, tarih: CD.bugun(), ten: d.ten, el: d.el, poz: d.poz, zemin: d.zemin, isik: d.isik, eller: kopya(d.eller) };
     let kayit = tam;
     try {
-      const b = await blobAl(fotografCiz(480, 600, veriSimdi(), { cerceve: true, ad }));
+      const b = await blobAl(fotoUret(480, 600, { cerceve: true, ad }));
       await ctx.idb.koy('tirnak', { id: kid, ad, tarih: tam.tarih, blob: b || null, tasarim: tasarimAl(tam) });
       kayit = hafifKayit(tam, kid);          // ortak listeye yalnız başlık gider
     } catch (err) { /* IndexedDB yoksa tasarım listede tam hâliyle durur */ }
@@ -2367,10 +2855,11 @@
     urlleriBirak();
     const foto = ((ctx.config.TIRNAK || {}).FOTO_ILHAM || []).filter(f => f && f.yol);
     sekme = sekme || 'kayit';
-    const sekmeler = [['kayit', 'Kayıtlarım'], ['trend', 'Trendler']].concat(foto.length ? [['cemre', "Cemre'nin tırnakları"]] : []);
+    const sekmeler = [['kayit', 'Kayıtlarım'], ['trend', 'Trendler'], ['kombin', 'Kombinlerim']].concat(foto.length ? [['cemre', "Cemre'nin tırnakları"]] : []);
     const ust = ctx.el('div.cipler.tirnak-cipler', { role: 'tablist', 'aria-label': 'Galeri sekmeleri' }, sekmeler.map(s => ctx.el('button.cip', { type: 'button', role: 'tab', 'aria-selected': String(s[0] === sekme), onclick: () => { ctx.ses.tik(); galeriSheet(s[0]); } }, s[1])));
     const kap = ctx.el('div.dikey', [ust]);
     if (sekme === 'trend') kap.appendChild(trendListesi());
+    else if (sekme === 'kombin') kap.appendChild(kombinListesi());
     else if (sekme === 'cemre') kap.appendChild(fotoIlham(foto));
     else kap.appendChild(kayitListesi());
     ctx.sheet(kap, { baslik: sekme === 'trend' ? 'İlham: trend tasarımlar' : 'Galeri', odak: false, kapaninca: urlleriBirak, sessiz: true });
@@ -2444,7 +2933,10 @@
       ctx.el('div.kalin', 'Poz'), secim(POZLAR, d.poz, pozDegistir),
       ctx.el('div.kalin', 'Masa'), secim(ZEMINLER, d.zemin, (v) => { d.zemin = v; ctx.ses.tik(); hepsiniCiz(); kaydetGec(); }),
       ctx.el('div.kalin', 'Işık'), secim(ISIKLAR, d.isik, (v) => { d.isik = v; ctx.ses.tik(); onbellek.clear(); hepsiniCiz(); kaydetGec(); if (v === 'los') balon('Loş ışıkta parlayan ojeler yanar ✨', 2400); }),
-      kaydirici('Işık açısı (yansımalar)', 0, 628, Math.round(d.isikAci * 100), 1, null, v => { d.isikAci = v / 100; tirnakCizIste(); }, () => kaydetGec()),
+      kaydirici('Işık açısı (yansımalar)', 0, 628, Math.round(d.isikAci * 100), 1, null, v => { d.isikAci = v / 100; tirnakCizIste(); if (mod3d) kirli.arka = true; }, () => kaydetGec()),
+      ctx.el('div.kalin', 'Görüntü'), secim([{ id: 'oto', ad: 'Otomatik' }, { id: '3d', ad: '3D' }, { id: '2d', ad: '2D' }], ayarAl().mod, (v) => modSec(v)),
+      not('3D yavaş kalırsa salon kendiliğinden 2D\'ye geçer. Buradan istediğin zaman değiştirebilirsin.'),
+      ctx.el('div.kalin', '3D kalite'), secim([{ id: 'oto', ad: 'Otomatik' }, { id: '2', ad: 'Yüksek' }, { id: '1', ad: 'Dengeli' }, { id: '0', ad: 'Hafif' }], String(ayarAl().kalite), (v) => { const a = ayarAl(); a.kalite = v; ayarYaz(a); if (api3) api3.kaliteAyarla(v === 'oto' ? 'oto' : Number(v)); ctx.ses.tik(); }),
       ctx.el('button.dugme-ikincil.tam', { type: 'button', onclick: () => { aynala(); } }, '⇄ Bu eli diğer ele de uygula'),
       ctx.el('button.dugme.tam', { type: 'button', onclick: () => ctx.sheetKapat() }, 'Tamam')
     ]);
@@ -2577,7 +3069,8 @@
     }
     if (d.sistem === 'jel') p.push(lambaSatiri());
     if (d.sonRenkler.length) p.push(altBaslik('Son kullandıkların'), renkSatiri(d.sonRenkler, t.renk, r => renkUygula(r, 'krem'), 'Son renk'));
-    p.push(karistiriciPanel());
+    p.push(vurguSatiri());
+    p.push(karistiriciPanel(), kombinPaneli(), katmanPaneli());
     p.push(ctx.el('div.satir.sar', [ctx.el('button.dugme-hayalet', { type: 'button', onclick: ojeSil }, 'Ojeyi sil'), ctx.el('span.bosluk'), ctx.el('button.dugme.kucuk', { type: 'button', onclick: () => adimaGit('sanat') }, 'Sanata geç')]));
     return p;
   }
@@ -2643,8 +3136,8 @@
     } else if (id === 'aura') {
       p.push(not('Merkeze dokun, dışarı sürükle: hale büyür.'), ...renkSec('Aura rengi', 'renk2'));
     } else if (id === 'french' || id === 'yarimAy') {
-      if (id === 'french') p.push(segment(FRENCH_STILLER, arac.frenchStil, (v) => { arac.frenchStil = v; ctx.ses.tik(); if (v === 'klasik') arac.renk2 = '#FFFFFF'; panelYenile(); }, 'French türü'));
-      p.push(not(id === 'french' ? 'Tırnağın üstünde parmağını yukarı-aşağı kaydır: uç çizgisi parmağını izler.' : 'Dipte yarım ay: parmağınla boyunu ayarla.'));
+      if (id === 'french') p.push(ctx.el('div.tirnak-secenekler.tirnak-secenekler-genis', FRENCH_STILLER.map(fs => secenek(fs.id, fs.ad, arac.frenchStil === fs.id, () => { arac.frenchStil = fs.id; ctx.ses.tik(); if (fs.id === 'klasik') arac.renk2 = '#FFFFFF'; panelYenile(); }, miniTirnak('fr:' + fs.id, { renk: '#F6D8DF', ojeTur: 'sheer', kat: 2, uzunluk: .55, teknik: { id: 'french', renk2: fs.id === 'klasik' || fs.id === 'mikro' || fs.id === 'ombre' ? '#FFFFFF' : '#EE6E96', kalinlik: fs.id === 'ters' ? .25 : .3, stil: fs.id } })))));
+      p.push(not(id === 'french' ? (arac.frenchStil === 'ters' ? 'Ters French dipte durur: parmağını yukarı kaydırdıkça hilal büyür.' : 'Tırnağın üstünde parmağını yukarı-aşağı kaydır: uç çizgisi parmağını izler.') : 'Dipte yarım ay: parmağınla boyunu ayarla.'));
       p.push(...renkSec(id === 'french' ? 'Uç rengi' : 'Yarım ay rengi', 'renk2'));
     } else if (id === 'mermer') {
       p.push(not('Dokun: renk damlası düşer (halka halka). Sürükle: iğneyle çekip mermerleştir.'));
@@ -2664,6 +3157,14 @@
       p.push(not('Çıkartmayı seç, tırnağa dokun; parmağınla kaydır.'));
       p.push(ctx.el('div.tirnak-secenekler.tirnak-parcalar', CIKARTMALAR.map(c => secenek(c.id, c.ad, arac.cikartma === c.id, () => { arac.cikartma = c.id; ctx.ses.tik(); panelYenile(); }, parcaTuval('cik:' + c.id, CIKARTMA_CIZ[c.id], arac.renk === '#FFFFFF' ? '#EE8AAA' : arac.renk, .7)))));
       p.push(...renkSec('Renk', 'renk'));
+    } else if (id === 'ek') {
+      p.push(not('Bir doku ya da desen seç: seçili tırnaklara yeni katman olarak eklenir. Aynısı varsa rengi değişir.'));
+      const gruplar = [...new Set(EKLER.map(e => e.grup))];
+      gruplar.forEach(gr => {
+        p.push(altBaslik(gr), ctx.el('div.tirnak-secenekler.tirnak-parcalar', EKLER.filter(e => e.grup === gr).map(e => secenek(e.id, e.ad, t.ekler.some(x => x.id === e.id), () => ekUygula(e.id), miniTirnak('ek:' + e.id, { renk: e.renk, kat: 2, uzunluk: .45, ekler: [ek(e.id)], top: e.id !== 'kum' && e.id !== 'kadife' })))));
+      });
+      p.push(altBaslik('Renk 1 (boş: önerilen)'), renkSatiri([null].concat(SANAT_RENKLERI).filter(Boolean), arac.ekRenk, r => { arac.ekRenk = arac.ekRenk === r ? null : r; ctx.ses.tik(); panelYenile(); }, 'Katman rengi'));
+      p.push(altBaslik('Renk 2'), renkSatiri(SANAT_RENKLERI, arac.ekRenk2, r => { arac.ekRenk2 = arac.ekRenk2 === r ? null : r; ctx.ses.tik(); panelYenile(); }, 'Katman ikinci rengi'));
     } else if (id === 'sus') {
       p.push(not('Süsü seç, tırnağa dokun; kaydır, boyutla, döndür.'));
       p.push(ctx.el('div.tirnak-secenekler.tirnak-parcalar', SUSLER.map(s => secenek(s.id, s.ad, arac.sus === s.id, () => { arac.sus = s.id; ctx.ses.tik(); panelYenile(); }, parcaTuval('sus:' + s.id, SUS_CIZ[s.id], arac.tasRenk, s.id === 'zincir' ? .9 : s.olcek < .2 ? .35 : .6)))));
@@ -2680,6 +3181,7 @@
         ctx.el('div.satir', [ctx.el('button.dugme-ikincil.kucuk', { type: 'button', onclick: seciliParcaSil }, 'Kaldır'), ctx.el('button.dugme-hayalet', { type: 'button', onclick: () => parcalariTemizle(seciliParca.liste) }, 'Hepsini temizle')])
       ]));
     }
+    p.push(vurguSatiri(), katmanPaneli());
     p.push(ctx.el('div.satir.sar', [ctx.el('button.dugme-hayalet', { type: 'button', onclick: async () => { const ok = await ctx.onayla('Seçili tırnaklardaki tüm sanat silinsin mi?', 'Sil', 'Kalsın'); if (ok && ctx) sanatTemizle(); } }, 'Sanatı temizle'), ctx.el('span.bosluk'), ctx.el('button.dugme.kucuk', { type: 'button', onclick: () => adimaGit('ust') }, 'Üst kata geç')]));
     return p;
   }
@@ -2697,6 +3199,7 @@
       ctx.el('button.dugme-ikincil', { type: 'button', onclick: pittiksuyaGoster }, '🐾 Pıttıksu\'ya göster')
     ]));
     if (t.top) p.push(ctx.el('button.dugme-hayalet', { type: 'button', onclick: ustSil }, 'Üst katı kaldır'));
+    p.push(katmanPaneli(), ctx.el('button.dugme.tam', { type: 'button', onclick: () => adimaGit('final') }, 'Finale geç'));
     return p;
   }
   function panelYenile() {
@@ -2704,9 +3207,9 @@
     const kayma = ui.panel.scrollTop;
     ui.panel.innerHTML = '';
     const adim = ADIMLAR.find(a => a.id === d.adim) || ADIMLAR[0];
-    ui.panel.appendChild(ctx.el('div.tirnak-panelBaslik', [ctx.el('h2.baslik.baslik-lg', adim.ad), ctx.el('span.sessiz', d.secim.hepsi ? 'Bütün tırnaklar' : PARMAK_AD[d.secim.parmak] + ' parmak')]));
+    ui.panel.appendChild(ctx.el('div.tirnak-panelBaslik', [ctx.el('h2.baslik.baslik-lg', adim.ad), ctx.el('span.sessiz', d.secim.hepsi ? 'Bütün tırnaklar' + (d.vurgu != null && VURGU_ADIM.includes(d.adim) ? ' (' + PARMAK_AD[d.vurgu].toLocaleLowerCase('tr') + ' vurgu hariç)' : '') : PARMAK_AD[d.secim.parmak] + ' parmak')]));
     let icerik = [];
-    try { icerik = { hazirlik: panelHazirlik, sekil: panelSekil, taban: panelTaban, renk: panelRenk, sanat: panelSanat, ust: panelUst }[adim.id](); }
+    try { icerik = { hazirlik: panelHazirlik, sekil: panelSekil, taban: panelTaban, renk: panelRenk, sanat: panelSanat, ust: panelUst, final: panelFinal }[adim.id](); }
     catch (e) { console.warn('[tirnak] panel', e); icerik = [not('Bu panel açılamadı; başka bir adıma geçip dönebilirsin.')]; }
     icerik.forEach(e => e && ui.panel.appendChild(e));
     ui.panel.scrollTop = kayma;
@@ -2715,17 +3218,451 @@
   }
   function secimYaz() {
     if (!ui.secim) return;
-    ui.secim.querySelectorAll('button[data-parmak]').forEach(b => { const v = b.dataset.parmak; b.setAttribute('aria-pressed', String(v === 'hepsi' ? d.secim.hepsi : (!d.secim.hepsi && Number(v) === d.secim.parmak))); });
+    ui.secim.querySelectorAll('button[data-parmak]').forEach(b => { const v = b.dataset.parmak; b.setAttribute('aria-pressed', String(v === 'hepsi' ? d.secim.hepsi : (!d.secim.hepsi && Number(v) === d.secim.parmak))); b.classList.toggle('tirnak-vurgu', v !== 'hepsi' && d.vurgu === Number(v)); });
     if (ui.elDugme) ui.elDugme.textContent = d.el === 'sol' ? 'Sol el' : 'Sağ el';
   }
   function adimaGit(id) {
     if (!d || d.adim === id) return;
+    if (d.adim === 'final' && id !== 'final') vitrinKapat();
     d.adim = id; seciliParca = null; imlec = null; ctx.ses.tik();
+    if (mod3d && api3) { gorunum.odak = false; api3.kamera(id); odakDugmesi(); }
     const a = ADIMLAR.find(x => x.id === id);
     if (id !== 'hazirlik' && d.adim !== 'hazirlik' && !hazirMi(d.el) && id === 'sekil') balon('Hazırlık yarım kaldı; istersen sonra dönersin.', 2400);
     else if (a) balon(a.ipucu);
     ustCizIste(); kaydetGec(); panelYenile();
     if (ui.panel && ui.panel.scrollIntoView && innerWidth < 900) { try { ui.adimlar.scrollIntoView({ block: 'nearest', behavior: ctx.azHareket ? 'auto' : 'smooth' }); } catch (e) {} }
+  }
+
+  /* ------------------------------------------------------------ katmanlar paneli (sırala, gizle, opaklık, kaldır) */
+  const KATMAN_AD = { renk: 'Oje', teknik: 'Teknik', mermer: 'Su mermeri', desen: 'Tam desen', damga: 'Damga', firca: 'Fırça izleri', cikartma: 'Çıkartmalar', efekt: 'Krom tozu', sus: '3D süsler', ust: 'Üst kat' };
+  function katmanVarMi(t, k) {
+    if (k === 'renk') return !!t.renk; if (k === 'teknik') return t.teknik && t.teknik.id !== 'yok'; if (k === 'mermer') return !!t.suMermer;
+    if (k === 'desen') return !!t.desen; if (k === 'damga') return t.damgalar.length > 0; if (k === 'firca') return t.firca.length > 0;
+    if (k === 'cikartma') return t.cikartmalar.length > 0; if (k === 'efekt') return t.efekt && t.efekt !== 'yok'; if (k === 'sus') return t.susler.length > 0;
+    if (k === 'ust') return !!t.top; if (k.startsWith('ek:')) return t.ekler.some(e => 'ek:' + e.u === k); return false;
+  }
+  function katmanAdi(t, k) {
+    if (k.startsWith('ek:')) { const e = t.ekler.find(x => 'ek:' + x.u === k); return e ? (EKLER.find(x => x.id === e.id) || {}).ad || 'Katman' : 'Katman'; }
+    if (k === 'renk') return 'Oje: ' + (renkAdi(t.renk) || 'özel renk') + ' (' + (TUR_AD[t.ojeTur] || '') + ')';
+    if (k === 'efekt') return 'Krom tozu: ' + ((EFEKTLER.find(e => e.id === t.efekt) || {}).ad || '');
+    if (k === 'ust') return 'Üst kat: ' + ((USTLER.find(u => u.id === t.ust) || {}).ad || '');
+    if (k === 'teknik') return 'Teknik: ' + ({ french: 'French', yarimAy: 'Yarım ay', ombre: 'Ombre', mermer: 'Mermer', aura: 'Aura', glitter: 'Sim', kromUc: 'Krom uç', kromToz: 'Krom toz' }[t.teknik.id] || t.teknik.id);
+    return KATMAN_AD[k] || k;
+  }
+  function gorunenKatmanlar(t) { return ['ust', 'sus'].filter(k => katmanVarMi(t, k)).concat(katmanSira(t).filter(k => katmanVarMi(t, k)).reverse()); }
+  function katmanDegistir(k, fn) {
+    gecmisKaydet();
+    hedefler().forEach(i => { const t = d.eller[d.el][i]; if (!katmanVarMi(t, k)) return; const km = t.katman ? kopya(t.katman) : {}; km.gizli = km.gizli || {}; km.opak = km.opak || {}; fn(t, km); t.katman = katmanDuzelt(km, t); });
+    tirnakCizIste(); kaydetGec();
+  }
+  function katmanTasi(k, yukari) {
+    katmanDegistir(k, (t, km) => {
+      const s = katmanSira(t), var_ = s.filter(x => katmanVarMi(t, x)), i = var_.indexOf(k), j = i + (yukari ? 1 : -1);
+      if (i < 0 || j < 0 || j >= var_.length) return;
+      const a = s.indexOf(k), b = s.indexOf(var_[j]); s[a] = var_[j]; s[b] = k; km.sira = s;
+    });
+    ctx.ses.tik(); panelYenile();
+  }
+  function katmanSil(k) {
+    gecmisKaydet();
+    hedefler().forEach(i => {
+      const t = d.eller[d.el][i];
+      if (k.startsWith('ek:')) t.ekler = t.ekler.filter(e => 'ek:' + e.u !== k);
+      else if (k === 'renk') { t.renk = null; t.kat = 0; t.kedi = null; }
+      else if (k === 'teknik') t.teknik = { id: 'yok', renk2: '#FFFFFF', kalinlik: .3 };
+      else if (k === 'mermer') t.suMermer = null; else if (k === 'desen') t.desen = null; else if (k === 'damga') t.damgalar = [];
+      else if (k === 'firca') t.firca = []; else if (k === 'cikartma') t.cikartmalar = []; else if (k === 'efekt') t.efekt = 'yok';
+      else if (k === 'sus') t.susler = []; else if (k === 'ust') { t.top = false; t.kur.top = true; }
+      t.katman = katmanDuzelt(t.katman, t);
+    });
+    seciliParca = null; ctx.ses.pit(); tirnakCizIste(); kaydetGec(); panelYenile();
+  }
+  function katmanPaneli() {
+    const t = aktifTirnak(), liste = gorunenKatmanlar(t), sirali = katmanSira(t).filter(k => katmanVarMi(t, k));
+    const govde = ctx.el('div.dikey.tirnak-katmanListe');
+    if (!liste.length) govde.appendChild(not('Bu tırnakta henüz katman yok. Renk ya da sanat ekleyince burada görünür.'));
+    liste.forEach(k => {
+      const gizli = katmanGizli(t, k), sabit = KATMAN_SABIT.includes(k), sira = sirali.indexOf(k);
+      const satir = ctx.el('div.tirnak-katmanSatir' + (gizli ? '.gizli' : ''), [
+        ctx.el('div.tirnak-katmanBas', [
+          ctx.el('span.tirnak-katmanAd', katmanAdi(t, k)),
+          ctx.el('span.bosluk'),
+          sabit ? null : ctx.el('button.tirnak-katmanDugme', { type: 'button', 'aria-label': katmanAdi(t, k) + ': yukarı taşı', disabled: sira >= sirali.length - 1 ? '' : null, onclick: () => katmanTasi(k, true) }, '▲'),
+          sabit ? null : ctx.el('button.tirnak-katmanDugme', { type: 'button', 'aria-label': katmanAdi(t, k) + ': aşağı taşı', disabled: sira <= 0 ? '' : null, onclick: () => katmanTasi(k, false) }, '▼'),
+          ctx.el('button.tirnak-katmanDugme', { type: 'button', 'aria-pressed': String(!gizli), 'aria-label': katmanAdi(t, k) + (gizli ? ': göster' : ': gizle'), onclick: () => { katmanDegistir(k, (tt, km) => { if (km.gizli[k]) delete km.gizli[k]; else km.gizli[k] = true; }); ctx.ses.tik(); panelYenile(); } }, gizli ? '◌' : '●'),
+          ctx.el('button.tirnak-katmanDugme', { type: 'button', 'aria-label': katmanAdi(t, k) + ': kaldır', onclick: () => katmanSil(k) }, '×')
+        ]),
+        k === 'ust' ? null : kaydirici('Opaklık', 5, 100, Math.round(katmanOpak(t, k) * 100), 1, v => '%' + v, v => { hedefler().forEach(i => { const tt = d.eller[d.el][i]; if (!katmanVarMi(tt, k)) return; const km = tt.katman ? kopya(tt.katman) : {}; km.opak = km.opak || {}; if (v >= 100) delete km.opak[k]; else km.opak[k] = v / 100; tt.katman = katmanDuzelt(km, tt); }); tirnakCizIste(); }, () => kaydetGec(), gecmisKaydet)
+      ]);
+      govde.appendChild(satir);
+    });
+    const det = ctx.el('details.tirnak-ozel.tirnak-katmanPanel', [ctx.el('summary', 'Katmanlar (' + liste.length + ')'), not('En üstteki katman listenin başında. ▲▼ ile sırala, ● ile gizle.'), govde]);
+    if (katmanPaneli.acik) det.open = true;
+    det.addEventListener('toggle', () => { katmanPaneli.acik = det.open; });
+    return det;
+  }
+  function vurguSatiri() {
+    return ctx.el('div.tirnak-vurguSatir', [
+      altBaslik('Vurgu tırnağı'),
+      segment([{ id: 'yok', ad: 'Yok' }].concat(PARMAK_AD.map((a, i) => ({ id: String(i), ad: a }))), d.vurgu == null ? 'yok' : String(d.vurgu), (v) => {
+        d.vurgu = v === 'yok' ? null : Number(v); ctx.ses.tik(); kaydetGec(); ustCizIste(); panelYenile();
+        if (d.vurgu != null) balon(PARMAK_AD[d.vurgu] + ' parmak vurgu: "Hepsi" seçiliyken renk ve sanat ona gitmez. Onu ayrıca seçip süsle.', 3400);
+      }, 'Vurgu tırnağı')
+    ]);
+  }
+
+  /* ------------------------------------------------------------ 3D malzeme tanımı (tirnak-3d.js okur) */
+  function malzeme3d(t) {
+    const gz = (k) => katmanGizli(t, k);
+    const m = { rough: .5, metal: 0, cc: .25, ccR: .2, irid: 0, sheen: 0, sheenRenk: null, tr: 0, kal: .02, glow: false, glowRenk: null, kedi: null, kediRenk: null, pul: null, doku: null, kapsul: false, islak: yapiskanMi(t), zayifRenk: null };
+    const renk = t.renk && t.kat > 0 && !gz('renk');
+    if (renk) {
+      m.rough = .32; m.cc = .35; m.ccR = .12;
+      switch (t.ojeTur) {
+        case 'jelly': m.tr = t.kat >= 3 ? .18 : .32; m.kal = .04; m.rough = .12; m.zayifRenk = t.renk; break;
+        case 'sheer': m.tr = .14; m.kal = .03; m.rough = .2; break;
+        case 'metalik': m.metal = .7; m.rough = .3; m.pul = 'ince'; break;
+        case 'simInce': m.metal = .45; m.rough = .28; m.pul = 'ince'; break;
+        case 'simIri': m.metal = .6; m.rough = .22; m.pul = 'iri'; break;
+        case 'simHolo': m.metal = .55; m.rough = .2; m.pul = 'iri'; m.irid = 1; break;
+        case 'kediGozu': m.kedi = t.kedi || { x: 0, y: .5, aci: -.5, gen: .5 }; m.kediRenk = parlaklik(t.renk) > 150 ? '#FFFFFF' : acik(t.renk, .75); m.rough = .25; break;
+        case 'glow': m.glow = true; m.glowRenk = t.renk; break;
+        case 'neon': m.rough = .38; break;
+      }
+    }
+    if (!gz('efekt')) {
+      const f = t.efekt;
+      if (f === 'kromAyna' || f === 'kromAltin' || f === 'kromRose') { m.metal = 1; m.rough = .07; m.pul = null; }
+      else if (f === 'krom') { m.metal = .9; m.rough = .14; m.tr = 0; }
+      else if (f === 'aurora') { m.irid = 1; m.metal = Math.max(m.metal, .25); m.rough = .1; m.iridAralik = [250, 800]; }
+      else if (f === 'inci') { m.irid = .7; m.sheen = .6; m.sheenRenk = '#FFE9F3'; m.rough = .18; }
+      else if (f === 'holo') { m.irid = 1; m.metal = .55; m.rough = .1; m.iridAralik = [100, 1000]; }
+      else if (f === 'glitter') { m.pul = 'iri'; m.metal = Math.max(m.metal, .5); }
+      else if (f === 'shimmer') { m.pul = m.pul || 'ince'; m.metal = Math.max(m.metal, .3); }
+    }
+    t.ekler.forEach(e => {
+      if (gz('ek:' + e.u)) return;
+      if (e.id === 'kadife') { m.sheen = 1; m.sheenRenk = e.renk2; m.rough = .85; m.cc = 0; }
+      else if (e.id === 'kazak') { m.doku = 'kazak'; m.rough = .85; }
+      else if (e.id === 'seker') { m.doku = 'seker'; m.rough = .55; m.sheen = .4; m.sheenRenk = '#FFFFFF'; }
+      else if (e.id === 'kum') { m.doku = 'kum'; m.rough = .95; m.cc = 0; }
+      else if (e.id === 'kirilgan') { m.doku = 'catlak'; }
+      else if (e.id === 'sedef') { m.irid = Math.max(m.irid, .8); }
+      else if (e.id === 'yansitici') { m.pul = 'yansitici'; m.metal = .85; m.rough = .2; }
+      else if (e.id === 'simGecis') { m.pul = m.pul || 'ince'; m.metal = Math.max(m.metal, .3); }
+      else if (e.id === 'folyoParca') { m.metal = Math.max(m.metal, .35); }
+      else if (e.id === 'kapsul') { m.kapsul = true; m.cc = 1; m.ccR = .02; }
+    });
+    if (t.top && !gz('ust')) {
+      const a = katmanOpak(t, 'ust');
+      if (t.ust === 'mat') { m.cc = 0; m.rough = Math.max(m.rough, .86); m.metal *= .5; m.irid *= .6; m.sheen = Math.max(m.sheen, .25); m.sheenRenk = m.sheenRenk || '#FFFFFF'; }
+      else if (t.ust === 'saten') { m.cc = .4 * a; m.ccR = .35; m.rough = Math.max(m.rough, .45); }
+      else { m.cc = Math.max(m.cc, a); m.ccR = .03; if (!m.doku) m.rough = Math.min(m.rough, .3); }
+      if (m.doku === 'kazak' || m.doku === 'kum' || (m.sheen >= 1 && t.ust !== 'parlak')) { /* dokulu bitişler üst katla da dokulu kalır */ }
+    } else if (!renk) { m.rough = .3; m.cc = .55; m.ccR = .1; }   // çıplak tırnak: sağlıklı hafif parlaklık
+    return m;
+  }
+
+  /* ------------------------------------------------------------ 3D köprüsü: tembel yükleme, ayarlar, dokunma, düşüş (2D'ye) */
+  let mod3d = false, api3 = null, yukleniyor3 = false, mountNo = 0, threeSoz = null;
+  const d3Anahtar = new Map();
+  const AYAR = 'cihaz.tirnak.ayar';
+  function ayarAl() { const a = CD.depo.al(AYAR, null); return Object.assign({ mod: 'oto', kalite: 'oto', zayif: false }, a && typeof a === 'object' ? a : {}); }
+  function ayarYaz(a) { CD.depo.yaz(AYAR, a); }
+  function webglVar() {
+    try { const c = document.createElement('canvas'); const gl = c.getContext('webgl2') || c.getContext('webgl'); if (!gl) return false; const x = gl.getExtension('WEBGL_lose_context'); if (x) x.loseContext(); return true; } catch (e) { return false; }
+  }
+  function modIstegi() { const a = ayarAl(); if (a.mod === '2d') return false; if (a.mod === '3d') return true; return !a.zayif; }
+  function betik(src) {
+    return new Promise((coz, red) => {
+      const s = document.createElement('script'); s.src = src; s.async = true;
+      s.onload = () => coz(); s.onerror = () => { s.remove(); red(new Error('yüklenemedi: ' + src)); };
+      document.head.appendChild(s);
+    });
+  }
+  /* three.min.js ve tirnak-3d.js bir kez yüklenir; ikinci açılışta hazır olan kullanılır */
+  function ucBoyutYukle() {
+    if (window.THREE && CD.tirnak3d) return Promise.resolve();
+    if (threeSoz) return threeSoz;
+    let uyari = null;
+    const ilk = window.THREE ? Promise.resolve() : new Promise((coz, red) => {
+      // r158'in "build/three.min.js eskidi" notu konsolu kirletmesin (yalnız o satır susturulur)
+      uyari = console.warn; console.warn = function (m) { if (typeof m === 'string' && m.indexOf('build/three') >= 0) return; return uyari.apply(console, arguments); };
+      betik('js/vendor/three.min.js').then(coz, red);
+    });
+    const geri = () => { if (uyari && console.warn !== uyari) console.warn = uyari; uyari = null; };
+    threeSoz = ilk.then(() => { geri(); return CD.tirnak3d ? null : betik('js/bolum/tirnak-3d.js'); }, (e) => { geri(); throw e; })
+      .then(() => { if (!window.THREE || !CD.tirnak3d) throw new Error('3D modülü hazır değil'); });
+    threeSoz.catch(() => { threeSoz = null; });
+    return threeSoz;
+  }
+  function yukleyici(acik) { if (ui.yukleyici) { ui.yukleyici.hidden = !acik; } if (ui.masa) ui.masa.classList.toggle('tirnak-yukleniyor', !!acik); }
+  function ucBoyutBaslat(neden) {
+    if (mod3d || yukleniyor3 || !ctx) return;
+    if (!webglVar()) { if (neden === 'kullanici') ctx.toast('Bu cihazda 3D açılamıyor; 2D salon açık.'); return; }
+    yukleniyor3 = true; yukleyici(true);
+    const benim = mountNo;
+    ucBoyutYukle().then(() => { if (!ctx || benim !== mountNo) return; d3Kur(neden); })
+      .catch(err => { console.warn('[tirnak] 3D yüklenemedi', err); if (ctx && benim === mountNo) ctx.toast('3D yüklenemedi; 2D salon açık.'); })
+      .then(() => { if (benim === mountNo) { yukleniyor3 = false; if (ctx) yukleyici(false); } });
+  }
+  function d3Bilgi(taraf, i) {
+    const y = yerlesim.find(q => q.taraf === taraf && q.i === i); if (!y || !d) return null;
+    const t = d.eller[taraf][i];
+    return { t, nw: y.nw, L: tirnakBoyu(t, y.nw), m3: malzeme3d(t), gizliSus: katmanGizli(t, 'sus'), susOpak: katmanOpak(t, 'sus') };
+  }
+  function d3DokuCiz(taraf, i, g, S) {
+    const y = yerlesim.find(q => q.taraf === taraf && q.i === i); if (!y) return;
+    const o = tirnakSecenek(taraf, i, S); o.d3 = true; tenSimdi = o.ten;
+    tirnakCiz(g, d.eller[taraf][i], y.nw, o);
+  }
+  function d3Olay(ad) {
+    if (!ctx) return;
+    if (ad === 'kayip') { d3Kapat(); ctx.toast('3D ekran kartı dinlenmeye geçti; 2D salon açık.'); }
+    else if (ad === 'zayif' && ayarAl().mod === 'oto') { const a = ayarAl(); a.zayif = true; ayarYaz(a); d3Kapat(); ctx.toast('Bu telefonda 2D daha akıcı; Görünüm\'den 3D\'yi yine açabilirsin.'); }
+  }
+  function d3SahneKur() { if (api3) api3.sahne({ ornekler, poz: d.poz, el: d.el, avuc: AVUC }); }
+  function d3Ortam() {
+    if (!api3) return;
+    const renkler = []; ['sag', 'sol'].forEach(k => d.eller[k].forEach(t => { if (t.renk && !renkler.includes(t.renk)) renkler.push(t.renk); }));
+    api3.ortam({ ten: d.ten || VARSAYILAN_TEN, zemin: d.zemin, isik: d.isik, isikAci: d.isikAci, renkler });
+  }
+  function d3Dokular() {
+    if (!api3) return;
+    yerlesim.forEach(y => {
+      const t = d.eller[y.taraf][y.i], o = tirnakSecenek(y.taraf, y.i, 1);
+      const a = JSON.stringify(t) + JSON.stringify(o.hz) + o.ten + o.isikAci.toFixed(2) + o.los + (o.anim ? o.anim.p.toFixed(3) : '') + o.sicak.toFixed(2);
+      if (d3Anahtar.get(y.taraf + y.i) === a) return;
+      d3Anahtar.set(y.taraf + y.i, a); api3.tirnak(y.taraf, y.i);
+    });
+  }
+  function d3Secim() {
+    if (!api3) return;
+    const sp = seciliParca && seciliParcaAl();
+    api3.secim(hedefYerlesim().map(y => ({ taraf: y.taraf, i: y.i })), sp ? { taraf: seciliParca.taraf, i: seciliParca.parmak, x: sp.x || 0, y: sp.y == null ? .5 : sp.y, r: (sp.olcek || .4) * 14 } : null);
+  }
+  function d3Kur(neden) {
+    try {
+      api3 = CD.tirnak3d.kur(ui.katman, {
+        kalite: ayarAl().kalite === 'oto' ? 'oto' : Number(ayarAl().kalite), azHareket: () => !ctx || ctx.azHareket,
+        yol: tirnakYol2D, dokuCiz: d3DokuCiz, bilgi: d3Bilgi, olay: d3Olay,
+        zeminCiz: (g, z) => { zeminCiz(g, z, tohumla(z === 'mermer' ? 11 : 23)); }
+      });
+    } catch (e) { console.warn('[tirnak] 3D kurulamadı', e); api3 = null; if (ctx) ctx.toast('3D açılamadı; 2D salon açık.'); return; }
+    mod3d = true; d3Anahtar.clear();
+    const tv = api3.tuval; tv.tabIndex = 0;
+    p3.isaret.clear(); p3.mod = null;
+    tv.addEventListener('pointerdown', p3Bas); tv.addEventListener('pointermove', p3Tasi); tv.addEventListener('pointerup', p3Birak); tv.addEventListener('pointercancel', p3Birak);
+    tv.addEventListener('wheel', p3Teker, { passive: false }); tv.addEventListener('keydown', p3Tus);
+    tv.addEventListener('contextmenu', e => e.preventDefault());
+    tv.addEventListener('touchstart', e => { e.preventDefault(); }, { passive: false });
+    ui.masa.classList.add('tirnak-3dMod');
+    api3.boyutla(); d3SahneKur(); d3Ortam(); d3Dokular(); d3Secim();
+    gorunum.odak = false; odakDugmesi();
+    api3.kamera(d.adim, 0);
+    if (!ctx.azHareket) api3.giris();
+    if (neden === 'kullanici') ctx.toast('3D salon açıldı ✨ Boş yeri sürükleyip çevir.');
+  }
+  function d3Kapat(sessiz) {
+    if (!api3) { mod3d = false; return; }
+    const a = api3; api3 = null; mod3d = false; d3Anahtar.clear(); p3.isaret.clear(); p3.mod = null;
+    try { a.yokEt(); } catch (e) { console.warn('[tirnak] 3D kapatılamadı', e); }
+    if (ui.masa) ui.masa.classList.remove('tirnak-3dMod');
+    if (ui.kurSayac) ui.kurSayac.hidden = true;
+    if (!sessiz && ctx && d) { gorunumSifirla(); onbellek.clear(); hepsiniCiz(); }
+  }
+  function modSec(v) {
+    const a = ayarAl(); a.mod = v; if (v === '3d') a.zayif = false; ayarYaz(a); ctx.ses.tik();
+    if (v === '2d') { d3Kapat(); ctx.toast('2D salon açık.'); }
+    else if (!mod3d) ucBoyutBaslat('kullanici');
+  }
+  /* 3D dokunma: tırnağa (araç açıkken) basınca 2D araç akışı aynen çalışır; boşluk sürüklenince kamera döner, iki parmak yakınlaştırır */
+  const p3 = { isaret: new Map(), mod: null, bas: null, son: null, pinch: null };
+  function aracAktif() { if (d.adim === 'hazirlik' && !hazirMi(d.el)) return true; if (d.adim === 'sanat' && arac.id !== 'ek') return true; return false; }
+  function d3Sahne(taraf, i, x, y) { const q = yerlesim.find(z => z.taraf === taraf && z.i === i); return q ? M.uygula(q.m, x, y) : { x: -9999, y: -9999 }; }
+  function vekil(e, h) {
+    const s = h && h.taraf != null ? d3Sahne(h.taraf, h.i, h.x, h.y) : { x: -9999, y: -9999 };
+    return { clientX: e.clientX, clientY: e.clientY, pointerId: e.pointerId, pointerType: e.pointerType, pressure: e.pressure, button: 0, preventDefault() {}, __s: s };
+  }
+  function p3Bas(e) {
+    if (!api3 || (e.pointerType === 'mouse' && e.button !== 0)) return;
+    e.preventDefault(); ctx.ses.uyandir();
+    try { api3.tuval.setPointerCapture(e.pointerId); } catch (err) {}
+    p3.isaret.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    if (p3.isaret.size === 2) {
+      if (p3.mod === 'arac') { surukle && tuvalBirak(vekil(e, null)); canliCizim = false; }
+      const [a, b] = [...p3.isaret.values()]; p3.mod = 'pinch'; p3.pinch = { d: Math.hypot(a.x - b.x, a.y - b.y) || 1, mx: (a.x + b.x) / 2, my: (a.y + b.y) / 2 }; return;
+    }
+    if (p3.isaret.size > 2) return;
+    if (ui.balon) { clearTimeout(balonT); ui.balon.classList.remove('goster'); }
+    const h = api3.vur(e.clientX, e.clientY);
+    p3.bas = { x: e.clientX, y: e.clientY, t: performance.now(), h, surdu: false };
+    if (h && h.taraf != null && aracAktif()) { p3.mod = 'arac'; p3.son = h; tuvalBas(Object.assign(vekil(e, h), { pointerId: e.pointerId })); return; }
+    p3.mod = 'kamera';
+  }
+  function p3Tasi(e) {
+    if (!api3 || !p3.isaret.has(e.pointerId)) return;
+    const once = p3.isaret.get(e.pointerId); p3.isaret.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    if (p3.mod === 'pinch') {
+      if (p3.isaret.size < 2) return;
+      const [a, b] = [...p3.isaret.values()], dd = Math.hypot(a.x - b.x, a.y - b.y) || 1, mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2;
+      api3.yakinlas(p3.pinch.d / dd); api3.kaydir(mx - p3.pinch.mx, my - p3.pinch.my); p3.pinch = { d: dd, mx, my }; gorunum.odak = false; return;
+    }
+    if (p3.mod === 'kamera') {
+      const b = p3.bas; if (b && !b.surdu && Math.hypot(e.clientX - b.x, e.clientY - b.y) > 7) b.surdu = true;
+      if (b && b.surdu) { api3.dondur(e.clientX - once.x, e.clientY - once.y); }
+      return;
+    }
+    if (p3.mod === 'arac' && surukle) {
+      const evs = (e.getCoalescedEvents && e.getCoalescedEvents().length) ? e.getCoalescedEvents() : [e];
+      const vek = evs.map(ev => {
+        let h = api3.vur(ev.clientX, ev.clientY);
+        if (!h || h.taraf == null) { const ref = surukle.yAna || p3.son; const q = ref && api3.duzlem(ev.clientX, ev.clientY, ref.taraf, ref.i); h = q ? { taraf: ref.taraf, i: ref.i, x: q.x, y: q.y } : null; }
+        else p3.son = h;
+        return Object.assign(vekil(ev, h), { pointerId: e.pointerId });
+      });
+      const son = vek[vek.length - 1];
+      tuvalTasi(Object.assign({}, son, { getCoalescedEvents: () => vek }));
+    }
+  }
+  function p3Birak(e) {
+    if (!api3) return;
+    const b = p3.bas, varMi = p3.isaret.has(e.pointerId); p3.isaret.delete(e.pointerId);
+    try { api3.tuval.releasePointerCapture(e.pointerId); } catch (err) {}
+    if (!varMi) return;
+    if (p3.mod === 'pinch') { if (!p3.isaret.size) p3.mod = null; return; }
+    if (p3.mod === 'arac') { p3.mod = null; tuvalBirak(Object.assign(vekil(e, null), { pointerId: e.pointerId })); return; }
+    const kisa = b && !b.surdu && performance.now() - b.t < 420 && e.type !== 'pointercancel';
+    p3.mod = null;
+    if (kisa) d3Dokunus(e, b.h);
+  }
+  function d3Dokunus(e, h) {
+    let hh = h && h.taraf != null ? h : null;
+    if (!hh && h && h.yakin) { const t = d.eller[h.yakin.taraf][h.yakin.i], y = yerlesim.find(q => q.taraf === h.yakin.taraf && q.i === h.yakin.i); hh = { taraf: h.yakin.taraf, i: h.yakin.i, x: 0, y: y ? -tirnakBoyu(t, y.nw) * .5 : 0 }; }
+    const v = Object.assign(vekil(e, hh), { pointerId: e.pointerId });
+    const onceOdak = gorunum.odak;
+    tuvalBas(v); tuvalBirak(v);
+    if (!api3) return;
+    if (hh && d.adim !== 'hazirlik' && !aracAktif()) { if (!onceOdak || !api3.odakta() || d.secim.parmak !== hh.i) { gorunum.odak = true; api3.kamera({ taraf: hh.taraf, i: hh.i }); odakDugmesi(); } }
+    else if (!hh && gorunum.odak) odakla(null);
+  }
+  function p3Teker(e) { if (!api3) return; e.preventDefault(); api3.yakinlas(e.deltaY > 0 ? 1.08 : 1 / 1.08); gorunum.odak = false; }
+  function p3Tus(e) {
+    if (!api3) return;
+    const k = e.key, adim = 24;
+    if (k === 'ArrowLeft') api3.dondur(-adim, 0); else if (k === 'ArrowRight') api3.dondur(adim, 0);
+    else if (k === 'ArrowUp') api3.dondur(0, -adim); else if (k === 'ArrowDown') api3.dondur(0, adim);
+    else if (k === '+' || k === '=') api3.yakinlas(1 / 1.12); else if (k === '-') api3.yakinlas(1.12);
+    else if (k === 'Escape') odakla(null); else return;
+    e.preventDefault();
+  }
+
+  /* ------------------------------------------------------------ final: vitrin (3D: el döner, ışık gezer, parıltı) */
+  function vitrinde() { return mod3d && api3 ? api3.vitrinde() : animler.has('vitrin2d'); }
+  function vitrinKapat() { if (mod3d && api3 && api3.vitrinde()) api3.vitrin(false); animler.delete('vitrin2d'); }
+  function vitrinAcKapa() {
+    if (vitrinde()) { vitrinKapat(); ctx.ses.tik(); panelYenile(); return; }
+    ctx.ses.isilti(); ctx.efekt.konfeti(undefined, undefined, 18);
+    if (mod3d && api3) { gorunum.odak = false; api3.kamera('final'); api3.vitrin(true); }
+    else { const yer = yerlesim.filter(y => y.taraf === d.el); animler.set('vitrin2d', { bas: performance.now(), sure: 2400, adim: p => { if (!animler.has('topParilti') && p < .6) animler.set('topParilti', { bas: performance.now(), sure: 900, yer }); } }); iste(); }
+    balon('Vitrin: ' + CD.rastgele(['ışıl ışıl ✨', 'tam bir sanat eseri', 'Pıttıksu alkışlıyor 🐾', 'salonun yıldızı']), 2600);
+    panelYenile();
+  }
+  function panelFinal() {
+    const ac = vitrinde();
+    return [
+      not(mod3d ? 'Vitrinde el yavaşça döner, ışık üstünde gezinir. İstersen boş yeri sürükleyip kendin de çevir.' : 'Vitrine çıkınca tırnaklar parlar ve konfeti saçılır.'),
+      ctx.el('button.dugme.tam' + (ac ? '' : '.inci'), { type: 'button', 'aria-pressed': String(ac), onclick: vitrinAcKapa }, ac ? '⏸ Vitrini durdur' : '✨ Vitrine çıkar'),
+      ctx.el('div.izgara-2', [
+        ctx.el('button.dugme', { type: 'button', onclick: fotografSheet }, '📷 Fotoğraf çek'),
+        ctx.el('button.dugme-ikincil', { type: 'button', onclick: pittiksuyaGoster }, '🐾 Pıttıksu\'ya göster')
+      ]),
+      ctx.el('button.dugme-ikincil.tam', { type: 'button', onclick: kombinKaydet }, '💾 Bu kombini kaydet'),
+      kombinPaneli(), katmanPaneli()
+    ];
+  }
+
+  /* ------------------------------------------------------------ kombin kurucu: renk uyumu → hazır tarifler, sürpriz zar, kendi kombinlerin */
+  const UYUMLAR = [{ id: 'tamamlayici', ad: 'Tamamlayıcı' }, { id: 'analog', ad: 'Analog' }, { id: 'tonsurton', ad: 'Ton sur ton' }, { id: 'uclu', ad: 'Üçlü' }];
+  const kombin = { uyum: 'tamamlayici', kayma: 0 };
+  const KOMBIN_SAKLA = 'cihaz.tirnak.kombinler', KOMBIN_MAKS = 24;
+  function paletUret(hex, uyum) {
+    const [h, s, l] = hexHsl(hex), H = (x) => ((x % 360) + 360) % 360, S = (x) => sinir(x, 8, 95), Lc = (x) => sinir(x, 10, 95);
+    if (uyum === 'analog') return [hex, hslHex(H(h + 32), S(s), Lc(l)), hslHex(H(h - 32), S(s), Lc(l - 8)), hslHex(H(h + 14), S(s * .55), Lc(l + 18))];
+    if (uyum === 'tonsurton') return [hex, hslHex(h, S(s), Lc(l + 20)), hslHex(h, S(s * 1.05), Lc(l - 24)), hslHex(h, S(s * .45), Lc(l + 34))];
+    if (uyum === 'uclu') return [hex, hslHex(H(h + 120), S(s), Lc(l)), hslHex(H(h + 240), S(s), Lc(l)), hslHex(h, S(s * .25), 96)];
+    return [hex, hslHex(H(h + 180), S(s), Lc(l)), hslHex(h, S(s * .6), Lc(l + 20)), hslHex(H(h + 180), S(s * .85), Lc(l - 26))];
+  }
+  // tarif: (palet p, vurgu V) → i → tırnak alanları
+  const KOMBIN_TARIF = [
+    { id: 'vurguSim', ad: 'Vurguda sim', yap: (p, V) => i => i === V ? { renk: p[1], ojeTur: 'simIri', kat: 3 } : { renk: p[0], kat: 2 } },
+    { id: 'frenchDuo', ad: 'İkili French', yap: (p, V) => i => ({ renk: p[3], ojeTur: 'sheer', kat: 2, teknik: { id: 'french', renk2: i === V ? p[1] : p[0], kalinlik: .26, stil: i === V ? 'cift' : 'renkli' } }) },
+    { id: 'aura', ad: 'Aura geçişi', yap: (p) => () => ({ renk: p[3], kat: 2, teknik: { id: 'aura', renk2: p[1], kalinlik: .34, x: 0, y: .5 } }) },
+    { id: 'ombre', ad: 'Sünger ombre', yap: (p) => () => ({ renk: p[0], kat: 2, teknik: { id: 'ombre', renk2: p[2], kalinlik: .3 } }) },
+    { id: 'parmak', ad: 'Parmak parmak', yap: (p) => i => ({ renk: p[[0, 1, 2, 3, 0][i]], kat: 2 }) },
+    { id: 'mermerVurgu', ad: 'Mermer vurgu', yap: (p, V) => i => i === V ? { renk: p[3], ekler: [ek('mermerBeyaz', p[3], p[1])], susler: [{ id: 'tasS', x: 0, y: .3, olcek: .2, don: 0, renk: '#FFFFFF' }] } : { renk: p[0], kat: 2 } },
+    { id: 'kediVurgu', ad: 'Kedi gözü vurgu', yap: (p, V) => i => i === V ? { renk: p[1], ojeTur: 'kediGozu', kat: 2, kedi: { x: 0, y: .5, aci: -.4, gen: .5 } } : { renk: p[0], kat: 2 } },
+    { id: 'desenIkili', ad: 'Desen ikilisi', yap: (p, V) => i => (i === 1 || i === V) ? { renk: p[3], ekler: [ek('damali', p[3], p[1])] } : { renk: p[0], kat: 2 } },
+    { id: 'kadife', ad: 'Kadife ikilisi', yap: (p, V) => i => ({ renk: i === V ? p[1] : p[0], ekler: [ek('kadife', i === V ? p[1] : p[0], p[2])], ust: 'mat', susler: i === V ? [{ id: 'charmKalp', x: 0, y: .4, olcek: .34, don: 0, renk: '#E6C35C' }] : [] }) },
+    { id: 'yanFrench', ad: 'Renkli yan French', yap: (p) => i => ({ renk: p[3], kat: 2, teknik: { id: 'french', renk2: p[[0, 1, 2, 1, 0][i]], kalinlik: .3, stil: 'asimetrik' } }) },
+    { id: 'simGecis', ad: 'Sim geçişi', yap: (p, V) => i => ({ renk: p[0], kat: 2, ekler: [ek('simGecis', i === V ? p[1] : p[2], '#FFFFFF')] }) },
+    { id: 'blooming', ad: 'Blooming çiçek', yap: (p, V) => i => ({ renk: p[3], kat: 2, ekler: i === V || i === 1 ? [ek('blooming', p[1], p[2])] : [], susler: i === V ? [{ id: 'inciMini', x: .3, y: .7, olcek: .14, don: 0, renk: '#FFFFFF' }] : [] }) }
+  ];
+  function kombinSeti(tarif, p, ad, sekil, uzunluk) {
+    const V = d.vurgu == null ? 3 : d.vurgu, f = tarif.yap(p, V);
+    return { id: 'kmb-' + tarif.id + p.join('').replace(/#/g, ''), ad: ad || tarif.ad, aciklama: '', yap: i => st(Object.assign({ sekil: sekil || 'badem', uzunluk: uzunluk == null ? .5 : uzunluk }, kopya(f(i)))) };
+  }
+  function kombinTabanRengi() { const t = aktifTirnak(); return t.renk || '#F4CFD8'; }
+  function kombinPaneli() {
+    const t = aktifTirnak(), taban = kombinTabanRengi(), p = paletUret(taban, kombin.uyum);
+    const ilk = (Math.abs(hexRgb(taban).reduce((a, b) => a * 31 + b, 7)) + kombin.kayma * 3) % KOMBIN_TARIF.length;
+    const oneriler = [0, 1, 2].map(k => KOMBIN_TARIF[(ilk + k) % KOMBIN_TARIF.length]);
+    const icerik = ctx.el('div.dikey', [
+      not('Taban rengin: ' + (renkAdi(taban) || sevimliAd(taban)) + '. Uyumu seç, sana yakışan üç kombin önereyim.'),
+      segment(UYUMLAR, kombin.uyum, (v) => { kombin.uyum = v; ctx.ses.tik(); panelYenile(); }, 'Renk uyumu'),
+      ctx.el('div.tirnak-kombinPalet', { role: 'img', 'aria-label': 'Palet: ' + p.map(x => renkAdi(x) || sevimliAd(x)).join(', ') }, p.map(x => { const s = ctx.el('span.tirnak-kombinRenk', { title: renkAdi(x) || sevimliAd(x) }); s.style.setProperty('--renk', x); return s; })),
+      ctx.el('div.tirnak-trendler.tirnak-kombinler', oneriler.map(tr => { const set = kombinSeti(tr, p, null, t.sekil, t.uzunluk); return ctx.el('button.yama.siki.dokun.tirnak-set', { type: 'button', onclick: () => setUygula(set) }, [trendMini(set), ctx.el('div.tirnak-setBilgi', [ctx.el('div.kalin', tr.ad), ctx.el('div.sessiz', UYUMLAR.find(u => u.id === kombin.uyum).ad + ' palet')])]); })),
+      ctx.el('div.izgara-2', [
+        ctx.el('button.dugme-ikincil.kucuk', { type: 'button', onclick: () => { kombin.kayma++; ctx.ses.tik(); panelYenile(); } }, 'Başka öner'),
+        ctx.el('button.dugme.kucuk', { type: 'button', onclick: surprizKombin }, '🎲 Sürpriz kombin')
+      ]),
+      ctx.el('button.dugme-hayalet', { type: 'button', onclick: kombinKaydet }, '💾 Bu kombini kaydet')
+    ]);
+    const det = ctx.el('details.tirnak-ozel.tirnak-kombin', [ctx.el('summary', 'Kombin kurucu ✨'), icerik]);
+    if (kombinPaneli.acik) det.open = true;
+    det.addEventListener('toggle', () => { kombinPaneli.acik = det.open; });
+    return det;
+  }
+  function surprizKombin() {
+    const tum = []; PALET.forEach(k => { if (!k.krom) k.renkler.forEach(r => { if (!r[2] || r[2] === 'krem' || r[2] === 'jelly') tum.push(r[1]); }); });
+    const taban = CD.rastgele(tum), uyum = CD.rastgele(UYUMLAR).id, tarif = CD.rastgele(KOMBIN_TARIF), sekil = CD.rastgele(SEKILLER).id, uz = [.3, .45, .6, .75][Math.floor(Math.random() * 4)];
+    kombin.uyum = uyum;
+    ctx.ses.zafer();
+    setUygula(kombinSeti(tarif, paletUret(taban, uyum), 'Sürpriz: ' + tarif.ad, sekil, uz));
+  }
+  function kombinlerAl() { const l = CD.depo.al(KOMBIN_SAKLA, []); return Array.isArray(l) ? l.filter(k => k && Array.isArray(k.el) && k.el.length === 5) : []; }
+  function kombinKaydet() {
+    const l = kombinlerAl(), ad = CD.rastgele(ISIM_SIFAT) + ' ' + CD.rastgele(['Kombin', 'İkili', 'Uyum', 'Palet', 'Rüya']);
+    l.unshift({ id: CD.kimlik(), ad, tarih: CD.bugun(), el: kopya(d.eller[d.el]).map(t => { const v = Object.assign({}, t); delete v.finish; return v; }) });
+    CD.depo.yaz(KOMBIN_SAKLA, l.slice(0, KOMBIN_MAKS));
+    ctx.ses.parilti(); ctx.toast('Kombinlerime kaydedildi: ' + ad + ' (İlham > Kombinlerim)');
+  }
+  function kombinListesi() {
+    const l = kombinlerAl();
+    if (!l.length) return ctx.el('div.bos-durum', [ctx.el('div.buyuk', '🎨'), ctx.el('p', 'Henüz kombin yok. Beğendiğin bir eli "Bu kombini kaydet" ile sakla.')]);
+    const kap = ctx.el('div.tirnak-trendler');
+    l.forEach(k => {
+      const set = { id: 'kml-' + k.id, ad: k.ad, yap: i => kopya(k.el[i]) };
+      kap.appendChild(ctx.el('div.yama.siki.tirnak-set.tirnak-kombinKart', [
+        trendMini(set),
+        ctx.el('div.tirnak-setBilgi', [ctx.el('div.kalin', k.ad), ctx.el('div.sessiz', CD.tarihYaz(k.tarih))]),
+        ctx.el('div.satir', [
+          ctx.el('button.dugme.kucuk', { type: 'button', onclick: () => setUygula(set) }, 'Uygula'),
+          ctx.el('button.dugme-hayalet', { type: 'button', 'aria-label': k.ad + ' kombinini sil', onclick: () => { CD.depo.yaz(KOMBIN_SAKLA, kombinlerAl().filter(x => x.id !== k.id)); ctx.ses.pit(); galeriSheet('kombin'); } }, 'Sil')
+        ])
+      ]));
+    });
+    return kap;
   }
 
   /* ------------------------------------------------------------ salon kurulumu */
@@ -2735,14 +3672,14 @@
     tuvalA = ctx.el('canvas.tirnak-katman', { 'aria-hidden': 'true' });
     tuvalT = ctx.el('canvas.tirnak-katman', { 'aria-hidden': 'true' });
     tuvalU = ctx.el('canvas.tirnak-katman.tirnak-dokunma', { role: 'img', 'aria-label': 'Tırnak masası: bir tırnağa dokunup seç, araçla üstüne çiz. Çift dokunuş yakınlaştırır.' });
-    gA = tuvalA.getContext('2d'); gT = tuvalT.getContext('2d'); gU = tuvalU.getContext('2d');
+    gA = tuvalA.getContext('2d'); gT = tuvalT.getContext('2d'); gU = tuvalU.getContext('2d'); ui.gUst = gU;
     ui.katman = ctx.el('div.tirnak-katmanlar', [tuvalA, tuvalT, tuvalU]);
     ui.balon = ctx.el('div.balon.tirnak-balon', { role: 'status', 'aria-live': 'polite' });
     ui.elDugme = ctx.el('button.tirnak-ustDugme', { type: 'button', 'aria-label': 'Eli değiştir', onclick: () => elDegistir() }, 'Sağ el');
     ui.odakDugme = ctx.el('button.tirnak-ustDugme.tirnak-ikonDugme', { type: 'button', 'aria-label': 'Seçili tırnağa yakınlaş', 'aria-pressed': 'false', onclick: () => { if (gorunum.odak) odakla(null); else { const y = yerlesim.find(q => q.taraf === d.el && q.i === (d.secim.hepsi ? 2 : d.secim.parmak)); odakla(y); } } }, '🔍');
     ui.secim = ctx.el('div.tirnak-secim', { role: 'group', 'aria-label': 'Hangi tırnak' }, [
-      ctx.el('button.tirnak-parmak', { type: 'button', data: { parmak: 'hepsi' }, onclick: () => { d.secim.hepsi = true; seciliParca = null; ctx.ses.tik(); secimYaz(); ustCizIste(); kaydetGec(); panelYenile(); } }, 'Hepsi')
-    ].concat(PARMAK_AD.map((ad, i) => ctx.el('button.tirnak-parmak', { type: 'button', 'aria-label': ad + ' tırnağı', data: { parmak: String(i) }, onclick: () => { d.secim.hepsi = false; d.secim.parmak = i; seciliParca = null; ctx.ses.tik(); secimYaz(); ustCizIste(); kaydetGec(); panelYenile(); } }, ['Baş', 'İşaret', 'Orta', 'Yüzük', 'Serçe'][i]))));
+      ctx.el('button.tirnak-parmak', { type: 'button', data: { parmak: 'hepsi' }, onclick: () => { d.secim.hepsi = true; seciliParca = null; ctx.ses.tik(); secimYaz(); ustCizIste(); kaydetGec(); panelYenile(); if (mod3d && api3) { gorunum.odak = false; api3.kamera(d.adim); odakDugmesi(); } } }, 'Hepsi')
+    ].concat(PARMAK_AD.map((ad, i) => ctx.el('button.tirnak-parmak', { type: 'button', 'aria-label': ad + ' tırnağı', data: { parmak: String(i) }, onclick: () => { d.secim.hepsi = false; d.secim.parmak = i; seciliParca = null; ctx.ses.tik(); secimYaz(); ustCizIste(); kaydetGec(); panelYenile(); if (mod3d && api3 && d.adim !== 'hazirlik') { gorunum.odak = true; api3.kamera({ taraf: d.el, i }); odakDugmesi(); } } }, ['Baş', 'İşaret', 'Orta', 'Yüzük', 'Serçe'][i]))));
     ui.masa = ctx.el('div.sahne.tirnak-masa', [
       ui.katman,
       ctx.el('div.tirnak-masaUst', [ui.elDugme, ctx.el('span.bosluk'), ui.odakDugme,
@@ -2751,6 +3688,12 @@
       ui.balon,
       ui.secim
     ]);
+    ui.yukleyici = ctx.el('div.tirnak-yukleyici', { hidden: true, role: 'status', 'aria-live': 'polite' }, [
+      ctx.el('span.tirnak-yukleyiciSise', { 'aria-hidden': 'true' }, [ctx.el('span.tirnak-yukleyiciKapak'), ctx.el('span.tirnak-yukleyiciSivi')]),
+      ctx.el('span.tirnak-yukleyiciYazi', '3D salon hazırlanıyor…')
+    ]);
+    ui.kurSayac = ctx.el('div.tirnak-kurSayac', { hidden: true, role: 'status', 'aria-live': 'off' });
+    ui.masa.append(ui.yukleyici, ui.kurSayac);
     ui.adimlar = ctx.el('nav.tirnak-adimlar', { role: 'tablist', 'aria-label': 'Salon adımları' }, ADIMLAR.map((a, i) => ctx.el('button.tirnak-adim', { type: 'button', role: 'tab', 'aria-selected': String(a.id === d.adim), data: { adim: a.id }, onclick: () => adimaGit(a.id) }, [ctx.el('span.tirnak-adimNo', String(i + 1)), ctx.el('span.tirnak-adimAd', a.ad)])));
     ui.panel = ctx.el('div.yama.tirnak-panel');
     el.appendChild(ctx.el('div.tirnak-salon', [ui.masa, ui.adimlar, ctx.el('div.icerik.tirnak-icerik', [ui.panel])]));
@@ -2781,7 +3724,7 @@
   CD.kaydet({
     id: ID, baslik: 'Tırnak Salonu', ikon: IKON, tamEkran: false,
     mount(el, c) {
-      ctx = c; kok = el;
+      ctx = c; kok = el; mountNo++;
       try {
         d = yukle();
         galeriGoc().catch(err => console.warn('[tirnak] galeri göçü', err));   // ağır kayıtlar IndexedDB'ye (bir kez)
@@ -2795,6 +3738,7 @@
         sonra(() => balon(!hazirMi(d.el) && d.adim === 'hazirlik' ? 'Manikür masası hazır. ' + HAZIRLIK[hz().adim].ipucu : d.eller[d.el].some(t => t.renk) ? 'Tırnakların seni bekliyordu.' : (a ? a.ipucu : ''), 3200), 500);
         kaydetDurum();
         if (ctx.depo.al('durum', null) != null) ctx.depo.sil('durum');   // eski ortak durum buluttan kalkar (cihaza taşındı)
+        if (modIstegi()) ucBoyutBaslat('acilis');
       } catch (e) {
         console.error('[tirnak] açılamadı', e);
         el.innerHTML = '';
@@ -2802,6 +3746,8 @@
       }
     },
     unmount() {
+      mountNo++;
+      d3Kapat(true);
       clearTimeout(kaydetT); clearTimeout(balonT); hepsiniIptal();
       if (raf) cancelAnimationFrame(raf); raf = 0;
       if (boyutCb) window.removeEventListener('resize', boyutCb); boyutCb = null;
@@ -2823,6 +3769,11 @@
   CD.tirnakTest = {
     durumGoc, galeriKaydiGoc, tirnakGoc, ellerDuzelt, surum: SURUM,
     konum: (taraf, i, ny) => ctx ? konumIstemci(taraf, i, ny) : null,
-    durum: () => d ? kopya(d) : null
+    durum: () => d ? kopya(d) : null,
+    mod3d: () => mod3d, d3: () => (api3 ? api3.bilgi() : null), d3Yukleniyor: () => yukleniyor3,
+    olay3: (ad) => d3Olay(ad), ayar: () => ayarAl(),
+    vur: (x, y) => (api3 ? api3.vur(x, y) : null),
+    sayilar: () => ({ trend: TRENDLER.length, sus: SUSLER.length, cikartma: CIKARTMALAR.length, ek: EKLER.length, tas: TAS_RENKLERI.length, french: FRENCH_STILLER.length, renk: PALET.reduce((a, k) => a + k.renkler.length, 0) }),
+    katmanSira: (t) => katmanSira(tirnakDuzelt(t)), malzeme3d: (t) => malzeme3d(tirnakDuzelt(t))
   };
 })();
