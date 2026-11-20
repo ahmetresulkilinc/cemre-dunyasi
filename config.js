@@ -194,7 +194,9 @@ window.CD_CONFIG = {
      Örnek satır: { yol: "assets/tirnak/tirnak-1.jpg", alt: "Aurora stiletto" },
      --------------------------------------------------------------- */
   TIRNAK: {
-    FOTO_ILHAM: []
+    FOTO_ILHAM: [
+      { yol: "assets/tirnak/cemre-tasarim-1.jpg", alt: "Cemre'nin eseri: palyaço ve sekiz top 🎱" }
+    ]
   },
 
   /* ---------------------------------------------------------------
