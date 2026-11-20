@@ -22,7 +22,9 @@ window.CD = window.CD || {};
     angela: 'Konuş, tiz sesle tekrar etsin; giydir, besle, uyut.', panda: 'Mantı, boba, mochi… karnı şişene kadar.',
     bahce: 'Lilyum ve gül ek, sula, açmasını bekle.', ofke: 'Terliği kap, tabakları kır, sonra nefes al.',
     xox: 'İkimiz sırayla oynayalım; hamleni yap, sırası ona geçsin.', bizim: 'İkimize dair küçük şeyler.',
-    safir: 'Safir için küçük, sakin bir köşe.'
+    safir: 'Safir için küçük, sakin bir köşe.',
+    elele: 'İkiniz aynı anda basılı tutunca eller birleşir.', tahta: 'Aynı tuvale birlikte çizin, albüme kaydedin.',
+    guzellik: 'Güzellik Salonu.'
   };
   const ORTAK = { P: '@pencere', o: '@topuz', Z: '@kenar' };
   const BINA = {
@@ -63,6 +65,16 @@ window.CD = window.CD || {};
     safir: { ad: "Safir'in Yeri", sakin: true, renk: { G: 'sf-yaprak', g: 'sf-yaprak-koyu', B: 'sf-govde', c: 'sf-cimen', t: 'sf-toprak', w: 'sf-cicek' }, satir: [
       '......GGGG......', '....GGGGGGGG....', '...GGgGGGGgGG...', '..GGGGGGgGGGGG..', '..GgGGGGGGGGgG..', '...GGGGgGGGGG...', '....GGGGGGGG....',
       '.......BB.......', '.......BB.......', '.......BB.......', '......BBBB......', '.w.cc.......cc.w', '.ttttttttttttttt', 'ZZZZZZZZZZZZZZZZ'] },
+    // Faz 2 binaları
+    guzellik: { ad: 'Güzellik Salonu', sakin: true, renk: { S: 'gz-tabela', L: 'gz-ruj', H: 'gz-kalp', C: 'gz-cati', D: 'gz-duvar', M: 'gz-ayna', K: 'gz-koltuk', R: 'gz-kapi' }, satir: [
+      '..SSSSSSSSSSSS..', '..SSLSSSSSSHSS..', '.CCCCCCCCCCCCCC.', 'CCCCCCCCCCCCCCCC', '.DDDDDDDDDDDDDD.', '.DMMMMDDDDRRRRD.', '.DMPPMDDDDRRRRD.',
+      '.DMPPMDDDDRRRRD.', '.DMMMMDDDDRRoRD.', '.DDKKDDDDDRRRRD.', '.DKKKKDDDDRRRRD.', '.DDKDDDDDDRRRRD.', '.DDDDDDDDDRRRRD.', 'ZZZZZZZZZZZZZZZZ'] },
+    tahta: { ad: 'Çizim Atölyesi', renk: { E: 'th-cerceve', T: 'th-tuval', r: 'th-kirmizi', b: 'th-mavi', y: 'th-sari', C: 'th-cati', D: 'th-duvar', R: 'th-kapi', F: 'th-kova' }, satir: [
+      '....EEEEEEEE....', '...ETTTTTTTTE...', '...ETrrTbbTTE...', '...ETTyyTTTTE...', '...EEEEEEEEEE...', '.CCCCCCCCCCCCCC.', '.DDDDDDDDDDDDDD.',
+      '.DPPPPPPDDRRRRD.', '.DPPPPPPDDRRRRD.', '.DPPPPPPDDRRoRD.', '.DDDDDDDDDRRRRD.', '.DFFDDDDDDRRRRD.', '.DFFDDDDDDRRRRD.', 'ZZZZZZZZZZZZZZZZ'] },
+    elele: { ad: 'El Ele Bankı', renk: { l: '@lamba', '|': 'el-direk', H: 'el-kalp', B: 'el-bank', S: 'el-oturak', A: 'el-ayak', K: 'el-kopru', W: 'el-su' }, satir: [
+      '..l.................', '.lll................', '..|.................', '..|......HH.HH......', '..|......HHHHH......', '..|.......HHH.......', '..|........H........',
+      '..|...BBBBBBBBBB....', '..|...BBBBBBBBBB....', '..|...SSSSSSSSSS....', '..|...A........A....', '.KKKKKKKKKKKKKKKKKK.', '.KWWKWWKWWKWWKWWKWK.', 'ZZZZZZZZZZZZZZZZZZZZ'] },
     pano: { ad: 'Mahalle Panosu', renk: { W: 'pn-cerceve', k: 'pn-kagit', q: 'pn-cizgi', '|': 'pn-direk', b: '@bayrak', m: 'pn-kutu' }, satir: [
       '.WWWWWWWW.', '.WkkkkkkW.', '.WkqqqqkW.', '.WkkkkkkW.', '.WWWWWWWW.', '....||....', '....||....', '....||.bm.', '....||.mm.', '....||.mm.', '....||....', '....||....', '....||....', 'ZZZZZZZZZZ'],
       ek: '<g class="mh-raptiye"><rect x="12" y="3" width="1" height="1"/><rect x="14" y="3" width="1" height="1"/><rect x="12" y="4" width="3" height="1"/><rect x="13" y="5" width="1" height="1"/></g>' }
@@ -121,9 +133,11 @@ window.CD = window.CD || {};
 
   /* ================================================================ yerleşim */
   // bahçenin yanında, oyun binalarından ayrı sakin bir teras: Safir'in Yeri
-  const TERASLAR = [['bizim', 'pano'], ['pittiksu', 'barbie'], ['tirnak', 'petevi'], ['angela', 'panda'], ['bahce'], ['safir'], ['xox', 'ofke']];
+  // Faz 2: Güzellik Salonu + Çizim Atölyesi terası, El Ele Bankı kendi küçük terasında (bahçeden sonra); Öfke Odası yine en dipte
+  const TERASLAR = [['bizim', 'pano'], ['pittiksu', 'barbie'], ['tirnak', 'petevi'], ['angela', 'panda'], ['guzellik', 'tahta'], ['bahce'], ['elele'], ['safir'], ['xox', 'ofke']];
   const terasNo = (id) => TERASLAR.findIndex(t => t.indexOf(id) >= 0);
-  const BOLUMLER = ['pittiksu', 'barbie', 'tirnak', 'petevi', 'angela', 'panda', 'bahce', 'ofke', 'xox', 'bizim'];
+  const BOLUMLER = ['pittiksu', 'barbie', 'tirnak', 'petevi', 'angela', 'panda', 'bahce', 'ofke', 'xox', 'bizim', 'elele', 'tahta'];
+  const SONRADAN = ['safir', 'guzellik'];   // sakin arsalar: dosyası gelince bina kendiliğinden açılır
   const evi = (kim) => { const e = (MAH().EV || {})[kim]; return BINA[e] && e !== 'pano' ? e : 'bizim'; };
   const yapimda = (id) => !/[?&]hepsi/.test(location.search) && ((CD.config || {}).YAPIM_ASAMASINDA || []).includes(id);
   const acik = (id) => !!CD.bolumler[id] && !yapimda(id);
@@ -152,6 +166,7 @@ window.CD = window.CD || {};
     el.append(CD.el('span.mh-tabela', b.ad), ipucu, CD.el('span.mh-bina-cizim', { html: binaSvg(id) + (el.classList.contains('yapimda') ? '<span class="mh-iskele" aria-hidden="true"></span>' : '') }));
     h.appendChild(el);
     hucre[id] = { hucre: h, bina: el, ipucu, svg: el.querySelector('svg') };
+    if (id === 'pano') panoYaniKur(h);
     if (id === 'bahce') h.appendChild(CD.el('span.mh-ari', { 'aria-hidden': 'true' }));
     return h;
   }
@@ -180,9 +195,17 @@ window.CD = window.CD || {};
     ui.selam = CD.el('h1.mh-selam#hubSelam', 'Hoş geldin');
     ui.gokNot = CD.el('p.gorsel-gizli');
     ui.gunes = CD.el('button.mh-gunes-dugme', { type: 'button', onclick: () => { CD.havaDegistir(); } });
+    // Faz 2: ortak gökyüzü (iyi geceler yıldızları) + mühür düğmesi
+    ui.ortakGok = CD.el('div.mh-ortak-gok', { role: 'group', 'aria-label': 'Ortak gökyüzü: iyi geceler yıldızları' });
+    ui.muhur = CD.el('button.mh-muhur-dugme', { type: 'button', hidden: true, onclick: muhurDokun });
+    ui.yildizBalon = CD.el('div.mh-yildiz-balon', { role: 'status', 'aria-live': 'polite', hidden: true });
     ui.gok.append(ui.gokA, ui.gokB, ui.yildizlar, ui.gokHareket, CD.el('div.mh-gok-los', { 'aria-hidden': 'true' }), CD.el('div.mh-simsek', { 'aria-hidden': 'true' }),
-      CD.el('div.mh-sutun.mh-gok-ic', [ui.gunes, ui.selam, ui.gokNot]));
+      CD.el('div.mh-sutun.mh-gok-ic', [ui.ortakGok, ui.gunes, ui.muhur, ui.selam, ui.gokNot, ui.yildizBalon]));
     kok.appendChild(ui.gok);
+    // Faz 2: haber şeridi (iki şehrin saati/havası, "şu an dinliyor")
+    ui.haber = CD.el('div.mh-sutun.mh-haber-ic');
+    ui.haberKap = CD.el('section.mh-haber', { 'aria-label': 'Mahalle haberleri', hidden: true }, [ui.haber]);
+    kok.appendChild(ui.haberKap);
     // teraslar
     const nav = CD.el('nav.mh-teraslar#mhTeraslar', { 'aria-label': 'Mahalle' });
     TERASLAR.forEach((ids, n) => {
@@ -191,7 +214,7 @@ window.CD = window.CD || {};
       const kisiler = CD.el('div.mh-kisiler');
       const kaldirimIc = CD.el('div.mh-sutun.mh-kaldirim-ic', [petAlan, kisiler, merdiven(n % 2 === 0)]);
       const kaldirim = CD.el('div.mh-kaldirim', [kaldirimIc]);
-      const sec = CD.el('section.mh-teras', { data: { teras: String(n + 1) } }, [CD.el('div.mh-sutun', [binalar]), kaldirim]);
+      const sec = CD.el('section.mh-teras', { data: { teras: String(n + 1), ilk: ids[0] } }, [CD.el('div.mh-sutun', [binalar]), kaldirim]);
       if (n === 0) kaldirimIc.append(CD.el('span.mh-birikinti.b1', { 'aria-hidden': 'true' }), CD.el('span.mh-birikinti.b2', { 'aria-hidden': 'true' }));
       teras[n] = { sec, kaldirim: kaldirimIc, petAlan, kisiler, motor: null };
       nav.appendChild(sec);
@@ -329,7 +352,7 @@ window.CD = window.CD || {};
       h.ipucu.textContent = m; h.ipucu.hidden = !m;
     });
     // açık/kapalı (bölüm sonradan kaydolursa)
-    BOLUMLER.concat(['safir']).forEach(id => {
+    BOLUMLER.concat(SONRADAN).forEach(id => {
       const h = hucre[id]; if (!h) return;
       const simdi = acik(id), once = h.bina.tagName === 'A';
       if (simdi !== once) { const yeni = binaKur(id); h.hucre.replaceWith(yeni); }
@@ -337,7 +360,8 @@ window.CD = window.CD || {};
     // Oyun Salonu: sıra sende
     try {
       const d = CD.depo.al('xox.durum', null);
-      hucre.xox.hucre.classList.toggle('sira-sende', !!(d && V().aktif() && d.sira === CD.kim() && !d.kazanan && !(d.tahta || []).every(x => x)));
+      const xoxSira = !!(d && V().aktif() && d.sira === CD.kim() && !d.kazanan && !(d.tahta || []).every(x => x));
+      hucre.xox.hucre.classList.toggle('sira-sende', xoxSira || !!(CD.oyunSalonu && V().aktif() && CD.oyunSalonu.siraSende()));
     } catch (e) {}
     // Pano: bayrak (bugün cevaplamadıysan kalkık), raptiye (karşı cevapladıysa)
     const bugun = CD.bugun();
@@ -531,7 +555,7 @@ window.CD = window.CD || {};
     const hepsi = CD.petListesi().filter(p => p.id !== 'pittiksu' && p.id !== 'barbie');
     const gun = Math.floor(Date.now() / 86400000);
     const adet = innerWidth >= 768 ? 2 : 1;
-    [2, 4].forEach((n, j) => {
+    [2, terasNo('bahce')].forEach((n, j) => {
       const m = yap(n); teras[n].motor = m;
       const w = teras[n].petAlan.clientWidth || 300;
       for (let i = 0; i < adet; i++) { const s = hepsi[(gun + j * 2 + i) % hepsi.length]; m.ekle(s, { x: w * (0.2 + 0.5 * i), ad: cfg[s.id] && cfg[s.id].AD }); }
@@ -650,7 +674,15 @@ window.CD = window.CD || {};
         CD.el('div.sessiz', 'Ne bıraksın?'), hediyeSec
       ]),
       CD.el('hr.mh-ayrac'),
-      CD.el('button.dugme-ikincil.tam', { type: 'button', disabled: !bulut, onclick: () => notSaklaSayfasi() }, '📌 Bir binaya not sakla')
+      CD.el('button.dugme-ikincil.tam', { type: 'button', disabled: !bulut, onclick: () => notSaklaSayfasi() }, '📌 Bir binaya not sakla'),
+      CD.el('hr.mh-ayrac'),
+      CD.el('div.kalin', 'Ona bir şey bırak'),
+      CD.el('div.izgara-2.mh-paylas', [
+        CD.el('button.dugme-ikincil', { type: 'button', onclick: () => { CD.sheetKapat(); setTimeout(gokDefteri, 340); } }, '🌙 İyi geceler'),
+        CD.el('button.dugme-ikincil', { type: 'button', onclick: () => CD.kaset && CD.kaset.kaydet() }, '📼 Sesli not'),
+        CD.el('button.dugme-ikincil', { type: 'button', disabled: !bulut, onclick: () => CD.sonFoto && CD.sonFoto.gonder() }, '📷 Son foto'),
+        CD.el('button.dugme-ikincil', { type: 'button', disabled: !bulut, onclick: () => CD.dinliyor && CD.dinliyor.sayfa() }, '🎧 Dinliyorum')
+      ])
     ]);
     CD.sheet(k, { baslik: 'Bugün havan nasıl?' });
   }
@@ -774,6 +806,158 @@ window.CD = window.CD || {};
     CD.sheet(CD.el('div.dikey', [liste, CD.el('button.dugme-ikincil.tam', { type: 'button', onclick: soruAc }, '‹ Bugünün sorusu')]), { baslik: 'Geçmiş sorular', odak: false });
   }
 
+  /* ================================================================ Faz 2: ortak gökyüzü (iyi geceler yıldızları) */
+  let yeniYildiz = null, sonGokAnahtar = '', balonT = 0;
+  const AYLAR_KISA = ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'];
+  const geceAdi = (g) => { const [y, m, d] = g.split('-').map(Number); return d + ' ' + AYLAR_KISA[m - 1] + (y !== new Date().getFullYear() ? ' ' + y : '') + ' gecesi'; };
+  function ortakGokCiz() {
+    if (!ui.ortakGok || !CD.gece) return;
+    const G = CD.gece;
+    const ben = CD.kim(), aktif = V().aktif();
+    const basilir = G.basilabilir(), benim = G.basildiMi(), onun = aktif && G.onunMu();
+    const toplam = G.yildizlar().length;
+    let metin = '', etiket = '';
+    if (ben && basilir) {
+      if (!benim) { metin = '🌙 İyi geceler de'; etiket = 'İyi geceler mührünü bas'; }
+      else if (onun) { metin = '⭐ Yıldızımız yandı'; etiket = 'Bu gece ikiniz de iyi geceler dediniz. Gökyüzü defterini aç'; }
+      else { metin = '🌙 Mührün basıldı'; etiket = 'Mührün basıldı; ' + (aktif ? adi(V().karsi()) + ' de basınca yıldız eklenir' : 'yıldız için ikinizin mührü gerek') + '. Gökyüzü defterini aç'; }
+    } else if (toplam) { metin = '⭐ ' + toplam; etiket = toplam + ' yıldız. Gökyüzü defterini aç'; }
+    ui.muhur.hidden = !metin; ui.muhur.textContent = metin; ui.muhur.setAttribute('aria-label', etiket || metin);
+    ui.muhur.classList.toggle('basildi', !!(ben && basilir && benim));
+    // yıldızlar yalnız gece görünür; kaçan geceler soluk "boş yer"
+    const gece = CD.hava === 'gece';
+    const takvim = G.takvim(60);
+    const anahtar = gece + '|' + takvim.map(t => t.yildiz ? 1 : 0).join('') + '|' + (takvim[0] ? takvim[0].gece : '') + '|' + (yeniYildiz || '');
+    if (anahtar === sonGokAnahtar) return;
+    sonGokAnahtar = anahtar;
+    ui.ortakGok.innerHTML = '';
+    ui.ortakGok.hidden = !gece || !takvim.length;
+    if (ui.ortakGok.hidden) { yeniYildiz = null; return; }
+    takvim.forEach(t => {
+      const x = 4 + ((t.no * 37 + 11) % 72), y = 8 + ((t.no * 53 + 7) % 42);   // aynı gece hep aynı yerde (iki telefonda da)
+      if (t.yildiz) {
+        const b = CD.el('button.mh-ortak-yildiz', { type: 'button', 'aria-label': geceAdi(t.gece) + ' yıldızı', onclick: () => yildizBalon(b, t.gece) }, [CD.el('i', { 'aria-hidden': 'true' })]);
+        b.style.left = x + '%'; b.style.top = y + '%';
+        if (yeniYildiz === t.gece && !az()) b.classList.add('yeni');
+        ui.ortakGok.appendChild(b);
+      } else {
+        const s = CD.el('span.mh-bos-yer', { 'aria-hidden': 'true' }); s.style.left = x + '%'; s.style.top = y + '%';
+        ui.ortakGok.appendChild(s);
+      }
+    });
+    yeniYildiz = null;
+  }
+  function yildizBalon(b, g) {
+    CD.ses.tink();
+    const bal = ui.yildizBalon; bal.textContent = geceAdi(g) + ' ⭐'; bal.hidden = false;
+    const r = b.getBoundingClientRect(), k = ui.gok.getBoundingClientRect();
+    bal.style.left = Math.max(8, Math.min(k.width - 170, r.left - k.left - 40)) + 'px'; bal.style.top = (r.bottom - k.top + 2) + 'px';
+    clearTimeout(balonT); balonT = setTimeout(() => { bal.hidden = true; }, 2600);
+  }
+  function muhurBas() {
+    const r = CD.gece.bas();
+    if (!r.tamam) {
+      if (r.neden === 'saat') CD.toast('Mühür akşam 18:00 ile gece 04:00 arası basılır 🌙', 3000);
+      else if (r.neden === 'kim') CD.kimSec(false);
+      return false;
+    }
+    CD.ses.can();
+    const m = ui.muhur && !ui.muhur.hidden ? ui.muhur.getBoundingClientRect() : { left: innerWidth / 2, top: 120, width: 0, height: 0 };
+    CD.efekt.yildiz(m.left + m.width / 2, m.top + m.height / 2, 6);
+    CD.toast(r.yildiz ? 'Mührün basıldı; geceye bir yıldız ekleniyor ⭐' : (V().aktif() ? 'Mührün basıldı 🌙 ' + adi(V().karsi()) + ' de basınca yıldız yanar' : 'Mührün basıldı 🌙'), 3200);
+    yenile();
+    return true;
+  }
+  function muhurDokun() {
+    CD.ses.tik();
+    if (CD.kim() && CD.gece.basilabilir() && !CD.gece.basildiMi()) { muhurBas(); return; }
+    gokDefteri();
+  }
+  function gokDefteri() {
+    if (!CD.gece) return;
+    const G = CD.gece, aktif = V().aktif(), k = V().karsi();
+    const seri = G.seri(), toplam = G.yildizlar().length;
+    const basilir = G.basilabilir(), benim = G.basildiMi(), onun = aktif && G.onunMu();
+    const durum = CD.el('div.mh-defter-durum', [
+      CD.el('div.mh-defter-satir', [CD.el('span', 'Sen'), CD.el('strong', benim ? 'mühür basıldı 🌙' : 'henüz değil')]),
+      aktif ? CD.el('div.mh-defter-satir', [CD.el('span', adi(k)), CD.el('strong', onun ? 'mühür basıldı 🌙' : 'henüz değil')]) : CD.el('p.sessiz', 'Yıldız için ikinizin de mührü gerek; bulut açık olunca birleşir.')
+    ]);
+    const dugme = CD.el('button.dugme.tam', { type: 'button', disabled: !(basilir && !benim && CD.kim()), onclick: () => { if (muhurBas()) gokDefteri(); } },
+      benim ? 'Bu gece mührün basıldı ✓' : (basilir ? '🌙 İyi geceler de' : 'Mühür 18:00\'den sonra basılır'));
+    const takvim = G.takvim(56);
+    const izgara = CD.el('div.mh-defter-izgara', { role: 'list', 'aria-label': 'Son geceler' }, takvim.map(t =>
+      CD.el('span.mh-defter-gece' + (t.yildiz ? '.yildiz' : ''), { role: 'listitem', title: geceAdi(t.gece), 'aria-label': geceAdi(t.gece) + (t.yildiz ? ': yıldız' : ': boş yer') }, t.yildiz ? '⭐' : '·')));
+    CD.sheet(CD.el('div.dikey.mh-defter', [
+      CD.el('div.mh-defter-sayilar', [
+        CD.el('div', [CD.el('strong.mh-defter-sayi', String(seri)), CD.el('span.sessiz', 'gece seri')]),
+        CD.el('div', [CD.el('strong.mh-defter-sayi', String(toplam)), CD.el('span.sessiz', 'yıldız')])
+      ]),
+      durum, dugme,
+      takvim.length ? izgara : CD.el('div.bos-durum', [CD.el('div.buyuk', '🌌'), CD.el('p', 'Gökyüzü henüz boş. İkiniz aynı gece iyi geceler deyince ilk yıldız yanar.')]),
+      CD.el('p.sessiz', 'Gece 04:00\'te değişir. Kaçan gece gökyüzünde boş yer olarak kalır; ceza yok 🤍')
+    ]), { baslik: 'Gökyüzü defteri', odak: false });
+  }
+
+  /* ================================================================ Faz 2: haber şeridi (iki şehir + dinliyorum) */
+  const KAR = ['...W..W...', '.W..WW..W.', '..WWWWWW..', 'WWWW..WWWW', '..WWWWWW..', '.W..WW..W.'];
+  function havaSimge(tur) {
+    if (tur === 'ay') return AY_KUCUK;
+    if (tur === 'kar') return pixel(KAR, { W: 'var(--bulut)' }, 'mh-ruh-svg');
+    return RUH_SIMGE[tur] ? ruhSimge(tur) : '';
+  }
+  let haberAnahtar = '';
+  function haberCiz() {
+    if (!ui.haber) return;
+    const sehir = CD.sehir && CD.sehir.aktif() ? CD.sehir.durum() : [];
+    const dn = CD.dinliyor ? CD.dinliyor.onun() : null;
+    const anahtar = JSON.stringify(sehir) + '|' + (dn ? dn.id + dn.t : '');
+    if (anahtar === haberAnahtar) return;
+    haberAnahtar = anahtar;
+    ui.haber.innerHTML = '';
+    sehir.forEach(d => {
+      const ozet = d.ad + ', saat ' + d.saat + (d.derece != null ? ', ' + d.derece + ' derece' + (d.turAd ? ', ' + d.turAd : '') : '');
+      ui.haber.appendChild(CD.el('div.mh-sehir', { role: 'group', 'aria-label': (d.kim === CD.kim() ? 'Senin şehrin: ' : CD.ek.nin(adi(d.kim)) + ' şehri: ') + ozet }, [
+        d.tur ? CD.el('span.mh-sehir-ikon', { 'aria-hidden': 'true', html: havaSimge(d.tur) }) : null,
+        CD.el('span.mh-sehir-ad', { 'aria-hidden': 'true' }, d.ad),
+        CD.el('span.mh-sehir-saat', { 'aria-hidden': 'true' }, d.saat),
+        d.derece != null ? CD.el('span.mh-sehir-derece', { 'aria-hidden': 'true' }, d.derece + '°') : null
+      ]));
+    });
+    if (dn) {
+      const A = adi(V().karsi());
+      ui.haber.appendChild(CD.el('button.mh-dinliyor', { type: 'button', 'aria-label': A + ' şunu dinliyor: ' + (dn.not || CD.dinliyor.kaynak(dn.link)) + '. Linki aç', onclick: () => { CD.ses.tik(); CD.dinliyor.ac(dn); } }, [
+        CD.el('span', { 'aria-hidden': 'true' }, '🎧'),
+        CD.el('span.mh-dinliyor-metin', A + ' dinliyor' + (dn.not ? ': ' + dn.not : ' · ' + CD.dinliyor.kaynak(dn.link))),
+        CD.el('span.mh-dinliyor-ac', { 'aria-hidden': 'true' }, 'Aç')
+      ]));
+    }
+    ui.haberKap.hidden = !ui.haber.children.length;
+  }
+
+  /* ================================================================ Faz 2: panonun yanı (son foto Polaroid + kaset rafı) */
+  function panoYaniKur(h) {
+    ui.polaroid = CD.el('button.mh-polaroid', { type: 'button', hidden: true, onclick: () => { CD.ses.pop(); if (CD.sonFoto) CD.sonFoto.bak(); } }, [CD.el('span.mh-polaroid-foto'), CD.el('span.mh-polaroid-alt', { 'aria-hidden': 'true' })]);
+    ui.kasetD = CD.el('button.mh-kaset', { type: 'button', 'aria-label': 'Kaset rafı: sesli notlar', onclick: () => { CD.ses.pop(); if (CD.kaset) CD.kaset.arsiv(); }, html: CD.kasetSvg ? CD.kasetSvg('#A995D6', '#FFF9F3', 'mh-kaset-svg') : '📼' });
+    h.classList.add('mh-pano-hucre');
+    h.appendChild(CD.el('div.mh-pano-yan', [ui.polaroid, ui.kasetD]));
+  }
+  let polaroidId = '';
+  async function panoYaniGuncelle() {
+    if (!ui.polaroid || !CD.sonFoto) return;
+    const k = V().karsi();
+    if (!k || !V().aktif()) { ui.polaroid.hidden = false; ui.polaroid.classList.add('bos'); ui.polaroid.setAttribute('aria-label', 'Son foto penceresi. Bulut açık olunca dolar'); polaroidId = ''; ui.polaroid.querySelector('.mh-polaroid-foto').style.backgroundImage = ''; return; }
+    const f = await CD.sonFoto.al(k);
+    const id = f ? f.id : '';
+    if (id === polaroidId && !ui.polaroid.hidden) return;
+    polaroidId = id;
+    const u = f ? CD.sonFoto.url(f) : '';
+    ui.polaroid.hidden = false;
+    ui.polaroid.classList.toggle('bos', !u);
+    ui.polaroid.querySelector('.mh-polaroid-foto').style.backgroundImage = u ? 'url("' + u + '")' : '';
+    ui.polaroid.querySelector('.mh-polaroid-alt').textContent = u ? (f.not || '') : '+';
+    ui.polaroid.setAttribute('aria-label', u ? CD.ek.den(adi(k)) + ' son fotoğraf' + (f.not ? ': ' + f.not : '') + '. Büyütmek için dokun' : 'Son foto penceresi boş. Bir fotoğraf göndermek için dokun');
+  }
+
   /* ================================================================ ana ekrana ekle + gizlilik */
   function kurulum() {
     const k = ui.kurulum; if (!k) return;
@@ -805,7 +989,7 @@ window.CD = window.CD || {};
     if (!kuruldu) return;
     cancelAnimationFrame(yenileT);
     yenileT = requestAnimationFrame(() => {
-      try { selam(); gokGuncelle(); seritGuncelle(); binalarGuncelle(); kisilerYerlestir(false); elcileriYerlestir(); }
+      try { selam(); gokGuncelle(); seritGuncelle(); binalarGuncelle(); kisilerYerlestir(false); elcileriYerlestir(); ortakGokCiz(); haberCiz(); panoYaniGuncelle(); }
       catch (e) { console.warn('[mahalle]', e); }
     });
   }
@@ -816,7 +1000,7 @@ window.CD = window.CD || {};
   }
 
   let sonBolum = null;
-  CD.mahalle = { yenile, soruAc, evineKay, binayaKay, benSayfasi };
+  CD.mahalle = { yenile, soruAc, evineKay, binayaKay, benSayfasi, gokDefteri };
   CD.hazir(() => {
     kur(); selam(); gizlilikYaz();
     yenile();
@@ -841,7 +1025,9 @@ window.CD = window.CD || {};
       if (d.o.tur === 'elci' && !kok.hidden) yuruyecek = d.o.id;
       yenile();
     });
-    setInterval(selam, 60000);
+    ['gece:degisti', 'medya:geldi', 'sonfoto:degisti', 'dinliyor:degisti', 'sehir:degisti'].forEach(ad => CD.olay.dinle(ad, () => yenile()));
+    CD.olay.dinle('gece:yildiz', (g) => { yeniYildiz = g; yenile(); });
+    setInterval(() => { selam(); if (!kok.hidden && !document.hidden) { haberCiz(); ortakGokCiz(); } }, 60000);
     gorunurluk();
   });
 })();

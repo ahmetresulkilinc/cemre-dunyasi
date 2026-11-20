@@ -114,3 +114,53 @@ body.giris-acik #kalpDugme { display: none; }
   .posta-kart, .posta-kart.cik { transform: none; transition: opacity 150ms; }
   .secici { transform: none; transition: opacity 150ms; }
 }
+
+/* ================================================================ Faz 2 — çekirdek katmanı parçaları */
+/* ortak bakım göstergesi (Pıttıksu / Barbie sahnesinin sol üstü) */
+.bakim-gosterge { position: absolute; left: var(--b-2); top: var(--b-2); z-index: 3; display: inline-flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; max-width: calc(100% - var(--b-4));
+  padding: 4px 10px; border-radius: var(--r-tam); background: color-mix(in srgb, var(--kagit) 90%, transparent); color: var(--murekkep); box-shadow: var(--golge-yastik-ic);
+  font-size: var(--punto-xs); font-weight: var(--kalin-vurgu); pointer-events: none; }
+.bakim-bugun { color: var(--sessiz); }
+.bakim-kisi { white-space: nowrap; opacity: .7; }
+.bakim-kisi.var { opacity: 1; font-weight: var(--kalin-baslik); }
+.bakim-gosterge.ikisi { background: var(--burun-zemin); box-shadow: 0 0 0 2px var(--burun); }
+.bakim-cokmutlu { animation: bakim-zipla 2200ms var(--egri-zip); }
+@keyframes bakim-zipla { 0%, 100% { transform: none; } 10% { transform: translateY(-22px) scale(1.05); } 20% { transform: none; } 30% { transform: translateY(-16px) rotate(-3deg); } 40% { transform: none; } 50% { transform: translateY(-10px) rotate(3deg); } 60% { transform: none; } }
+.bakim-kalp { position: fixed; z-index: var(--kat-parcacik); pointer-events: none; transform: translate(-50%, -50%) scale(0); animation: sahne-kalp 600ms var(--egri-zip) forwards; }
+.bakim-kalp svg { width: calc(var(--m-px) * 18); height: auto; display: block; }
+
+/* kaset (sesli not) */
+.kaset-kayit { align-items: stretch; }
+.kaset-buyuk { align-self: center; width: min(70%, 240px); }
+.kaset-buyuk .kaset-svg { width: 100%; height: auto; display: block; filter: drop-shadow(0 4px 0 rgba(59, 42, 58, .18)); }
+.kaset-buyuk.donuyor .kaset-svg rect[fill="#FFFDF9"] { animation: kaset-don 600ms steps(2) infinite; }
+@keyframes kaset-don { 50% { opacity: .35; } }
+.kaset-sayac { text-align: center; font-family: var(--yazi-baslik); font-size: var(--punto-xl); font-variant-numeric: tabular-nums; }
+.kaset-bar { height: 10px; border-radius: var(--r-tam); background: var(--kagit-3); overflow: hidden; }
+.kaset-bar span { display: block; height: 100%; width: 0; background: var(--muhur); transition: width 200ms linear; }
+.kaset-durum { text-align: center; }
+.kaset-sonra { justify-content: center; flex-wrap: wrap; gap: var(--b-2); }
+.kaset-sonra [hidden] { display: none; }
+.kaset-raf { display: flex; flex-direction: column; gap: var(--b-2); }
+.kaset-oge { display: flex; align-items: center; gap: var(--b-2); padding: var(--b-2); border-radius: var(--r-md); background: var(--kagit-2); box-shadow: var(--golge-yastik-ic); }
+.kaset-oge[data-kim="cemre"] { background: color-mix(in srgb, var(--seker-kiraz) 18%, var(--kagit-2)); }
+.kaset-oge[data-kim="ahmet"] { background: color-mix(in srgb, var(--seker-gok) 22%, var(--kagit-2)); }
+.kaset-cal { flex: 1; min-width: 0; min-height: var(--dokunma-birincil); display: flex; align-items: center; gap: var(--b-3); text-align: left; }
+.kaset-mini { flex: none; width: 64px; }
+.kaset-mini .kaset-svg { width: 100%; height: auto; display: block; }
+.kaset-oge.caliyor .kaset-mini .kaset-svg rect[fill="#FFFDF9"] { animation: kaset-don 600ms steps(2) infinite; }
+.kaset-etiket { display: flex; flex-direction: column; min-width: 0; }
+.kaset-etiket .sessiz { font-size: var(--punto-xs); }
+.kaset-sil { flex: none; }
+
+/* son foto (sheet) */
+.ps-polaroid { margin: 0 auto; width: min(100%, 320px); padding: 10px 10px 4px; background: #FFFDF9; border-radius: 3px; box-shadow: 0 4px 0 var(--golge-sert-ic), 0 0 0 1px var(--cizgi); transform: rotate(-1.5deg); }
+.ps-polaroid[hidden] { display: none; }
+.ps-polaroid img { display: block; width: 100%; max-height: 52vh; object-fit: cover; border-radius: 1px; }
+.ps-polaroid figcaption { min-height: 1.6em; padding-top: 6px; text-align: center; font-family: var(--yazi-elyazisi); font-size: var(--punto-xl); color: var(--giris-murekkep); overflow-wrap: anywhere; }
+
+@media (prefers-reduced-motion: reduce) {
+  .bakim-cokmutlu { animation: none; }
+  .bakim-kalp { display: none; }
+  .kaset-buyuk.donuyor .kaset-svg rect, .kaset-oge.caliyor .kaset-svg rect { animation: none !important; }
+}

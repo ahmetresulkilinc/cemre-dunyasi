@@ -5,7 +5,13 @@
    Şifreli dosyalar site/tools/gizle.js ile üretilir. Anahtar (kelime değil) bu cihazda hatırlanır. */
 (() => {
   'use strict';
-  const SCRIPTLER = ['js/cekirdek.js', 'js/senk.js', 'js/canli.js', 'js/varlik.js', 'js/petler-miras.js', 'js/giris.js', 'js/bolum/pittiksu.js', 'js/bolum/barbie.js', 'js/bolum/tirnak.js', 'js/bolum/petevi.js', 'js/bolum/angela.js', 'js/bolum/panda.js', 'js/bolum/bahce.js', 'js/bolum/ofke.js', 'js/bolum/xox.js', 'js/bolum/bizim.js', 'js/bolum/safir.js', 'js/sorular.js', 'js/posta.js', 'js/mahalle.js'];
+  const SCRIPTLER = ['js/cekirdek.js', 'js/senk.js', 'js/canli.js', 'js/varlik.js', 'js/petler-miras.js', 'js/giris.js', 'js/tuval.js', 'js/bakim.js',
+    'js/bolum/pittiksu.js', 'js/bolum/barbie.js', 'js/bolum/tirnak.js', 'js/bolum/petevi.js', 'js/bolum/angela.js', 'js/bolum/panda.js', 'js/bolum/bahce.js', 'js/bolum/ofke.js',
+    'js/oyun/salon.js', 'js/bolum/xox.js', 'js/oyun/dortlu.js', 'js/oyun/amiral.js', 'js/oyun/ciz.js',
+    'js/bolum/bizim.js', 'js/bolum/safir.js', 'js/bolum/elele.js', 'js/bolum/tahta.js', 'js/bolum/guzellik.js',
+    'js/sorular.js', 'js/posta.js', 'js/gece.js', 'js/kaset.js', 'js/paylas.js', 'js/sehir.js', 'js/mahalle.js'];
+  // başka ekibin yazdığı, henüz gelmemiş olabilecek dosyalar: yoksa sessizce atlanır (hata yazılmaz, akış durmaz; bina "yakında" der)
+  const SECIMLI = new Set(['js/bolum/guzellik.js']);
   const SAKLA = 'cd.kilit.anahtar';
   const ODA_SAKLA = 'cd.senk.oda';   // sihirli kelimeden türetilen bulut odası (kelime saklanmaz)
   const G = window.GIZLI = { hazir: false, _url: {}, url(p) { return this._url[p] || p; } };
@@ -14,11 +20,12 @@
 
   function yukle() {
     window.CD_YUKLENIYOR = true;   // çekirdek ilk yönlendirmeyi bekletir; bölümler kaydolunca CD.basla()
-    return SCRIPTLER.reduce((p, src) => p.then(() => new Promise((res, rej) => {
+    // hepsi birden eklenir: tarayıcı paralel indirir, async=false olduğu için yine LİSTE SIRASIYLA çalıştırır (eksik dosya sırayı bozmaz)
+    return Promise.all(SCRIPTLER.map(src => new Promise((res) => {
       const s = document.createElement('script'); s.src = src; s.async = false;
-      s.onload = res; s.onerror = () => { console.error('[kilit] yüklenemedi:', src); res(); };
+      s.onload = res; s.onerror = () => { if (!SECIMLI.has(src)) console.error('[kilit] yüklenemedi:', src); s.remove(); res(); };
       document.body.appendChild(s);
-    })), Promise.resolve()).then(() => {
+    }))).then(() => {
       window.CD_YUKLENIYOR = false;
       try { if (window.CD && CD.basla) CD.basla(); } catch (e) { console.error('[kilit] başlatılamadı', e); }
     });

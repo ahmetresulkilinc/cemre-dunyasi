@@ -370,7 +370,7 @@
       ctx.el('button.dugme-ikincil.kucuk.barbie-hud-bitir', { type: 'button', onclick: () => oyunBitir(true) }, 'Bitir')
     ]);
     const havYazi = ctx.el('div.barbie-hav-yazi', { 'aria-hidden': 'true' });
-    sahne.append(balonYer, oyunKat, kopekYer, zzz, alt, hud, havYazi);
+    sahne.append(balonYer, oyunKat, kopekYer, zzz, alt, hud, havYazi); ui.bakimCoz = CD.bakim ? CD.bakim.bagla(ID, { kap: sahne, hedef: kopekYer }) : null;   // Faz 2: ortak bakım göstergesi
     ctx.pati(sahne);
     Object.assign(ui, {
       sahne, balon: balonYer.firstChild, alt,
@@ -499,7 +499,7 @@
     oksuyor = false;
     ses.solumaDur();
     sonra(() => { if (!oksuyor) { ui.svg.classList.remove('mutlu'); ui.kuyruk.classList.remove('hizli'); } }, 600);
-    if (uzun) { d.sevgi++; d.bugun.oksama++; kaydet(); sevgiYenile(); }
+    if (uzun) { d.sevgi++; d.bugun.oksama++; kaydet(); sevgiYenile(); ortakSevgi(); }
   }
   function tepki(bolge, x, y) {
     if (mesgul) return;
@@ -518,7 +518,7 @@
         s.add('mutlu'); ui.kuyruk.classList.add('hizli');
         sonra(() => { if (!oksuyor) { s.remove('mutlu'); ui.kuyruk.classList.remove('hizli'); } }, 1000);
         ses.inle(); ctx.efekt.kalp(x, y, 4);
-        d.sevgi++; d.bugun.oksama++; kaydet(); sevgiYenile();
+        d.sevgi++; d.bugun.oksama++; kaydet(); sevgiYenile(); ortakSevgi();
     }
     const liste = d.kucakta && Math.random() < 0.4 ? TEPKI.kucak : (TEPKI[bolge] || TEPKI.kafa);
     soyle(rastgele(liste), 2000);
@@ -580,11 +580,11 @@
     if (oy) return;
     if (mesgul) {
       if (ui.svg.classList.contains('yiyor')) { ctx.toast('Bir saniye, ağzı dolu.'); return; }
-      g.mamalar.push(Date.now()); gunlukKaydet(); ctx.ses.yut(); ctx.toast('Öğün kaydedildi 🍖');
+      g.mamalar.push(Date.now()); gunlukKaydet(); ortakSevgi(); ctx.ses.yut(); ctx.toast('Öğün kaydedildi 🍖');
       if (sekme === 'gunluk') sekmeYenile();
       return;
     }
-    g.mamalar.push(Date.now()); gunlukKaydet();
+    g.mamalar.push(Date.now()); gunlukKaydet(); ortakSevgi();
     const uyuyordu = d.uyuyor;
     d.uyuyor = false; kaydet(); durumGuncelle();
     mesgul = true;
@@ -699,6 +699,8 @@
     kap.append(giris, izgara, sevgiKarti());
     return kap;
   }
+  // Faz 2: besleme ve sevme, "bugün kim sevgi verdi" kaydına da düşer (js/bakim.js); bölümün kendi kayıtları değişmez
+  function ortakSevgi() { try { if (CD.bakim) CD.bakim.sevgi(ID); } catch (e) {} }
   function sevgiKarti() {
     const kart = ctx.el('div.yama.barbie-sevgi', [
       ctx.el('div.satir.arasi', [ctx.el('h2.baslik.baslik-lg', 'Sevgi sayacı'), ctx.el('span.rozet.barbie-sevgi-rozet')]),
@@ -1663,6 +1665,7 @@
       urlHavuzu.forEach(u => { try { URL.revokeObjectURL(u); } catch (e) {} }); urlHavuzu = [];
       if (fotolar) fotolar.forEach(f => { f._url = ''; });
       fotolar = null; oksuyor = false; basili = null; mesgul = false; uykuDokunus = []; tuslar = null;
+      if (ui.bakimCoz) ui.bakimCoz();
       Object.keys(ui).forEach(k => { delete ui[k]; });
       ctx = null; kok = null; d = null; g = null;
     }
