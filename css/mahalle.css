@@ -329,6 +329,7 @@
   /* Anı Müzesi */     --bd-mz-cati: #A995D6; --bd-mz-kalp: #F5B54A; --bd-mz-friz: #EADFFF; --bd-mz-sutun: #FFF9F3; --bd-mz-ic: #8B7BB8; --bd-mz-kapi: #5E4E8C; --bd-mz-basamak: #D9CFEA;
   /* Hatıra Defteri */ --bd-df-kapak: #E08A6A; --bd-df-sayfa: #FFF9F3; --bd-df-cizgi: #C9B8C4; --bd-df-sirt: #B86A50; --bd-df-kurdele: #E8557A; --bd-df-duvar: #FFE8D6; --bd-df-kapi: #9C6B4E;
   /* Eğlence Köşesi */ --bd-eg-bayrak: #FF7A7A; --bd-eg-direk: #515766; --bd-eg-tente: #FF9DB4; --bd-eg-serit: #FFE28A; --bd-eg-duvar: #FFF1C9; --bd-eg-kavanoz: #A9D6F2; --bd-eg-kagit: #FF9DB4; --bd-eg-kapi: #6F97AC;
+  /* Sanat Galerisi */ --bd-gl-altin: #D9A93E; --bd-gl-cati: #7A2639; --bd-gl-tablo: #FF9DB4; --bd-gl-tablo-2: #A9D6F2; --bd-gl-friz: #F3E6CC; --bd-gl-sutun: #FFF6E6; --bd-gl-duvar: #E2CCA8; --bd-gl-kadife: #B0283F; --bd-gl-kapi: #4A1622; --bd-gl-basamak: #D8C7AE;
   /* Plak Dükkanı */   --bd-pk-plak: #3B2A3A; --bd-pk-oluk: #6F5468; --bd-pk-etiket: #FF9DB4; --bd-pk-cati: #3F6B82; --bd-pk-duvar: #DCEBF2; --bd-pk-nota: #3B2A3A; --bd-pk-kapi: #3F6B82;
 }
 /* haber şeridinde en yakın geri sayım */

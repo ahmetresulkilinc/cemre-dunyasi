@@ -200,6 +200,20 @@ window.CD_CONFIG = {
   },
 
   /* ---------------------------------------------------------------
+     SANAT GALERİSİ — mahalledeki sütunlu müze. Fotoğraflar şifreli (gizli/ klasöründe); yol: "assets/galeri/....jpg".
+     CEMRE: "Cemre" salonu (portreler, fotoğraflar). ESERLER: "Tırnak Eserleri" salonu (yukarıdaki TIRNAK.FOTO_ILHAM
+     fotoğrafları da bu salonda kendiliğinden görünür, iki kez yazmana gerek yok). BIZIM: "Bizim Anılarımız" salonu (isteğe bağlı).
+     Her satır: { yol: "assets/galeri/cemre-1.jpg", baslik: "Pembe sabah", tarih: "Kasım 2026", aciklama: "Kısa not", cerceve: "barok" },
+     cerceve: barok | minimal | paspartu | oval | ahsap | polaroid | kalp | neon | pixel  (boş bırakırsan salon kendisi seçer).
+     Uygulamanın içinden "Eser ekle" ile de fotoğraf asılabilir; onlar buraya yazılmaz.
+     --------------------------------------------------------------- */
+  GALERI: {
+    CEMRE: [],
+    ESERLER: [],
+    BIZIM: []
+  },
+
+  /* ---------------------------------------------------------------
      HATIRA DEFTERİ — pul eşiklerinde açılan gizli sürpriz mektuplar (5 tane: 10, 50, 200, 500, 1000 pul).
      Sırayla tırnak içine yaz; paragrafları arasına iki ters bölü-n koy. Boş kalan mektup "Ahmet'in sürprizi yakında 💌" der.
      Örnek: MEKTUPLAR: ["İlk on pulumuz! ...", "", "", "", ""]

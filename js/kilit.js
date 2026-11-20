@@ -9,7 +9,7 @@
     'js/bolum/pittiksu.js', 'js/bolum/barbie.js', 'js/bolum/tirnak.js', 'js/bolum/petevi.js', 'js/bolum/angela.js', 'js/bolum/panda.js', 'js/bolum/bahce.js', 'js/bolum/ofke.js',
     'js/oyun/salon.js', 'js/bolum/xox.js', 'js/oyun/dortlu.js', 'js/oyun/amiral.js', 'js/oyun/ciz.js',
     'js/bolum/bizim.js', 'js/bolum/safir.js', 'js/bolum/elele.js', 'js/bolum/tahta.js', 'js/bolum/guzellik.js',
-    'js/bolum/postane.js', 'js/bolum/muze.js', 'js/bolum/sayac.js', 'js/bolum/eglence.js', 'js/bolum/plak.js', 'js/bolum/defter.js',
+    'js/bolum/postane.js', 'js/bolum/muze.js', 'js/bolum/sayac.js', 'js/bolum/eglence.js', 'js/bolum/plak.js', 'js/bolum/defter.js', 'js/bolum/galeri.js',
     'js/sorular.js', 'js/posta.js', 'js/gece.js', 'js/kaset.js', 'js/paylas.js', 'js/sehir.js', 'js/mahalle.js'];
   // yalnız Ahmet'in telefonunda yüklenen bölüm (Cemre'nin telefonunda betik etiketi bile oluşmaz); kim sonradan seçilirse mahalle.js yükler
   try { if (localStorage.getItem('cd.cihaz.kim') === '"ahmet"') SCRIPTLER.splice(SCRIPTLER.indexOf('js/sorular.js'), 0, 'js/bolum/ozel.js'); } catch (e) {}
