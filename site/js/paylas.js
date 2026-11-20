@@ -57,6 +57,7 @@ window.CD = window.CD || {};
       try { await M().koy(kayit); } catch (e) { CD.toast('Fotoğraf kaydedilemedi; telefonda yer var mı bakar mısın?'); gonder.disabled = false; return; }
       for (const x of await M().liste('sonfoto:' + k)) if (x.id !== kayit.id) await M().sil(x.id);
       V().gonder('sonFoto', { id: kayit.id });
+      CD.pul && CD.pul('sonfoto', { kisa: kayit.not });
       CD.sheetKapat(); CD.ses.parilti(); CD.toast('Fotoğraf yola çıktı 📷');
       CD.olay.yay('medya:geldi', kayit.id);
     });
@@ -119,6 +120,7 @@ window.CD = window.CD || {};
   function ikizIsaretle(id) { const a = CD.depo.al(IKIZ, []); const l = Array.isArray(a) ? a : []; if (l.indexOf(id) < 0) l.push(id); CD.depo.yaz(IKIZ, l.slice(-40)); }
   function ikizKutla(kim, id) {
     if (ikizMi(id)) return; ikizIsaretle(id);
+    CD.pul && CD.pul('sarki-ikizi');
     CD.efekt.konfeti(undefined, undefined, 18);
     try { CD.ses.zafer(); } catch (e) {}
     if (CD.posta) CD.posta.kart({ kim, tur: 'sarkiIkizi', baslik: 'Şarkı ikizi! 🎶', alt: 'Aynı şarkıyı aynı anda dinliyorsunuz' });

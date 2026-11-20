@@ -1,0 +1,26 @@
+/* sayac.css — Saat Kulesi (önek sy-). Kadran: büyük pixel rakamlar, gerisi sakin bir liste. */
+body[data-bolum="sayac"] { --oda: var(--seker-seftali); --oda-zemin: #FFEDE2; --oda-vurgu: var(--seker-seftali); }
+.sy-govde { display: flex; flex-direction: column; gap: var(--b-3); }
+.sy-kadran { display: flex; flex-direction: column; align-items: center; gap: var(--b-3); text-align: center; }
+.sy-kadran-ad { font-family: var(--yazi-baslik); font-weight: var(--kalin-dev); font-size: var(--punto-xl); color: var(--murekkep); overflow-wrap: anywhere; }
+.sy-kadran-kutular { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--b-2); width: 100%; max-width: 420px; }
+.sy-kutu { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: var(--b-3) 4px; border-radius: var(--r-sm); background: var(--murekkep); color: var(--seker-limon); }
+.sy-kutu-sayi { display: block; line-height: 0; }
+.sy-rakam { height: 30px; width: auto; fill: currentColor; display: block; }
+.sy-kutu-ad { font-size: var(--punto-xs); color: var(--kagit); }
+.sy-kadran-tarih { font-weight: var(--kalin-vurgu); color: var(--murekkep-2); }
+.sy-bos { padding-block: var(--b-4); }
+.sy-liste { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.sy-satir { display: flex; align-items: center; gap: var(--b-2); min-height: 52px; padding: 4px 4px 4px var(--b-3); border-radius: var(--r-sm); background: var(--kagit); box-shadow: var(--golge-yastik-ic); }
+.sy-satir.gecti { opacity: .6; }
+.sy-satir-em { flex: none; font-size: var(--punto-lg); }
+.sy-satir-metin { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.sy-satir-metin strong { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.sy-satir-metin .sessiz { font-size: var(--punto-xs); }
+.sy-satir-gun { flex: none; font-family: var(--yazi-baslik); font-weight: var(--kalin-dev); font-variant-numeric: tabular-nums; }
+.sy-sil { flex: none; }
+.sy-etiket { display: flex; flex-direction: column; gap: 4px; font-weight: var(--kalin-vurgu); font-size: var(--punto-sm); }
+.sy-yillik { display: flex; align-items: center; gap: var(--b-2); min-height: var(--dokunma-min); }
+.sy-yillik input { width: 22px; height: 22px; accent-color: var(--seker-seftali); }
+.sy-not { margin: 0; }
+@media (max-width: 360px) { .sy-rakam { height: 24px; } }

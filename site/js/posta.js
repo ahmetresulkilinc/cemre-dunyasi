@@ -109,6 +109,7 @@ window.CD = window.CD || {};
     kalpT = setTimeout(() => {
       const adet = birikenKalp; birikenKalp = 0; kalpT = 0; sonGonderim = Date.now();
       V().gonder('kalp', { adet });
+      CD.pul && CD.pul('kalp', { say: adet, kisa: adet > 1 ? adet + ' kalp' : '' });
       CD.toast(adet > 1 ? adet + ' kalp birden 💗' : 'Kalbin yola çıktı 💗');
     }, bekle);
   }
@@ -171,6 +172,7 @@ window.CD = window.CD || {};
   function yagmurGonder(em) {
     seciciKapat(true);
     V().gonder('yagmur', { emoji: em });
+    CD.pul && CD.pul('yagmur', { kisa: em });
     CD.efekt.yagmur(em, 1000, 6); CD.ses.yagmurSerp();
     CD.toast(em + ' yağmuru gönderildi');
   }
@@ -400,6 +402,7 @@ window.CD = window.CD || {};
     if (CD.depo.al(anahtar, '') === iz) return;
     CD.depo.yaz(anahtar, iz);
     V().gonder('muhur', { neyi: 'mektup' });
+    CD.pul && CD.pul('muhur', { kisa: 'mektup okundu' });
   }
 
   /* ================================================================ kur */

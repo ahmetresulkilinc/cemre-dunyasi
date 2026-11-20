@@ -24,7 +24,11 @@ window.CD = window.CD || {};
     xox: 'İkimiz sırayla oynayalım; hamleni yap, sırası ona geçsin.', bizim: 'İkimize dair küçük şeyler.',
     safir: 'Safir için küçük, sakin bir köşe.',
     elele: 'İkiniz aynı anda basılı tutunca eller birleşir.', tahta: 'Aynı tuvale birlikte çizin, albüme kaydedin.',
-    guzellik: 'Güzellik Salonu.'
+    guzellik: 'Güzellik Salonu.',
+    // Faz 3
+    postane: 'Şu olunca aç zarfları, zaman kapsülü, minnet kutusu, QR hediye.', muze: 'İlklerimiz, anı haritası, birlikte yapacağımız 50 şey.',
+    sayac: 'Buluşmaya, doğum günlerine, yıldönümüne geri sayım.', eglence: 'Buluşma kavanozu, beni ne kadar tanıyorsun, özel gün sorusu.',
+    plak: 'Ortak çalma listemiz ve şu an dinlediklerimiz.', defter: 'Hatıra Defteri.'
   };
   const ORTAK = { P: '@pencere', o: '@topuz', Z: '@kenar' };
   const BINA = {
@@ -75,6 +79,25 @@ window.CD = window.CD || {};
     elele: { ad: 'El Ele Bankı', renk: { l: '@lamba', '|': 'el-direk', H: 'el-kalp', B: 'el-bank', S: 'el-oturak', A: 'el-ayak', K: 'el-kopru', W: 'el-su' }, satir: [
       '..l.................', '.lll................', '..|.................', '..|......HH.HH......', '..|......HHHHH......', '..|.......HHH.......', '..|........H........',
       '..|...BBBBBBBBBB....', '..|...BBBBBBBBBB....', '..|...SSSSSSSSSS....', '..|...A........A....', '.KKKKKKKKKKKKKKKKKK.', '.KWWKWWKWWKWWKWWKWK.', 'ZZZZZZZZZZZZZZZZZZZZ'] },
+    // Faz 3 binaları
+    postane: { ad: 'Postane', renk: { S: 'ps-tabela', W: 'ps-zarf', V: 'ps-cizgi', C: 'ps-cati', D: 'ps-duvar', R: 'ps-kapi', M: 'ps-kutu', I: 'ps-ayak' }, satir: [
+      '..SSSSSSSSSSSS..', '..SWVWWWWWWVWS..', '..SWWVWWWWVWWS..', '..SWWWVVVVWWWS..', '.CCCCCCCCCCCCCC.', 'CCCCCCCCCCCCCCCC', '.DDDDDDDDDDDDDD.',
+      '.DPPPPDDDDRRRRD.', '.DPPPPDDDDRRRRD.', '.DDDDDDDDDRRRRD.', '.DMMDDDDDDRRoRD.', '.DMMDDDDDDRRRRD.', '.DIIDDDDDDRRRRD.', 'ZZZZZZZZZZZZZZZZ'] },
+    sayac: { ad: 'Saat Kulesi', renk: { T: 'sy-tepe', C: 'sy-cati', D: 'sy-duvar', F: 'sy-kadran', A: 'sy-akrep', R: 'sy-kapi' }, satir: [
+      '.......TT.......', '......CCCC......', '.....CCCCCC.....', '....DDDDDDDD....', '....DFFFFFFD....', '....DFFAFFFD....', '....DFFAAAFD....',
+      '....DFFFFFFD....', '....DDDDDDDD....', '....DPPDDPPD....', '....DDDDDDDD....', '....DDDRRDDD....', '....DDRRoRDD....', 'ZZZZZZZZZZZZZZZZ'] },
+    muze: { ad: 'Anı Müzesi', renk: { C: 'mz-cati', H: 'mz-kalp', S: 'mz-friz', K: 'mz-sutun', D: 'mz-ic', R: 'mz-kapi', B: 'mz-basamak' }, satir: [
+      '.......CC.......', '.....CCCCCC.....', '...CCCCHHCCCC...', '.CCCCCCCCCCCCCC.', '.SSSSSSSSSSSSSS.', '.KDKDKDRRDKDKDK.', '.KDKDKRRRRKDKDK.',
+      '.KDKDKRRRRKDKDK.', '.KDKDKRRRRKDKDK.', '.KDKDKRRoRKDKDK.', '.KDKDKRRRRKDKDK.', '.SSSSSSSSSSSSSS.', 'BBBBBBBBBBBBBBBB', 'ZZZZZZZZZZZZZZZZ'] },
+    defter: { ad: 'Hatıra Defteri', sakin: true, renk: { K: 'df-kapak', W: 'df-sayfa', q: 'df-cizgi', s: 'df-sirt', r: 'df-kurdele', D: 'df-duvar', R: 'df-kapi' }, satir: [
+      '.KKKKKKKKKKKKKK.', '.KWWWWWWsWWWWWWK', '.KWqqqWWsWqqqWWK', '.KWWWWWWsWWWWWWK', '.KWqqWWWsWqqqWWK', '.KKKKKKKrKKKKKK.', '........r.......',
+      '.DDDDDDDDDDDDDD.', '.DPPPPDDDDRRRRD.', '.DPPPPDDDDRRRRD.', '.DDDDDDDDDRRRRD.', '.DDDDDDDDDRRoRD.', '.DDDDDDDDDRRRRD.', 'ZZZZZZZZZZZZZZZZ'] },
+    eglence: { ad: 'Eğlence Köşesi', renk: { F: 'eg-bayrak', I: 'eg-direk', T: 'eg-tente', W: 'eg-serit', D: 'eg-duvar', J: 'eg-kavanoz', j: 'eg-kagit', R: 'eg-kapi' }, satir: [
+      '.......FF.......', '.......I........', '......TWT.......', '.....TWTWT......', '....TWTWTWT.....', '...TWTWTWTWT....', '..TWTWTWTWTWT...',
+      '.TWTWTWTWTWTWTW.', '.DDDDDDDDDDDDDD.', '.DJJDDDRRRDDDDD.', '.DJjDDRRRRRDDDD.', '.DJJDDRRRRRDDDD.', '.DDDDDRRoRRDDDD.', 'ZZZZZZZZZZZZZZZZ'] },
+    plak: { ad: 'Plak Dükkanı', renk: { K: 'pk-plak', k: 'pk-oluk', L: 'pk-etiket', C: 'pk-cati', D: 'pk-duvar', N: 'pk-nota', R: 'pk-kapi' }, satir: [
+      '.....KKKKKK.....', '....KKkKKkKK....', '....KKKLLKKK....', '....KKKLLKKK....', '....KKkKKkKK....', '.....KKKKKK.....', '.CCCCCCCCCCCCCC.',
+      '.DDDDDDDDDDDDDD.', '.DPPPPPPDDRRRRD.', '.DPNNPPPDDRRRRD.', '.DPNPPPPDDRRoRD.', '.DPPPPPPDDRRRRD.', '.DDDDDDDDDRRRRD.', 'ZZZZZZZZZZZZZZZZ'] },
     pano: { ad: 'Mahalle Panosu', renk: { W: 'pn-cerceve', k: 'pn-kagit', q: 'pn-cizgi', '|': 'pn-direk', b: '@bayrak', m: 'pn-kutu' }, satir: [
       '.WWWWWWWW.', '.WkkkkkkW.', '.WkqqqqkW.', '.WkkkkkkW.', '.WWWWWWWW.', '....||....', '....||....', '....||.bm.', '....||.mm.', '....||.mm.', '....||....', '....||....', '....||....', 'ZZZZZZZZZZ'],
       ek: '<g class="mh-raptiye"><rect x="12" y="3" width="1" height="1"/><rect x="14" y="3" width="1" height="1"/><rect x="12" y="4" width="3" height="1"/><rect x="13" y="5" width="1" height="1"/></g>' }
@@ -134,10 +157,26 @@ window.CD = window.CD || {};
   /* ================================================================ yerleşim */
   // bahçenin yanında, oyun binalarından ayrı sakin bir teras: Safir'in Yeri
   // Faz 2: Güzellik Salonu + Çizim Atölyesi terası, El Ele Bankı kendi küçük terasında (bahçeden sonra); Öfke Odası yine en dipte
-  const TERASLAR = [['bizim', 'pano'], ['pittiksu', 'barbie'], ['tirnak', 'petevi'], ['angela', 'panda'], ['guzellik', 'tahta'], ['bahce'], ['elele'], ['safir'], ['xox', 'ofke']];
+  // Faz 3: Postane + Saat Kulesi terası (evlerin altında), Anı Müzesi + Hatıra Defteri terası, Plak Dükkanı + Eğlence Köşesi terası (oyunların üstünde).
+  // Ek binalar: bir bölüm dosyası kendi binasını CD.mhEkBinalar kuyruğuyla ekleyebilir ({ id, ad, aciklama, renk, satir, teras, yalniz }).
+  // "yalniz: 'ahmet'" olan bina yalnız o kişinin telefonunda kurulur; tanımı da yalnız o telefonda yüklenen dosyadadır.
+  const TERASLAR = [['bizim', 'pano'], ['pittiksu', 'barbie'], ['postane', 'sayac'], ['tirnak', 'petevi'], ['angela', 'panda'], ['guzellik', 'tahta'], ['muze', 'defter'], ['bahce'], ['elele'], ['safir'], ['plak', 'eglence'], ['xox', 'ofke']];
+  const EK = {};             // id → ek bina tanımı
+  const gorunsun = (id) => !EK[id] || !EK[id].yalniz || CD.kim() === EK[id].yalniz;
+  function ekKaydet() {
+    (CD.mhEkBinalar || []).forEach(e => {
+      if (!e || !e.id || EK[e.id] || BINA[e.id] || !Array.isArray(e.satir)) return;
+      EK[e.id] = e;
+      BINA[e.id] = { ad: String(e.ad || e.id), sakin: true, renk: e.renk || {}, satir: e.satir };
+      ACIKLAMA[e.id] = String(e.aciklama || '');
+      const t = TERASLAR.find(x => x.indexOf(e.teras) >= 0);
+      if (t && t.length < 2) t.push(e.id); else TERASLAR.push([e.id]);
+      if (SONRADAN.indexOf(e.id) < 0) SONRADAN.push(e.id);
+    });
+  }
   const terasNo = (id) => TERASLAR.findIndex(t => t.indexOf(id) >= 0);
-  const BOLUMLER = ['pittiksu', 'barbie', 'tirnak', 'petevi', 'angela', 'panda', 'bahce', 'ofke', 'xox', 'bizim', 'elele', 'tahta'];
-  const SONRADAN = ['safir', 'guzellik'];   // sakin arsalar: dosyası gelince bina kendiliğinden açılır
+  const BOLUMLER = ['pittiksu', 'barbie', 'tirnak', 'petevi', 'angela', 'panda', 'bahce', 'ofke', 'xox', 'bizim', 'elele', 'tahta', 'postane', 'muze', 'sayac', 'eglence', 'plak'];
+  const SONRADAN = ['safir', 'guzellik', 'defter'];   // sakin arsalar: dosyası gelince bina kendiliğinden açılır
   const evi = (kim) => { const e = (MAH().EV || {})[kim]; return BINA[e] && e !== 'pano' ? e : 'bizim'; };
   const yapimda = (id) => !/[?&]hepsi/.test(location.search) && ((CD.config || {}).YAPIM_ASAMASINDA || []).includes(id);
   const acik = (id) => !!CD.bolumler[id] && !yapimda(id);
@@ -176,6 +215,7 @@ window.CD = window.CD || {};
   function kur() {
     kok = $('#hub'); if (!kok || kuruldu) return;
     kuruldu = true;
+    ekKaydet();
     kok.innerHTML = '';
     kok.classList.add('mahalle');
     // tanımlar (inci gradyanı yalnız Tırnak Salonu tabelasında)
@@ -209,14 +249,15 @@ window.CD = window.CD || {};
     // teraslar
     const nav = CD.el('nav.mh-teraslar#mhTeraslar', { 'aria-label': 'Mahalle' });
     TERASLAR.forEach((ids, n) => {
-      const binalar = CD.el('div.mh-binalar', { data: { adet: String(ids.length) } }, ids.map(binaKur));
+      const gorunen = ids.filter(gorunsun);
+      const binalar = CD.el('div.mh-binalar', { data: { adet: String(gorunen.length) } }, gorunen.map(binaKur));
       const petAlan = CD.el('div.mh-pet-alan');
       const kisiler = CD.el('div.mh-kisiler');
       const kaldirimIc = CD.el('div.mh-sutun.mh-kaldirim-ic', [petAlan, kisiler, merdiven(n % 2 === 0)]);
       const kaldirim = CD.el('div.mh-kaldirim', [kaldirimIc]);
       const sec = CD.el('section.mh-teras', { data: { teras: String(n + 1), ilk: ids[0] } }, [CD.el('div.mh-sutun', [binalar]), kaldirim]);
       if (n === 0) kaldirimIc.append(CD.el('span.mh-birikinti.b1', { 'aria-hidden': 'true' }), CD.el('span.mh-birikinti.b2', { 'aria-hidden': 'true' }));
-      teras[n] = { sec, kaldirim: kaldirimIc, petAlan, kisiler, motor: null };
+      teras[n] = { sec, kaldirim: kaldirimIc, petAlan, kisiler, motor: null, binalar, ids };
       nav.appendChild(sec);
     });
     kok.appendChild(nav);
@@ -347,13 +388,16 @@ window.CD = window.CD || {};
     if (!kuruldu) return;
     BOLUMLER.forEach(id => {
       const h = hucre[id]; if (!h) return;
-      let m = CD.depo.alan(id).al('ipucu', ''); if (typeof m !== 'string') m = '';
+      let m = '';
+      // Faz 3 bölümleri ipucunu hesaplar (depoya yazmaz): CD.mhIpucu[id]()
+      if (CD.mhIpucu && typeof CD.mhIpucu[id] === 'function') { try { m = String(CD.mhIpucu[id]() || '').slice(0, 40); } catch (e) { m = ''; } }
+      else { m = CD.depo.alan(id).al('ipucu', ''); if (typeof m !== 'string') m = ''; }
       if (!acik(id)) m = '';
       h.ipucu.textContent = m; h.ipucu.hidden = !m;
     });
     // açık/kapalı (bölüm sonradan kaydolursa)
     BOLUMLER.concat(SONRADAN).forEach(id => {
-      const h = hucre[id]; if (!h) return;
+      const h = hucre[id]; if (!h || !h.hucre.isConnected) return;
       const simdi = acik(id), once = h.bina.tagName === 'A';
       if (simdi !== once) { const yeni = binaKur(id); h.hucre.replaceWith(yeni); }
     });
@@ -555,7 +599,7 @@ window.CD = window.CD || {};
     const hepsi = CD.petListesi().filter(p => p.id !== 'pittiksu' && p.id !== 'barbie');
     const gun = Math.floor(Date.now() / 86400000);
     const adet = innerWidth >= 768 ? 2 : 1;
-    [2, terasNo('bahce')].forEach((n, j) => {
+    [terasNo('tirnak'), terasNo('bahce')].forEach((n, j) => {
       const m = yap(n); teras[n].motor = m;
       const w = teras[n].petAlan.clientWidth || 300;
       for (let i = 0; i < adet; i++) { const s = hepsi[(gun + j * 2 + i) % hepsi.length]; m.ekle(s, { x: w * (0.2 + 0.5 * i), ad: cfg[s.id] && cfg[s.id].AD }); }
@@ -910,7 +954,8 @@ window.CD = window.CD || {};
     if (!ui.haber) return;
     const sehir = CD.sehir && CD.sehir.aktif() ? CD.sehir.durum() : [];
     const dn = CD.dinliyor ? CD.dinliyor.onun() : null;
-    const anahtar = JSON.stringify(sehir) + '|' + (dn ? dn.id + dn.t : '');
+    const sy = CD.sayac && CD.sayac.enYakin ? CD.sayac.enYakin() : null;
+    const anahtar = JSON.stringify(sehir) + '|' + (dn ? dn.id + dn.t : '') + '|' + (sy ? sy.ad + sy.gun : '');
     if (anahtar === haberAnahtar) return;
     haberAnahtar = anahtar;
     ui.haber.innerHTML = '';
@@ -923,6 +968,11 @@ window.CD = window.CD || {};
         d.derece != null ? CD.el('span.mh-sehir-derece', { 'aria-hidden': 'true' }, d.derece + '°') : null
       ]));
     });
+    if (sy) {
+      // Faz 3: en yakın geri sayım (Saat Kulesi)
+      const metin = sy.ad + ': ' + CD.sayac.gunMetni(sy.gun);
+      ui.haber.appendChild(CD.el('a.mh-sayac', { href: '#/sayac', 'aria-label': 'Saat Kulesi. ' + metin, onclick: () => CD.ses.tik() }, [CD.el('span', { 'aria-hidden': 'true' }, sy.em || '⏳'), CD.el('span.mh-sayac-metin', metin)]));
+    }
     if (dn) {
       const A = adi(V().karsi());
       ui.haber.appendChild(CD.el('button.mh-dinliyor', { type: 'button', 'aria-label': A + ' şunu dinliyor: ' + (dn.not || CD.dinliyor.kaynak(dn.link)) + '. Linki aç', onclick: () => { CD.ses.tik(); CD.dinliyor.ac(dn); } }, [
@@ -983,6 +1033,30 @@ window.CD = window.CD || {};
       : 'Her şey bu telefonda kalır; hiçbir yere gönderilmez.';
   }
 
+  /* ================================================================ Faz 3: kişiye özel ek binalar
+     Tanım yalnız o kişinin telefonunda yüklenen dosyadan gelir (kilit.js); bu dosyada adı geçmez. Kim sonradan değişirse burada düzeltilir. */
+  const OZEL_BETIK = { ahmet: 'js/bolum/ozel.js' };
+  function ekBinalar() {
+    if (!kuruldu) return;
+    ekKaydet();
+    teras.forEach((t, n) => {
+      if (!t) return;
+      const ist = TERASLAR[n].filter(gorunsun);
+      const var_ = [...t.binalar.children].map(h => h.dataset.bina);
+      if (ist.join() === var_.join()) return;
+      t.binalar.innerHTML = '';
+      Object.keys(EK).forEach(id => { if (hucre[id]) delete hucre[id]; });
+      ist.forEach(id => t.binalar.appendChild(binaKur(id)));
+      t.binalar.dataset.adet = String(ist.length);
+    });
+    const betik = OZEL_BETIK[CD.kim()];
+    if (betik && !document.querySelector('script[src="' + betik + '"]')) {
+      const s = document.createElement('script'); s.src = betik;
+      s.onload = () => { ekBinalar(); yenile(); }; s.onerror = () => s.remove();
+      document.body.appendChild(s);
+    }
+  }
+
   /* ================================================================ yenileme */
   let yenileT = 0;
   function yenile() {
@@ -1005,9 +1079,10 @@ window.CD = window.CD || {};
     kur(); selam(); gizlilikYaz();
     yenile();
     CD.olay.dinle('senk:acildi', () => { gizlilikYaz(); yenile(); });
-    CD.olay.dinle('kaydet', () => yenile());
+    CD.olay.dinle('kaydet', () => { ekBinalar(); yenile(); });
     CD.olay.dinle('hava', () => yenile());
-    CD.olay.dinle('kim', () => { kisiDurum.cemre = kisiDurum.ahmet = null; yenile(); });
+    CD.olay.dinle('kim', () => { kisiDurum.cemre = kisiDurum.ahmet = null; ekBinalar(); yenile(); });
+    CD.olay.dinle('sayac:degisti', () => { haberAnahtar = ''; yenile(); });
     CD.olay.dinle('varlik:degisti', () => yenile());
     CD.olay.dinle('senk:yenilendi', () => yenile());
     CD.olay.dinle('bolum:kapandi', (id) => { sonBolum = id; });

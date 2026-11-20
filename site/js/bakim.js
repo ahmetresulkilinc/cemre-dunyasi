@@ -38,6 +38,7 @@ window.CD = window.CD || {};
     if (r[h] !== g) {
       r[h] = g; CD.depo.yaz(anahtar(b), r);
       if (ben() && V()) V().gonder('sevgi', { hayvan: h, gun: g });
+      CD.pul && CD.pul.iz && CD.pul.iz('bakim', h);
     }
     guncelle(h);
   }
@@ -47,6 +48,7 @@ window.CD = window.CD || {};
   function cokMutlu(h, hedef) {
     if (kutlandi(h)) return false;
     kutlaIsaretle(h);
+    CD.pul && CD.pul('bakim', { kisa: h });
     const ad = HAYVANLAR[h]();
     if (hedef && hedef.isConnected) {
       if (!CD.azHareket) { hedef.classList.remove('bakim-cokmutlu'); void hedef.offsetWidth; hedef.classList.add('bakim-cokmutlu'); setTimeout(() => hedef.classList.remove('bakim-cokmutlu'), 2400); }

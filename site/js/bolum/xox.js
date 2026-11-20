@@ -382,10 +382,12 @@
       g.kazanan = sonuc.kim; g.cizgi = sonuc.cizgi;
       g.skor[sonuc.kim] = (g.skor[sonuc.kim] || 0) + 1;
       g.gecmis = [{ no: g.oyunNo, kazanan: sonuc.kim, zaman: Date.now() }].concat(g.gecmis).slice(0, GECMIS_SAYI);
+      CD.pul && CD.pul('oyun', { kisa: 'xox', kazanan: sonuc.kim });
     } else if (g.tahta.every(h => h)) {
       g.kazanan = 'berabere'; g.cizgi = null;
       g.skor.berabere = (g.skor.berabere || 0) + 1;
       g.gecmis = [{ no: g.oyunNo, kazanan: 'berabere', zaman: Date.now() }].concat(g.gecmis).slice(0, GECMIS_SAYI);
+      CD.pul && CD.pul('oyun', { kisa: 'xox', kazanan: 'berabere' });
     } else {
       g.sira = rakip(oynayan);
     }
