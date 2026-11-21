@@ -7,7 +7,7 @@
    - Bulut (Supabase) ve hava (Open-Meteo) istekleri farklı kaynak olduğu için hiç dokunulmaz.
    - Listede olup henüz var olmayan dosya (ör. başka ekibin guzellik.js/css'i, Hatıra Defteri'nin defter.js/css'i) kurulumu BOZMAZ: onbellegeAl 404'ü ve ağ hatasını null sayar.
    - Faz 3: js/bolum/ozel.js bilerek listede YOK (yalnız Ahmet'in telefonunda yüklenir; orada ilk açılışta ağdan gelip önbelleğe girer). */
-const SURUM = 'cd-v21';
+const SURUM = 'cd-v22';
 const AG_SURE = 3500;
 const KABUK = [
   './', './index.html', './config.js', './tokens.css', './base.css', './manifest.webmanifest',
@@ -16,7 +16,7 @@ const KABUK = [
   './css/ani-ortak.css', './css/postane.css', './css/muze.css', './css/sayac.css', './css/eglence.css', './css/plak.css', './css/defter.css',
   './js/kilit.js', './js/cekirdek.js', './js/senk.js', './js/canli.js', './js/varlik.js', './js/petler-miras.js', './js/giris.js', './js/sorular.js', './js/posta.js', './js/mahalle.js',
   './js/tuval.js', './js/bakim.js', './js/gece.js', './js/kaset.js', './js/paylas.js', './js/sehir.js', './js/ani-ortak.js', './js/qr.js', './js/defter.js',
-  './js/bolum/pittiksu.js', './js/bolum/barbie.js', './js/bolum/tirnak.js', './js/bolum/tirnak-3d.js', './js/vendor/three.min.js', './js/bolum/petevi.js', './js/bolum/angela.js', './js/bolum/panda.js', './js/bolum/bahce.js', './js/bolum/ofke.js', './js/bolum/xox.js', './js/bolum/bizim.js', './js/bolum/safir.js', './js/bolum/galeri.js', './css/galeri.css',
+  './js/bolum/pittiksu.js', './js/bolum/barbie.js', './js/bolum/tirnak.js', './js/bolum/tirnak-3d.js', './js/bolum/tirnak-el.js', './js/bolum/tirnak-pro.js', './js/bolum/tirnak-tasarim.js', './js/vendor/three.min.js', './js/bolum/petevi.js', './js/bolum/angela.js', './js/bolum/panda.js', './js/bolum/bahce.js', './js/bolum/ofke.js', './js/bolum/xox.js', './js/bolum/bizim.js', './js/bolum/safir.js', './js/bolum/galeri.js', './css/galeri.css',
   './js/bolum/elele.js', './js/bolum/tahta.js', './js/bolum/guzellik.js',
   './js/bolum/postane.js', './js/bolum/muze.js', './js/bolum/sayac.js', './js/bolum/eglence.js', './js/bolum/plak.js', './js/bolum/defter.js', './js/oyun/salon.js', './js/oyun/dortlu.js', './js/oyun/amiral.js', './js/oyun/ciz.js',
   './fonts/Nunito-latin.woff2', './fonts/Nunito-latin-ext.woff2', './fonts/SourGummy-latin.woff2', './fonts/SourGummy-latin-ext.woff2', './fonts/Caveat-latin.woff2', './fonts/Caveat-latin-ext.woff2',
