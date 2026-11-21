@@ -64,7 +64,7 @@
 @media (min-width: 768px) { .tirnak-masa::before { border-radius: var(--r-lg) var(--r-lg) 0 0; } .tirnak-secim { border-radius: 0 0 var(--r-lg) var(--r-lg); } }
 
 /* ---------------------------------------------------------------- adımlar (gerçek salon sırası) */
-.tirnak-adimlar { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 3px; max-width: var(--icerik-genislik); margin: var(--b-3) auto 0; padding: 0 var(--kenar); width: 100%; }
+.tirnak-adimlar { display: grid; grid-template-columns: repeat(8, minmax(50px, 1fr)); gap: 3px; overflow-x: auto; scrollbar-width: none; max-width: var(--icerik-genislik); margin: var(--b-3) auto 0; padding: 0 var(--kenar); width: 100%; }
 .tirnak-adim {
   position: relative; display: flex; flex-direction: column; align-items: center; gap: 2px; min-height: 52px; padding: 5px 1px;
   border-radius: var(--r-md); background: var(--kagit-2); color: var(--murekkep-2);
@@ -305,3 +305,58 @@ body[data-bolum="tirnak"] .altbar .eylem[aria-disabled="true"] { opacity: .45; }
 .tirnak-kombinler { grid-template-columns: 1fr; }
 .tirnak-kombinKart { flex-wrap: wrap; }
 .tirnak-vurguSatir .tirnak-segment { flex-wrap: wrap; }
+
+/* ---------------------------------------------------------------- PRO (js/bolum/tirnak-pro.js, tirnak-tasarim.js) */
+.tirnak-proBar { position: absolute; right: var(--b-2); bottom: 64px; z-index: 3; display: flex; flex-direction: column; gap: 6px; }
+.tirnak-proBarDugme { display: grid; place-items: center; width: var(--dokunma-min); height: var(--dokunma-min); border-radius: var(--r-tam); background: color-mix(in srgb, var(--kagit) 88%, transparent); box-shadow: 0 2px 0 var(--golge-sert-ic); font-size: 19px; color: var(--murekkep); }
+.tirnak-proBarDugme[aria-pressed="true"] { background: var(--oda-vurgu); }
+.tirnak-proBarDugme:focus-visible { outline: 3px solid var(--odak); outline-offset: 2px; }
+.tirnak-proKontrol { background: var(--oda-vurgu); }
+.tirnak-proBar-2d .tirnak-proKilit { display: none; }
+@media (max-width: 899px) { .tirnak-proBar { right: auto; left: var(--b-2); top: 64px; bottom: auto; gap: 4px; } .tirnak-proBarDugme { width: 40px; height: 40px; font-size: 17px; } }
+.tirnak-proTepsi { display: flex; flex-direction: column; gap: var(--b-2); padding-bottom: var(--b-2); border-bottom: 2px dashed var(--kagit-3); margin-bottom: var(--b-2); }
+.tirnak-proUst { display: flex; align-items: center; gap: var(--b-2); flex-wrap: wrap; }
+.tirnak-proAraclar { display: flex; gap: var(--b-2); overflow-x: auto; scroll-snap-type: x mandatory; padding: 2px 2px 6px; scrollbar-width: thin; }
+.tirnak-proArac { flex: none; scroll-snap-align: start; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; width: 76px; min-height: 66px; padding: 6px 4px; border-radius: var(--r-md); background: var(--kagit-2); color: var(--murekkep-2); box-shadow: 0 2px 0 var(--golge-sert-ic); font-size: var(--punto-xs); font-weight: var(--kalin-vurgu); line-height: 1.1; text-align: center; touch-action: manipulation; }
+.tirnak-proArac[aria-pressed="true"] { background: var(--oda-vurgu); color: var(--murekkep); box-shadow: 0 0 0 2px var(--murekkep), 0 2px 0 var(--golge-sert-ic); }
+.tirnak-proArac:focus-visible, .tirnak-proFirca:focus-visible, .tirnak-proTas:focus-visible, .tirnak-proSticker:focus-visible { outline: 3px solid var(--odak); outline-offset: 2px; }
+.tirnak-proAracIkon { font-size: 24px; line-height: 1; }
+.tirnak-proSecili { display: flex; gap: var(--b-2); align-items: flex-start; padding: var(--b-2); border-radius: var(--r-md); background: var(--kagit-2); }
+.tirnak-proSeciliIkon { font-size: 30px; line-height: 1; }
+.tirnak-proAyar .tirnak-segment { flex-wrap: wrap; }
+.tirnak-proYuk { position: relative; height: 14px; border-radius: var(--r-tam); background: var(--kagit-3); overflow: hidden; }
+.tirnak-proYukDolu { position: absolute; inset: 0 auto 0 0; width: calc(var(--yuk, 0) * 100%); background: var(--renk, var(--oda-vurgu)); transition: width var(--sure-1); }
+.tirnak-proFircalar { display: flex; flex-direction: column; gap: var(--b-2); }
+.tirnak-proFircaListe { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px; }
+.tirnak-proFirca { flex: none; display: flex; align-items: center; gap: 6px; min-height: var(--dokunma-min); padding: 0 10px; border-radius: var(--r-md); background: var(--kagit-2); color: var(--murekkep-2); font-size: var(--punto-xs); font-weight: var(--kalin-vurgu); box-shadow: 0 2px 0 var(--golge-sert-ic); white-space: nowrap; }
+.tirnak-proFirca[aria-pressed="true"] { background: var(--oda-vurgu); color: var(--murekkep); }
+.tirnak-proFircaUc { display: inline-block; width: var(--g, 4px); height: 18px; border-radius: 0 0 var(--u, 50%) var(--u, 50%); background: var(--murekkep-2); }
+.tirnak-proFircaOn, .tirnak-proPalet, .tirnak-proPlaka { width: 100%; height: auto; border-radius: var(--r-md); background: var(--kagit); touch-action: none; box-shadow: inset 0 0 0 2px var(--kagit-3); }
+.tirnak-proTeker { width: min(240px, 70vw); height: auto; align-self: center; touch-action: none; border-radius: 50%; }
+.tirnak-proTeker:focus-visible { outline: 3px solid var(--odak); outline-offset: 3px; }
+.tirnak-proOnRenk { width: 40px; height: 40px; border-radius: 50%; box-shadow: inset 0 0 0 2px var(--murekkep); }
+.tirnak-proHex { width: 7.5em; font-size: 16px; text-transform: uppercase; }
+.tirnak-proRenkBtn { display: inline-flex; align-items: center; gap: 6px; }
+.tirnak-proRenkNokta { display: inline-block; width: 18px; height: 18px; border-radius: 50%; background: var(--renk); box-shadow: inset 0 0 0 2px var(--murekkep); }
+.tirnak-proPaletSatir { flex-wrap: wrap; }
+.tirnak-proTaslar { display: flex; flex-wrap: wrap; gap: 6px; }
+.tirnak-proTas { min-height: 40px; padding: 0 10px; border-radius: var(--r-md); background: var(--kagit-2); color: var(--murekkep-2); font-size: var(--punto-xs); font-weight: var(--kalin-vurgu); box-shadow: 0 2px 0 var(--golge-sert-ic); }
+.tirnak-proTas[aria-pressed="true"] { background: var(--oda-vurgu); color: var(--murekkep); }
+.tirnak-proStickerlar { display: grid; grid-template-columns: repeat(auto-fill, minmax(72px, 1fr)); gap: 6px; max-height: 300px; overflow-y: auto; }
+.tirnak-proSticker { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 4px; border-radius: var(--r-md); background: var(--kagit-2); color: var(--murekkep-2); font-size: 10.5px; line-height: 1.1; box-shadow: 0 2px 0 var(--golge-sert-ic); }
+.tirnak-proSticker[aria-pressed="true"] { background: var(--oda-vurgu); color: var(--murekkep); }
+.tirnak-proStickerMini { width: 40px; height: 40px; }
+.tirnak-proJel { display: flex; flex-wrap: wrap; gap: 4px 10px; margin: 0; padding: 0; list-style: none; font-size: var(--punto-xs); color: var(--murekkep-2); }
+.tirnak-proJel .tamam { color: var(--murekkep); font-weight: var(--kalin-vurgu); }
+.tirnak-klasik > summary { cursor: pointer; }
+/* sanatçı vitrini (Cemre'nin tırnakları) */
+.tirnak-vitrin { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: var(--b-4); }
+.tirnak-vitrin > .tirnak-not { grid-column: 1 / -1; }
+.tirnak-vitrinEser { margin: 0; display: flex; flex-direction: column; gap: var(--b-2); }
+.tirnak-vitrinCerceve { display: block; width: 100%; padding: 10px; border-radius: 6px; background: linear-gradient(135deg, var(--kagit-3), var(--kagit-2) 45%, var(--kagit-3)); box-shadow: inset 0 0 0 3px var(--murekkep), 0 6px 14px -8px color-mix(in srgb, var(--murekkep) 60%, transparent); }
+.tirnak-vitrinCerceve .tirnak-vitrinResim { display: block; width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 2px; box-shadow: 0 0 0 4px var(--kagit); }
+.tirnak-vitrinCerceve.buyuk .tirnak-vitrinResim { aspect-ratio: auto; max-height: 62vh; object-fit: contain; background: var(--kagit); }
+.tirnak-plaket { align-self: center; display: flex; flex-direction: column; align-items: center; padding: 6px 14px; border-radius: 4px; background: var(--kagit-3); color: var(--murekkep); box-shadow: inset 0 0 0 1px var(--murekkep-2), 0 2px 0 var(--golge-sert-ic); font-size: var(--punto-sm); text-align: center; }
+.tirnak-plaket span { font-size: var(--punto-xs); color: var(--murekkep-2); }
+.tirnak-vitrinEser a.dugme-ikincil, .tirnak-vitrinBuyuk a.dugme-ikincil { display: inline-flex; align-items: center; justify-content: center; text-decoration: none; }
+@media (prefers-reduced-motion: reduce) { .tirnak-proYukDolu { transition: none; } }
